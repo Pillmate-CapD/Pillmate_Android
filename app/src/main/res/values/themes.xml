@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.Pillmate" parent="Base.Theme.Pillmate" />
+
+    <style name="CustomBottomNavTextAppearance" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:fontFamily">@font/notosanskrsemibold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
