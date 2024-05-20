@@ -13,8 +13,11 @@ import java.time.format.DateTimeFormatter
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var adapter: DateAdapter
+    private lateinit var dateAdapter: DateAdapter
     private val dateItems = mutableListOf<DateItem>()
+
+    private lateinit var categoryAdapter: CategoryAdapter
+    private val categoryItems = mutableListOf<CategoryItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,12 @@ class HomeFragment : Fragment() {
             }
             dateItems.add(DateItem(dayOfWeek, formattedDate))
         }
+
+        // 카테고리 아이템 추가
+        categoryItems.add(CategoryItem("전체", true))
+        categoryItems.add(CategoryItem("약"))
+        categoryItems.add(CategoryItem("비타민"))
+        categoryItems.add(CategoryItem("보충제"))
     }
 
     override fun onCreateView(
@@ -52,9 +61,16 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater,container, false)
 
-        adapter = DateAdapter(dateItems as ArrayList<DateItem>)
+        // 홈화면 => 주간 달력
+        dateAdapter = DateAdapter(dateItems as ArrayList<DateItem>)
         binding.dateList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.dateList.adapter = adapter
+        binding.dateList.adapter = dateAdapter
+
+        // 홈화면 => 약 카테고리 파트
+        categoryAdapter = CategoryAdapter(categoryItems as ArrayList<CategoryItem>)
+        binding.pillCategory.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.pillCategory.adapter = categoryAdapter
+
 
 
         return binding.root
