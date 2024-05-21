@@ -1,10 +1,16 @@
 package com.example.pillmate
 
+import android.graphics.Color
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import java.time.LocalDate
 
 class DateAdapter(private val itemDate : ArrayList<DateItem>) :
     RecyclerView.Adapter<DateAdapter.DateViewHolder>() {
@@ -24,20 +30,35 @@ class DateAdapter(private val itemDate : ArrayList<DateItem>) :
         holder.bind(item)
     }
 
-    class DateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        init {
-//            // 각 아이템을 클릭하는 이벤트를 처리합니다.
-//            itemView.setOnClickListener {
-//                onItemClick(adapterPosition) // 클릭한 아이템의 위치를 가져와서 전달합니다.
-//            }
-//        }
+    inner class DateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val day: TextView = itemView.findViewById(R.id.day_recy)
         private val date: TextView = itemView.findViewById(R.id.date_recy)
+        private val progressBar: CircularProgressIndicator = itemView.findViewById(R.id.pill_progressBar)
+        private val backgroundView : View = itemView.findViewById(R.id.today_view)
 
         fun bind(item: DateItem) {
-            day.text = item.day
-            date.text = item.date
+            day.text = item.dayOfWeek
+            date.text = item.formattedDate
+            progressBar.progress = item.progress
+            if (item.isToday) {
+                // 오늘 날짜인 경우 배경 색 변경
+                backgroundView.visibility = View.VISIBLE
+            } else {
+                // 오늘 날짜가 아닌 경우 배경 색 초기화
+                backgroundView.visibility = View.INVISIBLE
+            }
+
+            // 오늘 이후의 날짜인 경우
+            if (!item.isToday && item.date.isAfter(LocalDate.now())) {
+                // 프로그레스 바의 색상을 흰색의 20% 투명도로 설정
+                progressBar.setIndicatorColor(Color.parseColor("#33FFFFFF"))
+                // Date 텍스트의 색상을 흰색의 20% 투명도로 설정
+                date.setTextColor(Color.parseColor("#33FFFFFF"))
+            } else {
+                // 오늘 이후의 날짜가 아니라면 원래의 색상으로 설정
+                progressBar.setIndicatorColor(ContextCompat.getColor(itemView.context, R.color.white))
+                date.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
+            }
         }
     }
-
 }
