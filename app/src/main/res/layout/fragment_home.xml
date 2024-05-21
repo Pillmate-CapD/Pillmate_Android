@@ -64,27 +64,28 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_marginTop="3dp"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:fontFamily="@font/notosanskrsemibold"
+            android:fontFamily="@font/notosanskrbold"
             android:id="@+id/user_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="19sp"
-            android:text="손해인 님,"/>
+            android:text="손해인"/>
 
         <TextView
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/user_txt"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="-28dp"
+            android:layout_marginTop="3dp"
             android:id="@+id/txt"
-            android:fontFamily="@font/notosanskrsemibold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanskrbold"
+            android:text=" 님, 오늘의 약 일정이에요!"
+            android:textColor="@color/black"
             android:textSize="19sp"
-            android:text="오늘의 약 일정이에요!"/>
+            app:layout_constraintStart_toEndOf="@id/user_txt"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="-10dp"

@@ -23,10 +23,10 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         // 현재 날짜를 가져옴
-        val currentDate = LocalDate.now()
+        val todayDate = LocalDate.now()
 
         // 현재 주의 첫 번째 날을 계산
-        val firstDayOfWeek = currentDate.with(DayOfWeek.SUNDAY)
+        val firstDayOfWeek = todayDate.with(DayOfWeek.SUNDAY)
 
         // 이전 주의 첫 번째 날을 계산
         val previousWeekFirstDay = firstDayOfWeek.minusDays(7)
@@ -44,14 +44,15 @@ class HomeFragment : Fragment() {
                 DayOfWeek.FRIDAY -> "금"
                 DayOfWeek.SATURDAY -> "토"
             }
-            dateItems.add(DateItem(dayOfWeek, formattedDate))
+            val isToday = date == todayDate // 오늘 날짜인지 확인
+            dateItems.add(DateItem(dayOfWeek, formattedDate, 100, isToday, LocalDate.now()))
         }
 
         // 카테고리 아이템 추가
         categoryItems.add(CategoryItem("전체", true))
-        categoryItems.add(CategoryItem("약"))
-        categoryItems.add(CategoryItem("비타민"))
-        categoryItems.add(CategoryItem("보충제"))
+        categoryItems.add(CategoryItem("고혈압"))
+        categoryItems.add(CategoryItem("고지혈증"))
+        categoryItems.add(CategoryItem("당뇨"))
     }
 
     override fun onCreateView(
