@@ -19,6 +19,9 @@ class HomeFragment : Fragment() {
     private lateinit var categoryAdapter: CategoryAdapter
     private val categoryItems = mutableListOf<CategoryItem>()
 
+    private lateinit var pillListAdapter: PillListAdapter
+    private val pillListItems = mutableListOf<PillListItem>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -53,6 +56,13 @@ class HomeFragment : Fragment() {
         categoryItems.add(CategoryItem("고혈압"))
         categoryItems.add(CategoryItem("고지혈증"))
         categoryItems.add(CategoryItem("당뇨"))
+
+        // 카테고리 아이템 추가
+        pillListItems.add(PillListItem("오전 7:00", "트윈스타정"))
+        pillListItems.add(PillListItem("오전 7:00", "디아미크롱서방정"))
+        pillListItems.add(PillListItem("오후 12:00", "파스틱정"))
+        pillListItems.add(PillListItem("오후 7:30", "파스틱정"))
+        pillListItems.add(PillListItem("오후 8:30", "바이토린"))
     }
 
     override fun onCreateView(
@@ -72,7 +82,10 @@ class HomeFragment : Fragment() {
         binding.pillCategory.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.pillCategory.adapter = categoryAdapter
 
-
+        // 홈화면 => 약 리스트 파트
+        pillListAdapter = PillListAdapter(pillListItems as ArrayList<PillListItem>)
+        binding.pillList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.pillList.adapter = pillListAdapter
 
         return binding.root
     }
