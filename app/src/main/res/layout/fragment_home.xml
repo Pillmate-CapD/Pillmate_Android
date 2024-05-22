@@ -56,6 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -64,7 +65,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="6dp"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +77,7 @@
             android:text="손해인"/>
 
         <TextView
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="6dp"
             android:id="@+id/txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,20 +91,20 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="-10dp"
             android:id="@+id/pill_category"
-            app:layout_constraintTop_toBottomOf="@id/txt"
+            app:layout_constraintTop_toBottomOf="@id/user_txt"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:overScrollMode="never"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="5dp"
             android:id="@+id/pill_list"
-            app:layout_constraintTop_toBottomOf="@id/pill_category"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:overScrollMode="never"/>
-
+            android:overScrollMode="never"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pill_category" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
