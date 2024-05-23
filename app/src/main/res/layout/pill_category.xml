@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/pill_category_txt"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="5dp"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전체"
+        android:fontFamily="@font/notosanskrmedium"
+        />
+
+    <View
+        android:id="@+id/underline_view"
+        android:layout_marginRight="1dp"
+        android:layout_marginLeft="1dp"
+        app:layout_constraintStart_toStartOf="@id/pill_category_txt"
+        app:layout_constraintEnd_toEndOf="@id/pill_category_txt"
+        app:layout_constraintTop_toBottomOf="@id/pill_category_txt"
+        android:background="@drawable/pill_view"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="-10dp"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
