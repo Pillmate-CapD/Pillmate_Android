@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
                 DayOfWeek.SATURDAY -> "토"
             }
             val isToday = date == todayDate // 오늘 날짜인지 확인
-            dateItems.add(DateItem(dayOfWeek, formattedDate, 100, isToday, LocalDate.now()))
+            dateItems.add(DateItem(dayOfWeek, formattedDate, 50, isToday, LocalDate.now()))
         }
 
         // 카테고리 아이템 추가
