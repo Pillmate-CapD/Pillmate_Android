@@ -5,4 +5,5 @@
     <font android:font = "@font/notosanskrsemibold" />
     <font android:font = "@font/notosanskrregular" />
     <font android:font = "@font/notosanskrbold" />
+    <font android:font = "@font/notosanskrextrabold" />
 </font-family>
