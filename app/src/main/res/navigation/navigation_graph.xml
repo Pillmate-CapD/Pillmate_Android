@@ -20,7 +20,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.pillmate.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_alarmListActivity"
+            app:destination="@id/alarmListActivity" />
+    </fragment>
     <fragment
         android:id="@+id/userFragment"
         android:name="com.example.pillmate.UserFragment"
@@ -31,5 +35,10 @@
         android:name="com.example.pillmate.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
+    <activity
+        android:id="@+id/alarmListActivity"
+        android:name="com.example.pillmate.AlarmListActivity"
+        android:label="activity_alarm_list"
+        tools:layout="@layout/activity_alarm_list" />
 
 </navigation>
