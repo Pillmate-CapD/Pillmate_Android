@@ -11,4 +11,8 @@
         <item name="android:fontFamily">@font/notosanskrsemibold</item>
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="CustomCircularProgressIndicator" parent="Widget.Material3.CircularProgressIndicator">
+        <item name="indicatorColor">@drawable/progress_gradient</item>
+    </style>
 </resources>
