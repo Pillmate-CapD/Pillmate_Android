@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Onboard3Activity"
+    android:paddingLeft="16sp"
+    android:paddingRight="16sp"
+    android:paddingTop="22sp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            />
+        <!-- Onboarding Step -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="15sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="14sp"
+                android:background="@drawable/onboard_step_active"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="2dp"
+                android:background="#1E54DF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textSize="14sp"
+                android:background="@drawable/onboard_step_active"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="2dp"
+                android:background="#1E54DF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:textSize="14sp"
+                android:background="@drawable/onboard_step_active"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="7sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="만성질환"
+                android:layout_marginLeft="58dp"
+                android:textColor="#1E54DF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="진단시기"
+                android:layout_marginLeft="54dp"
+                android:textSize="14sp"
+                android:textColor="#1E54DF"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="알람 시간대"
+                android:textSize="14sp"
+                android:textColor="#1E54DF"
+                android:gravity="center"/>
+
+        </LinearLayout>
+        <!-- 평소 생활 시간대를 알려주세요 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="36dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="평소 생활 시간대를 알려주세요"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="약 알람을 자동으로 설정해 줘요"
+                android:layout_marginTop="10sp"
+                android:textSize="14sp"
+                android:textColor="#858585"/>
+        </LinearLayout>
+        <!-- info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="74sp">
+            <LinearLayout
+                android:id="@+id/wakeup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    기상    "
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/et_wakeup"
+                    android:layout_width="205sp"
+                    android:layout_height="38sp"
+                    android:background="@drawable/gray_stroke_et"
+                    android:textSize="20sp"
+                    android:hint="오전  06:00"
+                    android:textColorHint="#898989"
+                    android:paddingLeft="57dp"
+                    android:focusable="false"
+                    android:layout_marginLeft="24sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/breakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="아침 식사"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/et_breakfast"
+                    android:layout_width="205sp"
+                    android:layout_height="38sp"
+                    android:background="@drawable/gray_stroke_et"
+                    android:textSize="20sp"
+                    android:hint="오전  06:00"
+                    android:textColorHint="#898989"
+                    android:paddingLeft="57dp"
+                    android:focusable="false"
+                    android:layout_marginLeft="24sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="점심 식사"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/et_lunch"
+                    android:layout_width="205sp"
+                    android:layout_height="38sp"
+                    android:background="@drawable/gray_stroke_et"
+                    android:textSize="20sp"
+                    android:hint="오전  06:00"
+                    android:textColorHint="#898989"
+                    android:paddingLeft="57dp"
+                    android:focusable="false"
+                    android:layout_marginLeft="24sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/dinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="저녁 식사"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/et_dinner"
+                    android:layout_width="205sp"
+                    android:layout_height="38sp"
+                    android:background="@drawable/gray_stroke_et"
+                    android:textSize="20sp"
+                    android:hint="오전  06:00"
+                    android:textColorHint="#898989"
+                    android:paddingLeft="57dp"
+                    android:focusable="false"
+                    android:layout_marginLeft="24sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/sleep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10sp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    취침    "
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/et_sleep"
+                    android:layout_width="205sp"
+                    android:layout_height="38sp"
+                    android:background="@drawable/gray_stroke_et"
+                    android:textSize="20sp"
+                    android:hint="오전  06:00"
+                    android:textColorHint="#898989"
+                    android:paddingLeft="57dp"
+                    android:focusable="false"
+                    android:layout_marginLeft="24sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="300sp"
+        android:layout_height="50sp"
+        android:layout_marginTop="23sp"
+        android:background="@drawable/button_blue"
+        android:text="완료"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"/>
+</RelativeLayout>
