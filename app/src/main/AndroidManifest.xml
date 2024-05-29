@@ -25,13 +25,22 @@
         android:theme="@style/Theme.Pillmate"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Onboard2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Onboard3Activity"
+            android:exported="false" />
+        <activity
             android:name=".AlarmActivity"
             android:exported="false"/>
         <activity
             android:name=".AlarmListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Onboard1Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
