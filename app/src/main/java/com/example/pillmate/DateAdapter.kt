@@ -2,6 +2,7 @@ package com.example.pillmate
 
 import android.graphics.Color
 import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,28 +37,23 @@ class DateAdapter(private val itemDate : ArrayList<DateItem>) :
         private val progressBar: CircularProgressIndicator = itemView.findViewById(R.id.pill_progressBar)
         private val backgroundView : View = itemView.findViewById(R.id.today_view)
 
+
+        // 오늘 이후의 날들에 대해서는 text 색상의 변화가 있어야 하는 부분
         fun bind(item: DateItem) {
             day.text = item.dayOfWeek
             date.text = item.formattedDate
             progressBar.progress = item.progress
-            if (item.isToday) {
-                // 오늘 날짜인 경우 배경 색 변경
-                backgroundView.visibility = View.VISIBLE
-            } else {
-                // 오늘 날짜가 아닌 경우 배경 색 초기화
-                backgroundView.visibility = View.INVISIBLE
-            }
 
-            // 오늘 이후의 날짜인 경우
-            if (!item.isToday && item.date.isAfter(LocalDate.now())) {
-                // 프로그레스 바의 색상을 흰색의 20% 투명도로 설정
-                progressBar.setIndicatorColor(Color.parseColor("#33FFFFFF"))
-                // Date 텍스트의 색상을 흰색의 20% 투명도로 설정
-                date.setTextColor(Color.parseColor("#33FFFFFF"))
+            if (item.isToday) {
+                backgroundView.visibility = View.VISIBLE
+                date.setTextColor(ContextCompat.getColor(itemView.context, R.color.white)) // 오늘 날짜는 흰색
             } else {
-                // 오늘 이후의 날짜가 아니라면 원래의 색상으로 설정
-                progressBar.setIndicatorColor(ContextCompat.getColor(itemView.context, R.color.white))
-                date.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
+                backgroundView.visibility = View.INVISIBLE
+                if (item.isAfterToday(LocalDate.now())) { // 오늘 이후의 날짜 여부 확인
+                    date.setTextColor(Color.parseColor("#33FFFFFF")) // 오늘 이후의 날짜는 회색
+                } else {
+                    date.setTextColor(ContextCompat.getColor(itemView.context, R.color.white)) // 오늘 이전의 날짜는 흰색
+                }
             }
         }
     }
