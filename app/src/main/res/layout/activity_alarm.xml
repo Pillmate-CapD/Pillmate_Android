@@ -71,11 +71,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="파스틱정 (제2형당뇨)"
-                    android:fontFamily="@font/notosanskrmedium"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
+                    android:fontFamily="@font/notosanskrbold"
+                    android:textColor="@color/back_color"
+                    android:textSize="15sp"
                     android:textAlignment="center"
-                    android:backgroundTint="#F2F2F2"
+                    android:backgroundTint="#F5F6F8"
                     android:padding="8dp" />
 
             </LinearLayout>
@@ -84,57 +84,47 @@
 
         <Button
             android:layout_marginTop="40dp"
-            android:id="@+id/dismiss_button"
-            android:layout_width="315dp"
+            android:id="@+id/pill_btn"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/pill_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:fontFamily="@font/notosanskrsemibold"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:backgroundTint="#4054D2"
-            android:text="약 먹으러 가기" />
+            android:text="지금 약 먹으러 가기" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/dismiss_button"
+        <Button
+            app:layout_constraintTop_toBottomOf="@id/pill_btn"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            >
+            android:layout_marginTop="11dp"
+            android:id="@+id/realarm_btn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textSize="15sp"
+            android:textColor="#5F5F5F"
+            android:backgroundTint="#D7D7D7"
+            android:text="5분 후에 다시 알림" />
 
-            <Button
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:id="@+id/realarm_btn"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanskrregular"
-                app:layout_constraintEnd_toStartOf="@id/nonpill_btn"
-                android:textSize="12sp"
-                android:textColor="@color/black"
-                android:layout_marginEnd="15dp"
-                android:backgroundTint="#D7D7D7"
-                android:text="5분 후에 다시 알림" />
-
-            <Button
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/realarm_btn"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/nonpill_btn"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanskrregular"
-                android:backgroundTint="#D7D7D7"
-                android:text="먹지 못하는 경우"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:paddingBottom="3dp"
+            android:clickable="true"
+            android:layout_marginTop="20dp"
+            android:id="@+id/today_none_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/realarm_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="오늘은 먹지 못하나요?"
+            android:fontFamily="@font/notosanskrregular"
+            android:textColor="#898989"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:backgroundTint="#F2F2F2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
