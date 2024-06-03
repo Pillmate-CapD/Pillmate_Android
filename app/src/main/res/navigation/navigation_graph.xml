@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_homeFragment_to_alarmListActivity"
             app:destination="@id/alarmListActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_onboard3Activity"
+            app:destination="@id/onboard3Activity" />
     </fragment>
     <fragment
         android:id="@+id/userFragment"
@@ -40,5 +43,10 @@
         android:name="com.example.pillmate.AlarmListActivity"
         android:label="activity_alarm_list"
         tools:layout="@layout/activity_alarm_list" />
+    <activity
+        android:id="@+id/onboard3Activity"
+        android:name="com.example.pillmate.Onboard3Activity"
+        android:label="activity_onboard3"
+        tools:layout="@layout/activity_onboard3" />
 
 </navigation>

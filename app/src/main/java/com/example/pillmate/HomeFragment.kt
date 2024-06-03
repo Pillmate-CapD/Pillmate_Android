@@ -65,12 +65,7 @@ class HomeFragment : Fragment() {
         categoryItems.add(CategoryItem("고지혈증"))
         categoryItems.add(CategoryItem("당뇨"))
 
-        // 카테고리 아이템 추가
-        pillListItems.add(PillListItem("오전 7:00", "트윈스타정"))
-        pillListItems.add(PillListItem("오전 7:00", "디아미크롱서방정"))
-        pillListItems.add(PillListItem("오후 12:00", "파스틱정"))
-        pillListItems.add(PillListItem("오후 7:30", "파스틱정"))
-        pillListItems.add(PillListItem("오후 8:30", "바이토린"))
+
     }
 
     override fun onCreateView(
@@ -99,6 +94,22 @@ class HomeFragment : Fragment() {
             val navController = findNavController()
             navController.navigate(R.id.alarmListActivity)
         }
+
+        pillListAdapter.apply {
+            pillListItems.clear() // 기존 데이터 리스트 초기화
+            // 카테고리 아이템 추가
+            pillListItems.add(PillListItem("오전 7:00", "트윈스타정"))
+            pillListItems.add(PillListItem("오전 7:00", "디아미크롱서방정"))
+            pillListItems.add(PillListItem("오후 12:00", "파스틱정"))
+            pillListItems.add(PillListItem("오후 7:30", "파스틱정"))
+            pillListItems.add(PillListItem("오전 1:00", "바이토린"))
+
+            notifyDataSetChanged() // RecyclerView 갱신
+        }
+
+
+
+
 
         // 현재 날짜를 가져옴
         val todayDate = LocalDate.now()
@@ -134,6 +145,8 @@ class HomeFragment : Fragment() {
 
             dateItems.add(DateItem(dayOfWeek, formattedDate, 50, isToday, LocalDate.now()))
         }
+
+
 
 
 

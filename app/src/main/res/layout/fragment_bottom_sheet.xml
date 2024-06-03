@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".bottomSheetFragment"
+    android:background="@drawable/bg_btsheet_round12"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <ImageView
+        android:id="@+id/img_charc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="3dp"
+        android:layout_width="170dp"
+        android:layout_height="177dp"
+        android:background="@drawable/img_charac_alarm" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrbold"
+        android:textSize="20sp"
+        android:text="정말로 오늘 약을 먹지 못하시나요?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#3E3E3E"
+        app:layout_constraintTop_toBottomOf="@id/img_charc"/>
+
+    <TextView
+        android:id="@+id/tv_subTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrregular"
+        android:textSize="13sp"
+        android:textAlignment="center"
+        android:text="알람을 끄더라도 [홈 화면]에서\n오늘 안에 다시 복용할 수 있어요!"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#858585"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_check_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_subTitle"
+        app:layout_constraintStart_toStartOf="@id/tv_title">
+
+        <ImageView
+            android:id="@+id/btn_check_alarm"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_check_square"
+            android:clickable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="앞으로의 해당 약 알람 해제하기"
+            android:textColor="#3E3E3E"
+            android:fontFamily="@font/notosanskrmedium"
+            app:layout_constraintStart_toEndOf="@id/btn_check_alarm"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/layout_check_alarm"
+        android:id="@+id/btn_fin_alarm"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/button_blue"
+        android:fontFamily="@font/notosanskrbold"
+        android:text="알람 끄기"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/btn_fin_alarm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/btn_cancel_alarm"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/button_blue"
+        android:backgroundTint="#E6EBFA"
+        android:fontFamily="@font/notosanskrbold"
+        android:text="취소"
+        android:textColor="#1E54DF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="22dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

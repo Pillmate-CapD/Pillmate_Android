@@ -41,6 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,19 +49,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="지금 먹으러 가기"
-            android:textColor="#3E3E3E"
+            android:textColor="@color/back_color"
             android:textSize="14sp"
             android:fontFamily="@font/notosanskrbold"/>
 
         <View
-            android:layout_marginStart="5dp"
+            android:id="@+id/pill_right"
+            android:visibility="visible"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pill_list_go"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/pill_go"/>
+            android:background="@drawable/right"/>
+
+        <View
+            android:id="@+id/pill_done"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pill_list_go"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/pill_done"/>
+
+        <View
+            android:id="@+id/pill_before"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pill_list_go"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/pill_before"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

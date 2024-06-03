@@ -12,47 +12,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:fontFamily="@font/sfprodisplaymedium"
             android:text="12:00"
             android:textColor="@color/black"
-            android:textSize="76sp" />
+            android:textSize="76sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/date"
-            android:layout_marginTop="-40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/time"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="-40dp"
             android:fontFamily="@font/notosanskrregular"
             android:text="4월 10일 수요일"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time" />
 
         <androidx.cardview.widget.CardView
-            android:layout_marginTop="40dp"
             android:id="@+id/pill_view"
-            app:layout_constraintTop_toBottomOf="@id/date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            app:cardUseCompatPadding="true">
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date">
 
             <LinearLayout
                 android:layout_width="200dp"
@@ -70,61 +70,62 @@
                     android:id="@+id/pill_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="파스틱정 (제2형당뇨)"
-                    android:fontFamily="@font/notosanskrbold"
-                    android:textColor="@color/back_color"
-                    android:textSize="15sp"
-                    android:textAlignment="center"
                     android:backgroundTint="#F5F6F8"
-                    android:padding="8dp" />
+                    android:fontFamily="@font/notosanskrbold"
+                    android:padding="8dp"
+                    android:text="파스틱정 (제2형당뇨)"
+                    android:textAlignment="center"
+                    android:textColor="@color/back_color"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:layout_marginTop="40dp"
-            android:id="@+id/pill_btn"
+            android:id="@+id/btn_pill"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/pill_view"
+            android:layout_height="60dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/bg_blue_round30"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:text="지금 약 먹으러 가기"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:fontFamily="@font/notosanskrsemibold"
-            android:textSize="18sp"
-            android:backgroundTint="#4054D2"
-            android:text="지금 약 먹으러 가기" />
+            app:layout_constraintTop_toBottomOf="@id/pill_view" />
 
         <Button
-            app:layout_constraintTop_toBottomOf="@id/pill_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="11dp"
-            android:id="@+id/realarm_btn"
+            android:id="@+id/btn_realarm"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/bg_gray_round22"
             android:fontFamily="@font/notosanskrsemibold"
-            android:textSize="15sp"
+            android:text="5분 후에 다시 알림"
             android:textColor="#5F5F5F"
-            android:backgroundTint="#D7D7D7"
-            android:text="5분 후에 다시 알림" />
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_pill" />
 
         <TextView
-            android:paddingBottom="3dp"
-            android:clickable="true"
-            android:layout_marginTop="20dp"
-            android:id="@+id/today_none_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/realarm_btn"
+            android:id="@+id/btn_today_none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="오늘은 먹지 못하나요?"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#F2F2F2"
+            android:clickable="true"
             android:fontFamily="@font/notosanskrregular"
+            android:paddingBottom="3dp"
+            android:text="오늘은 먹지 못하나요?"
+            android:textAlignment="center"
             android:textColor="#898989"
             android:textSize="12sp"
-            android:textAlignment="center"
-            android:backgroundTint="#F2F2F2" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_realarm" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,4 +15,12 @@
     <style name="CustomCircularProgressIndicator" parent="Widget.Material3.CircularProgressIndicator">
         <item name="indicatorColor">@drawable/progress_gradient</item>
     </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_btsheet_round12</item>
+    </style>
 </resources>

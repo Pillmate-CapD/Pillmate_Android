@@ -30,7 +30,7 @@ class AlarmActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // xml에서 텍스트 밑줄
-        binding.todayNoneBtn.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG)
+        binding.btnTodayNone.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG)
 
         calendar = Calendar.getInstance()
 
@@ -52,9 +52,14 @@ class AlarmActivity : AppCompatActivity() {
             }
         }.start()
 
-        binding.pillBtn.setOnClickListener {
+        binding.btnPill.setOnClickListener {
             flag = false
             finish()
+        }
+
+        binding.btnTodayNone.setOnClickListener {
+            val bottomSheetFragment = bottomSheetFragment()
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
 
     }
@@ -89,6 +94,7 @@ class AlarmActivity : AppCompatActivity() {
         val dateString = dateFormat.format(calendar.time)
         binding.date.text = dateString
     }
+
     @SuppressLint("NewApi")
     private fun turnScreenOnAndKeyguardOff() {
         window.addFlags(

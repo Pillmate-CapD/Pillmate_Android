@@ -44,7 +44,8 @@ class Onboard3Activity : AppCompatActivity() {
 
         val btnFinish: Button = findViewById(R.id.btn_finish)
         btnFinish.setOnClickListener {
-
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
