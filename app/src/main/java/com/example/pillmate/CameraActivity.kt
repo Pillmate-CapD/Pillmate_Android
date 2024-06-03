@@ -2,6 +2,9 @@ package com.example.pillmate
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageFormat
+import android.graphics.Matrix
 import android.graphics.SurfaceTexture
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCaptureSession
@@ -10,20 +13,36 @@ import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CameraMetadata
 import android.hardware.camera2.CaptureRequest
+import android.hardware.camera2.TotalCaptureResult
+import android.media.ImageReader
 import android.os.Bundle
+import android.os.Environment
+import android.os.Handler
+import android.os.HandlerThread
+import android.util.TypedValue
 import android.view.Surface
 import android.view.TextureView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.pillmate.databinding.ActivityCameraBinding
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.nio.ByteBuffer
+import java.text.SimpleDateFormat
 import java.util.Collections
+import java.util.Date
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
     private lateinit var cameraDevice: CameraDevice
     private lateinit var captureRequestBuilder: CaptureRequest.Builder
     private lateinit var cameraCaptureSessions: CameraCaptureSession
+    private lateinit var backgroundHandler: Handler
+    private lateinit var backgroundThread: HandlerThread
+
+    private var isFlashOn = false
 
     private val textureListener = object : TextureView.SurfaceTextureListener {
         override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
@@ -44,6 +63,14 @@ class CameraActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.cameraPreview.surfaceTextureListener = textureListener
+
+        binding.btnCapture.setOnClickListener {
+            takePicture()
+        }
+
+        binding.btnFlash.setOnClickListener {
+            toggleFlash()
+        }
     }
 
     private fun openCamera() {
@@ -105,10 +132,118 @@ class CameraActivity : AppCompatActivity() {
 
     private fun updatePreview() {
         captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO)
+        if (isFlashOn) {
+            captureRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_TORCH)
+        } else {
+            captureRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF)
+        }
         try {
             cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, null)
         } catch (e: CameraAccessException) {
             e.printStackTrace()
+        }
+    }
+
+    private fun takePicture() {
+        if (cameraDevice == null) return
+
+        val bitmap = binding.cameraPreview.bitmap
+
+        if (bitmap != null) {
+            // 300dp를 픽셀 단위로 변환
+            val sizeInPixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300f, resources.displayMetrics).toInt()
+
+            // 미리보기의 중심을 계산
+            val centerX = bitmap.width / 2
+            val centerY = bitmap.height / 2
+
+            // 크롭 영역의 좌표를 계산
+            val left = centerX - sizeInPixels / 2
+            val top = centerY - sizeInPixels / 2
+            val right = centerX + sizeInPixels / 2
+            val bottom = centerY + sizeInPixels / 2
+
+            // 크롭된 비트맵을 생성
+            val croppedBitmap = Bitmap.createBitmap(bitmap, left, top, right - left, bottom - top)
+
+            val file = createImageFile()
+            saveBitmap(croppedBitmap, file)
+
+            runOnUiThread {
+                Toast.makeText(this, "Saved: ${file?.absolutePath}", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            runOnUiThread {
+                Toast.makeText(this, "Failed to capture image", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun saveBitmap(bitmap: Bitmap, file: File?) {
+        var output: FileOutputStream? = null
+        try {
+            output = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            try {
+                output?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun createImageFile(): File? {
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return try {
+            File.createTempFile(
+                "JPEG_${timeStamp}_", /* prefix */
+                ".jpg", /* suffix */
+                storageDir /* directory */
+            )
+        } catch (ex: IOException) {
+            null
+        }
+    }
+
+    private fun toggleFlash() {
+        isFlashOn = !isFlashOn
+        updatePreview()
+    }
+
+    private fun startBackgroundThread() {
+        backgroundThread = HandlerThread("Camera Background")
+        backgroundThread.start()
+        backgroundHandler = Handler(backgroundThread.looper)
+    }
+
+    private fun stopBackgroundThread() {
+        backgroundThread.quitSafely()
+        try {
+            backgroundThread.join()
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startBackgroundThread()
+        if (binding.cameraPreview.isAvailable) {
+            openCamera()
+        } else {
+            binding.cameraPreview.surfaceTextureListener = textureListener
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopBackgroundThread()
+        if (::cameraDevice.isInitialized) {
+            cameraDevice.close()
         }
     }
 
@@ -119,13 +254,6 @@ class CameraActivity : AppCompatActivity() {
                 Toast.makeText(this, "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show()
                 finish()
             }
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (::cameraDevice.isInitialized) {
-            cameraDevice.close()
         }
     }
 
