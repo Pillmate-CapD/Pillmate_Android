@@ -88,7 +88,7 @@ class PillListAdapter(private val pillListItem: ArrayList<PillListItem>, private
                 // 임시 설정 (30초 후에 알람 설정)
                 //setAlarm(30, "트윈스타정")
                 // 알람 설정
-                setAlarm(itemHour, itemMinute, item.name)
+                //setAlarm(itemHour, itemMinute, item.name)
 
                 itemView.setOnClickListener {
                     // EatMediActivity로 이동
