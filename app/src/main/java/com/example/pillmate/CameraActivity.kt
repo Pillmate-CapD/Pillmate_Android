@@ -1,6 +1,7 @@
 package com.example.pillmate
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageFormat
@@ -151,7 +152,7 @@ class CameraActivity : AppCompatActivity() {
 
         if (bitmap != null) {
             // 300dp를 픽셀 단위로 변환
-            val sizeInPixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300f, resources.displayMetrics).toInt()
+            val sizeInPixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 190f, resources.displayMetrics).toInt()
 
             // 미리보기의 중심을 계산
             val centerX = bitmap.width / 2
@@ -170,7 +171,11 @@ class CameraActivity : AppCompatActivity() {
             saveBitmap(croppedBitmap, file)
 
             runOnUiThread {
+                val intent = Intent()
+                intent.putExtra("photoPath", file?.absolutePath)
+                setResult(RESULT_OK, intent)
                 Toast.makeText(this, "Saved: ${file?.absolutePath}", Toast.LENGTH_SHORT).show()
+                finish()
             }
         } else {
             runOnUiThread {
