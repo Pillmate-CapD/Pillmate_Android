@@ -1,0 +1,102 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:background="@drawable/button_gray">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/step2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textSize="16sp"
+                android:background="@drawable/onboard_step_inactive"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginLeft="20dp"/>
+            <ImageView
+                android:id="@+id/step_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check"
+                android:visibility="gone"
+                android:layout_marginLeft="20dp"/>
+            <TextView
+                android:id="@+id/step_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="약 확인하기"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginLeft="19sp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/step_content2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/medicheck_image"
+                android:layout_width="190dp"
+                android:layout_height="190dp"
+                android:layout_gravity="center"
+                android:src="@drawable/medi_right"/>
+
+            <TextView
+                android:id="@+id/step2_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="당뇨약 파스타정이 맞아요!"
+                android:layout_marginTop="19sp"
+                android:textSize="16sp"
+                android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_marginTop="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <Button
+                    android:id="@+id/photo_again"
+                    android:background="@drawable/button_skyblue"
+                    android:text="다시 촬영"
+                    android:textColor="#1E54DF"
+                    android:layout_width="150sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"/>
+                <Button
+                    android:id="@+id/step_button2"
+                    android:background="@drawable/button_blue"
+                    android:text="복용하기"
+                    android:textColor="#ffffff"
+                    android:layout_width="150sp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line3"
+        android:layout_marginLeft="20dp"/>
+</LinearLayout>

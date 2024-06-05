@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:background="@drawable/button_stroke_blue">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/step1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="16sp"
+            android:background="@drawable/onboard_step_inactive"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"/>
+        <ImageView
+            android:id="@+id/step_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/check"
+            android:visibility="gone"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/step_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="먹을 약 인증하기"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginLeft="19sp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/step_content1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/medi_image"
+            android:layout_width="164dp"
+            android:layout_height="101dp"
+            android:layout_gravity="center"
+            android:src="@drawable/test_medi1"/>
+
+        <TextView
+            android:id="@+id/step1_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="당뇨약 파스타정을 촬영하면\n해당 약이 맞는지 확인해 드려요"
+            android:textAlignment="center"
+            android:layout_marginTop="19sp"
+            android:textSize="16sp"
+
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/step_button1"
+            android:background="@drawable/button_blue"
+            android:text="카메라 촬영하기"
+            android:textColor="@color/white"
+            android:layout_width="296sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19sp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/pass1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="인증 건너뛰기"
+            android:layout_marginTop="11sp"
+            android:textSize="12sp"
+            android:textColor="#1E54DF"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line3"
+        android:layout_marginLeft="20dp"/>
+</LinearLayout>
