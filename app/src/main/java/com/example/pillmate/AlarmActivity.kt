@@ -3,6 +3,7 @@ package com.example.pillmate
 import android.annotation.SuppressLint
 import android.app.KeyguardManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.os.PowerManager
@@ -54,7 +55,18 @@ class AlarmActivity : AppCompatActivity() {
 
         binding.btnPill.setOnClickListener {
             flag = false
+
+            // EatMediActivity로 이동
+            val intent = Intent(this, EatMediActivity::class.java)
+            startActivity(intent)
+
+            // 어차피 약 다 먹었으니까 화면 나가도 되지 않나?
             finish()
+
+//            // MainActivity로 이동
+//            val mainIntent = Intent(this, MainActivity::class.java)
+//            mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+//            startActivity(mainIntent)
         }
 
         binding.btnTodayNone.setOnClickListener {
