@@ -6,4 +6,5 @@
     <color name="selected_icon_color">#1E54DF</color>
     <color name="back_color">#1E54DF</color>
     <color name="point_back">#08D2C8</color>
+    <color name="trans_white">#33FFFFFF</color>
 </resources>

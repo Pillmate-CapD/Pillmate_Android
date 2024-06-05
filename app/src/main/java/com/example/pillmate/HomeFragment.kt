@@ -65,15 +65,13 @@ class HomeFragment : Fragment() {
         categoryItems.add(CategoryItem("고지혈증"))
         categoryItems.add(CategoryItem("당뇨"))
 
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater,container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         // 홈화면 => 주간 달력
         dateAdapter = DateAdapter(dateItems as ArrayList<DateItem>)
@@ -95,35 +93,29 @@ class HomeFragment : Fragment() {
             navController.navigate(R.id.alarmListActivity)
         }
 
+        binding.homePillProgressBar.setMaxProgress(100)
+        binding.homePillProgressBar.setProgress(90)
+
         pillListAdapter.apply {
-            pillListItems.clear() // 기존 데이터 리스트 초기화
-            // 카테고리 아이템 추가
-            pillListItems.add(PillListItem("오전 7:00", "트윈스타정"))
-            pillListItems.add(PillListItem("오전 7:00", "디아미크롱서방정"))
+            pillListItems.clear()
+            pillListItems.add(PillListItem("오전 1:00", "트윈스타정"))
+            pillListItems.add(PillListItem("오전 1:47", "디아미크롱서방정"))
             pillListItems.add(PillListItem("오후 12:00", "파스틱정"))
             pillListItems.add(PillListItem("오후 7:30", "파스틱정"))
-            pillListItems.add(PillListItem("오전 1:00", "바이토린"))
-
-            notifyDataSetChanged() // RecyclerView 갱신
+            pillListItems.add(PillListItem("오후 9:00", "바이토린"))
+            notifyDataSetChanged()
         }
-
-
-
-
 
         // 현재 날짜를 가져옴
         val todayDate = LocalDate.now()
 
-        // 현재 주의 첫 번째 날을 계산
-        val firstDayOfWeek = when (todayDate.dayOfWeek) {
-            DayOfWeek.SUNDAY -> todayDate
-            else -> todayDate.minusDays(todayDate.dayOfWeek.value.toLong())
-        }
+        // 현재 주의 첫 번째 날(일요일)을 계산
+        val firstDayOfWeek = todayDate.with(DayOfWeek.SUNDAY).minusWeeks(1)
 
-        // 이전 주의 일요일부터 토요일까지의 날짜를 계산하여 추가
+        // 현재 주의 일요일부터 토요일까지의 날짜를 계산하여 추가
         for (i in 0..6) {
             val date = firstDayOfWeek.plusDays(i.toLong())
-            val formattedDate = date.format(DateTimeFormatter.ofPattern("dd"))
+            val formattedDate = date.dayOfMonth.toString()
             val dayOfWeek = when (date.dayOfWeek) {
                 DayOfWeek.SUNDAY -> "일"
                 DayOfWeek.MONDAY -> "월"
@@ -133,22 +125,9 @@ class HomeFragment : Fragment() {
                 DayOfWeek.FRIDAY -> "금"
                 DayOfWeek.SATURDAY -> "토"
             }
-            val isToday = date == todayDate // 오늘 날짜인지 확인
-
-            val textColor = if (!isToday && date.isAfter(todayDate)) {
-                // 오늘 이후의 날짜인 경우
-                Color.parseColor("#33FFFFFF") // 텍스트 색상을 변경할 색상
-            } else {
-                // 오늘 이전의 날짜이거나 오늘 날짜인 경우
-                ContextCompat.getColor(requireContext(), R.color.white) // 기본 텍스트 색상
-            }
-
-            dateItems.add(DateItem(dayOfWeek, formattedDate, 50, isToday, LocalDate.now()))
+            val isToday = date == todayDate
+            dateItems.add(DateItem(dayOfWeek, formattedDate, 50, isToday, date))
         }
-
-
-
-
 
         return binding.root
     }

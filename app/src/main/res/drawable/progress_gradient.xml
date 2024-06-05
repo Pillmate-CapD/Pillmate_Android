@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="ring"
-    android:innerRadiusRatio="3"
-    android:thicknessRatio="9"
-    android:useLevel="false">
-    <gradient
-        android:type="sweep"
-        android:startColor="#FF5722"
-        android:centerColor="#FFEB3B"
-        android:endColor="#00BCD4"
-        android:angle="0"/>
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="10dp"/>
+            <solid android:color="#D9D9D9"/>
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <scale
+            android:scaleWidth="100%"
+            android:scaleHeight="100%"
+            android:scaleGravity="left">
+            <shape>
+                <corners android:radius="10dp"/>
+                <gradient
+                    android:startColor="#1E54DF"
+                    android:endColor="#B1EDEA"
+                    android:angle="0"/>
+            </shape>
+        </scale>
+    </item>
+</layer-list>

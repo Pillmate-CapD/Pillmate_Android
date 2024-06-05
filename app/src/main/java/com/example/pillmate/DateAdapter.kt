@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import java.time.LocalDate
 
-class DateAdapter(private val itemDate : ArrayList<DateItem>) :
+class DateAdapter(private val itemDate: ArrayList<DateItem>) :
     RecyclerView.Adapter<DateAdapter.DateViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DateViewHolder {
@@ -35,24 +35,30 @@ class DateAdapter(private val itemDate : ArrayList<DateItem>) :
         private val day: TextView = itemView.findViewById(R.id.day_recy)
         private val date: TextView = itemView.findViewById(R.id.date_recy)
         private val progressBar: CircularProgressIndicator = itemView.findViewById(R.id.pill_progressBar)
-        private val backgroundView : View = itemView.findViewById(R.id.today_view)
+        private val backgroundView: View = itemView.findViewById(R.id.today_view)
 
-
-        // 오늘 이후의 날들에 대해서는 text 색상의 변화가 있어야 하는 부분
         fun bind(item: DateItem) {
             day.text = item.dayOfWeek
             date.text = item.formattedDate
             progressBar.progress = item.progress
 
+            val today = LocalDate.now()
+
             if (item.isToday) {
                 backgroundView.visibility = View.VISIBLE
                 date.setTextColor(ContextCompat.getColor(itemView.context, R.color.white)) // 오늘 날짜는 흰색
+                day.setTextColor(ContextCompat.getColor(itemView.context, R.color.white)) // 오늘 날짜의 요일도 흰색
+                progressBar.progress = item.progress
             } else {
                 backgroundView.visibility = View.INVISIBLE
-                if (item.isAfterToday(LocalDate.now())) { // 오늘 이후의 날짜 여부 확인
-                    date.setTextColor(Color.parseColor("#33FFFFFF")) // 오늘 이후의 날짜는 회색
+                if (item.date.isAfter(today)) { // 오늘 이후의 날짜 여부 확인
+                    date.setTextColor(ContextCompat.getColor(itemView.context, R.color.trans_white))  // 오늘 이후의 날짜는 회색
+                    //day.setTextColor(ContextCompat.getColor(itemView.context, R.color.trans_white))  // 오늘 이후의 요일도 회색
+                    progressBar.progress = 0
                 } else {
                     date.setTextColor(ContextCompat.getColor(itemView.context, R.color.white)) // 오늘 이전의 날짜는 흰색
+                    day.setTextColor(ContextCompat.getColor(itemView.context, R.color.white)) // 오늘 이전의 요일도 흰색
+                    progressBar.progress = item.progress
                 }
             }
         }
