@@ -1,5 +1,7 @@
 package com.example.pillmate
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -30,41 +32,16 @@ class HomeFragment : Fragment() {
     private lateinit var pillListAdapter: PillListAdapter
     private val pillListItems = mutableListOf<PillListItem>()
 
+    private val REQUEST_CODE_EAT_MEDI = 1001
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        // 현재 날짜를 가져옴
-//        val todayDate = LocalDate.now()
-//
-//        // 현재 주의 첫 번째 날을 계산
-//        val firstDayOfWeek = todayDate.with(DayOfWeek.SUNDAY)
-//
-//        // 이전 주의 첫 번째 날을 계산
-//        val previousWeekFirstDay = firstDayOfWeek.minusDays(7)
-//
-//        // 이전 주의 일요일부터 토요일까지의 날짜를 계산하여 추가
-//        for (i in 0..6) {
-//            val date = previousWeekFirstDay.plusDays(i.toLong())
-//            val formattedDate = date.format(DateTimeFormatter.ofPattern("dd"))
-//            val dayOfWeek = when (date.dayOfWeek) {
-//                DayOfWeek.SUNDAY -> "일"
-//                DayOfWeek.MONDAY -> "월"
-//                DayOfWeek.TUESDAY -> "화"
-//                DayOfWeek.WEDNESDAY -> "수"
-//                DayOfWeek.THURSDAY -> "목"
-//                DayOfWeek.FRIDAY -> "금"
-//                DayOfWeek.SATURDAY -> "토"
-//            }
-//            val isToday = date == todayDate // 오늘 날짜인지 확인
-//            dateItems.add(DateItem(dayOfWeek, formattedDate, 50, isToday, LocalDate.now()))
-//        }
 
         // 카테고리 아이템 추가
         categoryItems.add(CategoryItem("전체", true))
         categoryItems.add(CategoryItem("고혈압"))
         categoryItems.add(CategoryItem("고지혈증"))
         categoryItems.add(CategoryItem("당뇨"))
-
     }
 
     override fun onCreateView(
@@ -84,7 +61,7 @@ class HomeFragment : Fragment() {
         binding.pillCategory.adapter = categoryAdapter
 
         // 홈화면 => 약 리스트 파트
-        pillListAdapter = PillListAdapter(pillListItems as ArrayList<PillListItem>)
+        pillListAdapter = PillListAdapter(pillListItems as ArrayList<PillListItem>, this)
         binding.pillList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.pillList.adapter = pillListAdapter
 
@@ -130,5 +107,18 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_EAT_MEDI && resultCode == Activity.RESULT_OK) {
+            val completed = data?.getBooleanExtra("completed", false) ?: false
+            val position = data?.getIntExtra("position", -1) ?: -1
+            if (completed && position != -1) {
+                // 완료된 아이템의 상태를 갱신
+                pillListItems[position].isCompleted = true
+                pillListAdapter.notifyItemChanged(position)
+            }
+        }
     }
 }
