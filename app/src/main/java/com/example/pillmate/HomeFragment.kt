@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,15 +25,18 @@ import java.util.Locale
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var dateAdapter: DateAdapter
-    private val dateItems = mutableListOf<DateItem>()
-
     private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var pillListAdapter: PillListAdapter
     private val categoryItems = mutableListOf<CategoryItem>()
 
-    private lateinit var pillListAdapter: PillListAdapter
-    private val pillListItems = mutableListOf<PillListItem>()
+    private val preferencesHelper: PreferencesHelper by lazy {
+        PreferencesHelper(requireContext())
+    }
 
     private val REQUEST_CODE_EAT_MEDI = 1001
+
+    private val dateViewModel: DateViewModel by viewModels()
+    private val pillViewModel: PillViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +55,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         // 홈화면 => 주간 달력
-        dateAdapter = DateAdapter(dateItems as ArrayList<DateItem>)
+        dateAdapter = DateAdapter(dateViewModel.dateItems as ArrayList<DateItem>)
         binding.dateList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.dateList.adapter = dateAdapter
 
@@ -61,7 +65,7 @@ class HomeFragment : Fragment() {
         binding.pillCategory.adapter = categoryAdapter
 
         // 홈화면 => 약 리스트 파트
-        pillListAdapter = PillListAdapter(pillListItems as ArrayList<PillListItem>, this)
+        pillListAdapter = PillListAdapter(arrayListOf(), this, preferencesHelper)
         binding.pillList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.pillList.adapter = pillListAdapter
 
@@ -73,37 +77,19 @@ class HomeFragment : Fragment() {
         binding.homePillProgressBar.setMaxProgress(100)
         binding.homePillProgressBar.setProgress(90)
 
-        pillListAdapter.apply {
-            pillListItems.clear()
-            pillListItems.add(PillListItem("오전 1:00", "트윈스타정"))
-            pillListItems.add(PillListItem("오전 1:47", "디아미크롱서방정"))
-            pillListItems.add(PillListItem("오후 12:00", "파스틱정"))
-            pillListItems.add(PillListItem("오후 7:30", "파스틱정"))
-            pillListItems.add(PillListItem("오후 9:00", "바이토린"))
-            notifyDataSetChanged()
-        }
+        // ViewModel을 사용하여 데이터 로드
+        pillViewModel.loadPillItems(
+            listOf(
+                PillListItem("오전 1:00", "트윈스타정"),
+                PillListItem("오전 1:47", "디아미크롱서방정"),
+                PillListItem("오후 12:00", "파스틱정"),
+                PillListItem("오후 7:30", "파스틱정"),
+                PillListItem("오후 9:00", "바이토린")
+            )
+        )
 
-        // 현재 날짜를 가져옴
-        val todayDate = LocalDate.now()
-
-        // 현재 주의 첫 번째 날(일요일)을 계산
-        val firstDayOfWeek = todayDate.with(DayOfWeek.SUNDAY).minusWeeks(1)
-
-        // 현재 주의 일요일부터 토요일까지의 날짜를 계산하여 추가
-        for (i in 0..6) {
-            val date = firstDayOfWeek.plusDays(i.toLong())
-            val formattedDate = date.dayOfMonth.toString()
-            val dayOfWeek = when (date.dayOfWeek) {
-                DayOfWeek.SUNDAY -> "일"
-                DayOfWeek.MONDAY -> "월"
-                DayOfWeek.TUESDAY -> "화"
-                DayOfWeek.WEDNESDAY -> "수"
-                DayOfWeek.THURSDAY -> "목"
-                DayOfWeek.FRIDAY -> "금"
-                DayOfWeek.SATURDAY -> "토"
-            }
-            val isToday = date == todayDate
-            dateItems.add(DateItem(dayOfWeek, formattedDate, 50, isToday, date))
+        pillViewModel.pillItems.observe(viewLifecycleOwner) { pillItems ->
+            pillListAdapter.updateItems(pillItems)
         }
 
         return binding.root
@@ -115,8 +101,7 @@ class HomeFragment : Fragment() {
             val completed = data?.getBooleanExtra("completed", false) ?: false
             val position = data?.getIntExtra("position", -1) ?: -1
             if (completed && position != -1) {
-                // 완료된 아이템의 상태를 갱신
-                pillListItems[position].isCompleted = true
+                pillViewModel.setPillCompleted(position, true)
                 pillListAdapter.notifyItemChanged(position)
             }
         }

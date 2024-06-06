@@ -18,8 +18,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import java.util.Calendar
 
-class PillListAdapter(private val pillListItem: ArrayList<PillListItem>, private val fragment: Fragment) :
-    RecyclerView.Adapter<PillListAdapter.PillListViewHolder>() {
+class PillListAdapter(
+    private val pillListItem: ArrayList<PillListItem>,
+    private val fragment: Fragment,
+    private val preferencesHelper: PreferencesHelper
+) : RecyclerView.Adapter<PillListAdapter.PillListViewHolder>() {
 
     private val REQUEST_CODE_EAT_MEDI = 1001
     private val REQUEST_CODE_SCHEDULE_EXACT_ALARM = 1002
@@ -42,7 +45,6 @@ class PillListAdapter(private val pillListItem: ArrayList<PillListItem>, private
     inner class PillListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val time: TextView = itemView.findViewById(R.id.pill_list_time)
         private val pillName: TextView = itemView.findViewById(R.id.pill_list_name)
-
         private val pill_right: View = itemView.findViewById(R.id.pill_right)
         private val pill_list_go: View = itemView.findViewById(R.id.pill_list_go)
         private val pill_done: View = itemView.findViewById(R.id.pill_done)
@@ -66,8 +68,6 @@ class PillListAdapter(private val pillListItem: ArrayList<PillListItem>, private
             val itemTimeInMinutes = itemHour * 60 + itemMinute
             val currentTimeInMinutes = currentHour * 60 + currentMinute
 
-
-
             if (item.isCompleted) {
                 // 아이템이 완료된 경우
                 itemView.setBackgroundResource(R.drawable.custom_pill_background) // 기본 색상
@@ -83,12 +83,6 @@ class PillListAdapter(private val pillListItem: ArrayList<PillListItem>, private
                 pill_before.visibility = View.INVISIBLE
                 pill_list_go.visibility = View.VISIBLE
                 pill_right.visibility = View.VISIBLE
-
-
-                // 임시 설정 (30초 후에 알람 설정)
-                //setAlarm(30, "트윈스타정")
-                // 알람 설정
-                //setAlarm(itemHour, itemMinute, item.name)
 
                 itemView.setOnClickListener {
                     // EatMediActivity로 이동
@@ -202,5 +196,11 @@ class PillListAdapter(private val pillListItem: ArrayList<PillListItem>, private
                 // Handle SecurityException gracefully, perhaps by requesting necessary permissions
             }
         }
+    }
+
+    fun updateItems(newItems: List<PillListItem>) {
+        pillListItem.clear()
+        pillListItem.addAll(newItems)
+        notifyDataSetChanged()
     }
 }
