@@ -3,8 +3,11 @@ package com.example.pillmate
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.RectF
+import android.graphics.Shader
 import android.graphics.SweepGradient
 import android.util.AttributeSet
 import android.view.View
@@ -26,12 +29,10 @@ class CustomCircularProgressBar @JvmOverloads constructor(
     }
     private val rectF = RectF()
 
-    private lateinit var gradient: SweepGradient
+    private var gradient: LinearGradient? = null
 
     init {
-        val colors = intArrayOf(Color.parseColor("#1E54DF"),Color.parseColor("#B1EDEA"),Color.parseColor("#1E54DF"))
-        gradient = SweepGradient(width / 2f, height / 2f, colors, null)
-        paint.shader = gradient
+        updateGradient()
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -39,8 +40,7 @@ class CustomCircularProgressBar @JvmOverloads constructor(
         val size = min(w, h)
         val padding = paint.strokeWidth / 2
         rectF.set(padding, padding, size - padding, size - padding)
-        gradient = SweepGradient(size / 2f, size / 2f, intArrayOf(Color.parseColor("#1E54DF"), Color.parseColor("#B1EDEA"), Color.parseColor("#1E54DF")), null)
-        paint.shader = gradient
+        updateGradient()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -59,15 +59,37 @@ class CustomCircularProgressBar @JvmOverloads constructor(
 
     fun setProgress(progress: Int) {
         this.progress = progress
+        updateGradient()
         invalidate()
     }
 
     fun setMaxProgress(maxProgress: Int) {
         this.maxProgress = maxProgress
+        updateGradient()
         invalidate()
     }
 
     private fun dpToPx(dp: Float): Float {
         return dp * context.resources.displayMetrics.density
+    }
+
+    private fun updateGradient() {
+        val colors = intArrayOf(
+            Color.parseColor("#1E54DF"),
+            Color.parseColor("#1E54DF"),
+            Color.parseColor("#88A4EE"),
+            Color.parseColor("#BECDF6"),
+        )
+        val sweepAngle = (progress / maxProgress.toFloat()) * 360
+        val centerX = width / 2f
+        val centerY = height / 2f
+        val radius = min(centerX, centerY)
+
+        val startX = centerX
+        val startY = centerY - radius
+        val endX = centerX
+        val endY = centerY + radius
+
+        gradient = LinearGradient(startX, startY, endX, endY, colors, null, Shader.TileMode.REPEAT)
     }
 }
