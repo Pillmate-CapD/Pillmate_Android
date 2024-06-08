@@ -8,10 +8,12 @@ class DateViewModel : ViewModel() {
     val dateItems = mutableListOf<DateItem>()
 
     init {
-        generateDateItems()
+        // 예시 progress 값 리스트
+        val progressValues = listOf(10, 50, 100, 90, 50, 60, 10)
+        generateDateItems(progressValues)
     }
 
-    private fun generateDateItems() {
+    private fun generateDateItems(progressValues: List<Int>) {
         if (dateItems.isEmpty()) {
             val todayDate = LocalDate.now()
             val firstDayOfWeek = todayDate.with(DayOfWeek.SUNDAY).minusWeeks(1)
@@ -29,7 +31,8 @@ class DateViewModel : ViewModel() {
                     DayOfWeek.SATURDAY -> "토"
                 }
                 val isToday = date == todayDate
-                dateItems.add(DateItem(dayOfWeek, formattedDate, 50, isToday, date))
+                val progress = progressValues.getOrElse(i) { 50 } // progress 값을 가져오거나 기본값 50 사용
+                dateItems.add(DateItem(dayOfWeek, formattedDate, progress, isToday, date))
             }
         }
     }

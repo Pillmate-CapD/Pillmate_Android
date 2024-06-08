@@ -18,7 +18,8 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class AlarmActivity : AppCompatActivity() {
+
+class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListener {
     private lateinit var binding: ActivityAlarmBinding
     private lateinit var calendar: Calendar
     private lateinit var powerManager: PowerManager
@@ -55,25 +56,19 @@ class AlarmActivity : AppCompatActivity() {
 
         binding.btnPill.setOnClickListener {
             flag = false
-
+            stopAlarm()
             // EatMediActivity로 이동
             val intent = Intent(this, EatMediActivity::class.java)
             startActivity(intent)
-
-            // 어차피 약 다 먹었으니까 화면 나가도 되지 않나?
             finish()
-
-//            // MainActivity로 이동
-//            val mainIntent = Intent(this, MainActivity::class.java)
-//            mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-//            startActivity(mainIntent)
         }
 
         binding.btnTodayNone.setOnClickListener {
-            val bottomSheetFragment = bottomSheetFragment()
+            flag = false
+            stopAlarm()
+            val bottomSheetFragment = BottomSheetFragment()
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
-
     }
 
     private fun updateTimeText() {
@@ -87,17 +82,17 @@ class AlarmActivity : AppCompatActivity() {
             "$minute"
         }
 
-        if (hourOfDay in 1..11) {
-            timeString = "$hourOfDay:$formattedMinute"
-        } else if (hourOfDay == 12) {
-            timeString = "$hourOfDay:$formattedMinute"
-        } else {
-            val formattedHour = if (hourOfDay > 12) {
-                hourOfDay - 12
-            } else {
-                hourOfDay
+        timeString = when {
+            hourOfDay in 1..11 -> "$hourOfDay:$formattedMinute"
+            hourOfDay == 12 -> "$hourOfDay:$formattedMinute"
+            else -> {
+                val formattedHour = if (hourOfDay > 12) {
+                    hourOfDay - 12
+                } else {
+                    hourOfDay
+                }
+                "$formattedHour:$formattedMinute"
             }
-            timeString = "$formattedHour:$formattedMinute"
         }
 
         binding.time.text = timeString
@@ -111,16 +106,21 @@ class AlarmActivity : AppCompatActivity() {
     private fun turnScreenOnAndKeyguardOff() {
         window.addFlags(
             WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
-                    WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
+                    WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON or
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
         )
 
-        setShowWhenLocked(true)
-        setTurnScreenOn(true)
-
-        // Android 12 이상에서는 KeyguardManager를 사용하여 잠금 화면을 해제합니다.
         val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-        if (keyguardManager.isKeyguardLocked) {
-            keyguardManager.requestDismissKeyguard(this, null)
-        }
+        keyguardManager.requestDismissKeyguard(this, null)
+    }
+
+    private fun stopAlarm() {
+        val serviceIntent = Intent(this, AlarmService::class.java)
+        stopService(serviceIntent)
+    }
+
+    override fun onAlarmDismiss() {
+        finish()
     }
 }

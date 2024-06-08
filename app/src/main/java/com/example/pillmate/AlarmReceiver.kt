@@ -15,12 +15,11 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val pillName = intent.getStringExtra("pill_name")
         Log.d("AlarmReceiver", "Alarm received for pill: $pillName")
-        // Handle the received alarm here
 
-        val inIntent = Intent(context, AlarmActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        // AlarmService 시작
+        val serviceIntent = Intent(context, AlarmService::class.java).apply {
             putExtra("pill_name", pillName)
         }
-        context.startActivity(inIntent)
+        context.startForegroundService(serviceIntent)
     }
 }
