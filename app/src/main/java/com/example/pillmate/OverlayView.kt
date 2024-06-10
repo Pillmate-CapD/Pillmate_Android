@@ -34,7 +34,7 @@ class OverlayView @JvmOverloads constructor(
         // 투명한 사각형 영역을 만든다
         val centerX = width / 2f
         val centerY = height/ 2f
-        val size = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 350f, resources.displayMetrics)
+        val size = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340f, resources.displayMetrics)
         val left = centerX - size / 2
         val top = centerY - size / 2
         val right = centerX + size / 2

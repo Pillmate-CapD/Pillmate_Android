@@ -68,7 +68,7 @@ class PillListAdapter(
             val itemTimeInMinutes = itemHour * 60 + itemMinute
             val currentTimeInMinutes = currentHour * 60 + currentMinute
 
-            setAlarm(20,"트윈스타정")
+            //setAlarm(20,"트윈스타정")
             if (item.isCompleted) {
                 // 아이템이 완료된 경우
                 itemView.setBackgroundResource(R.drawable.custom_pill_background) // 기본 색상
