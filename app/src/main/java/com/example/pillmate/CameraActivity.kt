@@ -152,6 +152,8 @@ class CameraActivity : AppCompatActivity() {
 
         if (bitmap != null) {
             // 300dp를 픽셀 단위로 변환
+            val intent = Intent(this, RecognizeIngActivity::class.java)
+            startActivity(intent)
             val sizeInPixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340f, resources.displayMetrics).toInt()
 
             // 미리보기의 중심을 계산

@@ -78,9 +78,11 @@
             android:name=".AlarmListActivity"
             android:exported="false" />
         <activity
+            android:name=".RecognizeIngActivity"
+            android:exported="false" />
+        <activity
             android:name=".Onboard1Activity"
             android:exported="false">
-
         </activity>
     </application>
 

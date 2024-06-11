@@ -1,23 +1,17 @@
 package com.example.pillmate
 
-import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.NumberPicker
-import android.widget.Space
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.internal.ViewUtils.dpToPx
 import java.util.Calendar
-import java.util.Locale
 
 class Onboard2Activity : AppCompatActivity() {
+
+    private lateinit var btnNext: Button
+    private val dateEditTexts = mutableListOf<EditText>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,83 +26,71 @@ class Onboard2Activity : AppCompatActivity() {
         val linearLayout: LinearLayout = findViewById(R.id.linearLayout)
 
         selectedDiseases.forEach { disease ->
-            // 세로로 배치되는 LinearLayout 생성
-            val verticalLayout = LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
+            // 수평으로 배치되는 LinearLayout 생성
+            val horizontalLayout = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
+                setPadding(0, dpToPx(10f).toInt(), 0, dpToPx(10f).toInt()) // 상하 여백 추가
             }
-            linearLayout.addView(verticalLayout)
-            // 여백 추가
-            val space1 = Space(this).apply {
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    dpToPx(10f).toInt()
-                )
-            }
-            verticalLayout.addView(space1)
+            linearLayout.addView(horizontalLayout)
+
             // 질병을 표시하는 TextView 생성
             val diseaseTextView = TextView(this).apply {
                 text = disease
                 textSize = 20f
                 layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
+                    0, // 너비를 0으로 설정하고 weight를 사용하여 비율로 설정
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f // 가중치 설정
                 )
                 setTextColor(Color.parseColor("#3E3E3E"))
             }
-            verticalLayout.addView(diseaseTextView)
+            horizontalLayout.addView(diseaseTextView)
 
-            // 여백 추가
+            // 가로 여백 추가 (10dp)
             val space = Space(this).apply {
                 layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    dpToPx(7f).toInt()
+                    dpToPx(10f).toInt(), // 너비
+                    0, // 높이
+                    0f // 가중치 설정
                 )
             }
-            verticalLayout.addView(space)
+            horizontalLayout.addView(space)
 
             // 날짜를 선택하는 에디트텍스트 생성
             val dateEditText = EditText(this).apply {
                 hint = "2024년 4월"
                 isFocusable = false
-                setBackgroundResource(R.drawable.gray_stroke_et)
+                setBackgroundResource(R.drawable.onboard_et_gray)
                 layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    resources.getDimensionPixelSize(R.dimen.onboard_et_height)
+                    0, // 너비를 0으로 설정하고 weight를 사용하여 비율로 설정
+                    resources.getDimensionPixelSize(R.dimen.onboard_et_height),
+                    2f // 가중치 설정
                 )
                 setOnClickListener {
                     showDatePickerDialog(this)
                 }
                 setHintTextColor(Color.parseColor("#6C6B6B")) // 힌트 색상 변경
-                setPadding(dpToPx(20f).toInt(), 0, 0, 0) // 왼쪽 여백 추가
+                setPadding(dpToPx(20f).toInt(), dpToPx(10f).toInt(), 0, dpToPx(10f).toInt()) // 왼쪽 여백 추가
             }
-            verticalLayout.addView(dateEditText)
+            horizontalLayout.addView(dateEditText)
+            dateEditTexts.add(dateEditText)
         }
 
-        val btnNext: Button = findViewById(R.id.btn_next)
+        btnNext = findViewById(R.id.btn_next)
+        updateNextButtonState() // 초기 상태 설정
+
         btnNext.setOnClickListener {
-            // Save selected dates and pass to the next activity
-            val intent = Intent(this, Onboard3Activity::class.java)
-            startActivity(intent)
+            if (dateEditTexts.all { it.text.isNotBlank() }) {
+                val intent = Intent(this, Onboard3Activity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
-
-    /*private fun showDatePickerDialog(editText: EditText) {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog, { _, selectedYear, selectedMonth, selectedDay ->
-            val date = "$selectedYear-${selectedMonth + 1}-$selectedDay"
-            editText.setText(date)
-        }, year, month, day)
-        datePickerDialog.show()
-    }*/
     private fun showDatePickerDialog(editText: EditText) {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.date_picker)
@@ -141,11 +123,24 @@ class Onboard2Activity : AppCompatActivity() {
 
             val selectedDate = "$selectedYear $selectedMonth"
             editText.setText(selectedDate)
+            editText.setBackgroundResource(R.drawable.onboard_et_blue) // 배경색 변경
+            updateNextButtonState() // 상태 업데이트
             dialog.dismiss()
         }
 
         dialog.show()
     }
+
+    private fun updateNextButtonState() {
+        if (dateEditTexts.all { it.text.isNotBlank() }) {
+            btnNext.isEnabled = true
+            btnNext.setBackgroundResource(R.drawable.onboard_btn_active)
+        } else {
+            btnNext.isEnabled = false
+            btnNext.setBackgroundResource(R.drawable.onboard_btn_inactive)
+        }
+    }
+
     private fun dpToPx(dp: Float): Float {
         return dp * resources.displayMetrics.density
     }

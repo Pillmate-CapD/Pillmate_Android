@@ -33,6 +33,15 @@ class EatMediActivity : AppCompatActivity() {
         adapter = EatMediAdapter(steps, this::onStepButtonClick, this::onSkipButtonClick)
         recyclerView.adapter = adapter
 
+        // Intent에서 전달된 사진 경로를 받아옴
+        val photoPath = intent.getStringExtra("photoPath")
+
+        // 사진 경로가 있다면 두 번째 단계에 해당 사진을 설정
+        if (!photoPath.isNullOrEmpty()) {
+            steps[1].isVisible = true
+            steps[1].photoPath = photoPath
+        }
+
         // Intent에서 전달된 position 값을 저장
         itemPosition = intent.getIntExtra("position", -1)
     }

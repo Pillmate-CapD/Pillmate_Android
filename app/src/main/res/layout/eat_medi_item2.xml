@@ -66,29 +66,15 @@
                 android:layout_marginTop="19sp"
                 android:textSize="16sp"
                 android:layout_gravity="center"/>
-            <LinearLayout
-                android:layout_marginTop="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
-                <Button
-                    android:id="@+id/photo_again"
-                    android:background="@drawable/button_skyblue"
-                    android:text="다시 촬영"
-                    android:textColor="#1E54DF"
-                    android:layout_width="150sp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"/>
                 <Button
                     android:id="@+id/step_button2"
                     android:background="@drawable/button_blue"
-                    android:text="복용하기"
+                    android:text="다음으로"
                     android:textColor="#ffffff"
-                    android:layout_width="150sp"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
+                    android:layout_width="296sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19sp"
+                    android:layout_gravity="center"/>
 
 
         </LinearLayout>

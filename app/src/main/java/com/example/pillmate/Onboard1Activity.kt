@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 class Onboard1Activity : AppCompatActivity() {
 
     private val selectedDiseases = mutableListOf<String>()
+    private lateinit var btnNext: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,49 +26,52 @@ class Onboard1Activity : AppCompatActivity() {
         }
 
         val card1: CardView = findViewById(R.id.card1)
-        setCardContent(card1, "당뇨", "혈당 조절이 어려워져\n혈당 수치가 비정상적으로 높아지는\n만성질환", R.drawable.diabetes)
+        setCardContent(card1, "당뇨", "혈당 조절이 어려워져\n혈당 수치가 비정상적으로 \n높아지는 만성질환", R.drawable.o_diabetes)
         card1.setOnClickListener {
-            toggleSelection(card1, "당뇨", R.drawable.diabetes_select)
+            toggleSelection(card1, "당뇨", R.drawable.o_diabetes_select)
         }
 
         val card2: CardView = findViewById(R.id.card2)
-        setCardContent(card2, "고혈압", "혈압이 지속적으로\n높은 만성질환\n ", R.drawable.heartrate)
+        setCardContent(card2, "고혈압", "혈압이 지속적으로\n높은 만성질환\n ", R.drawable.o_heartrate)
         card2.setOnClickListener {
-            toggleSelection(card2, "고혈압", R.drawable.heartrate_select)
+            toggleSelection(card2, "고혈압", R.drawable.o_heartrate_select)
         }
 
         val card3: CardView = findViewById(R.id.card3)
-        setCardContent(card3, "고지혈증", "혈중 지질 수치가\n높은 만성질환\n  ", R.drawable.blood_cells)
+        setCardContent(card3, "고지혈증", "혈중 지질 수치가\n높은 만성질환\n  ", R.drawable.o_blood_cells)
         card3.setOnClickListener {
-            toggleSelection(card3, "고지혈증", R.drawable.blood_cells_select)
+            toggleSelection(card3, "고지혈증", R.drawable.o_blood_cells_select)
         }
 
         val card4: CardView = findViewById(R.id.card4)
-        setCardContent(card4, "호흡기질환", "호흡기에\n장기적인 문제가 생기는 질병\n ", R.drawable.coughing_alt)
+        setCardContent(card4, "호흡기질환", "호흡기에\n장기적인 문제가 생기는 질병\n  ", R.drawable.o_coughing_alt)
         card4.setOnClickListener {
-            toggleSelection(card4, "호흡기질환", R.drawable.coughing_alt_select)
+            toggleSelection(card4, "호흡기질환", R.drawable.o_coughing_alt_select)
         }
 
         val card5: CardView = findViewById(R.id.card5)
-        setCardContent(card5, "심혈관질환", "체지방이 과도하게\n축적된 만성 질환\n ", R.drawable.overweight)
+        setCardContent(card5, "심혈관질환", "심장과 혈관에 영향을\n미치는 만성 질환\n  ", R.drawable.o_overweight)
         card5.setOnClickListener {
-            toggleSelection(card5, "심혈관질환", R.drawable.overweight_select)
+            toggleSelection(card5, "심혈관질환", R.drawable.o_overweight_select)
         }
 
         val card6: CardView = findViewById(R.id.card6)
-        setCardContent(card6, "기타", "장기간에 걸쳐 지속되는 다양한 질병\n \n ", R.drawable.etc)
+        setCardContent(card6, "기타", "장기간에 걸쳐 지속되는\n다양한 질병\n  ", R.drawable.o_plus)
         card6.setOnClickListener {
-            toggleSelection(card6, "기타", R.drawable.etc)
+            toggleSelection(card6, "기타", R.drawable.o_plus_select)
         }
 
 
         // 다른 버튼들의 초기화 및 클릭 리스너 설정
 
-        val btnNext: Button = findViewById(R.id.btn_next)
+        btnNext = findViewById(R.id.btn_next)
+        updateNextButtonState() // 초기 상태 설정
         btnNext.setOnClickListener {
-            val intent = Intent(this, Onboard2Activity::class.java)
-            intent.putStringArrayListExtra("selectedDiseases", ArrayList(selectedDiseases))
-            startActivity(intent)
+            if (selectedDiseases.isNotEmpty()) {
+                val intent = Intent(this, Onboard2Activity::class.java)
+                intent.putStringArrayListExtra("selectedDiseases", ArrayList(selectedDiseases))
+                startActivity(intent)
+            }
         }
     }
     private fun setCardContent(card: CardView, title: String, description: String, imageResId: Int) {
@@ -98,6 +102,16 @@ class Onboard1Activity : AppCompatActivity() {
             titleView.setTextColor(Color.parseColor("#1E54DF"))
             iconView.setImageResource(selectedImageResId)
             setCardStroke(card, Color.parseColor("#1E54DF"))
+        }
+        updateNextButtonState() // 상태 업데이트
+    }
+    private fun updateNextButtonState() {
+        if (selectedDiseases.isNotEmpty()) {
+            btnNext.isEnabled = true
+            btnNext.setBackgroundResource(R.drawable.onboard_btn_active)
+        } else {
+            btnNext.isEnabled = false
+            btnNext.setBackgroundResource(R.drawable.onboard_btn_inactive)
         }
     }
 
