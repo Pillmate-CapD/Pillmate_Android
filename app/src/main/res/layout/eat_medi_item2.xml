@@ -39,9 +39,9 @@
                 android:layout_height="wrap_content"
                 android:text="약 확인하기"
                 android:textColor="#3e3e3e"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:fontFamily="@font/notosanskrsemibold"
-                android:layout_marginLeft="19sp"/>
+                android:layout_marginLeft="10sp"/>
         </LinearLayout>
 
 

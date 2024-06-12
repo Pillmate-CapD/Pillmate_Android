@@ -2,16 +2,20 @@ package com.example.pillmate
 
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.TextPaint
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
+import android.text.style.TypefaceSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class EatMediAdapter(
@@ -78,17 +82,20 @@ class EatMediAdapter(
                 stepCheck?.visibility = View.GONE
                 stepText?.visibility = View.VISIBLE
                 stepTitle?.visibility = View.VISIBLE
+                stepText?.setBackgroundResource(R.drawable.eatmedi_active)
             } else {
                 if (position < getCurrentStepPosition()) {
                     // 현재 단계 전
                     stepCheck?.visibility = View.VISIBLE
                     stepText?.visibility = View.GONE
                     stepTitle?.visibility = View.VISIBLE
+                    stepText?.setBackgroundResource(R.drawable.eatmedi_inactive)
                 } else {
                     // 현재 단계 후
                     stepCheck?.visibility = View.GONE
                     stepText?.visibility = View.VISIBLE
                     stepTitle?.visibility = View.VISIBLE
+                    stepText?.setBackgroundResource(R.drawable.eatmedi_inactive)
                 }
             }
             // 2단계의 medicheck_image 설정
@@ -110,7 +117,10 @@ class EatMediAdapter(
                         end,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                     )
-
+                    val typeface = ResourcesCompat.getFont(itemView.context, R.font.notosanskrbold)
+                    if (typeface != null) {
+                        spannable.setSpan(CustomTypefaceSpan(typeface), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    }
                     stepDescription?.text = spannable
                 }
             }
@@ -126,8 +136,19 @@ class EatMediAdapter(
                         end,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                     )
+                    val typeface = ResourcesCompat.getFont(itemView.context, R.font.notosanskrbold)
+                    if (typeface != null) {
+                        spannable.setSpan(CustomTypefaceSpan(typeface), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    }
                     stepDescription?.text = spannable
                 }
+            }
+            // stepTitle 폰트 크기 설정
+            if (step.isVisible) {
+                stepTitle?.textSize = 16f
+
+            } else {
+                stepTitle?.textSize = 14f
             }
 
         }
@@ -136,6 +157,34 @@ class EatMediAdapter(
                 if (!steps[i].isCompleted) return i
             }
             return steps.size
+        }
+    }
+    // CustomTypefaceSpan 클래스 정의
+    class CustomTypefaceSpan(private val newType: Typeface) : TypefaceSpan("") {
+
+        override fun updateDrawState(ds: TextPaint) {
+            applyCustomTypeFace(ds, newType)
+        }
+
+        override fun updateMeasureState(paint: TextPaint) {
+            applyCustomTypeFace(paint, newType)
+        }
+
+        private fun applyCustomTypeFace(paint: TextPaint, tf: Typeface) {
+            val oldStyle: Int
+            val old = paint.typeface
+            oldStyle = old?.style ?: 0
+
+            val fake = oldStyle and tf.style.inv()
+            if (fake and Typeface.BOLD != 0) {
+                paint.isFakeBoldText = true
+            }
+
+            if (fake and Typeface.ITALIC != 0) {
+                paint.textSkewX = -0.25f
+            }
+
+            paint.typeface = tf
         }
     }
 }

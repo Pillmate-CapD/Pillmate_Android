@@ -45,7 +45,7 @@
 
         <receiver android:name=".AlarmReceiver"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".EatMediActivity"
             android:exported="false">
 
         </activity>
@@ -53,7 +53,7 @@
             android:name=".CameraActivity"
             android:exported="false" />
         <activity
-            android:name=".EatMediActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

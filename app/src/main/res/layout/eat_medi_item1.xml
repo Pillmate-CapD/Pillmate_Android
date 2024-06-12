@@ -40,7 +40,7 @@
             android:id="@+id/step_title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="19sp"
+            android:layout_marginLeft="10sp"
             android:fontFamily="@font/notosanskrsemibold"
             android:text="먹을 약 인증하기"
             android:textColor="#3e3e3e"
