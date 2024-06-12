@@ -21,25 +21,26 @@
                 android:layout_height="wrap_content"
                 android:text="2"
                 android:textSize="16sp"
-                android:background="@drawable/onboard_step_inactive"
-                android:textColor="@color/black"
+                android:background="@drawable/eatmedi_active"
+                android:textColor="#3e3e3e"
                 android:gravity="center"
                 android:layout_marginLeft="20dp"/>
             <ImageView
                 android:id="@+id/step_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25sp"
+                android:layout_height="25sp"
                 android:src="@drawable/check"
                 android:visibility="gone"
+                android:layout_marginTop="8dp"
                 android:layout_marginLeft="20dp"/>
             <TextView
                 android:id="@+id/step_title2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="약 확인하기"
+                android:textColor="#3e3e3e"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
+                android:fontFamily="@font/notosanskrsemibold"
                 android:layout_marginLeft="19sp"/>
         </LinearLayout>
 
@@ -49,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/medicheck_image"
@@ -61,15 +62,19 @@
             <TextView
                 android:id="@+id/step2_description"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5sp"
+                android:fontFamily="@font/notosanskrbold"
                 android:text="당뇨약 파스타정이 맞아요!"
-                android:layout_marginTop="19sp"
-                android:textSize="16sp"
-                android:layout_gravity="center"/>
+                android:textColor="#3e3e3e"
+                android:textSize="16sp" />
                 <Button
                     android:id="@+id/step_button2"
                     android:background="@drawable/button_blue"
                     android:text="다음으로"
+                    android:fontFamily="@font/notosanskrbold"
+                    android:textSize="14sp"
                     android:textColor="#ffffff"
                     android:layout_width="296sp"
                     android:layout_height="wrap_content"
@@ -81,8 +86,8 @@
     </LinearLayout>
     <ImageView
         android:id="@+id/line"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/line3"
+        android:layout_width="12sp"
+        android:layout_height="12sp"
+        android:src="@drawable/line"
         android:layout_marginLeft="20dp"/>
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
@@ -46,6 +47,7 @@ class Onboard2Activity : AppCompatActivity() {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1f // 가중치 설정
                 )
+                //gravity = Gravity.END // 텍스트를 오른쪽 정렬
                 setTextColor(Color.parseColor("#3E3E3E"))
             }
             horizontalLayout.addView(diseaseTextView)
@@ -70,11 +72,12 @@ class Onboard2Activity : AppCompatActivity() {
                     resources.getDimensionPixelSize(R.dimen.onboard_et_height),
                     2f // 가중치 설정
                 )
+                gravity = Gravity.CENTER // 텍스트를 중앙 정렬
                 setOnClickListener {
                     showDatePickerDialog(this)
                 }
                 setHintTextColor(Color.parseColor("#6C6B6B")) // 힌트 색상 변경
-                setPadding(dpToPx(20f).toInt(), dpToPx(10f).toInt(), 0, dpToPx(10f).toInt()) // 왼쪽 여백 추가
+                setPadding(dpToPx(0f).toInt(), dpToPx(10f).toInt(), 0, dpToPx(10f).toInt()) // 왼쪽 여백 추가
             }
             horizontalLayout.addView(dateEditText)
             dateEditTexts.add(dateEditText)

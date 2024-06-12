@@ -2,7 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="30dp">
     <LinearLayout
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
@@ -20,26 +21,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4"
+            android:textColor="#3e3e3e"
             android:textSize="16sp"
-            android:background="@drawable/onboard_step_inactive"
-            android:textColor="@color/black"
+            android:background="@drawable/eatmedi_active"
             android:gravity="center"
             android:layout_marginLeft="20dp"/>
         <ImageView
             android:id="@+id/step_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
             android:src="@drawable/check"
             android:visibility="gone"
+            android:layout_marginTop="8dp"
             android:layout_marginLeft="20dp"/>
         <TextView
             android:id="@+id/step_title4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="다음 약 일정 확인하기"
+            android:textColor="#3e3e3e"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
+            android:fontFamily="@font/notosanskrsemibold"
             android:layout_marginLeft="19sp"/>
     </LinearLayout>
 
@@ -50,7 +52,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="visible"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/timecheck"
@@ -62,16 +64,20 @@
         <TextView
             android:id="@+id/step4_description"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:layout_height="79dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5sp"
+            android:fontFamily="@font/notosanskrregular"
             android:text="다음에 먹을 약은\n오늘 오후 7시 30분\n당뇨약 ‘파스타정'이에요!"
-            android:layout_marginTop="19sp"
-            android:textSize="16sp"
-            android:layout_gravity="center"/>
+            android:textAlignment="center"
+            android:textColor="#3e3e3e"
+            android:textSize="16sp" />
         <Button
             android:id="@+id/step_button4"
             android:background="@drawable/button_blue"
             android:text="확인 완료"
+            android:fontFamily="@font/notosanskrbold"
+            android:textSize="14sp"
             android:textColor="@color/white"
             android:layout_width="296sp"
             android:layout_height="wrap_content"

@@ -21,25 +21,26 @@
             android:layout_height="wrap_content"
             android:text="3"
             android:textSize="16sp"
-            android:background="@drawable/onboard_step_inactive"
-            android:textColor="@color/black"
+            android:background="@drawable/eatmedi_active"
+            android:textColor="#3e3e3e"
             android:gravity="center"
             android:layout_marginLeft="20dp"/>
         <ImageView
             android:id="@+id/step_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
             android:src="@drawable/check"
             android:visibility="gone"
+            android:layout_marginTop="8dp"
             android:layout_marginLeft="20dp"/>
         <TextView
             android:id="@+id/step_title3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="약 복용하기"
+            android:textColor="#3e3e3e"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
+            android:fontFamily="@font/notosanskrsemibold"
             android:layout_marginLeft="19sp"/>
     </LinearLayout>
 
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="visible"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="0dp">
 
         <ImageView
             android:id="@+id/medieat_image"
@@ -62,15 +63,19 @@
         <TextView
             android:id="@+id/step3_description"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="31dp"
             android:text="이제 물과 함께 복용해 주세요!"
-            android:layout_marginTop="19sp"
+            android:textColor="#3e3e3e"
+            android:fontFamily="@font/notosanskrbold"
+            android:layout_marginTop="5sp"
             android:textSize="16sp"
             android:layout_gravity="center"/>
         <Button
             android:id="@+id/step_button3"
             android:background="@drawable/button_blue"
             android:text="약 먹었어요!"
+            android:fontFamily="@font/notosanskrbold"
+            android:textSize="14sp"
             android:textColor="@color/white"
             android:layout_width="296sp"
             android:layout_height="wrap_content"
@@ -81,8 +86,8 @@
     </LinearLayout>
     <ImageView
         android:id="@+id/line"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/line3"
+        android:layout_width="12sp"
+        android:layout_height="12sp"
+        android:src="@drawable/line"
         android:layout_marginLeft="20dp"/>
 </LinearLayout>
