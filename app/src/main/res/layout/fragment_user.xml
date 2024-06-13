@@ -1,14 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UserFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_top"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#E6E6E6"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="User Fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <TextView
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="108dp"
+            android:id="@+id/tv_user"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="손해인"
+            android:textColor="@color/black"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_marginTop="108dp"
+            app:layout_constraintStart_toEndOf="@id/tv_user"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 님,"
+            android:fontFamily="@font/notosanskrregular"
+            android:textSize="22sp"/>
+
+        <TextView
+            android:id="@+id/tv_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="-15dp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="오늘도 건강한\n하루 보내세요!"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_top"
+        android:layout_width="match_parent"
+        android:paddingRight="20dp"
+        android:paddingTop="40dp"
+        android:paddingLeft="30dp"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/tv_my_account"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 계정 관리"
+            android:fontFamily="@font/notosanskrregular"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <View
+            android:id="@+id/btn_my_account"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_right_user"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_my_account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_my_account" />
+
+        <TextView
+            android:layout_marginTop="25dp"
+            android:id="@+id/tv_my_health"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 건강 정보"
+            android:fontFamily="@font/notosanskrregular"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <View
+            android:id="@+id/btn_my_health"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_right_user"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_my_health"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_my_health" />
+
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_health"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자주 묻는 질문"
+            android:fontFamily="@font/notosanskrregular"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <View
+            android:id="@+id/btn_question"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_right_user"
+            app:layout_constraintTop_toTopOf="@id/tv_question"
+            app:layout_constraintBottom_toBottomOf="@id/tv_question"
+            app:layout_constraintEnd_toEndOf="parent"
+             />
+
+        <TextView
+            android:id="@+id/tv_help"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도움말"
+            android:fontFamily="@font/notosanskrregular"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <View
+            android:id="@+id/btn_help"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_right_user"
+            app:layout_constraintTop_toTopOf="@id/tv_help"
+            app:layout_constraintBottom_toBottomOf="@id/tv_help"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,7 @@ class PillViewModel(application: Application) : AndroidViewModel(application) {
         get() = _pillItems
 
     init {
+        //resetPillCompletionStatus()
         startMidnightResetTimer()
     }
 
@@ -57,4 +58,5 @@ class PillViewModel(application: Application) : AndroidViewModel(application) {
         _pillItems.value?.forEach { it.isCompleted = false }
         _pillItems.value = _pillItems.value // To trigger LiveData update
     }
+
 }

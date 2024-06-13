@@ -80,7 +80,7 @@ class HomeFragment : Fragment() {
         // ViewModel을 사용하여 데이터 로드
         pillViewModel.loadPillItems(
             listOf(
-                PillListItem("오전 7:00", "트윈스타정"),
+                PillListItem("오전 8:00", "트윈스타정"),
                 PillListItem("오전 11:00", "디아미크롱서방정"),
                 PillListItem("오후 12:00", "파스틱정"),
                 PillListItem("오후 6:30", "파스틱정"),
