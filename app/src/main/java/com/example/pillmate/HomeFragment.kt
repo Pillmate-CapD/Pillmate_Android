@@ -75,15 +75,15 @@ class HomeFragment : Fragment() {
         }
 
         binding.homePillProgressBar.setMaxProgress(100)
-        binding.homePillProgressBar.setProgress(90)
+        binding.homePillProgressBar.setProgress(60)
 
         // ViewModel을 사용하여 데이터 로드
         pillViewModel.loadPillItems(
             listOf(
-                PillListItem("오전 1:00", "트윈스타정"),
-                PillListItem("오전 1:47", "디아미크롱서방정"),
+                PillListItem("오전 7:00", "트윈스타정"),
+                PillListItem("오전 11:00", "디아미크롱서방정"),
                 PillListItem("오후 12:00", "파스틱정"),
-                PillListItem("오후 7:30", "파스틱정"),
+                PillListItem("오후 6:30", "파스틱정"),
                 PillListItem("오후 9:00", "바이토린")
             )
         )

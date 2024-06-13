@@ -1,6 +1,7 @@
 package com.example.pillmate
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -49,6 +50,10 @@ class Onboard3Activity : AppCompatActivity() {
 
         btnFinish.setOnClickListener {
             // 다음 화면으로 이동 또는 완료 액션
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+
+            finish()
         }
     }
 

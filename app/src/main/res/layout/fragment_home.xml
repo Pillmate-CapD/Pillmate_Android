@@ -232,7 +232,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/notosanskrextrabold"
-                        android:text="28일"
+                        android:text="10일"
                         android:textColor="@color/selected_icon_color"
                         android:textSize="20sp"/>
 
@@ -246,7 +246,7 @@
                         android:fontFamily="@font/notosanskrmedium"
                         app:layout_constraintStart_toStartOf="@id/home_pill_user"
                         app:layout_constraintEnd_toEndOf="@id/home_pill_user"
-                        android:text="/31일"
+                        android:text="/30일"
                         android:textColor="#C0C0C0"
                         android:textSize="17sp"/>
 
@@ -269,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/notosanskrextrabold"
-                        android:text="90%"
+                        android:text="60%"
                         android:textColor="@color/selected_icon_color"
                         android:textSize="20sp"/>
 

@@ -9,29 +9,40 @@
     tools:context=".AlarmListActivity"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/alarm_title"
+    <androidx.constraintlayout.widget.ConstraintLayout
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="알림"
-        android:fontFamily="@font/notosanskrbold"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        />
-
-    <ImageView
-        android:id="@+id/close_btn"
-        android:clickable="true"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/close_btn"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        />
+        android:id="@+id/top_layout"
+        android:paddingTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/alarm_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="알림"
+            android:fontFamily="@font/notosanskrbold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
+
+        <ImageView
+            android:id="@+id/close_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:clickable="true"
+            android:src="@drawable/close_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"
@@ -39,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
-        app:layout_constraintTop_toBottomOf="@id/alarm_title"
+        app:layout_constraintTop_toBottomOf="@id/top_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
