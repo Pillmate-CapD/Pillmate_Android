@@ -52,8 +52,8 @@ class AllFragment : Fragment() {
 
     private fun addDummyData() {
         medicationList.add(MedicationItem("트윈스타정 (고혈압)", "1정 | 매일 1회 | 3개월", "기상 직후"))
-        medicationList.add(MedicationItem("디아미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 3개월", "기상 직후"))
-        medicationList.add(MedicationItem("파스틱정 (제2형당뇨)", "1정 | 매일 2회 | 3개월", "점심 식전, 저녁 식전"))
+        medicationList.add(MedicationItem("디아미크롱서방정 (당뇨)", "1정 | 매일 1회 | 3개월", "기상 직후"))
+        medicationList.add(MedicationItem("파스틱정 (당뇨)", "1정 | 매일 2회 | 3개월", "점심 식전, 저녁 식전"))
         medicationList.add(MedicationItem("바이토린 (고지혈증)", "1정 | 매일 1회 | 3개월", "저녁 식후"))
 
 

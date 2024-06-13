@@ -25,9 +25,13 @@ class MyPillListFragment : Fragment() {
 
         // 처음에는 All 버튼
         if (isFirstTime) {
-            parentFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, AllFragment())
-                .commit()
+            // 프래그먼트 컨테이너에 이미 추가된 프래그먼트가 있는지 확인
+            val fragment = parentFragmentManager.findFragmentById(R.id.fragment_container)
+            if (fragment == null) {
+                parentFragmentManager.beginTransaction()
+                    .add(R.id.fragment_container, AllFragment())
+                    .commit()
+            }
             isFirstTime = false // 다음에는 이 부분이 실행되지 않도록 플래그 변경
         }
 
