@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ListFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/mypill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="#3e3e3e"
+        android:text="내 약 리스트"
+        android:layout_marginTop="27sp"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="List Fragment" />
+        android:orientation="vertical"
+        android:layout_below="@id/mypill"
+        android:layout_marginTop="16sp">
 
-</FrameLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:tabIndicatorColor="#1154FD"
+            app:tabIndicatorHeight="3dp"
+            app:tabTextAppearance="@style/MyTabTextStyle"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/tab_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#1154FD"
+        android:src="@drawable/plus"/>
+
+</RelativeLayout>
