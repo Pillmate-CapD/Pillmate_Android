@@ -32,7 +32,7 @@ class AlarmSetFragment : Fragment() {
 
         binding.btnSetAlarm.setOnClickListener {
             setAlarm(10,"파스틱정")
-            Toast.makeText(requireContext(), "20초 후에 알람이 울립니다", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "10초 후에 알람이 울립니다", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
