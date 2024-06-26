@@ -29,7 +29,7 @@
     - 연관된 파일들) HomeFragment.kt, PillListAdapter.kt, PillViewModel.kt, PillListItem.kt, etc...
 
 3. 복약 가이드 기능
-    - 개발 과정)
+    - 개발 과정) 해당 단계의 버튼 클릭시 진행한 단계는 접히고 진행할 단계는 열리는 형태로 구현 >  RecyclerView와 Adapter를 이용해 개발
     - 사용자가 약 복용 단계를 따라가면서 실제로 약을 먹었는 지 확인하도록 하는 기능으로, 상세 내용은 코드에서 확인하실 수 있습니다.
     - 연관된 파일들) EatMediActivity.kt, EatMediAdapter.kt, EatMedi.kt, etc...
   
