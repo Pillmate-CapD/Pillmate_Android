@@ -45,10 +45,11 @@ class PillListAdapter(
     inner class PillListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val time: TextView = itemView.findViewById(R.id.pill_list_time)
         private val pillName: TextView = itemView.findViewById(R.id.pill_list_name)
-        private val pill_right: View = itemView.findViewById(R.id.pill_right)
-        private val pill_list_go: View = itemView.findViewById(R.id.pill_list_go)
-        private val pill_done: View = itemView.findViewById(R.id.pill_done)
-        private val pill_before: View = itemView.findViewById(R.id.pill_before)
+        private val pillImg: View = itemView.findViewById(R.id.img_pill)
+
+        private val pill_done: View = itemView.findViewById(R.id.bt_eat_done)
+        private val pill_now: View = itemView.findViewById(R.id.bt_eat_now)
+        private val pill_before: View = itemView.findViewById(R.id.bt_eat_will)
 
         fun bind(item: PillListItem, position: Int) {
             // 시간 및 약물 이름 설정
@@ -69,21 +70,33 @@ class PillListAdapter(
             val currentTimeInMinutes = currentHour * 60 + currentMinute
 
             //setAlarm(20,"트윈스타정")
+
+
             if (item.isCompleted) {
                 // 아이템이 완료된 경우
                 itemView.setBackgroundResource(R.drawable.custom_pill_background) // 기본 색상
+                pillImg.setBackgroundResource(R.drawable.img_pill_none) // 약 이미지 복용전과 복용 예정인 경우의 상태
                 pill_done.visibility = View.VISIBLE
-                pill_list_go.visibility = View.INVISIBLE
-                pill_right.visibility = View.INVISIBLE
+                pill_now.visibility= View.INVISIBLE
+
                 pill_before.visibility = View.INVISIBLE
                 itemView.setOnClickListener(null) // 클릭 비활성화
-            } else if (currentTimeInMinutes >= itemTimeInMinutes - 60) {
-                // 현재 시간이 항목의 시간보다 한 시간 전이거나 같은 경우
-                itemView.setBackgroundResource(R.drawable.bg_pill_list_check) // 배경 색상 변경
+
+                // 텍스트 색상 직접 지정 (HEX 값을 사용하여 파란색으로 설정)
+                time.setTextColor(Color.parseColor("#494949"))
+                pillName.setTextColor(Color.parseColor("#494949"))
+            }
+            else if (currentTimeInMinutes >= itemTimeInMinutes + 120){
+                // 현재 시간이 항목의 시간보다 2시간이상 지났거나 먹어야하는데 아직 안먹은 경우
+                itemView.setBackgroundResource(R.drawable.bg_pill_list_check2) // 배경 색상 변경
                 pill_done.visibility = View.INVISIBLE
                 pill_before.visibility = View.INVISIBLE
-                pill_list_go.visibility = View.VISIBLE
-                pill_right.visibility = View.VISIBLE
+                pill_now.visibility= View.VISIBLE
+
+                // 텍스트 색상 직접 지정 (HEX 값을 사용하여 파란색으로 설정)
+                time.setTextColor(Color.parseColor("#1E54DF"))
+                pillName.setTextColor(Color.parseColor("#1E54DF"))
+
 
                 itemView.setOnClickListener {
                     // EatMediActivity로 이동
@@ -93,13 +106,40 @@ class PillListAdapter(
                     intent.putExtra("position", position) // 클릭된 아이템의 position을 전달
                     fragment.startActivityForResult(intent, REQUEST_CODE_EAT_MEDI)
                 }
-            } else {
+            }
+            else if (currentTimeInMinutes >= itemTimeInMinutes - 60) {
+                // 현재 시간이 항목의 시간보다 한 시간 전이거나 같은 경우
+                itemView.setBackgroundResource(R.drawable.bg_list_now) // 배경 색상 변경
+                pill_done.visibility = View.INVISIBLE
+                pill_before.visibility = View.INVISIBLE
+                pill_now.visibility= View.VISIBLE
+
+                // 텍스트 색상 직접 지정 (HEX 값을 사용하여 파란색으로 설정)
+                time.setTextColor(Color.parseColor("#1E54DF"))
+                pillName.setTextColor(Color.parseColor("#1E54DF"))
+
+                itemView.setOnClickListener {
+                    // EatMediActivity로 이동
+                    val intent = Intent(fragment.requireContext(), EatMediActivity::class.java)
+                    intent.putExtra("pill_name", item.name)
+                    intent.putExtra("pill_time", item.time)
+                    intent.putExtra("position", position) // 클릭된 아이템의 position을 전달
+                    fragment.startActivityForResult(intent, REQUEST_CODE_EAT_MEDI)
+                }
+
+            }
+            else {
                 // 그 외의 경우 기본 배경 색상 사용
                 itemView.setBackgroundResource(R.drawable.custom_pill_background) // 기본 색상
+                pillImg.setBackgroundResource(R.drawable.img_pill_none) // 약 이미지 복용전과 복용 예정인 경우의 상태
+
                 pill_done.visibility = View.INVISIBLE
-                pill_list_go.visibility = View.INVISIBLE
-                pill_right.visibility = View.INVISIBLE
+                pill_now.visibility= View.INVISIBLE
                 pill_before.visibility = View.VISIBLE
+
+                // 텍스트 색상 직접 지정 (HEX 값을 사용하여 파란색으로 설정)
+                time.setTextColor(Color.parseColor("#898989"))
+                pillName.setTextColor(Color.parseColor("#898989"))
             }
         }
 
