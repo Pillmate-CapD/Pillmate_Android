@@ -9,18 +9,14 @@
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-
-    <uses-permission android:name="android.permission.VIBRATE"/>
-
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
-
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -33,6 +29,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pillmate"
         tools:targetApi="31">
+        <activity
+            android:name=".PrescriptActivity"
+            android:exported="false" />
+        <activity
+            android:name=".prescription"
+            android:exported="false" />
 
         <service
             android:name=".AlarmService"
@@ -42,13 +44,11 @@
             android:permission="android.permission.FOREGROUND_SERVICE" />
 
         <receiver android:name=".AlarmReceiver" />
+        <receiver android:name=".AlarmReceiver" />
 
-        <receiver android:name=".AlarmReceiver"/>
         <activity
             android:name=".EatMediActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".CameraActivity"
             android:exported="false" />
@@ -60,7 +60,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Onboard2Activity"
@@ -71,10 +70,10 @@
         <activity
             android:name=".AlarmActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:showOnLockScreen="true"
             android:launchMode="singleTask"
-            android:turnScreenOn="true"/>
+            android:showOnLockScreen="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:turnScreenOn="true" />
         <activity
             android:name=".AlarmListActivity"
             android:exported="false" />
@@ -83,9 +82,7 @@
             android:exported="false" />
         <activity
             android:name=".Onboard1Activity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

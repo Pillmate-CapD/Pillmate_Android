@@ -3,27 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="27sp"
-        android:textStyle="bold"
-        android:text="알람"
-        android:layout_marginTop="27sp"/>
 
-    <Button
-        android:id="@+id/btn_set_alarm"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="14sp"
-        android:textColor="@color/white"
-        android:background="@drawable/button_blue"
-        android:fontFamily="@font/notosanskrsemibold"
-        android:text="알람 테스트 버튼"
-        android:layout_marginTop="27sp"/>
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="27sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:text="알람"-->
+<!--        android:layout_marginTop="27sp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_set_alarm"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->ㅋ
+<!--        android:gravity="center"-->
+<!--        android:textSize="14sp"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:background="@drawable/button_blue"-->
+<!--        android:fontFamily="@font/notosanskrsemibold"-->
+<!--        android:text="알람 테스트 버튼"-->
+<!--        android:layout_marginTop="27sp"/>-->
 
 </LinearLayout>

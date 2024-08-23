@@ -40,6 +40,17 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_precription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/fab"
+        android:layout_marginBottom="-20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:backgroundTint="#1154FD"
+        android:src="@drawable/btn_prescrip"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
