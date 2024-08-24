@@ -92,6 +92,10 @@ class HomeFragment : Fragment() {
             pillListAdapter.updateItems(pillItems)
         }
 
+        binding.btnPillList.setOnClickListener {
+            findNavController().navigate(R.id.listFragment)
+        }
+
         return binding.root
     }
 

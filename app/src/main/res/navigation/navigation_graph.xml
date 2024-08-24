@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_homeFragment_to_onboard3Activity"
             app:destination="@id/onboard3Activity" />
+        <action
+            android:id="@+id/action_homeFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/userFragment"
@@ -37,7 +40,11 @@
         android:id="@+id/listFragment"
         android:name="com.example.pillmate.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <activity
         android:id="@+id/alarmListActivity"
         android:name="com.example.pillmate.AlarmListActivity"

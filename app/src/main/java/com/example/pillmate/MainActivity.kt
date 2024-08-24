@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.pillmate.databinding.ActivityMainBinding
@@ -24,6 +25,28 @@ class MainActivity : AppCompatActivity() {
 
             //val navController = findNavController(R.id.nav_host_fragment)
             bottomNavi.setupWithNavController(navController)
+
+            bottomNavi.setOnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.homeFragment -> {
+                        if (navController.currentDestination?.id != R.id.homeFragment) {
+                            navController.popBackStack(R.id.homeFragment, true)
+                            navController.navigate(R.id.homeFragment)
+                        }
+                        true
+                    }
+                    R.id.listFragment -> {
+                        if (navController.currentDestination?.id != R.id.listFragment) {
+                            navController.navigate(R.id.listFragment)
+                        }
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+            //navController.navigate(R.id.homeFragment, null, NavOptions.Builder().setPopUpTo(R.id.homeFragment, true).build())
+
         }
     }
 }
