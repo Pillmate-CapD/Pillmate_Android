@@ -23,30 +23,25 @@ class MainActivity : AppCompatActivity() {
             val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
             val navController = navHostFragment.navController
 
-            //val navController = findNavController(R.id.nav_host_fragment)
+            // BottomNavigationView와 NavController 연결
             bottomNavi.setupWithNavController(navController)
 
-            bottomNavi.setOnNavigationItemSelectedListener { item ->
+            binding.bottomNavi.setOnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.homeFragment -> {
-                        if (navController.currentDestination?.id != R.id.homeFragment) {
-                            navController.popBackStack(R.id.homeFragment, true)
-                            navController.navigate(R.id.homeFragment)
-                        }
+                        val navOptions = NavOptions.Builder()
+                            .setPopUpTo(R.id.homeFragment, true) // 홈 프래그먼트로 돌아갈 때 다른 프래그먼트를 모두 제거
+                            .build()
+
+                        navController.navigate(R.id.homeFragment, null, navOptions)
                         true
                     }
-                    R.id.listFragment -> {
-                        if (navController.currentDestination?.id != R.id.listFragment) {
-                            navController.navigate(R.id.listFragment)
-                        }
+                    else -> {
+                        navController.navigate(item.itemId) // 다른 메뉴는 기본 동작 수행
                         true
                     }
-                    else -> false
                 }
             }
-
-            //navController.navigate(R.id.homeFragment, null, NavOptions.Builder().setPopUpTo(R.id.homeFragment, true).build())
-
         }
     }
 }
