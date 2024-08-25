@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.recyclerview)
     val nav_version = "2.7.7"
     // BottomNavigation
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
