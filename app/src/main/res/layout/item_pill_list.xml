@@ -1,83 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="118sp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="8dp"
-    android:elevation="4dp"
-    app:cardCornerRadius="10dp"
-    android:padding="16dp">
+    android:padding="8dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:elevation="2dp"
+    android:background="@drawable/bg_11_lightgray"
+    android:layout_marginBottom="11dp"
+    app:cardCornerRadius="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-        <LinearLayout
+        android:orientation="vertical">
+        <!-- 이미지 뷰 -->
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearanceOverlay="@style/RoundedImageStyle"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/image_view"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:background="#E0E0E0"
+            android:layout_gravity="center"
+            android:src="@drawable/df_medi"/>
+        <!-- 수정 버튼 -->
+        <TextView
+            android:padding="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:id="@+id/edit_button"
+            android:layout_width="80dp"
+            android:textAlignment="center"
+            android:background="@drawable/bg_btn_10_gray"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanskrmedium"
+            android:includeFontPadding="false"
+            android:text="정보 수정"
+            android:textSize="12sp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/layout_img"
+        android:layout_marginLeft="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="11dp"
+            android:id="@+id/medication_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="12sp"
-            android:layout_marginLeft="20sp">
-            <!-- 이미지 뷰 -->
-            <ImageView
-                android:id="@+id/image_view"
-                android:layout_width="80sp"
-                android:layout_height="48sp"
-                android:background="#E0E0E0"
-                android:scaleType="centerInside"
-                android:layout_gravity="center"
-                />
-            <!-- 수정 버튼 -->
-            <Button
-                android:id="@+id/edit_button"
-                android:layout_width="83sp"
-                android:layout_gravity="center"
-                android:layout_height="38dp"
-                android:text="정보 수정"
-                android:textSize="12sp"/>
-        </LinearLayout>
+            android:fontFamily="@font/notosanskrsemibold"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:text="트윈스타정 (고혈압)"
+            android:textSize="14sp"/>
 
-
-        <!-- 텍스트 및 버튼 레이아웃 -->
-        <LinearLayout
-            android:layout_width="0dp"
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/medication_title"
+            android:layout_marginTop="8dp"
+            android:id="@+id/medication_info"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="14sp"
-            android:layout_marginTop="6sp"
-            android:orientation="vertical">
+            android:fontFamily="@font/notosanskrmedium"
+            android:includeFontPadding="false"
+            android:textColor="#3E3E3E"
+            android:text="1정 | 매 1회 | 90일"
+            android:textSize="12sp"/>
 
-            <!-- 제목 텍스트 -->
-            <TextView
-                android:id="@+id/medication_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="트윈스타정 (고혈압)"
-                android:textSize="16sp"
-                android:textColor="#000000" />
-
-            <!-- 약 정보 텍스트 -->
-            <TextView
-                android:id="@+id/medication_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1정 | 매일 1회 | 3개월"
-                android:textSize="14sp"
-                android:textColor="#757575"
-                android:layout_marginTop="6sp" />
-
-            <!-- 추가 정보 텍스트 -->
-            <TextView
-                android:id="@+id/medication_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="기상 직후"
-                android:textSize="14sp"
-                android:textColor="#757575"
-                android:layout_marginTop="6sp" />
-        </LinearLayout>
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/medication_info"
+            android:layout_marginTop="8dp"
+            android:id="@+id/medication_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanskrmedium"
+            android:includeFontPadding="false"
+            android:textColor="#3E3E3E"
+            android:text="기상 직후"
+            android:textSize="12sp"/>
 
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center_vertical">-->
+<!--        -->
+
+
+<!--        &lt;!&ndash; 텍스트 및 버튼 레이아웃 &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_marginLeft="14sp"-->
+<!--            android:layout_marginTop="6sp"-->
+<!--            android:orientation="vertical">-->
+
+<!--            &lt;!&ndash; 제목 텍스트 &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/medication_title"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="트윈스타정 (고혈압)"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="#000000" />-->
+
+<!--            &lt;!&ndash; 약 정보 텍스트 &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/medication_info"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="1정 | 매일 1회 | 3개월"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="#757575"-->
+<!--                android:layout_marginTop="6sp" />-->
+
+<!--            &lt;!&ndash; 추가 정보 텍스트 &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/medication_time"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="기상 직후"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="#757575"-->
+<!--                android:layout_marginTop="6sp" />-->
+<!--        </LinearLayout>-->
+
+
+<!--    </LinearLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

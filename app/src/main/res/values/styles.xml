@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="MyTabTextStyle" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">14sp</item> <!-- 텍스트 크기 설정 -->
-         <!-- 사용할 폰트 설정 -->
-        <!-- 기타 필요한 텍스트 스타일 속성을 추가할 수 있습니다. -->
+        <item name="android:textSize">15sp</item> <!-- 텍스트 크기 설정 -->
+        <item name="android:fontFamily">@font/notosanskrsemibold</item> <!-- 폰트 설정 -->
+        <item name="android:textColor">@color/tab_text_selector</item> <!-- 상태별 텍스트 색상 적용 -->
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="RoundedImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">5dp</item> <!-- 원하는 모서리 크기 설정 -->
     </style>
 </resources>
