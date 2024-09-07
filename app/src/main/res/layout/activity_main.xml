@@ -24,7 +24,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="4dp"
+            android:layout_height="3dp"
             android:background="@drawable/shadow_background"
             app:layout_constraintBottom_toTopOf="@id/bottomNavi"
             app:layout_constraintStart_toStartOf="parent"

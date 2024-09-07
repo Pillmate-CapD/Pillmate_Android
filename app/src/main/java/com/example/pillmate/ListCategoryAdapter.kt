@@ -42,9 +42,10 @@ class ListCategoryAdapter(
         // 선택 여부에 따른 스타일 적용
         if (position == selectedPosition) {
             holder.button.setBackgroundResource(R.drawable.bg_list_category_check)
-            holder.button.setTextColor(Color.WHITE)
+            holder.button.setTextColor(Color.parseColor("#FFFFFF"))
+
         } else {
-            holder.button.setBackgroundColor(Color.WHITE)
+            holder.button.setBackgroundColor(Color.parseColor("#F9F9F9"))
             holder.button.setTextColor(Color.parseColor("#D9D9D9"))
         }
     }

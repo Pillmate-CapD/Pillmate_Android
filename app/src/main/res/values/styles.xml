@@ -11,4 +11,11 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">5dp</item> <!-- 원하는 모서리 크기 설정 -->
     </style>
+
+    <style name="category_toggle">
+        <item name="thumbTint">@color/white</item>
+        <item name="track">@drawable/track_custom</item>
+        <item name="android:thumb">@drawable/thumb_custom</item>
+        <item name="android:enabled">true</item>
+    </style>
 </resources>

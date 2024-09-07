@@ -14,7 +14,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pillmate.AlarmReceiver
+import com.example.pillmate.ListAlarmAdapter
+import com.example.pillmate.ListAlarmItem
 import com.example.pillmate.R
 import com.example.pillmate.databinding.FragmentAlarmSetBinding
 import com.example.pillmate.databinding.FragmentHomeBinding
@@ -22,6 +26,10 @@ import java.util.Calendar
 
 class AlarmSetFragment : Fragment() {
     private lateinit var binding: FragmentAlarmSetBinding
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ListAlarmAdapter
+    private lateinit var listAlarmItems: MutableList<ListAlarmItem>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +42,28 @@ class AlarmSetFragment : Fragment() {
 //            //setAlarm(10,"파스틱정")
 //            Toast.makeText(requireContext(), "10초 후에 알람이 울립니다", Toast.LENGTH_SHORT).show()
 //        }
+
+        // RecyclerView 설정
+        recyclerView = binding.alarmListRecy
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // 샘플 데이터 생성
+        listAlarmItems = mutableListOf(
+            ListAlarmItem("오전", "07:00", "트윈스타정 (고혈압)", "1정 | 매일 1회 | 90일", "기상 직후", true),
+            ListAlarmItem("오후", "12:00", "다이미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 90일", "기상 직후", false),
+            ListAlarmItem("오전", "07:00", "트윈스타정 (고혈압)", "1정 | 매일 1회 | 90일", "기상 직후", true),
+            ListAlarmItem("오후", "12:00", "다이미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 90일", "기상 직후", false),
+            ListAlarmItem("오전", "07:00", "트윈스타정 (고혈압)", "1정 | 매일 1회 | 90일", "기상 직후", true),
+            ListAlarmItem("오후", "12:00", "다이미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 90일", "기상 직후", false),
+            ListAlarmItem("오전", "07:00", "트윈스타정 (고혈압)", "1정 | 매일 1회 | 90일", "기상 직후", true),
+            ListAlarmItem("오후", "12:00", "다이미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 90일", "기상 직후", false)
+
+        )
+
+        // Adapter 설정
+        adapter = ListAlarmAdapter(listAlarmItems, requireContext())
+        recyclerView.adapter = adapter
+
 
         return binding.root
     }

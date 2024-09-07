@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <!-- 활성화된 상태에서 thumb 모양 (그림자 포함) -->
+        <layer-list>
+            <!-- 그림자 효과 -->
+            <item>
+                <shape android:shape="oval">
+                    <size android:width="28dp" android:height="28dp"/> <!-- 그림자의 크기 (thumb보다 약간 큼) -->
+                    <solid android:color="#80000000" /> <!-- 반투명 검정 그림자 -->
+                </shape>
+            </item>
+            <!-- 실제 thumb -->
+            <item android:bottom="2dp" android:left="2dp" android:right="2dp" android:top="2dp">
+                <shape android:shape="oval">
+                    <solid android:color="#FFFFFF" /> <!-- 실제 thumb 색상 -->
+                    <size android:width="26dp" android:height="26dp" /> <!-- 실제 thumb 크기 -->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:state_checked="false">
+        <!-- 비활성화된 상태에서 thumb 모양 (그림자 포함) -->
+        <layer-list>
+            <!-- 그림자 효과 -->
+            <item>
+                <shape android:shape="oval">
+                    <size android:width="30dp" android:height="30dp"/> <!-- 그림자의 크기 (thumb보다 약간 큼) -->
+                    <solid android:color="#80000000" /> <!-- 반투명 검정 그림자 -->
+                </shape>
+            </item>
+            <!-- 실제 thumb -->
+            <item android:bottom="2dp" android:left="2dp" android:right="2dp" android:top="2dp">
+                <shape android:shape="oval">
+                    <solid android:color="#FFFFFF" /> <!-- 실제 thumb 색상 -->
+                    <size android:width="26dp" android:height="26dp" /> <!-- 실제 thumb 크기 -->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

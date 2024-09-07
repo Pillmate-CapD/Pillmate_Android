@@ -8,8 +8,7 @@
     android:layout_marginRight="3dp"
     android:elevation="2dp"
     android:background="@drawable/bg_11_lightgray"
-    android:layout_marginBottom="11dp"
-    app:cardCornerRadius="10dp">
+    android:layout_marginBottom="11dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_img"
@@ -34,12 +33,17 @@
             android:src="@drawable/df_medi"/>
         <!-- 수정 버튼 -->
         <TextView
+            android:clickable="true"
+            android:elevation="2dp"
             android:padding="5dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginBottom="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_view"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:id="@+id/edit_button"
             android:layout_width="80dp"
             android:textAlignment="center"
@@ -47,6 +51,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanskrmedium"
             android:includeFontPadding="false"
+            android:textColor="#1E54DF"
             android:text="정보 수정"
             android:textSize="12sp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -93,60 +98,21 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanskrmedium"
             android:includeFontPadding="false"
-            android:textColor="#3E3E3E"
+            android:textColor="#1E54DF"
             android:text="기상 직후"
             android:textSize="12sp"/>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:gravity="center_vertical">-->
-<!--        -->
+    <View
+        android:padding="5dp"
+        android:id="@+id/btn_pill_img"
+        android:clickable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_btn_right"/>
 
-
-<!--        &lt;!&ndash; 텍스트 및 버튼 레이아웃 &ndash;&gt;-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:layout_marginLeft="14sp"-->
-<!--            android:layout_marginTop="6sp"-->
-<!--            android:orientation="vertical">-->
-
-<!--            &lt;!&ndash; 제목 텍스트 &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:id="@+id/medication_title"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="트윈스타정 (고혈압)"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            &lt;!&ndash; 약 정보 텍스트 &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:id="@+id/medication_info"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="1정 | 매일 1회 | 3개월"-->
-<!--                android:textSize="14sp"-->
-<!--                android:textColor="#757575"-->
-<!--                android:layout_marginTop="6sp" />-->
-
-<!--            &lt;!&ndash; 추가 정보 텍스트 &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:id="@+id/medication_time"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="기상 직후"-->
-<!--                android:textSize="14sp"-->
-<!--                android:textColor="#757575"-->
-<!--                android:layout_marginTop="6sp" />-->
-<!--        </LinearLayout>-->
-
-
-<!--    </LinearLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,11 +16,6 @@ import com.example.pillmate.databinding.FragmentMypillListBinding
 
 class MyPillListFragment : Fragment() {
     private var isFirstTime = true // 처음인지 여부를 나타내는 플래그
-//    private lateinit var AllBt: Button
-//    private lateinit var bt2: Button
-//    private lateinit var bt3: Button
-//    private lateinit var bt4: Button
-//    private lateinit var bt5: Button
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var categoryAdapter: ListCategoryAdapter
