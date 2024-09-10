@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#FFEB3B"/> <!-- 로그인 비활성화 배경색 -->
+    <corners android:radius="10dp"/> <!-- 둥근 모서리 반경 -->
+
+</shape>
