@@ -81,6 +81,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.SwitchCompat
+        app:elevation="4dp"
+        app:showText="false"
+        app:switchMinWidth="51dp"
         android:background="@null"
         android:id="@+id/switch_alarm"
         android:layout_width="wrap_content"
@@ -90,7 +93,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 
     <View
         android:layout_marginLeft="19dp"

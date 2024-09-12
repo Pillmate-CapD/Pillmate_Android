@@ -80,23 +80,23 @@ class ListFragment : Fragment() {
 
                 // 각각 다른 지속 시간을 가진 버튼 애니메이션
                 val precriptionButtonAnimator = ObjectAnimator.ofFloat(binding.btnPrecription, "translationY", binding.fab.translationY, binding.fab.translationY - 180f)
-                precriptionButtonAnimator.duration = 700  // 300ms 지속
+                precriptionButtonAnimator.duration = 300  // 300ms 지속
 
                 val pillRecogButtonAnimator = ObjectAnimator.ofFloat(binding.btnPillRecog, "translationY", binding.fab.translationY, binding.fab.translationY - 360f)
-                pillRecogButtonAnimator.duration = 700  // 500ms 지속
+                pillRecogButtonAnimator.duration = 300  // 500ms 지속
 
                 val pillWriteButtonAnimator = ObjectAnimator.ofFloat(binding.btnPillWrite, "translationY", binding.fab.translationY, binding.fab.translationY - 530f)
-                pillWriteButtonAnimator.duration = 700  // 700ms 지속
+                pillWriteButtonAnimator.duration = 300  // 700ms 지속
 
                 // 각각 다른 지속 시간을 가진 텍스트 애니메이션
                 val prescriptTextAnimator = ObjectAnimator.ofFloat(binding.tvPrescript, "translationY", binding.fab.translationY, binding.fab.translationY - 180f)
-                prescriptTextAnimator.duration = 700  // 300ms 지속
+                prescriptTextAnimator.duration = 300  // 300ms 지속
 
-                val pillRecogTextAnimator = ObjectAnimator.ofFloat(binding.tvPillRecog, "translationY", binding.fab.translationY, binding.fab.translationY - 360f)
-                pillRecogTextAnimator.duration = 700  // 500ms 지속
+                val pillRecogTextAnimator = ObjectAnimator.ofFloat(binding.tvPillRecog, "translationY", binding.fab.translationY, binding.fab.translationY - 340f)
+                pillRecogTextAnimator.duration = 300  // 500ms 지속
 
-                val pillWriteTextAnimator = ObjectAnimator.ofFloat(binding.tvPillWrite, "translationY", binding.fab.translationY, binding.fab.translationY - 530f)
-                pillWriteTextAnimator.duration = 700  // 700ms 지속
+                val pillWriteTextAnimator = ObjectAnimator.ofFloat(binding.tvPillWrite, "translationY", binding.fab.translationY, binding.fab.translationY - 510f)
+                pillWriteTextAnimator.duration = 300  // 700ms 지속
 
                 // 동시에 애니메이션 시작
                 precriptionButtonAnimator.start()
@@ -112,22 +112,22 @@ class ListFragment : Fragment() {
 
                 // FAB가 닫힐 때의 애니메이션
                 val precriptionButtonAnimator = ObjectAnimator.ofFloat(binding.btnPrecription, "translationY", binding.fab.translationY - 180f, binding.fab.translationY)
-                precriptionButtonAnimator.duration = 700
+                precriptionButtonAnimator.duration = 300
 
                 val pillRecogButtonAnimator = ObjectAnimator.ofFloat(binding.btnPillRecog, "translationY", binding.fab.translationY - 360f, binding.fab.translationY)
-                pillRecogButtonAnimator.duration = 700
+                pillRecogButtonAnimator.duration = 300
 
                 val pillWriteButtonAnimator = ObjectAnimator.ofFloat(binding.btnPillWrite, "translationY", binding.fab.translationY - 530f, binding.fab.translationY)
-                pillWriteButtonAnimator.duration = 700
+                pillWriteButtonAnimator.duration = 300
 
                 val prescriptTextAnimator = ObjectAnimator.ofFloat(binding.tvPrescript, "translationY", binding.fab.translationY - 180f, binding.fab.translationY)
-                prescriptTextAnimator.duration = 700
+                prescriptTextAnimator.duration = 300
 
-                val pillRecogTextAnimator = ObjectAnimator.ofFloat(binding.tvPillRecog, "translationY", binding.fab.translationY - 360f, binding.fab.translationY)
-                pillRecogTextAnimator.duration = 700
+                val pillRecogTextAnimator = ObjectAnimator.ofFloat(binding.tvPillRecog, "translationY", binding.fab.translationY - 340f, binding.fab.translationY)
+                pillRecogTextAnimator.duration = 300
 
-                val pillWriteTextAnimator = ObjectAnimator.ofFloat(binding.tvPillWrite, "translationY", binding.fab.translationY - 530f, binding.fab.translationY)
-                pillWriteTextAnimator.duration = 700
+                val pillWriteTextAnimator = ObjectAnimator.ofFloat(binding.tvPillWrite, "translationY", binding.fab.translationY - 510f, binding.fab.translationY)
+                pillWriteTextAnimator.duration = 300
 
                 precriptionButtonAnimator.start()
                 pillRecogButtonAnimator.start()
