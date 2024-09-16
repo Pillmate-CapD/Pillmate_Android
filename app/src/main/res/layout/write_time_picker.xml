@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="11dp"
+    android:layout_marginRight="11dp"
+    android:layout_marginBottom="8dp"
+    android:clipToOutline="true"
+    android:background="@drawable/bg_btsheet_round15"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_sheet"
+        android:clipToOutline="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view1"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_grabber"
+            android:layout_width="56dp"
+            android:layout_height="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:includeFontPadding="false"
+            android:paddingLeft="27dp"
+            android:paddingRight="27dp"
+            android:id="@+id/tv_after_wu"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/view1"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="기상 직후"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/btn_after_wu"
+            android:layout_marginRight="21dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_after_wu"
+            app:layout_constraintBottom_toBottomOf="@id/tv_after_wu"/>
+
+        <TextView
+            android:includeFontPadding="false"
+            android:paddingLeft="27dp"
+            android:paddingRight="27dp"
+            android:id="@+id/tv_after_bf"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_after_wu"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="아침 직후"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/btn_after_bf"
+            android:layout_marginRight="21dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_after_bf"
+            app:layout_constraintBottom_toBottomOf="@id/tv_after_bf"/>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_after_bf"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D9D9D9"/>
+
+        <TextView
+            android:includeFontPadding="false"
+            android:paddingLeft="27dp"
+            android:paddingRight="27dp"
+            android:id="@+id/tv_before_lunch"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/view2"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="점심 직전"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/btn_before_lunch"
+            android:layout_marginRight="21dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_before_lunch"
+            app:layout_constraintBottom_toBottomOf="@id/tv_before_lunch"/>
+
+        <TextView
+            android:includeFontPadding="false"
+            android:paddingLeft="27dp"
+            android:paddingRight="27dp"
+            android:id="@+id/tv_after_lunch"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_before_lunch"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="점심 직후"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/btn_after_lunch"
+            android:layout_marginRight="21dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_after_lunch"
+            app:layout_constraintBottom_toBottomOf="@id/tv_after_lunch"/>
+
+        <View
+            android:id="@+id/view3"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_after_lunch"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D9D9D9"/>
+
+        <TextView
+            android:includeFontPadding="false"
+            android:paddingLeft="27dp"
+            android:paddingRight="27dp"
+            android:id="@+id/tv_before_dinner"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/view3"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="저녁 식전"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/btn_before_dinner"
+            android:layout_marginRight="21dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_before_dinner"
+            app:layout_constraintBottom_toBottomOf="@id/tv_before_dinner"/>
+
+        <TextView
+            android:includeFontPadding="false"
+            android:paddingLeft="27dp"
+            android:paddingRight="27dp"
+            android:id="@+id/tv_after_dinner"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_before_dinner"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="저녁 식후"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/btn_after_dinner"
+            android:layout_marginRight="21dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_after_dinner"
+            app:layout_constraintBottom_toBottomOf="@id/tv_after_dinner"/>
+
+        <TextView
+            android:includeFontPadding="false"
+            android:paddingLeft="27dp"
+            android:paddingRight="27dp"
+            android:id="@+id/tv_before_sleep"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_after_dinner"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="취침 직전"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/btn_before_sleep"
+            android:layout_marginRight="21dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_before_sleep"
+            app:layout_constraintBottom_toBottomOf="@id/tv_before_sleep"/>
+
+        <View
+            android:id="@+id/view4"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_before_sleep"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D9D9D9"/>
+
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="27dp"
+            android:paddingRight="27dp"
+            android:id="@+id/tv_else"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view4"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrregular"
+            android:text="기타"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/btn_else"
+            android:layout_marginRight="21dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_else"
+            app:layout_constraintBottom_toBottomOf="@id/tv_else"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

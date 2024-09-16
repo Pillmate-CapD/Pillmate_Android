@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="7dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:background="@drawable/bg_spinner"
+        android:textColor="#C0C0C0"
+        android:clickable="true"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="15sp"
+        android:id="@+id/spinner_time"
+        android:fontFamily="@font/notosanskrmedium"
+        android:layout_width="0dp"
+        android:layout_height="47dp"
+        android:text="기상 직후"/>
+
+    <View
+        android:id="@+id/btn_spinner"
+        android:clickable="true"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="@id/spinner_time"
+        app:layout_constraintTop_toTopOf="@id/spinner_time"
+        app:layout_constraintBottom_toBottomOf="@id/spinner_time"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_under"/>
+
+    <TextView
+        android:id="@+id/picker_time"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:background="@drawable/bg_edittext"
+        app:layout_constraintStart_toEndOf="@id/spinner_time"
+        app:layout_constraintTop_toTopOf="@id/spinner_time"
+        app:layout_constraintBottom_toBottomOf="@id/spinner_time"
+        android:layout_width="0dp"
+        android:layout_height="47dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/sfprodisplaymedium"
+        android:text="06:00"
+        android:layout_marginLeft="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"/>
+
+    <View
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/btn_delete"
+        android:clickable="true"
+        android:layout_marginRight="11dp"
+        android:background="@drawable/ic_del"
+        app:layout_constraintEnd_toEndOf="@id/picker_time"
+        app:layout_constraintTop_toTopOf="@id/picker_time"
+        app:layout_constraintBottom_toBottomOf="@id/picker_time"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

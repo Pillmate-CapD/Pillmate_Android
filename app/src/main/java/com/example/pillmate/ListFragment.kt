@@ -56,6 +56,11 @@ class ListFragment : Fragment() {
         //val fab = view.findViewById<FloatingActionButton>(R.id.fab)
         //val prescriptBtn = view.findViewById<FloatingActionButton>(R.id.btn_precription)
 
+        binding.btnPillWrite.setOnClickListener {
+            val intent = Intent(requireContext(), WriteMediActivity::class.java)
+            startActivity(intent)
+        }
+
         var isFabOpen = false
 
         binding.fab.setOnClickListener {
