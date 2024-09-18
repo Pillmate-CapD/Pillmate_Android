@@ -3,15 +3,19 @@ package com.example.pillmate
 import TimeSlotAdapter
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pillmate.databinding.ActivityWriteMediBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class WriteMediActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWriteMediBinding
@@ -60,10 +64,15 @@ class WriteMediActivity : AppCompatActivity() {
         }
     }
 
+    // TODO: 1) spinnerTime이랑 pickerTime 다 받아야되니까 그 값을 같이 저장할 수 있도록 해줘 => 서버도 변경되어야 할듯
+    // TODO: 2) spinnerTime이랑 pickerTime이랑 리스트형태로 받을 수 있는지? => 서버
+
+
     // 필수 필드 확인 및 커스텀 토스트 메시지 표시
     private fun checkFieldsAndShowToast() {
         // 필수 필드 체크
         val isMediNameEmpty = binding.editMedi.text.isNullOrEmpty()
+        val isDiseaseEmpty = binding.editDisease.text.isNullOrEmpty()
         val isOneEatEmpty = binding.editOneEat.text.isNullOrEmpty()
         val isOneDayEmpty = binding.editOneDay.text.isNullOrEmpty()
         val isAllDayEmpty = binding.editAllDay.text.isNullOrEmpty()
@@ -75,6 +84,9 @@ class WriteMediActivity : AppCompatActivity() {
         when {
             isMediNameEmpty -> {
                 showCustomToast("약품명을 입력해주세요.")
+            }
+            isDiseaseEmpty -> {
+                showCustomToast("질병을 입력해주세요.")
             }
             isOneEatEmpty -> {
                 showCustomToast("1회 복약량을 입력해주세요.")
@@ -90,10 +102,68 @@ class WriteMediActivity : AppCompatActivity() {
             }
             else -> {
                 // 모든 필드가 채워져 있으면 저장 로직 수행
+                // EditText에서 값을 받아서 처리
+                val mediName = binding.editMedi.text.toString()  // 약품명
+                val disease = binding.editDisease.text.toString() // 질병
+                val oneEat = binding.editOneEat.text.toString().toInt()  // 1회 복약량
+                val oneDay = binding.editOneDay.text.toString().toInt()  // 1일 복약횟수
+                val allDay = binding.editAllDay.text.toString().toInt()  // 총 복약일수
+                // 복약 시간대도 데이터를 받을 필요가 있다면 처리 추가
+                //val times = timeSlots.map { it.timeValue }  // 시간대 데이터
+
+                // TimeSlotItem 리스트를 TimeSlotRequest 리스트로 변환
+                val timeSlotRequests = timeSlots.map { timeSlot ->
+                    TimeSlotRequest(
+                        timeLabel = timeSlot.timeLabel,
+                        time = timeSlot.time,
+                    )
+                }
+                // 예: MediAddRequest 객체 생성 및 전송
+                val mediAddRequest = MediAddRequest(
+                    medicineName = mediName,
+                    disease = disease,
+                    amount = oneEat,
+                    timesPerDay = oneDay,
+                    day = allDay,
+                    timeSlotList = timeSlotRequests
+                )
+                // 모든 필드가 채워져 있으면 저장 로직 수행
                 // 예: 데이터 저장, 서버로 전송 등
                 showCustomToast("데이터가 저장됩니다.")
+                sendMediAdd(mediAddRequest)
             }
         }
+    }
+
+    private fun sendMediAdd(mediAddRequest: MediAddRequest) {
+        val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
+        val call = service.addMedi(mediAddRequest)
+
+        val gson = Gson()
+        val requestJson = gson.toJson(mediAddRequest)
+        Log.d("WriteMediActivity", "보낸 요청: $requestJson")
+
+        call.enqueue(object : Callback<MediAddResponse> {
+            override fun onResponse(
+                call: Call<MediAddResponse>,
+                response: Response<MediAddResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val mediResponse = response.body()
+                    // 성공 시 처리할 로직 추가
+                    mediResponse?.let {
+                        Log.d("WriteMediActivity", "직접 작성 성공: ${it}")
+                        showCustomToast("저장 성공!")
+                    }
+                } else {
+                    Log.d("WriteMediActivity", "직접 작성하기 실패 : ${response.code()}, ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<MediAddResponse>, t: Throwable) {
+                Log.e("WriteMediActivity", "API 호출 실패", t)
+            }
+        })
     }
 
     // 커스텀 토스트 메시지를 띄우는 함수

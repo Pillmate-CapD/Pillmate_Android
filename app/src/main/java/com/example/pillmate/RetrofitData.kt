@@ -38,3 +38,55 @@ data class SignUpResponse(
     @SerializedName("accessToken")
     val accessToken: String
 )
+import com.google.gson.annotations.SerializedName
+
+// 약 직접 추가
+data class MediAddRequest(
+    @SerializedName("medicineName")
+    val medicineName: String,
+    @SerializedName("disease")
+    val disease: String,
+    @SerializedName("amount")
+    val amount: Int,
+    @SerializedName("timesPerDay")
+    val timesPerDay: Int,
+    @SerializedName("day")
+    val day: Int,
+    @SerializedName("timeSlotList")
+    val timeSlotList: List<TimeSlotRequest>,
+)
+
+data class MediAddResponse(
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("code")
+    val code: String,
+)
+
+data class TimeSlotRequest(
+    @SerializedName("spinnerTime")
+    val timeLabel: String,
+    @SerializedName("pickerTime")
+    val time: String,
+)
+
+// 약리스트 화면에서 메디 리스트 얻기
+data class MediListResponseWrapper(
+    val medicines: List<MediListResponse>
+)
+
+data class MediListResponse(
+    val picture: String,
+    val name: String,
+    val category: String,
+    val amount: Int,
+    val timesPerDay: Int,
+    val day: Int,
+    val timeSlotList: List<TimeSlotResponse>
+)
+
+data class TimeSlotResponse(
+    val id: Int,
+    val spinnerTime: String,
+    val pickerTime: String
+)

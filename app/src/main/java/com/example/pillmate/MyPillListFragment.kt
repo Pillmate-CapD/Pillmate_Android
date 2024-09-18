@@ -1,6 +1,7 @@
 package com.example.capdi_eat_test
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pillmate.CalendarFragment
 import com.example.pillmate.ListCategoryAdapter
+import com.example.pillmate.MediListResponseWrapper
 import com.example.pillmate.R
+import com.example.pillmate.RetrofitApi
 import com.example.pillmate.databinding.FragmentMypillListBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MyPillListFragment : Fragment() {
     private var isFirstTime = true // 처음인지 여부를 나타내는 플래그
@@ -46,7 +52,7 @@ class MyPillListFragment : Fragment() {
         val categories = listOf("전체", "고지혈증", "고혈압", "당뇨", "기타")
         categoryAdapter = ListCategoryAdapter(categories) { position ->
             // 클릭된 아이템에 대한 처리 로직
-            //Toast.makeText(context, "${categories[position]} 클릭됨", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "${categories[position]} 클릭됨", Toast.LENGTH_SHORT).show()
         }
 
         binding.recyCategory.apply {

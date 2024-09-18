@@ -40,7 +40,7 @@ class TimeSlotAdapter(
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 onSpinnerClickListener(adapterPosition)
 
-                holder.spinnerTime.isSelected= true
+                //holder.spinnerTime.isSelected= true
             }
         }
 
@@ -75,6 +75,10 @@ class TimeSlotAdapter(
                 removeTimeSlot(adapterPosition, view)
             }
         }
+    }
+
+    fun getTimeSlots(): List<TimeSlotItem> {
+        return timeSlots
     }
 
     override fun getItemCount(): Int {

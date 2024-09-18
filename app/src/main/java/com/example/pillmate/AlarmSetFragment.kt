@@ -57,7 +57,6 @@ class AlarmSetFragment : Fragment() {
             ListAlarmItem("오후", "12:00", "다이미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 90일", "기상 직후", false),
             ListAlarmItem("오전", "07:00", "트윈스타정 (고혈압)", "1정 | 매일 1회 | 90일", "기상 직후", true),
             ListAlarmItem("오후", "12:00", "다이미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 90일", "기상 직후", false)
-
         )
 
         // Adapter 설정

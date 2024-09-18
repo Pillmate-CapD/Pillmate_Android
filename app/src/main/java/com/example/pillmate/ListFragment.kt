@@ -16,7 +16,11 @@ import com.example.pillmate.databinding.FragmentListBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import android.animation.ObjectAnimator
+import android.util.Log
 import android.view.animation.AccelerateDecelerateInterpolator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ListFragment : Fragment() {
@@ -46,7 +50,6 @@ class ListFragment : Fragment() {
 
         // TabLayout과 ViewPager를 연결
         tabLayout.setupWithViewPager(viewPager)
-
 
         binding.btnPrecription.setOnClickListener {
             val intent = Intent(requireContext(), PrescriptActivity::class.java)
@@ -162,6 +165,8 @@ class ListFragment : Fragment() {
         //return view
         return binding.root
     }
+
+
 
 
 }
