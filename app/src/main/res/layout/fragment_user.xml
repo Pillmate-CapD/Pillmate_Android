@@ -11,46 +11,69 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="#E6E6E6"
+        android:background="@drawable/mypagebg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <View
+            android:id="@+id/mint"
+            android:layout_width="100dp"
+            android:layout_height="11dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="-30dp"
+            android:background="#08D2C8"
+            app:layout_constraintStart_toStartOf="@id/tv_user"
+            app:layout_constraintEnd_toEndOf="@id/tv_user"
+            app:layout_constraintTop_toBottomOf="@id/tv_user"/>
 
         <TextView
-            android:layout_marginLeft="42dp"
-            android:layout_marginTop="108dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="64dp"
             android:id="@+id/tv_user"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="손해인"
-            android:textColor="@color/black"
-            android:fontFamily="@font/notosanskrsemibold"
-            android:textSize="22sp"/>
+            android:textColor="@color/white"
+            android:fontFamily="@font/notosanskrbold"
+            android:textSize="24sp"/>
         <TextView
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="71dp"
             app:layout_constraintStart_toEndOf="@id/tv_user"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" 님,"
-            android:fontFamily="@font/notosanskrregular"
-            android:textSize="22sp"/>
+            android:fontFamily="@font/notosanskrmedium"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/tv_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
-            android:layout_marginLeft="42dp"
+            android:layout_marginBottom="65dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="-15dp"
             android:fontFamily="@font/notosanskrregular"
-            android:text="오늘도 건강한\n하루 보내세요!"
-            android:textColor="@color/black"
-            android:textSize="22sp"
+            android:text="오늘도 \n필메이트와 함께\n건강한 하루 보내세요!"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_user" />
+        <!-- 오른쪽에 추가할 이미지뷰 -->
+        <ImageView
+            android:id="@+id/image_top"
+            android:layout_width="182dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="52dp"
+            android:src="@drawable/mypage_ex_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.108" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,38 +86,28 @@
         android:paddingTop="40dp"
         android:paddingLeft="30dp"
         android:layout_height="0dp">
-
-        <TextView
-            android:id="@+id/tv_my_account"
+        <ImageView
+            android:id="@+id/icon_my_health"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/my_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내 계정 관리"
-            android:fontFamily="@font/notosanskrregular"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
-
-        <View
-            android:id="@+id/btn_my_account"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/ic_right_user"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_my_account"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_my_account" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_health"
+            android:layout_marginEnd="10dp"/>
 
         <TextView
-            android:layout_marginTop="25dp"
             android:id="@+id/tv_my_health"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_account"
+            app:layout_constraintStart_toEndOf="@id/icon_my_health"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내 건강 정보"
             android:fontFamily="@font/notosanskrregular"
             android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textSize="15sp"
+            android:layout_marginLeft="11sp"/>
+
 
         <View
             android:id="@+id/btn_my_health"
@@ -105,39 +118,59 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_my_health" />
 
+        <ImageView
+            android:id="@+id/icon_question"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/my_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_health"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"/>
+
         <TextView
             android:id="@+id/tv_question"
-            android:layout_marginTop="25dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon_question"
             app:layout_constraintTop_toBottomOf="@id/tv_my_health"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="자주 묻는 질문"
             android:fontFamily="@font/notosanskrregular"
             android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textSize="15sp"
+            android:layout_marginLeft="11sp"/>
+
 
         <View
             android:id="@+id/btn_question"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/ic_right_user"
-            app:layout_constraintTop_toTopOf="@id/tv_question"
-            app:layout_constraintBottom_toBottomOf="@id/tv_question"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_question"
             app:layout_constraintEnd_toEndOf="parent"
-             />
+            app:layout_constraintTop_toTopOf="@+id/tv_question" />
+
+        <ImageView
+            android:id="@+id/icon_help"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/my3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_question"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"/>
 
         <TextView
             android:id="@+id/tv_help"
-            android:layout_marginTop="25dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon_help"
             app:layout_constraintTop_toBottomOf="@id/tv_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="도움말"
             android:fontFamily="@font/notosanskrregular"
             android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textSize="15sp"
+            android:layout_marginLeft="11dp"/>
 
         <View
             android:id="@+id/btn_help"
@@ -148,6 +181,49 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_help"
             app:layout_constraintEnd_toEndOf="parent"
             />
+
+        <ImageView
+            android:id="@+id/icon_ch_pw"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/my_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_help"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_ch_pw"
+            app:layout_constraintStart_toEndOf="@id/icon_ch_pw"
+            app:layout_constraintTop_toBottomOf="@id/tv_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호 변경"
+            android:fontFamily="@font/notosanskrregular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_marginLeft="11sp"/>
+
+        <View
+            android:id="@+id/btn_ch_pw"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_right_user"
+            app:layout_constraintTop_toTopOf="@id/tv_ch_pw"
+            app:layout_constraintBottom_toBottomOf="@id/tv_ch_pw"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <TextView
+            android:id="@+id/tv_logout"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_ch_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
+            android:fontFamily="@font/notosanskrregular"
+            android:textColor="#FF0000"
+            android:textSize="16sp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
