@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pillmate.CalendarFragment
 import com.example.pillmate.ListCategoryAdapter
-import com.example.pillmate.MediListResponseWrapper
 import com.example.pillmate.R
 import com.example.pillmate.RetrofitApi
 import com.example.pillmate.databinding.FragmentMypillListBinding

@@ -12,9 +12,9 @@ class MediListAdapter(private var medicines: List<MediListResponse>) : RecyclerV
 
     inner class MediViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val picture: ImageView = itemView.findViewById(R.id.image_view)
-        val title: TextView = itemView.findViewById(R.id.tv_title)
+        val title: TextView = itemView.findViewById(R.id.medication_title)
         val info: TextView = itemView.findViewById(R.id.medication_info)
-        val time: TextView = itemView.findViewById(R.id.tv_time)
+        val time: TextView = itemView.findViewById(R.id.medication_time)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MediViewHolder {
@@ -35,7 +35,7 @@ class MediListAdapter(private var medicines: List<MediListResponse>) : RecyclerV
         // Time 설정 (첫 번째 timeSlot 사용)
         if (medi.timeSlotList.isNotEmpty()) {
             val timeSlot = medi.timeSlotList[0] // 첫 번째 timeSlot 사용
-            val formattedTime = "${timeSlot.spinnerTime} - ${timeSlot.pickerTime}"
+            val formattedTime = "${timeSlot.spinnerTime}"
             holder.time.text = formattedTime
         } else {
             holder.time.text = "시간대 없음"
@@ -44,7 +44,7 @@ class MediListAdapter(private var medicines: List<MediListResponse>) : RecyclerV
         // 이미지 로딩 (Glide 사용)
         Glide.with(holder.itemView.context)
             .load(medi.picture)
-            .placeholder(R.color.black) // 기본 이미지
+            .placeholder(R.drawable.bg_null) // 기본 이미지
             .into(holder.picture)
     }
 

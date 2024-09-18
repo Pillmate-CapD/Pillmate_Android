@@ -52,28 +52,24 @@ data class MediAddRequest(
     @SerializedName("day")
     val day: Int,
     @SerializedName("timeSlotList")
-    val timeSlotList: List<TimeSlotRequest>,
+    val timeSlotList: List<TimeSlotRequest>
+)
+
+data class TimeSlotRequest(
+    @SerializedName("spinnerTime")
+    val spinnerTime: String,
+    @SerializedName("pickerTime")
+    val pickerTime: String
 )
 
 data class MediAddResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("code")
-    val code: String,
-)
-
-data class TimeSlotRequest(
-    @SerializedName("spinnerTime")
-    val timeLabel: String,
-    @SerializedName("pickerTime")
-    val time: String,
+    val code: String
 )
 
 // 약리스트 화면에서 메디 리스트 얻기
-data class MediListResponseWrapper(
-    val medicines: List<MediListResponse>
-)
-
 data class MediListResponse(
     val picture: String,
     val name: String,

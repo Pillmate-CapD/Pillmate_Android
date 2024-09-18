@@ -114,8 +114,8 @@ class WriteMediActivity : AppCompatActivity() {
                 // TimeSlotItem 리스트를 TimeSlotRequest 리스트로 변환
                 val timeSlotRequests = timeSlots.map { timeSlot ->
                     TimeSlotRequest(
-                        timeLabel = timeSlot.timeLabel,
-                        time = timeSlot.time,
+                        spinnerTime = timeSlot.timeLabel,
+                        pickerTime = timeSlot.time,
                     )
                 }
                 // 예: MediAddRequest 객체 생성 및 전송
@@ -129,7 +129,6 @@ class WriteMediActivity : AppCompatActivity() {
                 )
                 // 모든 필드가 채워져 있으면 저장 로직 수행
                 // 예: 데이터 저장, 서버로 전송 등
-                showCustomToast("데이터가 저장됩니다.")
                 sendMediAdd(mediAddRequest)
             }
         }
@@ -143,25 +142,28 @@ class WriteMediActivity : AppCompatActivity() {
         val requestJson = gson.toJson(mediAddRequest)
         Log.d("WriteMediActivity", "보낸 요청: $requestJson")
 
-        call.enqueue(object : Callback<MediAddResponse> {
+        call.enqueue(object : Callback<String> {
             override fun onResponse(
-                call: Call<MediAddResponse>,
-                response: Response<MediAddResponse>
+                call: Call<String>,
+                response: Response<String>
             ) {
                 if (response.isSuccessful) {
-                    val mediResponse = response.body()
+                    val message = response.body()
                     // 성공 시 처리할 로직 추가
-                    mediResponse?.let {
-                        Log.d("WriteMediActivity", "직접 작성 성공: ${it}")
-                        showCustomToast("저장 성공!")
+                    message?.let {
+                        Log.d("WriteMediActivity", "직접 작성 성공: $it")
+                        showCustomToast(it) // 서버에서 보낸 메시지를 토스트로 표시
+                        finish()
                     }
                 } else {
                     Log.d("WriteMediActivity", "직접 작성하기 실패 : ${response.code()}, ${response.errorBody()?.string()}")
+                    showCustomToast("약 추가에 실패했습니다: ${response.code()}")
                 }
             }
 
-            override fun onFailure(call: Call<MediAddResponse>, t: Throwable) {
+            override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.e("WriteMediActivity", "API 호출 실패", t)
+                showCustomToast("API 호출 실패: ${t.message}")
             }
         })
     }
