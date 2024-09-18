@@ -38,7 +38,6 @@ data class SignUpResponse(
     @SerializedName("accessToken")
     val accessToken: String
 )
-import com.google.gson.annotations.SerializedName
 
 // 약 직접 추가
 data class MediAddRequest(
