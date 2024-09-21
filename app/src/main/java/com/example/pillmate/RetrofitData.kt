@@ -85,3 +85,57 @@ data class TimeSlotResponse(
     val spinnerTime: String,
     val pickerTime: String
 )
+
+// 알람 추가 post
+data class AddAlarmRequest(
+    val medicineName: String,
+    val time: String
+)
+
+// 알람 추가 후 데이터 받기
+data class AlarmListResponse(
+    val time: String,
+    val medicineName: String,
+    val category: String,
+    val amount: Int,
+    val timesPerDay: Int,
+    val month: Int,
+    val day: Int,
+    val isAvailable: Boolean,
+    val timeOfDay: String,
+)
+
+data class MainPageResponse(
+    val weekRateInfoList: List<WeekRateRequest>,
+    val medicineAlarmRecords: List<MedicineAlarmRequest>,
+    val grade: String,
+    val takenDay: Int,
+    val month: Int,
+    val rate: Int,
+    val bestRecord: BestRecordData,
+    val worstRecord: WorstRecordData
+)
+
+data class WeekRateRequest(
+    val date: String,
+    val rate: Int
+)
+
+data class MedicineAlarmRequest(
+    val name: String,
+    val time: String,
+    val category: String,
+    val isEaten: Boolean
+)
+
+data class BestRecordData(
+    val name: String,
+    val taken: Int,
+    val scheduled: Int,
+)
+
+data class WorstRecordData(
+    val name: String,
+    val taken: Int,
+    val scheduled: Int,
+)

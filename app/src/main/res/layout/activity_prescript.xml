@@ -17,6 +17,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <com.example.pillmate.OverlayView2
+        android:id="@+id/overlay_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="parent" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_title"
@@ -28,9 +37,10 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
+            android:id="@+id/btn_x"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:background="@drawable/ic_left_arrow_white"
+            android:background="@drawable/ic_x"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,11 +61,27 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <View
+        android:id="@+id/overlay_guide"
+        android:layout_marginRight="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="151dp"
+        android:layout_marginBottom="151dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_line_prescript"/>
+
     <!-- 오버레이 내부 요소들 -->
     <TextView
+        android:id="@+id/tv_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="처방전을 인식해주세요"
+        android:text="점선 표시에 맞춰 촬영해주세요"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         app:layout_constraintTop_toTopOf="parent"
@@ -64,6 +90,18 @@
         android:layout_marginTop="80dp"
         android:fontFamily="@font/notosanskrmedium"
         android:gravity="center" />
+
+    <!-- 갤러리 버튼 -->
+    <View
+        android:id="@+id/btn_gallery"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/ic_gallery"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="@id/overlay_guide"
+        app:layout_constraintTop_toTopOf="@+id/btn_capture" />
 
     <!-- 카메라 버튼 -->
     <View
@@ -76,6 +114,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="32dp" />
+
+    <!-- 플래시 버튼 -->
+    <View
+        android:id="@+id/btn_flash"
+        android:layout_width="25dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/ic_flash"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/overlay_guide"
+        app:layout_constraintTop_toTopOf="@+id/btn_capture" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

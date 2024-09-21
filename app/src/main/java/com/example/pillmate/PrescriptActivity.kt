@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Rect
 import android.graphics.SurfaceTexture
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCaptureSession
@@ -16,9 +17,11 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.HandlerThread
+import android.util.Log
 import android.util.TypedValue
 import android.view.Surface
 import android.view.TextureView
+import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -43,7 +46,7 @@ class PrescriptActivity : AppCompatActivity() {
     private lateinit var backgroundHandler: Handler
     private lateinit var backgroundThread: HandlerThread
 
-    //private var isFlashOn = false
+    private var isFlashOn = false
 
     private val textureListener = object : TextureView.SurfaceTextureListener {
         override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
@@ -67,8 +70,45 @@ class PrescriptActivity : AppCompatActivity() {
 
         // 화면 캡쳐시에 넘어가는 화면 화인
         binding.btnCapture.setOnClickListener {
-            //takePicture()
+            takePicture()
         }
+        binding.btnX.setOnClickListener{
+            finish()
+        }
+
+        // overlayGuide의 위치와 크기를 정확히 계산
+        binding.overlayGuide.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                val location = IntArray(2)
+                binding.overlayGuide.getLocationOnScreen(location)
+
+                Log.d("overlayGuide", "${location[0]}, ${location[1]}")
+
+                // 151dp를 px로 변환
+                val marginDp = 151.dpToPx()
+
+                // 위아래로 151dp씩 추가한 Rect 계산
+                val rect = Rect(
+                    location[0], // 왼쪽 위치
+                    0 + marginDp, // 위쪽 위치에 151dp 추가
+                    location[0] + binding.overlayGuide.width,  // 오른쪽 위치
+                    0 + binding.overlayGuide.height + marginDp  // 아래쪽 위치에 151dp 추가
+                )
+
+                Log.d("PrescriptActivity", "OverlayGuide Rect: left=${rect.left}, top=${rect.top}, right=${rect.right}, bottom=${rect.bottom}")
+
+                // OverlayView2에 업데이트
+                binding.overlayView.updateOverlayGuide(rect)
+
+                // Listener 제거하여 반복 호출 방지
+                binding.overlayGuide.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            }
+        })
+    }
+
+    // dp를 px로 변환하는 함수
+    fun Int.dpToPx(): Int {
+        return (this * resources.displayMetrics.density).toInt()
     }
 
     private fun openCamera() {
@@ -130,11 +170,11 @@ class PrescriptActivity : AppCompatActivity() {
 
     private fun updatePreview() {
         captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO)
-//        if (isFlashOn) {
-//            captureRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_TORCH)
-//        } else {
-//            captureRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF)
-//        }
+        if (isFlashOn) {
+            captureRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_TORCH)
+        } else {
+            captureRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF)
+        }
         try {
             cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, null)
         } catch (e: CameraAccessException) {
@@ -148,61 +188,38 @@ class PrescriptActivity : AppCompatActivity() {
         val bitmap = binding.cameraPreview.bitmap
 
         if (bitmap != null) {
-            // 300dp를 픽셀 단위로 변환
-            val intent = Intent(this, RecognizeIngActivity::class.java)
-            startActivity(intent)
+            // overlayGuideRect 크기만큼 비트맵을 잘라서 저장
+            val rect = binding.overlayView.getOverlayGuideRect() // Use getter method
+            if (rect != null) {
+                // Rect에 맞춰서 비트맵 크롭
+                val croppedBitmap = Bitmap.createBitmap(
+                    bitmap,
+                    rect.left.coerceAtLeast(0),  // 좌측
+                    rect.top.coerceAtLeast(0),   // 상단
+                    rect.width().coerceAtMost(bitmap.width - rect.left),  // 너비
+                    rect.height().coerceAtMost(bitmap.height - rect.top)  // 높이
+                )
 
-            // 원본 비트맵을 그대로 사용하여 저장
-            val file = createImageFile()
-            saveBitmap(bitmap, file)
+                // 크롭된 비트맵을 저장
+                val file = createImageFile()
+                saveBitmap(croppedBitmap, file)
 
-            runOnUiThread {
-                val intent = Intent()
-                intent.putExtra("photoPath", file?.absolutePath)
-                setResult(RESULT_OK, intent)
-                Toast.makeText(this, "Saved: ${file?.absolutePath}", Toast.LENGTH_SHORT).show()
-                finish()
+                runOnUiThread {
+                    // 파일 경로를 AfterPreActivity로 전달
+                    val intent = Intent(this, AfterPreActivity::class.java)
+                    intent.putExtra("photoPath", file?.absolutePath)
+                    startActivity(intent)  // AfterPreActivity 실행
+                }
+            } else {
+                runOnUiThread {
+                    Toast.makeText(this, "Failed to get overlay guide rect", Toast.LENGTH_SHORT).show()
+                }
             }
         } else {
             runOnUiThread {
                 Toast.makeText(this, "Failed to capture image", Toast.LENGTH_SHORT).show()
             }
         }
-
-//        if (bitmap != null) {
-//            // 300dp를 픽셀 단위로 변환
-//            val intent = Intent(this, RecognizeIngActivity::class.java)
-//            startActivity(intent)
-//            val sizeInPixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340f, resources.displayMetrics).toInt()
-//
-//            // 미리보기의 중심을 계산
-//            val centerX = bitmap.width / 2
-//            val centerY = bitmap.height / 2
-//
-//            // 크롭 영역의 좌표를 계산
-//            val left = centerX - sizeInPixels / 2
-//            val top = centerY - sizeInPixels / 2
-//            val right = centerX + sizeInPixels / 2
-//            val bottom = centerY + sizeInPixels / 2
-//
-//            // 크롭된 비트맵을 생성
-//            val croppedBitmap = Bitmap.createBitmap(bitmap, left, top, right - left, bottom - top)
-//
-//            val file = createImageFile()
-//            saveBitmap(croppedBitmap, file)
-//
-//            runOnUiThread {
-//                val intent = Intent()
-//                intent.putExtra("photoPath", file?.absolutePath)
-//                setResult(RESULT_OK, intent)
-//                Toast.makeText(this, "Saved: ${file?.absolutePath}", Toast.LENGTH_SHORT).show()
-//                finish()
-//            }
-//        } else {
-//            runOnUiThread {
-//                Toast.makeText(this, "Failed to capture image", Toast.LENGTH_SHORT).show()
-//            }
-//        }
     }
 
     private fun saveBitmap(bitmap: Bitmap, file: File?) {
@@ -235,10 +252,10 @@ class PrescriptActivity : AppCompatActivity() {
         }
     }
 
-//    private fun toggleFlash() {
-//        isFlashOn = !isFlashOn
-//        updatePreview()
-//    }
+    private fun toggleFlash() {
+        isFlashOn = !isFlashOn
+        updatePreview()
+    }
 
     private fun startBackgroundThread() {
         backgroundThread = HandlerThread("Camera Background")

@@ -16,4 +16,14 @@ interface RetrofitService {
 
     @GET("medicines/all")
     fun getMediAll() : Call<List<MediListResponse>>
+
+    @POST("alarms")
+    fun postAlarm(@Body request: AddAlarmRequest) : Call<String>
+
+    // 로직 수정중
+    @GET("alarms")
+    fun getAlarm() : Call<AlarmListResponse>
+
+    @GET("main")
+    fun getMain() : Call<MainPageResponse>
 }

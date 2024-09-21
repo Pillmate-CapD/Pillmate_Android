@@ -63,7 +63,7 @@
             android:textColor="@color/black"
             android:textSize="15sp"
             android:fontFamily="@font/notosanskrregular"
-            android:text="아침 직후"
+            android:text="아침 식후"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -96,7 +96,7 @@
             android:textColor="@color/black"
             android:textSize="15sp"
             android:fontFamily="@font/notosanskrregular"
-            android:text="점심 직전"
+            android:text="점심 식전"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -121,7 +121,7 @@
             android:textColor="@color/black"
             android:textSize="15sp"
             android:fontFamily="@font/notosanskrregular"
-            android:text="점심 직후"
+            android:text="점심 식후"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

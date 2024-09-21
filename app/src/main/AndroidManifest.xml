@@ -6,6 +6,7 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -32,6 +33,12 @@
         android:theme="@style/Theme.Pillmate"
         tools:targetApi="33">
         <activity
+            android:name=".PreMediActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AfterPreActivity"
+            android:exported="false" />
+        <activity
             android:name=".WriteMediActivity"
             android:exported="false" />
         <activity
@@ -56,12 +63,10 @@
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
