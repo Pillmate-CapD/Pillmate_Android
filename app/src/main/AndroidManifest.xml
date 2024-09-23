@@ -33,6 +33,9 @@
         android:theme="@style/Theme.Pillmate"
         tools:targetApi="33">
         <activity
+            android:name=".LoadingPreActivity"
+            android:exported="false" />
+        <activity
             android:name=".PreMediActivity"
             android:exported="false" />
         <activity

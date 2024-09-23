@@ -43,6 +43,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
+        android:scaleType="fitXY"
         android:id="@+id/img_medi_camera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -92,5 +93,69 @@
         android:textSize="13sp"
         android:includeFontPadding="false"
         />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loading_layout"
+        android:visibility="invisible"
+        android:background="#F5F6F8"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/recog_ing_image"
+                android:layout_width="164sp"
+                android:layout_height="164sp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_loading"/>
+
+            <TextView
+                android:layout_marginTop="19dp"
+                android:includeFontPadding="false"
+                android:id="@+id/recog_ing_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="처방전을 인식 중이에요"
+                android:textSize="20sp"
+                android:fontFamily="@font/notosanskrbold"
+                android:textColor="#3E3E3E"
+                app:layout_constraintTop_toBottomOf="@id/recog_ing_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_marginTop="11dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recog_ing_text"
+                android:fontFamily="@font/notosanskrregular"
+                android:includeFontPadding="false"
+                android:id="@+id/recog_ing_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인식이 완료될 때까지 잠시만 기다려주세요"
+                android:textColor="#858585"
+                android:textSize="13sp"
+                android:layout_gravity="center"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

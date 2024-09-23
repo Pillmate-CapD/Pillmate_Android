@@ -10,18 +10,21 @@
         android:layout_width="164sp"
         android:layout_height="164sp"
         android:layout_gravity="center"
-        android:src="@drawable/recog"/>
+        android:src="@drawable/ic_loading"/>
     <TextView
+        android:includeFontPadding="false"
         android:id="@+id/recog_ing_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="알약을 인식 중이에요"
         android:layout_marginTop="40sp"
         android:textSize="20sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/notosanskrbold"
         android:textColor="#3E3E3E"
         android:layout_gravity="center"/>
     <TextView
+        android:fontFamily="@font/notosanskrregular"
+        android:includeFontPadding="false"
         android:id="@+id/recog_ing_text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

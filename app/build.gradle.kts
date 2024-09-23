@@ -1,6 +1,12 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+}
+
+val properties = Properties().apply {
+    load(project.rootProject.file("local.properties").inputStream())
 }
 
 android {
@@ -15,6 +21,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "OCR_SECRET_KEY", "\"${properties["ocr_secret_key"]}\"")
+        buildConfigField("String", "INVOKE_URL", "\"${properties["ocr_invoke_url"]}\"")
     }
 
     buildTypes {
@@ -37,7 +46,7 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
-        // buildConfig = true
+        buildConfig = true
     }
 }
 
