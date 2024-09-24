@@ -34,13 +34,10 @@ class TimeSlotAdapter(
         holder.spinnerTime.text = timeSlotItem.timeLabel
         holder.pickerTime.text = timeSlotItem.time
 
-        // spinnerTime 클릭 시 BottomSheetDialog 호출
         holder.spinnerTime.setOnClickListener {
             val adapterPosition = holder.adapterPosition
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                onSpinnerClickListener(adapterPosition)
-
-                //holder.spinnerTime.isSelected= true
+                onSpinnerClickListener(adapterPosition) // 클릭 시 BottomSheet를 여는 함수 호출
             }
         }
 

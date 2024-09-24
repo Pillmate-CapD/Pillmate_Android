@@ -2,14 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="11dp"
-    android:layout_marginRight="11dp"
-    android:layout_marginBottom="8dp"
     android:clipToOutline="true"
-    android:background="@drawable/bg_btsheet_round15"
+    android:backgroundTint="@color/trans_white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/bg_btsheet_round15"
         android:id="@+id/bottom_sheet"
         android:clipToOutline="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -228,8 +226,9 @@
             android:background="#D9D9D9"/>
 
         <TextView
+            app:layout_goneMarginBottom="34dp"
             android:includeFontPadding="false"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="34dp"
             android:paddingLeft="27dp"
             android:paddingRight="27dp"
             android:id="@+id/tv_else"

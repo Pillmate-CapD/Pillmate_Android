@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pillmate.databinding.ActivityWriteMediBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -62,6 +64,10 @@ class WriteMediActivity : AppCompatActivity() {
         binding.tvSave.setOnClickListener {
             checkFieldsAndShowToast()
         }
+
+        binding.spinnerDisease.setOnClickListener {
+            showDiseaseBottomSheet()
+        }
     }
 
     // TODO: 1) spinnerTime이랑 pickerTime 다 받아야되니까 그 값을 같이 저장할 수 있도록 해줘 => 서버도 변경되어야 할듯
@@ -72,7 +78,7 @@ class WriteMediActivity : AppCompatActivity() {
     private fun checkFieldsAndShowToast() {
         // 필수 필드 체크
         val isMediNameEmpty = binding.editMedi.text.isNullOrEmpty()
-        val isDiseaseEmpty = binding.editDisease.text.isNullOrEmpty()
+        val isDiseaseEmpty = binding.spinnerDisease.text.isNullOrEmpty()
         val isOneEatEmpty = binding.editOneEat.text.isNullOrEmpty()
         val isOneDayEmpty = binding.editOneDay.text.isNullOrEmpty()
         val isAllDayEmpty = binding.editAllDay.text.isNullOrEmpty()
@@ -86,7 +92,7 @@ class WriteMediActivity : AppCompatActivity() {
                 showCustomToast("약품명을 입력해주세요.")
             }
             isDiseaseEmpty -> {
-                showCustomToast("질병을 입력해주세요.")
+                showCustomToast("질병을 선택해주세요.")
             }
             isOneEatEmpty -> {
                 showCustomToast("1회 복약량을 입력해주세요.")
@@ -104,7 +110,7 @@ class WriteMediActivity : AppCompatActivity() {
                 // 모든 필드가 채워져 있으면 저장 로직 수행
                 // EditText에서 값을 받아서 처리
                 val mediName = binding.editMedi.text.toString()  // 약품명
-                val disease = binding.editDisease.text.toString() // 질병
+                val disease = binding.spinnerDisease.text.toString() // 질병
                 val oneEat = binding.editOneEat.text.toString().toInt()  // 1회 복약량
                 val oneDay = binding.editOneDay.text.toString().toInt()  // 1일 복약횟수
                 val allDay = binding.editAllDay.text.toString().toInt()  // 총 복약일수
@@ -239,6 +245,62 @@ class WriteMediActivity : AppCompatActivity() {
         // BottomSheetDialog 표시
         bottomSheetDialog.show()
     }
+
+    private fun showDiseaseBottomSheet() {
+        val diBottomSheetDialog = BottomSheetDialog(this)
+        val diBottomSheetView = layoutInflater.inflate(R.layout.write_disease_picker, null)
+
+        // 각 질병 항목 레이아웃과 체크 아이콘을 맵핑
+        val diseaseLayouts = listOf(
+            diBottomSheetView.findViewById<ConstraintLayout>(R.id.di_layout_0) to diBottomSheetView.findViewById<View>(R.id.check_0),
+            diBottomSheetView.findViewById<ConstraintLayout>(R.id.di_layout_1) to diBottomSheetView.findViewById<View>(R.id.check_1),
+            diBottomSheetView.findViewById<ConstraintLayout>(R.id.di_layout_2) to diBottomSheetView.findViewById<View>(R.id.check_2),
+            diBottomSheetView.findViewById<ConstraintLayout>(R.id.di_layout_3) to diBottomSheetView.findViewById<View>(R.id.check_3),
+            diBottomSheetView.findViewById<ConstraintLayout>(R.id.di_layout_4) to diBottomSheetView.findViewById<View>(R.id.check_4),
+            diBottomSheetView.findViewById<ConstraintLayout>(R.id.di_layout_5) to diBottomSheetView.findViewById<View>(R.id.check_5)
+        )
+
+        // 기본 체크 상태 초기화 (모두 숨김)
+        diseaseLayouts.forEach { (_, checkView) ->
+            checkView.visibility = View.INVISIBLE
+        }
+
+        // 레이아웃 클릭 리스너 설정
+        diseaseLayouts.forEachIndexed { index, (layout, checkView) ->
+            layout.setOnClickListener {
+                // 모든 체크뷰를 숨기고 클릭된 항목만 표시
+                diseaseLayouts.forEach { (_, check) -> check.visibility = View.INVISIBLE }
+                checkView.visibility = View.VISIBLE
+
+                diBottomSheetView.findViewById<TextView>(R.id.btn_done).setOnClickListener {
+                    // 선택된 항목을 EditText에 설정
+                    val selectedDiseaseTextView = layout.findViewById<TextView>(resources.getIdentifier("tv_di_$index", "id", packageName))
+                    binding.spinnerDisease.setText(selectedDiseaseTextView.text)
+                    binding.spinnerDisease.setBackgroundResource(R.drawable.bg_mint_spinner)
+                    diBottomSheetDialog.dismiss()
+                }
+            }
+        }
+
+        // BottomSheetDialog에 레이아웃 설정
+        diBottomSheetDialog.setContentView(diBottomSheetView)
+
+        // 배경 흐림과 색상 설정
+        diBottomSheetDialog.window?.apply {
+            // 다이얼로그 자체 배경을 투명하게 설정
+            setBackgroundDrawableResource(android.R.color.transparent)
+
+            // 배경 흐림 설정
+            setDimAmount(0.6f) // 0.0f ~ 1.0f로 흐림 정도 설정
+
+            // 뒷배경 색상 설정 (검정색에 40% 투명도)
+            decorView.setBackgroundColor(Color.parseColor("#66000000")) // 검정색 + 40% 투명도
+        }
+
+        // BottomSheetDialog 표시
+        diBottomSheetDialog.show()
+    }
+
 
     private fun addAlarm() {
         val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
