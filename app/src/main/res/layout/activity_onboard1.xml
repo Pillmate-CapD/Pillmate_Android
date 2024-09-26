@@ -37,9 +37,9 @@
                 android:gravity="center"/>
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="84dp"
                 android:layout_height="2dp"
-                android:background="#E6E8EB"/>
+                android:background="#E6E8EB" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,11 +48,11 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:background="@drawable/onboard_step_inactive"
-                android:textColor="@color/black"
+                android:textColor="#898989"
                 android:gravity="center"/>
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="84dp"
                 android:layout_height="2dp"
                 android:background="#E6E8EB"/>
 
@@ -63,7 +63,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:background="@drawable/onboard_step_inactive"
-                android:textColor="@color/black"
+                android:textColor="#898989"
                 android:gravity="center"/>
         </LinearLayout>
         <LinearLayout
@@ -75,29 +75,29 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:layout_marginLeft="58dp"
-                android:fontFamily="@font/notosanskrbold"
+                android:layout_marginLeft="60dp"
+                android:fontFamily="@font/notosanskrsemibold"
                 android:gravity="center"
                 android:text="만성질환"
                 android:textColor="#1E54DF"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:text="진단시기"
-                android:layout_marginLeft="54dp"
-                android:fontFamily="@font/notosanskrregular"
-                android:textSize="14sp"
+                android:layout_marginLeft="68dp"
+                android:fontFamily="@font/notosanskrmedium"
+                android:textSize="11sp"
                 android:textColor="@color/black"
                 android:gravity="center"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:layout_marginLeft="50dp"
-                android:text="알람 시간대"
-                android:fontFamily="@font/notosanskrregular"
-                android:textSize="14sp"
+                android:layout_marginLeft="62dp"
+                android:text="증상•부작용"
+                android:fontFamily="@font/notosanskrmedium"
+                android:textSize="11sp"
                 android:textColor="@color/black"
                 android:gravity="center"/>
         </LinearLayout>
@@ -106,14 +106,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
-                android:fontFamily="@font/notosanskrbold"
-                android:text="현재 앓고 있는 만성질환을\n선택해 주세요"
+                android:fontFamily="@font/notosanskrsemibold"
+                android:text="현재 앓고 계신\n만성질환을 선택해 주세요"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -193,13 +193,13 @@
         <Button
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="45sp"
             android:layout_marginTop="30sp"
             android:background="@drawable/button_blue"
             android:text="다음"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:fontFamily="@font/notosanskrbold"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrmedium"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
     </LinearLayout>

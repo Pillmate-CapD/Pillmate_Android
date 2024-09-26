@@ -26,36 +26,43 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Find the TextView (or Button) for logout
+        // 로그아웃 버튼 처리
         val logoutTextView: TextView = view.findViewById(R.id.tv_logout)
-
-        // Set click listener on the logout TextView
         logoutTextView.setOnClickListener {
-            // Show the logout confirmation dialog
+            // 로그아웃 확인 다이얼로그 표시
             showLogoutDialog()
+        }
+        // 비밀번호 변경 버튼 처리
+        val changePwButton: View = view.findViewById(R.id.btn_ch_pw)
+        changePwButton.setOnClickListener {
+            // 비밀번호 변경 화면으로 이동
+            val intent = Intent(activity, PwChangeActivity::class.java)
+            startActivity(intent)
         }
     }
 
     private fun showLogoutDialog() {
-        // Create an AlertDialog for logout confirmation
-        val builder = AlertDialog.Builder(requireContext())
+        // 로그아웃 확인을 위한 AlertDialog 생성
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setMessage("필메이트에서 로그아웃하시겠어요?")
             .setPositiveButton("로그아웃") { dialog, id ->
-                // User clicked Logout, perform logout action
+                // 로그아웃 클릭 시 로그아웃 처리
                 logout()
             }
             .setNegativeButton("취소") { dialog, id ->
-                // User cancelled the dialog, just dismiss it
+                // 취소 클릭 시 다이얼로그 닫기
                 dialog.dismiss()
             }
 
-        // Show the dialog
+        // 다이얼로그 표시
         val dialog = builder.create()
         dialog.show()
 
-        // Customize button text colors
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(android.R.color.holo_red_light))
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(android.R.color.black))
+        // 버튼 색상 커스터마이징 (선택 사항)
+        dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(resources.getColor(android.R.color.holo_red_light))
+        dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE)
+            .setTextColor(resources.getColor(android.R.color.black))
     }
 
     private fun logout() {

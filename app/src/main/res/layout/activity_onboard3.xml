@@ -4,275 +4,262 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Onboard3Activity"
     android:paddingLeft="16sp"
+    android:paddingTop="22sp"
     android:paddingRight="16sp"
-    android:paddingTop="22sp">
+    tools:context=".Onboard3Activity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <ImageView
             android:id="@+id/back"
             android:layout_width="32sp"
             android:layout_height="32sp"
-            android:src="@drawable/back"
-            />
+            android:src="@drawable/back" />
         <!-- Onboarding Step -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="5sp"
             android:gravity="center"
-            android:layout_marginTop="5sp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/onboard_step_active_already"
+                android:gravity="center"
                 android:text="1"
+                android:textColor="#1E54DF"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:background="@drawable/onboard_step_active"
-                android:textColor="@color/white"
-                android:gravity="center"/>
+                android:textStyle="bold" />
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="84dp"
                 android:layout_height="2dp"
-                android:background="@drawable/onboard_gradient"/>
+                android:background="@drawable/onboard_gradient" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/onboard_step_active_already"
+                android:gravity="center"
                 android:text="2"
+                android:textColor="#1E54DF"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:background="@drawable/onboard_step_active"
-                android:textColor="@color/white"
-                android:gravity="center"/>
+                android:textStyle="bold" />
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="84dp"
                 android:layout_height="2dp"
-                android:background="@drawable/onboard_gradient2"/>
+                android:background="@drawable/onboard_gradient2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3"
-                android:textSize="14sp"
-                android:textStyle="bold"
                 android:background="@drawable/onboard_step_active"
+                android:gravity="center"
+                android:text="3"
                 android:textColor="@color/white"
-                android:gravity="center"/>
+                android:textSize="14sp"
+                android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="0sp">
+            android:layout_marginTop="0sp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:fontFamily="@font/notosanskrbold"
+                android:layout_marginLeft="60dp"
+                android:fontFamily="@font/notosanskrsemibold"
                 android:gravity="center"
                 android:text="만성질환"
-                android:layout_marginLeft="58dp"
                 android:textColor="#1E54DF"
-                android:textSize="14sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:fontFamily="@font/notosanskrbold"
+                android:layout_marginLeft="68dp"
+                android:fontFamily="@font/notosanskrsemibold"
+                android:gravity="center"
                 android:text="진단시기"
-                android:layout_marginLeft="54dp"
-                android:textSize="14sp"
                 android:textColor="#1E54DF"
-                android:gravity="center"/>
+                android:textSize="11sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:fontFamily="@font/notosanskrbold"
-                android:layout_marginLeft="50dp"
-                android:text="알람 시간대"
-                android:textSize="14sp"
+                android:layout_marginLeft="62dp"
+                android:fontFamily="@font/notosanskrsemibold"
+                android:gravity="center"
+                android:text="증상•부작용"
                 android:textColor="#1E54DF"
-                android:gravity="center"/>
+                android:textSize="11sp" />
 
         </LinearLayout>
         <!-- 평소 생활 시간대를 알려주세요 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:gravity="center">
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
-                android:text="평소 생활하는\n시간대를 알려주세요"
+                android:fontFamily="@font/notosanskrsemibold"
+                android:text="평소에 느끼는 증상이나\n부작용을 모두 선택해 주세요"
                 android:textAlignment="center"
-                android:fontFamily="@font/notosanskrbold"
-                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:layout_marginTop="0sp"
                 android:fontFamily="@font/notosanskrregular"
-                android:text="약 알람을 자동으로 설정해 줘요"
-                android:textSize="14sp"
-                android:textColor="#858585"/>
+                android:text="증상과 부작용을 확인하고 관리해요"
+                android:textColor="#858585"
+                android:textSize="14sp" />
         </LinearLayout>
         <!-- info -->
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="395dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="23sp">
+            android:layout_marginTop="23sp"
+            android:gravity="center">
+
             <LinearLayout
-                android:id="@+id/wakeup"
+                android:id="@+id/symptom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="23sp">
-                <TextView
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <GridLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="        기상"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"/>
-                <EditText
-                    android:id="@+id/et_wakeup"
-                    android:layout_width="205sp"
-                    android:layout_height="50sp"
-                    android:background="@drawable/onboard_et_gray"
-                    android:textSize="20sp"
-                    android:hint="오전  06:00"
-                    android:textColorHint="#898989"
-                    android:paddingLeft="57dp"
-                    android:focusable="false"
-                    android:layout_marginLeft="24sp"/>
+                    android:rowCount="6"
+                    android:columnCount="3"
+                    android:alignmentMode="alignMargins"
+                    android:useDefaultMargins="true">
+
+                    <!-- 각각의 버튼 -->
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="피로감" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="몸살" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="근육통" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="관절통" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="두통" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="건망증" />
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="인후통" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="기침∙가래" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="호흡곤란" />
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="두근거림" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="복통" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="소화불량" />
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="구토" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="변비" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="불면증" />
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="수면장애" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="우울" />
+
+                    <Button
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:text="기타" />
+
+                </GridLayout>
+
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/breakfast"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="12sp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="아침 식사"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"/>
-                <EditText
-                    android:id="@+id/et_breakfast"
-                    android:layout_width="205sp"
-                    android:layout_height="50sp"
-                    android:background="@drawable/onboard_et_gray"
-                    android:textSize="20sp"
-                    android:hint="오전  06:00"
-                    android:textColorHint="#898989"
-                    android:paddingLeft="57dp"
-                    android:focusable="false"
-                    android:layout_marginLeft="24sp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/lunch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="12sp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="점심 식사"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"/>
-                <EditText
-                    android:id="@+id/et_lunch"
-                    android:layout_width="205sp"
-                    android:layout_height="50sp"
-                    android:background="@drawable/onboard_et_gray"
-                    android:textSize="20sp"
-                    android:hint="오전  06:00"
-                    android:textColorHint="#898989"
-                    android:paddingLeft="57dp"
-                    android:focusable="false"
-                    android:layout_marginLeft="24sp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/dinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="12sp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="저녁 식사"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"/>
-                <EditText
-                    android:id="@+id/et_dinner"
-                    android:layout_width="205sp"
-                    android:layout_height="50sp"
-                    android:background="@drawable/onboard_et_gray"
-                    android:textSize="20sp"
-                    android:hint="오전  06:00"
-                    android:textColorHint="#898989"
-                    android:paddingLeft="57dp"
-                    android:focusable="false"
-                    android:layout_marginLeft="24sp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/sleep"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="12sp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="        취침"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"/>
-                <EditText
-                    android:id="@+id/et_sleep"
-                    android:layout_width="205sp"
-                    android:layout_height="50sp"
-                    android:background="@drawable/onboard_et_gray"
-                    android:textSize="20sp"
-                    android:hint="오전  06:00"
-                    android:textColorHint="#898989"
-                    android:paddingLeft="57dp"
-                    android:focusable="false"
-                    android:layout_marginLeft="24sp"/>
-            </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
+
         <Button
             android:id="@+id/btn_finish"
             android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:layout_marginTop="30sp"
-            android:background="@drawable/button_blue"
-            android:text="완료"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/notosanskrbold"
+            android:layout_height="45sp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginTop="30sp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/button_blue"
+            android:fontFamily="@font/notosanskrmedium"
+            android:text="다음"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>

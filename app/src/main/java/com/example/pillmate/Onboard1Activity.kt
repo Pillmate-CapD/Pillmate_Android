@@ -28,37 +28,37 @@ class Onboard1Activity : AppCompatActivity() {
         val card1: CardView = findViewById(R.id.card1)
         setCardContent(card1, "당뇨", "혈당 조절이 어려워져\n혈당 수치가 비정상적으로 \n높아지는 만성질환", R.drawable.o_diabetes)
         card1.setOnClickListener {
-            toggleSelection(card1, "당뇨", R.drawable.o_diabetes_select)
+            toggleSelection(card1, "당뇨", R.drawable.o_diabetes)
         }
 
         val card2: CardView = findViewById(R.id.card2)
         setCardContent(card2, "고혈압", "혈압이 지속적으로\n높은 만성질환\n ", R.drawable.o_heartrate)
         card2.setOnClickListener {
-            toggleSelection(card2, "고혈압", R.drawable.o_heartrate_select)
+            toggleSelection(card2, "고혈압", R.drawable.o_heartrate)
         }
 
         val card3: CardView = findViewById(R.id.card3)
         setCardContent(card3, "고지혈증", "혈중 지질 수치가\n높은 만성질환\n  ", R.drawable.o_blood_cells)
         card3.setOnClickListener {
-            toggleSelection(card3, "고지혈증", R.drawable.o_blood_cells_select)
+            toggleSelection(card3, "고지혈증", R.drawable.o_blood_cells)
         }
 
         val card4: CardView = findViewById(R.id.card4)
         setCardContent(card4, "호흡기질환", "호흡기에\n장기적인 문제가 생기는 질병\n  ", R.drawable.o_coughing_alt)
         card4.setOnClickListener {
-            toggleSelection(card4, "호흡기질환", R.drawable.o_coughing_alt_select)
+            toggleSelection(card4, "호흡기질환", R.drawable.o_coughing_alt)
         }
 
         val card5: CardView = findViewById(R.id.card5)
         setCardContent(card5, "심혈관질환", "심장과 혈관에 영향을\n미치는 만성 질환\n  ", R.drawable.o_overweight)
         card5.setOnClickListener {
-            toggleSelection(card5, "심혈관질환", R.drawable.o_overweight_select)
+            toggleSelection(card5, "심혈관질환", R.drawable.o_overweight)
         }
 
         val card6: CardView = findViewById(R.id.card6)
         setCardContent(card6, "기타", "장기간에 걸쳐 지속되는\n다양한 질병\n  ", R.drawable.o_plus)
         card6.setOnClickListener {
-            toggleSelection(card6, "기타", R.drawable.o_plus_select)
+            toggleSelection(card6, "기타", R.drawable.o_plus)
         }
 
 
@@ -99,9 +99,9 @@ class Onboard1Activity : AppCompatActivity() {
         } else {
             selectedDiseases.add(disease)
             card.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
-            titleView.setTextColor(Color.parseColor("#1E54DF"))
+            titleView.setTextColor(Color.parseColor("#3e3e3e"))
             iconView.setImageResource(selectedImageResId)
-            setCardStroke(card, Color.parseColor("#1E54DF"))
+            setCardStroke(card, Color.parseColor("#08D2C8"))
         }
         updateNextButtonState() // 상태 업데이트
     }
@@ -109,9 +109,11 @@ class Onboard1Activity : AppCompatActivity() {
         if (selectedDiseases.isNotEmpty()) {
             btnNext.isEnabled = true
             btnNext.setBackgroundResource(R.drawable.onboard_btn_active)
+            btnNext.setTextColor(Color.parseColor("#FFFFFF"))
         } else {
             btnNext.isEnabled = false
-            btnNext.setBackgroundResource(R.drawable.onboard_btn_inactive)
+            btnNext.setBackgroundResource(R.drawable.onboard_btn_inactive_real)
+            btnNext.setTextColor(Color.parseColor("#898989"))
         }
     }
 
