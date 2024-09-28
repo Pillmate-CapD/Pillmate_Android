@@ -16,14 +16,9 @@ class PwChangeOkActivity : AppCompatActivity() {
         binding = ActivityPwchangeOkBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 확인 버튼에 리스너 설정
+        // btn_register 버튼 클릭 시 이전 화면(UserFragment)으로 돌아가기
         binding.btnRegister.setOnClickListener {
-            // UserFragment로 전환
-            val fragment = UserFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment) // 프래그먼트를 넣을 레이아웃의 ID를 사용하세요
-                .addToBackStack(null) // 뒤로 가기 눌렀을 때 이전 상태로 돌아가기 위해 백스택에 추가
-                .commit()
+            finish()  // 현재 Activity 종료
         }
     }
-    }
+}

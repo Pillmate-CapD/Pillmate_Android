@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    >
     <ImageView
         android:layout_width="115dp"
         android:layout_height="115dp"
@@ -25,14 +26,23 @@
         android:fontFamily="@font/notosanskrsemibold"
         android:textColor="#1E54DF"
         android:textSize="25sp" />
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="350dp"
-        android:layout_height="49dp"
-        android:text="확인"
-        android:background="@drawable/bt_login_enable"
-        android:textColor="#ffffff"
-        android:textSize="15sp"
-        android:fontFamily="@font/notosanskrmedium"
-        android:layout_marginTop="220dp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="확인"
+            android:background="@drawable/bt_login_enable"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrmedium"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="50dp"/>
+    </FrameLayout>
 </LinearLayout>

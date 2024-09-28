@@ -100,6 +100,12 @@
         <activity
             android:name=".Onboard1Activity"
             android:exported="false" />
+        <activity
+            android:name=".PwChangeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PwChangeOkActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
