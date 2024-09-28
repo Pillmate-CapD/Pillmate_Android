@@ -86,6 +86,7 @@
         android:paddingTop="40dp"
         android:paddingLeft="30dp"
         android:layout_height="0dp">
+        <!-- 내 건강 정보 항목 -->
         <ImageView
             android:id="@+id/icon_my_health"
             android:layout_width="20dp"
@@ -106,8 +107,7 @@
             android:fontFamily="@font/notosanskrregular"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_marginLeft="11sp"/>
-
+            android:layout_marginLeft="11dp"/>
 
         <View
             android:id="@+id/btn_my_health"
@@ -118,6 +118,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_my_health" />
 
+
+        <!-- 자주 묻는 질문 항목 -->
         <ImageView
             android:id="@+id/icon_question"
             android:layout_width="20dp"
@@ -138,8 +140,7 @@
             android:fontFamily="@font/notosanskrregular"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_marginLeft="11sp"/>
-
+            android:layout_marginLeft="11dp"/>
 
         <View
             android:id="@+id/btn_question"
@@ -150,6 +151,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_question" />
 
+        <!-- 도움말 항목 -->
         <ImageView
             android:id="@+id/icon_help"
             android:layout_width="20dp"
@@ -177,11 +179,11 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/ic_right_user"
-            app:layout_constraintTop_toTopOf="@id/tv_help"
-            app:layout_constraintBottom_toBottomOf="@id/tv_help"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_help"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="@+id/tv_help" />
 
+        <!-- 비밀번호 변경 항목 -->
         <ImageView
             android:id="@+id/icon_ch_pw"
             android:layout_width="20dp"
@@ -202,17 +204,18 @@
             android:fontFamily="@font/notosanskrregular"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_marginLeft="11sp"/>
+            android:layout_marginLeft="11dp"/>
 
         <View
             android:id="@+id/btn_ch_pw"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/ic_right_user"
-            app:layout_constraintTop_toTopOf="@id/tv_ch_pw"
-            app:layout_constraintBottom_toBottomOf="@id/tv_ch_pw"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_ch_pw"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="@+id/tv_ch_pw" />
+
+        <!-- 로그아웃 항목 -->
         <TextView
             android:id="@+id/tv_logout"
             android:layout_marginTop="25dp"

@@ -29,7 +29,7 @@ class UserFragment : Fragment() {
         // 로그아웃 버튼 처리
         val logoutTextView: TextView = view.findViewById(R.id.tv_logout)
         logoutTextView.setOnClickListener {
-            // 로그아웃 확인 다이얼로그 표시
+            // 로그아웃 다이얼로그 표시
             showLogoutDialog()
         }
         // 비밀번호 변경 버튼 처리
@@ -42,34 +42,9 @@ class UserFragment : Fragment() {
     }
 
     private fun showLogoutDialog() {
-        // 로그아웃 확인을 위한 AlertDialog 생성
-        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-        builder.setMessage("필메이트에서 로그아웃하시겠어요?")
-            .setPositiveButton("로그아웃") { dialog, id ->
-                // 로그아웃 클릭 시 로그아웃 처리
-                logout()
-            }
-            .setNegativeButton("취소") { dialog, id ->
-                // 취소 클릭 시 다이얼로그 닫기
-                dialog.dismiss()
-            }
-
-        // 다이얼로그 표시
-        val dialog = builder.create()
-        dialog.show()
-
-        // 버튼 색상 커스터마이징 (선택 사항)
-        dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(resources.getColor(android.R.color.holo_red_light))
-        dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE)
-            .setTextColor(resources.getColor(android.R.color.black))
-    }
-
-    private fun logout() {
-        // Perform the logout logic and redirect to the LoginActivity
-        val intent = Intent(activity, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        // LogoutDialogFragment를 사용하여 로그아웃 다이얼로그 표시
+        val logoutDialog = LogoutDialogFragment()
+        logoutDialog.show(parentFragmentManager, "logoutDialog")
     }
 
 }

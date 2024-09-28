@@ -94,7 +94,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:layout_marginLeft="62dp"
+                android:layout_marginLeft="63dp"
                 android:text="증상•부작용"
                 android:fontFamily="@font/notosanskrmedium"
                 android:textSize="11sp"
