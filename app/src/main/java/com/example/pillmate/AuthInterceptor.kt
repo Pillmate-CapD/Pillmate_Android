@@ -9,7 +9,7 @@ class AuthInterceptor : Interceptor {
         //val token = App.prefs.token
 
         // 김가현 임시토큰 넣어놓음 123@gmail.com , 123
-        val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI2NzIxNzIyLCJleHAiOjE3MjY4MDgxMjIsImF1dGgiOlt7ImF1dGhvcml0eSI6IlVTRVIifV19.0tDubyh86QPQJX4vqmSbeUHHYQe32muXKsmhiLGRJvk"
+        val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwiaWF0IjoxNzI3MTgxMzIxLCJleHAiOjE3MjcyNjc3MjEsImF1dGgiOlt7ImF1dGhvcml0eSI6IlVTRVIifV19.XdECnygTgLSAwUVrFNf4yK_jZea-sAdrplYFJqysa30"
         val requestBuilder = chain.request().newBuilder()
 
         // 토큰이 존재하는 경우에만 Authorization 헤더 추가

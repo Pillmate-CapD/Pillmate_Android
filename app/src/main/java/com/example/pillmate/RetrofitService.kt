@@ -11,7 +11,7 @@ interface RetrofitService {
     @POST("members/signup")
     fun signup(@Body request: SignUpRequest): Call<SignUpResponse>
 
-    @POST("medicines/directly")
+    @POST("medicines")
     fun addMedi(@Body request : MediAddRequest): Call<String>
 
     @GET("medicines/all")

@@ -92,18 +92,17 @@ data class AddAlarmRequest(
     val time: String
 )
 
-// 알람 추가 후 데이터 받기
 data class AlarmListResponse(
-    val time: String,
-    val medicineName: String,
+    val id: Int,
+    val name: String,
     val category: String,
     val amount: Int,
     val timesPerDay: Int,
-    val month: Int,
     val day: Int,
-    val isAvailable: Boolean,
-    val timeOfDay: String,
+    val timeSlotList: List<TimeSlotResponse>,
+    val isAvailable: Boolean
 )
+
 
 data class MainPageResponse(
     val weekRateInfoList: List<WeekRateRequest>,

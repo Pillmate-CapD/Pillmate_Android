@@ -143,7 +143,7 @@ class WriteMediActivity : AppCompatActivity() {
 
     private fun sendMediAdd(mediAddRequest: MediAddRequest) {
         val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
-        val call = service.addMedi(mediAddRequest)
+        val call = service.addMedi(mediAddRequest)   // MediAddRequest 전체를 한 번에 전송
 
         val gson = Gson()
         val requestJson = gson.toJson(mediAddRequest)
@@ -158,15 +158,13 @@ class WriteMediActivity : AppCompatActivity() {
                     val message = response.body()
                     // 성공 시 처리할 로직 추가
                     message?.let {
-                        Log.d("WriteMediActivity", "직접 작성 성공: $it")
+                        Log.d("WriteMediActivity", "약 추가 성공: $it")
                         showCustomToast(it) // 서버에서 보낸 메시지를 토스트로 표시
 
-                        // 알람 생성하기
-                        //addAlarm()
                         finish()
                     }
                 } else {
-                    Log.d("WriteMediActivity", "직접 작성하기 실패 : ${response.code()}, ${response.errorBody()?.string()}")
+                    Log.d("WriteMediActivity", "약 추가 실패: ${response.code()}, ${response.errorBody()?.string()}")
                     showCustomToast("약 추가에 실패했습니다: ${response.code()}")
                 }
             }
@@ -177,6 +175,8 @@ class WriteMediActivity : AppCompatActivity() {
             }
         })
     }
+
+
 
     // 커스텀 토스트 메시지를 띄우는 함수
     private fun showCustomToast(message: String) {
@@ -302,46 +302,46 @@ class WriteMediActivity : AppCompatActivity() {
     }
 
 
-    private fun addAlarm() {
-        val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
-
-        // Iterate through each timeSlotRequest and post the alarm
-        for (timeSlot in timeSlots) {
-            val medicineName = binding.editMedi.text.toString()  // 약품명
-            val time = timeSlot.time.toString()  // pickerTime 값 (10:00:00 등)
-
-            // Create the request object
-            val addAlarmRequest = AddAlarmRequest(
-                medicineName = medicineName,
-                time = time
-            )
-
-            // Make the API call
-            val call = service.postAlarm(addAlarmRequest)
-
-            // Log the request for debugging purposes
-            val gson = Gson()
-            val requestJson = gson.toJson(addAlarmRequest)
-            Log.d("WriteMediActivity", "Alarm request: $requestJson")
-
-            call.enqueue(object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    if (response.isSuccessful) {
-                        val message = response.body()
-                        Log.d("WriteMediActivity", "Alarm set successfully: $message")
-                        showCustomToast("알람이 성공적으로 설정되었습니다.")
-                    } else {
-                        Log.d("WriteMediActivity", "Failed to set alarm: ${response.code()}")
-                        showCustomToast("알람 설정에 실패했습니다.")
-                    }
-                }
-
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.e("WriteMediActivity", "Alarm API call failed", t)
-                    showCustomToast("알람 API 호출에 실패했습니다: ${t.message}")
-                }
-            })
-        }
-    }
+//    private fun addAlarm() {
+//        val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
+//
+//        // Iterate through each timeSlotRequest and post the alarm
+//        for (timeSlot in timeSlots) {
+//            val medicineName = binding.editMedi.text.toString()  // 약품명
+//            val time = timeSlot.time.toString()  // pickerTime 값 (10:00:00 등)
+//
+//            // Create the request object
+//            val addAlarmRequest = AddAlarmRequest(
+//                medicineName = medicineName,
+//                time = time
+//            )
+//
+//            // Make the API call
+//            val call = service.postAlarm(addAlarmRequest)
+//
+//            // Log the request for debugging purposes
+//            val gson = Gson()
+//            val requestJson = gson.toJson(addAlarmRequest)
+//            Log.d("WriteMediActivity", "Alarm request: $requestJson")
+//
+//            call.enqueue(object : Callback<String> {
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    if (response.isSuccessful) {
+//                        val message = response.body()
+//                        Log.d("WriteMediActivity", "Alarm set successfully: $message")
+//                        showCustomToast("알람이 성공적으로 설정되었습니다.")
+//                    } else {
+//                        Log.d("WriteMediActivity", "Failed to set alarm: ${response.code()}")
+//                        showCustomToast("알람 설정에 실패했습니다.")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    Log.e("WriteMediActivity", "Alarm API call failed", t)
+//                    showCustomToast("알람 API 호출에 실패했습니다: ${t.message}")
+//                }
+//            })
+//        }
+//    }
 
 }
