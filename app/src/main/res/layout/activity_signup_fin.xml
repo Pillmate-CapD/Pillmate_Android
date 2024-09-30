@@ -33,21 +33,23 @@
         android:fontFamily="@font/notosanskrregular"
         android:textColor="#1E54DF"
         android:textSize="15sp" />
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="16sp"
-        android:paddingRight="16sp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:textColor="@color/white"
+            android:text="로그인하기"
+            android:background="@drawable/bt_login_enable"
+            android:textColor="#ffffff"
             android:textSize="15sp"
             android:fontFamily="@font/notosanskrmedium"
-            android:background="@drawable/bt_login_enable"
-            android:layout_marginTop="220dp"
-            android:text="로그인하기"/>
-    </LinearLayout>
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="50dp"/>
+    </FrameLayout>
 </LinearLayout>

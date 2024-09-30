@@ -190,11 +190,16 @@
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"/>
         </GridLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="45sp"
-            android:layout_marginTop="30sp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/button_blue"
             android:text="다음"
             android:textColor="@color/white"

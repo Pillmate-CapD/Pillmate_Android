@@ -150,105 +150,986 @@
                 android:layout_marginTop="23sp">
 
                 <GridLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:rowCount="6"
                     android:columnCount="3"
                     android:alignmentMode="alignMargins"
                     android:useDefaultMargins="true">
+                    <!-- 피로감 -->
+                    <FrameLayout
+                        android:id="@+id/btn1"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_margin="6dp">
 
-                    <!-- 각각의 버튼 -->
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="피로감" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="몸살" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="근육통" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="관절통" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="두통" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="건망증" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="인후통" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="기침∙가래" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="호흡곤란" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="두근거림" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="복통" />
-                    <Button
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="소화불량" />
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="구토" />
-                    <Button
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn1"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="피로감"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon1"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 몸살 -->
+                    <FrameLayout
+                        android:id="@+id/btn2"
                         android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="변비" />
-                    <Button
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn2"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="몸살"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon2"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 근육통 -->
+                    <FrameLayout
+                        android:id="@+id/btn3"
                         android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="불면증" />
-                    <Button
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn3"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="근육통"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon3"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 관절통 -->
+                    <FrameLayout
+                        android:id="@+id/btn4"
                         android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="수면장애" />
-                    <Button
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn4"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="관절통"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon4"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 두통 -->
+                    <FrameLayout
+                        android:id="@+id/btn5"
                         android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="우울" />
-                    <Button
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn5"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="두통"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon5"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 건망증 -->
+                    <FrameLayout
+                        android:id="@+id/btn6"
                         android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/onboard3_btn"
-                        android:text="기타" />
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn6"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="건망증"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon6"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 인후통 -->
+                    <FrameLayout
+                        android:id="@+id/btn7"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn7"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="인후통"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon7"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 기침∙가래 -->
+                    <FrameLayout
+                        android:id="@+id/btn8"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn8"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="기침∙가래"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay8"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon8"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 호흡곤란 -->
+                    <FrameLayout
+                        android:id="@+id/btn9"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn9"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="호흡곤란"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon9"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 두근거림 -->
+                    <FrameLayout
+                        android:id="@+id/btn10"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn10"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="두근거림"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay10"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon10"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 복통 -->
+                    <FrameLayout
+                        android:id="@+id/btn11"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn11"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="복통"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay11"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon11"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 소화불량 -->
+                    <FrameLayout
+                        android:id="@+id/btn12"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn2"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="소화불량"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay12"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon12"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 구토 -->
+                    <FrameLayout
+                        android:id="@+id/btn13"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn13"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="구토"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay13"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon13"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 변비 -->
+                    <FrameLayout
+                        android:id="@+id/btn14"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn14"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="변비"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay14"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon14"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 불면증 -->
+                    <FrameLayout
+                        android:id="@+id/btn15"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn15"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="불면증"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay15"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon15"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 수면장애 -->
+                    <FrameLayout
+                        android:id="@+id/btn16"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn16"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="수면장애"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay16"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon16"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 우울 -->
+                    <FrameLayout
+                        android:id="@+id/btn17"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn17"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="우울"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay17"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon17"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+                    <!-- 기타 -->
+                    <FrameLayout
+                        android:id="@+id/btn18"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp">
+
+                        <!-- 버튼 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn"
+                            android:cornerRadius="10dp"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:enabled="false" />
+
+                        <!-- 이미지 -->
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal|top"
+                            android:src="@drawable/onboard3btn18"
+                            android:scaleType="centerInside"/>
+
+                        <!-- 텍스트 -->
+                        <TextView
+                            android:id="@+id/on3txt18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:gravity="center"
+                            android:text="기타"
+                            android:layout_marginBottom="13dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"/>
+
+                        <!-- 선택된 후 검정 투명 오버레이 -->
+                        <View
+                            android:id="@+id/overlay18"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/onboard3_btn_check"
+                            android:visibility="gone"/>
+
+                        <!-- 체크 아이콘 -->
+                        <ImageView
+                            android:id="@+id/check_icon18"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/onboard3_check"
+                            android:visibility="gone"/>
+                    </FrameLayout>
+
                 </GridLayout>
             </LinearLayout>
         </LinearLayout>

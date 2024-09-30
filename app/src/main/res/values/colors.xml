@@ -7,4 +7,5 @@
     <color name="back_color">#F9F9F9</color>
     <color name="point_back">#08D2C8</color>
     <color name="trans_white">#33FFFFFF</color>
+    <color name="gray_bg">#F5F6F8</color>
 </resources>
