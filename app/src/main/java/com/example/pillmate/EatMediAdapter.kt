@@ -51,6 +51,8 @@ class EatMediAdapter(
         private val stepButton: Button = itemView.findViewById(R.id.step_button1) ?: itemView.findViewById(R.id.step_button2) ?: itemView.findViewById(R.id.step_button3) ?: itemView.findViewById(R.id.step_button4)
         private val stepCheck: ImageView? = itemView.findViewById(R.id.step_check)
         private val stepText: TextView? = itemView.findViewById(R.id.step1) ?: itemView.findViewById(R.id.step2) ?: itemView.findViewById(R.id.step3) ?: itemView.findViewById(R.id.step4)
+        private val b_stepTitle: TextView? = itemView.findViewById(R.id.b_step_title1)
+        //private val important: TextView = itemView.findViewById(R.id.important)
         private val stepTitle: TextView? = itemView.findViewById(R.id.step_title1) ?: itemView.findViewById(R.id.step_title2) ?: itemView.findViewById(R.id.step_title3) ?: itemView.findViewById(R.id.step_title4)
         private val passButton: TextView? = itemView.findViewById(R.id.pass1)  // Pass 버튼은 첫 번째 단계에만 존재
         private val stepDescription: TextView? = itemView.findViewById(R.id.step1_description) ?:itemView.findViewById(R.id.step4_description)
@@ -60,7 +62,7 @@ class EatMediAdapter(
             // 단계 내용 가시성 설정
             stepContent.visibility = if (step.isVisible) View.VISIBLE else View.GONE
             // root 레이아웃 배경 설정
-            rootLayout.setBackgroundResource(if (step.isVisible || step.isCompleted) R.drawable.button_stroke_blue else R.drawable.button_gray)
+            rootLayout.setBackgroundResource(if (step.isVisible || step.isCompleted) R.drawable.eatmedi_button1 else R.drawable.eatmedi_button1)
 
             // 단계 버튼 클릭 리스너 설정
             stepButton.setOnClickListener {
@@ -81,21 +83,27 @@ class EatMediAdapter(
             if (step.isVisible) {
                 stepCheck?.visibility = View.GONE
                 stepText?.visibility = View.VISIBLE
-                stepTitle?.visibility = View.VISIBLE
-                stepText?.setBackgroundResource(R.drawable.eatmedi_active)
+                stepTitle?.visibility = View.GONE
+                b_stepTitle?.visibility=View.VISIBLE
+                stepText?.setBackgroundResource(R.drawable.eatmedi_open)
             } else {
                 if (position < getCurrentStepPosition()) {
                     // 현재 단계 전
                     stepCheck?.visibility = View.VISIBLE
                     stepText?.visibility = View.GONE
                     stepTitle?.visibility = View.VISIBLE
-                    stepText?.setBackgroundResource(R.drawable.eatmedi_inactive)
+                    b_stepTitle?.visibility=View.GONE
+                    stepText?.setBackgroundResource(R.drawable.eatmedi_open)
+                    stepDescription?.visibility=View.GONE
+
                 } else {
                     // 현재 단계 후
                     stepCheck?.visibility = View.GONE
-                    stepText?.visibility = View.VISIBLE
+                    stepText?.visibility = View.GONE
                     stepTitle?.visibility = View.VISIBLE
-                    stepText?.setBackgroundResource(R.drawable.eatmedi_inactive)
+                    b_stepTitle?.visibility=View.GONE
+                    stepDescription?.visibility=View.GONE
+                    //important?.visibility=View.GONE
                 }
             }
             // 2단계의 medicheck_image 설정

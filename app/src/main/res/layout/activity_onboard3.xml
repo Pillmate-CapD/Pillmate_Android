@@ -240,8 +240,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon2"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -285,8 +285,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon3"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -329,8 +329,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon4"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -373,8 +373,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon5"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -417,8 +417,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon6"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -461,8 +461,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon7"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -505,8 +505,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon8"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -550,8 +550,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon9"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -595,8 +595,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon10"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -640,8 +640,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon11"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -685,8 +685,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon12"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -729,8 +729,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon13"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -773,8 +773,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon14"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -817,8 +817,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon15"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -861,8 +861,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon16"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -905,8 +905,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon17"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
@@ -949,8 +949,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon18"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="51dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>
