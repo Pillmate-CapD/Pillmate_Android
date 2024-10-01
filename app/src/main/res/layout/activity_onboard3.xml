@@ -161,17 +161,8 @@
                         android:id="@+id/btn1"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        android:layout_margin="6dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
+                        android:layout_margin="6dp"
+                        android:background="@drawable/onboard3_btn">
 
                         <!-- 이미지 -->
                         <ImageView
@@ -215,18 +206,8 @@
                     <FrameLayout
                         android:id="@+id/btn2"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -269,17 +250,8 @@
                     <FrameLayout
                         android:id="@+id/btn3"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
 
                         <!-- 이미지 -->
                         <ImageView
@@ -323,18 +295,8 @@
                     <FrameLayout
                         android:id="@+id/btn4"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -377,18 +339,8 @@
                     <FrameLayout
                         android:id="@+id/btn5"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -431,18 +383,8 @@
                     <FrameLayout
                         android:id="@+id/btn6"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -485,18 +427,8 @@
                     <FrameLayout
                         android:id="@+id/btn7"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -539,18 +471,8 @@
                     <FrameLayout
                         android:id="@+id/btn8"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -593,17 +515,8 @@
                     <FrameLayout
                         android:id="@+id/btn9"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
 
                         <!-- 이미지 -->
                         <ImageView
@@ -647,17 +560,8 @@
                     <FrameLayout
                         android:id="@+id/btn10"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
 
                         <!-- 이미지 -->
                         <ImageView
@@ -701,17 +605,8 @@
                     <FrameLayout
                         android:id="@+id/btn11"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
 
                         <!-- 이미지 -->
                         <ImageView
@@ -755,17 +650,8 @@
                     <FrameLayout
                         android:id="@+id/btn12"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
 
                         <!-- 이미지 -->
                         <ImageView
@@ -809,18 +695,8 @@
                     <FrameLayout
                         android:id="@+id/btn13"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -863,18 +739,8 @@
                     <FrameLayout
                         android:id="@+id/btn14"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -917,18 +783,8 @@
                     <FrameLayout
                         android:id="@+id/btn15"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -971,18 +827,8 @@
                     <FrameLayout
                         android:id="@+id/btn16"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -1025,18 +871,8 @@
                     <FrameLayout
                         android:id="@+id/btn17"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
@@ -1079,18 +915,8 @@
                     <FrameLayout
                         android:id="@+id/btn18"
                         android:layout_width="90dp"
-                        android:layout_height="90dp">
-
-                        <!-- 버튼 -->
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/onboard3_btn"
-                            android:cornerRadius="10dp"
-                            android:elevation="4dp"
-                            android:gravity="center"
-                            android:enabled="false" />
-
+                        android:layout_height="90dp"
+                        android:background="@drawable/onboard3_btn">
                         <!-- 이미지 -->
                         <ImageView
                             android:layout_width="35dp"
