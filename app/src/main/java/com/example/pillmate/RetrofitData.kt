@@ -1,6 +1,7 @@
 package com.example.pillmate
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class SignUpRequest(
     @SerializedName("email")
@@ -78,13 +79,13 @@ data class MediListResponse(
     val timesPerDay: Int,
     val day: Int,
     val timeSlotList: List<TimeSlotResponse>
-)
+) : Serializable
 
 data class TimeSlotResponse(
     val id: Int,
     val spinnerTime: String,
     val pickerTime: String
-)
+):Serializable
 
 // 알람 추가 post
 data class AddAlarmRequest(

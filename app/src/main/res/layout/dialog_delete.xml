@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_round15"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_dia_del1"
+        android:layout_marginTop="29dp"
+        android:fontFamily="@font/notosanskrbold"
+        android:textSize="16sp"
+        android:text="해당 약리스트를 삭제하시겠어요?"
+        android:textColor="#3E3E3E"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"/>
+
+    <TextView
+        android:id="@+id/tv_dia_del2"
+        android:layout_marginTop="13dp"
+        android:fontFamily="@font/notosanskrregular"
+        android:textSize="11sp"
+        android:gravity="center"
+        android:text="지금 삭제하시면 해당 약 리스트는 영구적으로 삭제되며,\n
+        복원이 어려워 새롭게 추가해야 합니다."
+        android:textColor="#3E3E3E"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_dia_del1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"/>
+
+    <View
+        android:id="@+id/dia_view1"
+        android:layout_marginTop="29dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_dia_del2"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#80D9D9D9"/>
+
+    <TextView
+        android:clickable="true"
+        android:id="@+id/btn_dia_del"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp"
+        android:fontFamily="@font/notosanskrbold"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="삭제"
+        android:textColor="#FC2F2F"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dia_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"/>
+
+    <View
+        android:id="@+id/dia_view2"
+        app:layout_constraintTop_toBottomOf="@id/btn_dia_del"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#80D9D9D9"/>
+
+    <TextView
+        android:id="@+id/btn_dia_cancel"
+        android:fontFamily="@font/notosanskrmedium"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="취소"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp"
+        android:textColor="#3E3E3E"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dia_view2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

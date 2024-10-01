@@ -24,7 +24,7 @@ class MPTabPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR
         // 탭의 제목 설정
         return when (position) {
             0 -> "약 리스트"
-            1 -> "알람"
+            1 -> "약 알람"
             else -> null
         }
     }

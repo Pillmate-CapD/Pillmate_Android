@@ -45,6 +45,7 @@ class WriteMediActivity : AppCompatActivity() {
         timeSlotAdapter = TimeSlotAdapter(timeSlots) { position ->
             showTimePickerBottomSheet(position)
         }
+
         binding.timeSlotRecy.apply {
             layoutManager = LinearLayoutManager(this@WriteMediActivity)
             adapter = timeSlotAdapter
@@ -120,10 +121,11 @@ class WriteMediActivity : AppCompatActivity() {
                 // TimeSlotItem 리스트를 TimeSlotRequest 리스트로 변환
                 val timeSlotRequests = timeSlots.map { timeSlot ->
                     TimeSlotRequest(
-                        spinnerTime = timeSlot.timeLabel,
-                        pickerTime = timeSlot.time,
+                        spinnerTime = timeSlot.timeLabel, // 예: "기상 직후"
+                        pickerTime = convertTo24HourFormat(timeSlot.time) // 12시간제를 24시간제로 변환한 값
                     )
                 }
+
                 // 예: MediAddRequest 객체 생성 및 전송
                 val mediAddRequest = MediAddRequest(
                     medicineName = mediName,
@@ -139,6 +141,27 @@ class WriteMediActivity : AppCompatActivity() {
                 //addAlarm()
             }
         }
+    }
+
+    // 12시간제(오전/오후) 시간을 24시간제 시간으로 변환하는 함수
+    private fun convertTo24HourFormat(time: String): String {
+        // time이 "오전 06:00" 또는 "오후 09:00" 형식인 경우 처리
+        val amPm = time.split(" ")[0] // "오전" 또는 "오후"
+        val hourMinute = time.split(" ")[1] // "06:00"
+        val hour = hourMinute.split(":")[0].toInt()
+        val minute = hourMinute.split(":")[1].toInt()
+
+        // 오전/오후에 따라 시간을 24시간 형식으로 변환
+        val hourIn24Format = if (amPm == "오후" && hour < 12) {
+            hour + 12
+        } else if (amPm == "오전" && hour == 12) {
+            0 // 오전 12시는 0시로 변환
+        } else {
+            hour
+        }
+
+        // 24시간 형식으로 포맷팅
+        return String.format("%02d:%02d", hourIn24Format, minute)
     }
 
     private fun sendMediAdd(mediAddRequest: MediAddRequest) {
@@ -204,7 +227,7 @@ class WriteMediActivity : AppCompatActivity() {
 
     // BottomSheetDialog를 열어 시간대를 선택하는 함수
     private fun showTimePickerBottomSheet(position: Int) {
-        val bottomSheetDialog = BottomSheetDialog(this)
+        val bottomSheetDialog = BottomSheetDialog(this,R.style.AppBottomSheetDialogTheme)
         val bottomSheetView = layoutInflater.inflate(R.layout.write_time_picker, null)
 
         // BottomSheetDialog에 레이아웃 설정
@@ -216,7 +239,7 @@ class WriteMediActivity : AppCompatActivity() {
             setBackgroundDrawableResource(android.R.color.transparent)
 
             // 배경 흐림 설정
-            setDimAmount(0.6f) // 0.0f ~ 1.0f로 흐림 정도 설정
+            setDimAmount(0.3f) // 0.0f ~ 1.0f로 흐림 정도 설정
 
             // 뒷배경 색상 설정 (검정색에 40% 투명도)
             decorView.setBackgroundColor(Color.parseColor("#66000000")) // 검정색 + 40% 투명도
@@ -247,7 +270,7 @@ class WriteMediActivity : AppCompatActivity() {
     }
 
     private fun showDiseaseBottomSheet() {
-        val diBottomSheetDialog = BottomSheetDialog(this)
+        val diBottomSheetDialog = BottomSheetDialog(this,R.style.AppBottomSheetDialogTheme)
         val diBottomSheetView = layoutInflater.inflate(R.layout.write_disease_picker, null)
 
         // 각 질병 항목 레이아웃과 체크 아이콘을 맵핑
@@ -291,7 +314,7 @@ class WriteMediActivity : AppCompatActivity() {
             setBackgroundDrawableResource(android.R.color.transparent)
 
             // 배경 흐림 설정
-            setDimAmount(0.6f) // 0.0f ~ 1.0f로 흐림 정도 설정
+            setDimAmount(0.3f) // 0.0f ~ 1.0f로 흐림 정도 설정
 
             // 뒷배경 색상 설정 (검정색에 40% 투명도)
             decorView.setBackgroundColor(Color.parseColor("#66000000")) // 검정색 + 40% 투명도

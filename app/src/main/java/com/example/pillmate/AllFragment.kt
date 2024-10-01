@@ -31,7 +31,7 @@ class AllFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
 
         // MediListAdapter 초기화 및 RecyclerView에 설정
-        adapter = MediListAdapter(emptyList())
+        adapter = MediListAdapter(emptyList(),requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 

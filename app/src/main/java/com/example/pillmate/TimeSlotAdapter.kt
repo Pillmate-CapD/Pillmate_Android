@@ -1,4 +1,5 @@
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -109,40 +110,65 @@ class TimeSlotAdapter(
 
     // 커스텀 타임피커 다이얼로그를 표시하는 함수
     private fun showTimePickerDialog(context: Context, position: Int) {
-        val builder = AlertDialog.Builder(context)
-        val inflater = LayoutInflater.from(context)
-        val dialogView = inflater.inflate(R.layout.time_picker, null)
-        builder.setView(dialogView)
+        // Dialog 생성
+        val dialog = Dialog(context, R.style.CustomDialogTheme)
+        dialog.setContentView(R.layout.time_picker2) // 커스텀 레이아웃 설정
 
         // TimePicker 참조 및 설정
-        val timePicker = dialogView.findViewById<TimePicker>(R.id.timePicker)
-        timePicker.setIs24HourView(true) // 24시간 형식 사용
+        val timePicker = dialog.findViewById<TimePicker>(R.id.am_timePicker)
+        timePicker.setIs24HourView(false) // 12시간 형식으로 설정
+
+        // currentTime에서 "오전"/"오후"와 시간을 분리
         val currentTime = timeSlots[position].time
-        val hour = currentTime.split(":")[0].toInt()
-        val minute = currentTime.split(":")[1].toInt()
-        timePicker.hour = hour
+        val amPm = currentTime.split(" ")[0] // "오전" 또는 "오후"
+        val time = currentTime.split(" ")[1] // "06:00"
+        val hour = time.split(":")[0].toInt()
+        val minute = time.split(":")[1].toInt()
+
+        // 오전/오후에 따라 시간을 24시간 형식으로 변환
+        val hourIn24Format = if (amPm == "오후" && hour < 12) {
+            hour + 12
+        } else if (amPm == "오전" && hour == 12) {
+            0
+        } else {
+            hour
+        }
+
+        // TimePicker에 시간 설정
+        timePicker.hour = hourIn24Format
         timePicker.minute = minute
 
         // 확인 및 취소 버튼 설정
-        val btnCancel = dialogView.findViewById<TextView>(R.id.btn_cancel)
-        val btnConfirm = dialogView.findViewById<TextView>(R.id.btn_confirm)
+        val btnCancel = dialog.findViewById<TextView>(R.id.btn_cancel)
+        val btnConfirm = dialog.findViewById<TextView>(R.id.btn_confirm)
 
-        val dialog = builder.create()
-
+        // 취소 버튼 클릭 리스너 설정
         btnCancel.setOnClickListener {
-            dialog.dismiss()
+            dialog.dismiss() // 다이얼로그 닫기
         }
 
+        // 확인 버튼 클릭 리스너 설정
         btnConfirm.setOnClickListener {
             val selectedHour = timePicker.hour
             val selectedMinute = timePicker.minute
-            val newTime = String.format("%02d:%02d", selectedHour, selectedMinute)
+
+            // 선택한 시간을 오전/오후 형식으로 변환
+            val amPm = if (selectedHour >= 12) "오후" else "오전"
+            val formattedHour = if (selectedHour > 12) selectedHour - 12 else if (selectedHour == 0) 12 else selectedHour
+
+            // 새로운 시간 포맷
+            val newTime = String.format("%s %02d:%02d", amPm, formattedHour, selectedMinute)
+
+            // 시간 정보 업데이트
             timeSlots[position].time = newTime
             timeSlots[position].isTimeChanged = true // 시간 변경 여부 설정
             notifyItemChanged(position)
-            dialog.dismiss()
+            dialog.dismiss() // 다이얼로그 닫기
         }
 
-        dialog.show()
+        // 다이얼로그 스타일 및 크기 설정
+        dialog.show() // 다이얼로그 표시
     }
+
+
 }

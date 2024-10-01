@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:clipToOutline="true"
     android:backgroundTint="@color/trans_white"
+    android:background="@drawable/bg_dialog_round15"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout

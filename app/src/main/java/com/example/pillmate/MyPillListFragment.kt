@@ -51,7 +51,7 @@ class MyPillListFragment : Fragment() {
         val categories = listOf("전체", "고지혈증", "고혈압", "당뇨", "기타")
         categoryAdapter = ListCategoryAdapter(categories) { position ->
             // 클릭된 아이템에 대한 처리 로직
-            Toast.makeText(context, "${categories[position]} 클릭됨", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "${categories[position]} 클릭됨", Toast.LENGTH_SHORT).show()
         }
 
         binding.recyCategory.apply {
