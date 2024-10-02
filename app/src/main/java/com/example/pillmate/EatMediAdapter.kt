@@ -51,7 +51,8 @@ class EatMediAdapter(
         private val stepButton: Button = itemView.findViewById(R.id.step_button1) ?: itemView.findViewById(R.id.step_button2) ?: itemView.findViewById(R.id.step_button3) ?: itemView.findViewById(R.id.step_button4)
         private val stepCheck: ImageView? = itemView.findViewById(R.id.step_check)
         private val stepText: TextView? = itemView.findViewById(R.id.step1) ?: itemView.findViewById(R.id.step2) ?: itemView.findViewById(R.id.step3) ?: itemView.findViewById(R.id.step4)
-        private val b_stepTitle: TextView? = itemView.findViewById(R.id.b_step_title1)
+        private val stepText_b: TextView? = itemView.findViewById(R.id.step2_) ?: itemView.findViewById(R.id.step3_)
+        private val b_stepTitle: TextView? = itemView.findViewById(R.id.b_step_title1) ?: itemView.findViewById(R.id.b_step_title2)?: itemView.findViewById(R.id.b_step_title3)
         //private val important: TextView = itemView.findViewById(R.id.important)
         private val stepTitle: TextView? = itemView.findViewById(R.id.step_title1) ?: itemView.findViewById(R.id.step_title2) ?: itemView.findViewById(R.id.step_title3) ?: itemView.findViewById(R.id.step_title4)
         private val passButton: TextView? = itemView.findViewById(R.id.pass1)  // Pass 버튼은 첫 번째 단계에만 존재
@@ -85,6 +86,7 @@ class EatMediAdapter(
                 stepText?.visibility = View.VISIBLE
                 stepTitle?.visibility = View.GONE
                 b_stepTitle?.visibility=View.VISIBLE
+                stepText_b?.visibility = View.GONE
                 stepText?.setBackgroundResource(R.drawable.eatmedi_open)
             } else {
                 if (position < getCurrentStepPosition()) {
@@ -95,6 +97,7 @@ class EatMediAdapter(
                     b_stepTitle?.visibility=View.GONE
                     stepText?.setBackgroundResource(R.drawable.eatmedi_open)
                     stepDescription?.visibility=View.GONE
+                    stepText_b?.visibility = View.VISIBLE
 
                 } else {
                     // 현재 단계 후
@@ -104,6 +107,8 @@ class EatMediAdapter(
                     b_stepTitle?.visibility=View.GONE
                     stepDescription?.visibility=View.GONE
                     //important?.visibility=View.GONE
+                    stepText_b?.visibility = View.GONE
+
                 }
             }
             // 2단계의 medicheck_image 설정

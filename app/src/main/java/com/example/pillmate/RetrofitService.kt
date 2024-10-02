@@ -8,6 +8,10 @@ import retrofit2.http.PATCH
 
 
 interface RetrofitService {
+    //로그인
+    @POST("members/login")
+    fun login(@Body request: LoginRequest): Call<LoginResponse>
+
     // 회원가입
     @POST("members/signup")
     fun signup(@Body request: SignUpRequest): Call<SignUpResponse>

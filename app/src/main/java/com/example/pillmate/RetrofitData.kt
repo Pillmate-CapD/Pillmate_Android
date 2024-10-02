@@ -3,6 +3,20 @@ package com.example.pillmate
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+//로그인
+data class LoginRequest(
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("password")
+    val password: String)
+data class TokenInfo(
+    val name: String,
+    val grantType: String,
+    val accessToken: String)
+data class LoginResponse(
+    val tokenInfo: TokenInfo
+)
+//회원가입
 data class SignUpRequest(
     @SerializedName("email")
     val email: String,

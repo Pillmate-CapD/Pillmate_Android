@@ -5,11 +5,15 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.pillmate.databinding.ActivityLoginBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
@@ -124,22 +128,44 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString()
         val password = binding.passwordEditText.text.toString()
 
-        // 이메일, 비밀번호 일치하지 않을 경우
-        if (!isValidCredentials(email, password)) {
-            // 이메일과 비밀번호 배경색 변경
-            binding.email.setBackgroundResource(R.drawable.login_email_btn_wrong)
-            binding.password.setBackgroundResource(R.drawable.login_password_btn_wrong)
+        // 로그인 요청 데이터 생성
+        val loginRequest = LoginRequest(email, password)
 
-            // 오류 메시지 표시
-            binding.tvErrorMessage.visibility = View.VISIBLE
-        } else {
-            // 로그인 성공 처리
-            Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-            // 다른 액티비티로 이동 등 추가 로직
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        // Retrofit을 이용한 로그인 API 호출
+        RetrofitApi.getRetrofitService.login(loginRequest).enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful) {
+                    val loginResponse = response.body()
+
+                    // 로그인 성공 처리 (토큰 정보 저장 등)
+                    val accessToken = loginResponse?.tokenInfo?.accessToken
+                    Log.d("LoginActivity", "로그인 성공! 액세스 토큰: $accessToken")
+                    Toast.makeText(this@LoginActivity, "로그인 성공! 토큰: $accessToken", Toast.LENGTH_SHORT).show()
+
+                    // MainActivity로 이동
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    // 로그인 실패 처리
+                    showError()
+                    Log.e("LoginActivity", "로그인 실패: ${response.code()} - ${response.message()}")
+                    Log.e("LoginActivity", "에러 응답: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                // 네트워크 오류 등 예외 처리
+                Log.e("LoginActivity", "네트워크 오류: ${t.message}")
+                Toast.makeText(this@LoginActivity, "로그인 실패: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun showError() {
+        binding.email.setBackgroundResource(R.drawable.login_email_btn_wrong)
+        binding.password.setBackgroundResource(R.drawable.login_password_btn_wrong)
+        binding.tvErrorMessage.visibility = View.VISIBLE
     }
 
     // 이메일, 비밀번호 입력 시 배경 복구
@@ -150,8 +176,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // 유효한 이메일, 비밀번호인지 확인 (서버로 실제 요청하는 부분은 서버와 연동 시 작성)
-    private fun isValidCredentials(email: String, password: String): Boolean {
+    //private fun isValidCredentials(email: String, password: String): Boolean {
         // 예시로 이메일, 비밀번호를 간단히 체크 (실제 환경에서는 서버와의 연동 필요)
-        return email == "test@gmail.com" && password == "passwd123"
-    }
+    //    return email == "test@gmail.com" && password == "passwd123"
+    //}
 }
