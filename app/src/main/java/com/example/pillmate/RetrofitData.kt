@@ -53,6 +53,11 @@ data class SignUpResponse(
     @SerializedName("accessToken")
     val accessToken: String
 )
+//로그아웃
+data class LogoutResponse(
+    val memberId: Int
+)
+
 
 //마이페이지 기존 비밀번호 확인
 data class PasswordCheckRequest(

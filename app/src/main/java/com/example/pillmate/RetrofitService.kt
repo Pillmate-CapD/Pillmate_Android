@@ -17,6 +17,11 @@ interface RetrofitService {
     @POST("members/signup")
     fun signup(@Body request: SignUpRequest): Call<SignUpResponse>
 
+    //로그아웃
+    @POST("members/logout")
+    suspend fun logout(): LogoutResponse
+
+
     //마이페이지 기존 비번 확인
     @POST("check/password")
     suspend fun checkPassword(
