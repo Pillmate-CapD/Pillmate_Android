@@ -140,7 +140,6 @@ class LoginActivity : AppCompatActivity() {
                     // 로그인 성공 처리 (토큰 정보 저장 등)
                     val accessToken = loginResponse?.tokenInfo?.accessToken
                     Log.d("LoginActivity", "로그인 성공! 액세스 토큰: $accessToken")
-                    Toast.makeText(this@LoginActivity, "로그인 성공! 토큰: $accessToken", Toast.LENGTH_SHORT).show()
 
                     // MainActivity로 이동
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)

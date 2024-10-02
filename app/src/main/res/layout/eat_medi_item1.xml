@@ -14,7 +14,6 @@
             android:layout_height="wrap_content"
             android:text="1"
             android:textSize="15sp"
-            android:textStyle="bold"
             android:background="@drawable/eatmedi_open"
             android:textColor="#FF453A"
             android:gravity="center"
@@ -67,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
+            android:layout_marginTop="-13sp"
             android:fontFamily="@font/notosanskrbold"
             android:text="파스틱정 (제2형당뇨)"
             android:textColor="#3e3e3e"
@@ -81,12 +81,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="visible"
-        android:layout_marginTop="0dp">
+        android:layout_marginTop="-7dp">
 
         <ImageView
             android:id="@+id/medi_image"
-            android:layout_width="426dp"
-            android:layout_height="228dp"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
             android:layout_gravity="center"
             android:src="@drawable/eatmedi_sample_d1" />
 
@@ -101,7 +101,7 @@
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="19sp"
+            android:layout_marginTop="16sp"
             android:layout_gravity="center"/>
 
         <TextView
@@ -109,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:layout_marginTop="5sp"
+            android:layout_marginTop="2sp"
             android:fontFamily="@font/notosanskrmedium"
             android:text="인증 건너뛰기"
             android:textColor="#1E54DF"

@@ -13,7 +13,6 @@
             android:layout_height="wrap_content"
             android:text="2"
             android:textSize="15sp"
-            android:textStyle="bold"
             android:background="@drawable/eatmedi_open"
             android:textColor="#FF453A"
             android:gravity="center"
