@@ -1,5 +1,6 @@
 package com.example.pillmate
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +22,15 @@ import android.view.MenuInflater
 import android.widget.PopupMenu
 import android.view.WindowManager
 import android.widget.PopupWindow
+import androidx.activity.result.ActivityResultLauncher
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet.Layout
 
-class MediListAdapter(private var medicines: List<MediListResponse>, private val context: Context) : RecyclerView.Adapter<MediListAdapter.MediViewHolder>() {
+class MediListAdapter(private var medicines: List<MediListResponse>, private val context: Context, private val editMediActivityLauncher: ActivityResultLauncher<Intent>) : RecyclerView.Adapter<MediListAdapter.MediViewHolder>() {
+
+    companion object {
+        const val EDIT_REQUEST_CODE = 1001 // 적절한 값으로 상수 선언
+    }
 
     inner class MediViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val picture: ImageView = itemView.findViewById(R.id.image_view)
@@ -135,7 +141,9 @@ class MediListAdapter(private var medicines: List<MediListResponse>, private val
             // 수정하기 처리
             val intent = Intent(context, EditMediActivity::class.java)
             intent.putExtra("medi_data", medi) // MediListResponse 객체 전체를 전달
-            context.startActivity(intent)
+            //context.startActivity(intent)
+
+            editMediActivityLauncher.launch(intent)
             popupWindow.dismiss() // 팝업 닫기
         }
 

@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 
 
 interface RetrofitService {
@@ -16,6 +17,12 @@ interface RetrofitService {
 
     @GET("medicines/all")
     fun getMediAll() : Call<List<MediListResponse>>
+
+    @PATCH("medicines")
+    fun patchMedi(@Body request : MediEditRequest): Call<String>
+
+    @GET("medicines/name")
+    fun getMediInfo(@Body request: MediInfoRequest) : Call<MediInfoResponse>
 
     @POST("alarms")
     fun postAlarm(@Body request: AddAlarmRequest) : Call<String>

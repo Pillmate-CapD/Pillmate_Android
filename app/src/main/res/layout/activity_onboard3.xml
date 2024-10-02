@@ -329,8 +329,8 @@
                         <!-- 체크 아이콘 -->
                         <ImageView
                             android:id="@+id/check_icon4"
-                            android:layout_width="51dp"
-                            android:layout_height="50dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_gravity="center"
                             android:src="@drawable/onboard3_check"
                             android:visibility="gone"/>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="10dp"
+    android:paddingTop="20dp"
+    android:paddingLeft="22dp"
+    android:paddingRight="16dp"
+    tools:context=".ViewPageFragment">
+
+    <TextView
+        android:id="@+id/vp_medi_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrbold"
+        android:includeFontPadding="false"
+        android:text="파스틱정 (제 2형 당뇨)"
+        android:textColor="#3E3E3E"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_blue_round4"
+        android:fontFamily="@font/notosanskrmedium"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:paddingLeft="15dp"
+        android:paddingTop="3dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="4dp"
+        android:text="당뇨"
+        android:textColor="#1E54DF"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/vp_medi_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/vp_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:textColor="#3E3E3E"
+        app:layout_constraintTop_toBottomOf="@id/vp_medi_name"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"
+        android:textSize="13sp"
+        android:text="1회 복약량"/>
+
+    <TextView
+        android:id="@+id/vp_medi_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:includeFontPadding="false"
+        android:text="1회"
+        android:textColor="#3E3E3E"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/vp_tv_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/vp_tv_2" />
+
+    <TextView
+        android:id="@+id/vp_tv_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:textColor="#3E3E3E"
+        app:layout_constraintTop_toBottomOf="@id/vp_tv_1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:textSize="13sp"
+        android:text="1일 복약횟수"/>
+
+    <TextView
+        android:id="@+id/vp_medi_perday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:includeFontPadding="false"
+        android:text="1정"
+        android:textColor="#3E3E3E"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/vp_tv_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/vp_tv_1" />
+
+    <TextView
+        android:id="@+id/vp_tv_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:textColor="#3E3E3E"
+        app:layout_constraintTop_toBottomOf="@id/vp_tv_2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:textSize="13sp"
+        android:text="총 복약일수"/>
+
+    <TextView
+        android:id="@+id/vp_medi_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:includeFontPadding="false"
+        android:text="90일"
+        android:textColor="#3E3E3E"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/vp_tv_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/vp_tv_3" />
+
+    <TextView
+        android:id="@+id/vp_tv_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:textColor="#3E3E3E"
+        app:layout_constraintTop_toBottomOf="@id/vp_tv_3"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:textSize="13sp"
+        android:text="복약시간"/>
+
+    <TextView
+        android:id="@+id/vp_medi_slot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:includeFontPadding="false"
+        android:text="기상 직후 | 오전 06:00\n점심 식전 | 오전 11:00"
+        android:textColor="#3E3E3E"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/vp_tv_4" />
+
+
+    <ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator
+        android:id="@+id/pagerIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:dotColor="#4D000000"
+        app:selectedDotColor="#000000"
+        app:dotCount="3"
+        app:layout_constraintTop_toBottomOf="@id/vp_medi_slot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:spi_orientation="horizontal"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

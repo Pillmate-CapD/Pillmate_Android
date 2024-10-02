@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="21dp"
+    android:paddingRight="21dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background="@drawable/bg_toast"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/ic_import"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_toast_check"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_toast"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ic_import"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="9dp"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:textSize="13sp"
+        android:textColor="@color/white"
+        android:includeFontPadding="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1회 복약량을 입력해주세요"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

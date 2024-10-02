@@ -139,3 +139,27 @@ data class WorstRecordData(
     val taken: Int,
     val scheduled: Int,
 )
+
+data class MediEditRequest(
+    @SerializedName("medicineName")
+    val medicineName: String,
+    @SerializedName("amount")
+    val amount: Int,
+    @SerializedName("timesPerDay")
+    val timesPerDay: Int,
+    @SerializedName("day")
+    val day: Int,
+    @SerializedName("timeSlotList")
+    val timeSlotList: List<TimeSlotRequest>
+)
+
+data class MediInfoRequest(
+    @SerializedName("name")
+    val name: String
+)
+
+data class MediInfoResponse(
+    val name:String,
+    val photo: String,
+    val category: String
+)

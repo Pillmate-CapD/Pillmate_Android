@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.pillmate.databinding.ActivityAfterPreBinding
 import org.json.JSONArray
 import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
 import java.io.DataOutputStream
@@ -264,7 +267,7 @@ class AfterPreActivity : AppCompatActivity() {
                             Log.d("OCR_PROCESSING", "데이터 추출 시작")
 
                             val name = cleanName(getNextCellValue(cells, rowIndex, nameColumnIndex))
-                            val dosage = cleanDosage(getNextCellValue(cells, rowIndex, dosageColumnIndex))
+                            val dosage = getNextCellValue(cells, rowIndex, dosageColumnIndex)
                             val frequency = cleanFrequency(
                                 getNextCellValue(
                                     cells,
@@ -302,11 +305,30 @@ class AfterPreActivity : AppCompatActivity() {
                 }
             }
 
-            // 최종적으로 추출된 데이터를 로그로 출력
+            // 새로운 리스트에 정제된 데이터를 저장
+            val updatedData: MutableList<Map<String, String>> = mutableListOf()
+
             extractedData.forEach { data ->
-                Log.d("ExtractedData", "명칭: ${data["명칭"]}, 1회 투약량: ${data["1회 투약량"]}, 1일 투여횟수: ${data["1일 투여횟수"]}, 총 투약일수: ${data["총 투약일수"]}")
-                // 파일 경로를 AfterPreActivity로 전달
+                // 기존의 명칭을 가져와 cleanName 함수로 가공
+                val originalName = data["명칭"] ?: ""
+                val cleanedName = cleanName2(originalName)
+
+                // 정제된 데이터를 새로운 리스트에 추가
+                updatedData.add(mapOf(
+                    "명칭" to cleanedName,
+                    "1회 투약량" to data["1회 투약량"].orEmpty(),
+                    "1일 투여횟수" to data["1일 투여횟수"].orEmpty(),
+                    "총 투약일수" to data["총 투약일수"].orEmpty()
+                ))
+
+                // 로그 출력
+                //Log.d("ExtractedData", "정제된 명칭: ${cleanedName}, 1회 투약량: ${data["1회 투약량"]}, 1일 투여횟수: ${data["1일 투여횟수"]}, 총 투약일수: ${data["총 투약일수"]}")
             }
+
+            Log.d("UpdatedData", "${updatedData}")
+
+            // 명칭 전달해서 해당 약이 있는지 확인하고 사진 받아오는 함수
+            fetchMediInfo(updatedData)
 
             // 여기서 전달하기 전에 명칭을 서버로 보내서 서버에서 해당 약이 있는지 확인하고 사진을 받아와야 함.
             // 받아온 후에 해당 내용을 PreMediActivity로 사진이랑 같이 전달하기
@@ -326,10 +348,14 @@ class AfterPreActivity : AppCompatActivity() {
         return name.replace(Regex("\\d|\\(.*?\\)"), "").trim()
     }
 
-    private fun cleanDosage(dosage: String): String {
-        Log.d("CLEAN_FUNCTION", "1회 투약량 정제 중: $dosage")
-        return dosage.replace(Regex(" cc| gm| 개| 정"), "").trim() + " cc"
+    //TODO: [급여][]아클펜정_(. 이런식으로 명칭을 받고 있어서 해당 내용을 수정해서 적어야 함
+    private fun cleanName2(name: String): String {
+        Log.d("CLEAN_FUNCTION", "이름 정제 중: $name")
+        // '[급여][]', '()', 특수문자 등을 제거하는 정규식
+        return name.replace(Regex("\\[.*?\\]|\\(.*?\\)|[^가-힣a-zA-Z0-9]"), "").trim()
     }
+
+
 
     private fun cleanFrequency(frequency: String): String {
         Log.d("CLEAN_FUNCTION", "1일 투여횟수 정제 중: $frequency")
@@ -394,5 +420,49 @@ class AfterPreActivity : AppCompatActivity() {
         out.write(("--$boundary--\r\n").toByteArray(Charsets.UTF_8))
         out.flush()
     }
+
+    private fun fetchMediInfo(updatedData: MutableList<Map<String, String>>) {
+        val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
+
+        // updatedData 리스트에 있는 모든 명칭에 대해 약품 정보를 요청
+        updatedData.forEachIndexed { index, data ->
+            val name = data["명칭"] ?: ""
+            if (name.isNotBlank()) {
+                // MediInfoRequest 객체 생성
+                val request = MediInfoRequest(name)
+                Log.d("fetchMediInfo","$request")
+
+                // 서버로 API 요청 보내기
+                val call = service.getMediInfo(request)
+                call.enqueue(object : Callback<MediInfoResponse> {
+                    override fun onResponse(call: Call<MediInfoResponse>, response: Response<MediInfoResponse>) {
+                        if (response.isSuccessful) {
+                            val mediInfo = response.body()
+                            mediInfo?.let {
+                                Log.d("MediInfoResponse", "약품 이름: ${it.name}, 사진 URL: ${it.photo}, 카테고리: ${it.category}")
+
+                                // 기존 updatedData의 항목을 업데이트
+                                val updatedEntry = updatedData[index].toMutableMap().apply {
+                                    this["photo"] = it.photo
+                                    this["category"] = it.category
+                                }
+                                updatedData[index] = updatedEntry
+
+                                // 업데이트된 데이터를 로그로 출력
+                                Log.d("UpdatedData", updatedData.toString())
+                            }
+                        } else {
+                            Log.e("MediInfoResponse", "Error: ${response.code()} - 서버에서 약품 정보를 찾을 수 없습니다.")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<MediInfoResponse>, t: Throwable) {
+                        Log.e("MediInfoResponse", "API 호출 실패: ${t.message}")
+                    }
+                })
+            }
+        }
+    }
+
 
 }
