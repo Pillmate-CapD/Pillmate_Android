@@ -5,12 +5,20 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.pillmate.databinding.ActivityPwchangeBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PwChangeActivity : AppCompatActivity() {
 
@@ -18,6 +26,9 @@ class PwChangeActivity : AppCompatActivity() {
     private var isPwVisible1 = false
     private var isPwVisible2 = false
     private var isPwVisible3 = false
+
+    // 현재 비밀번호 유효성 상태를 추적
+    private var isCurrentPwValid: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -168,6 +179,11 @@ class PwChangeActivity : AppCompatActivity() {
             binding.btnRegister.background = ContextCompat.getDrawable(this, R.drawable.bt_login_enable)
             binding.btnRegister.setTextColor(ContextCompat.getColor(this, R.color.white))
             binding.btnRegister.setOnClickListener {
+                val oldPassword = binding.etPwnow.text.toString()
+                val newPassword = binding.etNewpw.text.toString()
+
+                // 비밀번호 변경 API 호출
+                changePassword(oldPassword, newPassword)
                 // 비밀번호 변경 완료 후 PwChangeOkActivity로 이동
                 val intent = Intent(this, PwChangeOkActivity::class.java)
                 startActivity(intent)
@@ -179,4 +195,28 @@ class PwChangeActivity : AppCompatActivity() {
             binding.btnRegister.setTextColor(Color.parseColor("#898989"))
         }
     }
+    // 비밀번호 변경 API 호출 함수
+    private fun changePassword(oldPassword: String, newPassword: String) {
+        val request = PasswordChangeRequest(oldPassword, newPassword)
+        val call = RetrofitApi.getRetrofitService.changePassword(request)
+
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Log.d("PwChangeActivity", "Password changed successfully")
+                    // 성공 시 PwChangeOkActivity로 이동
+                    val intent = Intent(this@PwChangeActivity, PwChangeOkActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Log.e("PwChangeActivity", "Password change failed: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("PwChangeActivity", "API call failed", t)
+            }
+        })
+    }
+
 }

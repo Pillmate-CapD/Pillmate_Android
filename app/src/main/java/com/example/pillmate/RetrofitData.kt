@@ -54,6 +54,21 @@ data class SignUpResponse(
     val accessToken: String
 )
 
+//마이페이지 기존 비밀번호 확인
+data class PasswordCheckRequest(
+    val password: String
+)
+
+data class PasswordCheckResponse(
+    val isValid: Boolean
+)
+
+//마이페이지 비번 변경
+data class PasswordChangeRequest(
+    val oldPassword: String,
+    val newPassword: String
+)
+
 // 약 직접 추가
 data class MediAddRequest(
     @SerializedName("medicineName")

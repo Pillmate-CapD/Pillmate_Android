@@ -1,6 +1,7 @@
 package com.example.pillmate
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.GET
@@ -15,6 +16,15 @@ interface RetrofitService {
     // 회원가입
     @POST("members/signup")
     fun signup(@Body request: SignUpRequest): Call<SignUpResponse>
+
+    //마이페이지 기존 비번 확인
+    @POST("check/password")
+    suspend fun checkPassword(
+        @Body passwordCheckRequest: PasswordCheckRequest): PasswordCheckResponse
+
+    //마이페이지 비번 변경 (new password)
+    @PATCH("members/password")
+    fun changePassword(@Body passwordChangeRequest: PasswordChangeRequest): Call<Void>
 
     @POST("medicines")
     fun addMedi(@Body request : MediAddRequest): Call<String>
