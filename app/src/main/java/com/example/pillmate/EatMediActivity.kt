@@ -3,6 +3,9 @@ package com.example.pillmate
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +22,10 @@ class EatMediActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eat_medi)
+
+        findViewById<ImageView>(R.id.back).setOnClickListener {
+            showExitDialog()
+        }
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -93,5 +100,28 @@ class EatMediActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
         }
+    }
+    // 다이얼로그를 표시하는 메서드
+    private fun showExitDialog() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_eatmedi_f, null)
+        builder.setView(dialogView)
+
+        val dialog = builder.create()
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        // 확인 버튼 클릭 시 이전 화면으로 돌아가는 동작
+        dialogView.findViewById<Button>(R.id.btn_ok).setOnClickListener {
+            finish() // 이전 화면으로 돌아가는 코드
+            dialog.dismiss()
+        }
+
+        // 취소 버튼 클릭 시 다이얼로그만 닫히고 현재 페이지 유지
+        dialogView.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }
