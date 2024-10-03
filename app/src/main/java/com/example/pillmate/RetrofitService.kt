@@ -17,6 +17,7 @@ interface RetrofitService {
     @POST("members/signup")
     fun signup(@Body request: SignUpRequest): Call<SignUpResponse>
 
+
     //로그아웃
     @POST("members/logout")
     suspend fun logout(): LogoutResponse

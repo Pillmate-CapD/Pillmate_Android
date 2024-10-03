@@ -13,6 +13,7 @@ class Onboard2Activity : AppCompatActivity() {
 
     private lateinit var btnNext: Button
     private val dateEditTexts = mutableListOf<EditText>()
+    private val diseaseStartDates = HashMap<String, String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,9 @@ class Onboard2Activity : AppCompatActivity() {
         backButton.setOnClickListener {
             onBackPressed() // 이전 화면으로 돌아가기
         }
-
+        val email = intent.getStringExtra("email") ?: ""
+        val password = intent.getStringExtra("password") ?: ""
+        val name = intent.getStringExtra("name") ?: ""
         val selectedDiseases = intent.getStringArrayListExtra("selectedDiseases") ?: arrayListOf()
         val linearLayout: LinearLayout = findViewById(R.id.linearLayout)
 
@@ -88,7 +91,18 @@ class Onboard2Activity : AppCompatActivity() {
 
         btnNext.setOnClickListener {
             if (dateEditTexts.all { it.text.isNotBlank() }) {
-                val intent = Intent(this, Onboard3Activity::class.java)
+                // 모든 EditText의 값을 HashMap에 저장
+                dateEditTexts.forEachIndexed { index, editText ->
+                    val diseaseName = selectedDiseases[index] // 질병 이름
+                    diseaseStartDates[diseaseName] = editText.text.toString() // 질병과 날짜 매핑
+                }
+                val intent = Intent(this, Onboard3Activity::class.java).apply {
+                    putExtra("email", email)
+                    putExtra("password", password)
+                    putExtra("name", name)
+                    putStringArrayListExtra("selectedDiseases", ArrayList(selectedDiseases))
+                    putExtra("diseaseStartDates", diseaseStartDates) // HashMap 전달
+                }
                 startActivity(intent)
             }
         }

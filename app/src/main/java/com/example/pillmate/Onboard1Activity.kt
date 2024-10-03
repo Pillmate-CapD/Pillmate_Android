@@ -68,8 +68,18 @@ class Onboard1Activity : AppCompatActivity() {
         updateNextButtonState() // 초기 상태 설정
         btnNext.setOnClickListener {
             if (selectedDiseases.isNotEmpty()) {
-                val intent = Intent(this, Onboard2Activity::class.java)
-                intent.putStringArrayListExtra("selectedDiseases", ArrayList(selectedDiseases))
+                // 전달받은 이메일, 비밀번호, 이름 가져오기
+                val email = intent.getStringExtra("email") ?: ""
+                val password = intent.getStringExtra("password") ?: ""
+                val name = intent.getStringExtra("name") ?: ""
+
+                // Onboard2Activity로 데이터 전달
+                val intent = Intent(this, Onboard2Activity::class.java).apply {
+                    putExtra("email", email)
+                    putExtra("password", password)
+                    putExtra("name", name)
+                    putStringArrayListExtra("selectedDiseases", ArrayList(selectedDiseases))
+                }
                 startActivity(intent)
             }
         }

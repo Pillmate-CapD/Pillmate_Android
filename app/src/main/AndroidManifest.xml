@@ -71,10 +71,10 @@
             android:name=".SplashActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -106,6 +106,12 @@
             android:exported="false" />
         <activity
             android:name=".Onboard1Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Onboard0Activity"
+            android:exported="false" />
+        <activity
+            android:name=".SignupFinishActivity"
             android:exported="false" />
         <activity
             android:name=".PwChangeActivity"

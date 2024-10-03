@@ -6,15 +6,18 @@ import okhttp3.Response
 
 class AuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        //val token = App.prefs.token
-
-        // 김가현 임시토큰 넣어놓음 123@gmail.com , 123
-        val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwiaWF0IjoxNzI3NzY1MTk1LCJleHAiOjE3Mjc4NTE1OTUsImF1dGgiOlt7ImF1dGhvcml0eSI6IlVTRVIifV19.K0ykIor6dVArBnNO_yyT6IPYmHzbTa1QTY9Vk1XG6_M"
         val requestBuilder = chain.request().newBuilder()
 
-        // 토큰이 존재하는 경우에만 Authorization 헤더 추가
-        if (!token.isNullOrEmpty()) {
-            requestBuilder.addHeader("Authorization", "Bearer $token")
+        // 현재 요청의 URL
+        val requestUrl = chain.request().url().toString()
+
+        // 회원가입 API 호출 시 Authorization 헤더를 추가하지 않음
+        if (!requestUrl.contains("members/signup")) {
+            val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwiaWF0IjoxNzI3NzY1MTk1LCJleHAiOjE3Mjc4NTE1OTUsImF1dGgiOlt7ImF1dGhvcml0eSI6IlVTRVIifV19.K0ykIor6dVArBnNO_yyT6IPYmHzbTa1QTY9Vk1XG6_M"
+            // 토큰이 존재하는 경우에만 Authorization 헤더 추가
+            if (!token.isNullOrEmpty()) {
+                requestBuilder.addHeader("Authorization", "Bearer $token")
+            }
         }
 
         val request = requestBuilder.build()

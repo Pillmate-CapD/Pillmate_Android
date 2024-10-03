@@ -2,6 +2,7 @@ package com.example.pillmate
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+import java.time.LocalDate
 
 //로그인
 data class LoginRequest(
@@ -17,42 +18,30 @@ data class LoginResponse(
     val tokenInfo: TokenInfo
 )
 //회원가입
+data class Disease(
+    val disease: String,
+    val startDate: LocalDate
+) : Serializable
+
+data class Symptom(
+    val name: String
+) : Serializable
+
 data class SignUpRequest(
-    @SerializedName("email")
     val email: String,
-    @SerializedName("password")
     val password: String,
-    @SerializedName("name")
     val name: String,
-    @SerializedName("wakeUp")
-    val wakeUp: String,
-    @SerializedName("morning")
-    val morning: String,
-    @SerializedName("lunch")
-    val lunch: String,
-    @SerializedName("dinner")
-    val dinner: String,
-    @SerializedName("bed")
-    val bed: String,
-    @SerializedName("diseases")
-    val diseases: List<DiseaseData>,
-    @SerializedName("roles")
+    val diseases: List<Disease>,
+    val symptoms: List<Symptom>,
     val roles: List<String>
 )
 
-data class DiseaseData(
-    @SerializedName("disease")
-    val disease: String,
-    @SerializedName("startDate")
-    val startDate: String
-)
-
 data class SignUpResponse(
-    @SerializedName("grantType")
+    val name: String,
     val grantType: String,
-    @SerializedName("accessToken")
     val accessToken: String
 )
+
 //로그아웃
 data class LogoutResponse(
     val memberId: Int
