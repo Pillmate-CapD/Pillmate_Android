@@ -199,3 +199,19 @@ data class MedicineInfo(
     val allDay: Int,
     val timeSlotList: List<TimeSlotRequest>
 ) : Serializable
+
+data class HealthInfoResponse(
+    val diseases: List<DiseaseInfo>,
+    val symptoms: List<SymptomInfo>
+)
+
+data class DiseaseInfo(
+    val id: Int,
+    val disease: String,
+    val startDate: String
+)
+
+data class SymptomInfo(
+    val id: Int,
+    val name: String
+)

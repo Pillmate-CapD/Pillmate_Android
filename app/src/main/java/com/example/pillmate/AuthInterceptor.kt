@@ -13,7 +13,7 @@ class AuthInterceptor : Interceptor {
 
         // 회원가입 API 호출 시 Authorization 헤더를 추가하지 않음
         if (!requestUrl.contains("members/signup")) {
-            val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwiaWF0IjoxNzI3NzY1MTk1LCJleHAiOjE3Mjc4NTE1OTUsImF1dGgiOlt7ImF1dGhvcml0eSI6IlVTRVIifV19.K0ykIor6dVArBnNO_yyT6IPYmHzbTa1QTY9Vk1XG6_M"
+            val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzI4NDcyMTcxLCJleHAiOjE3Mjg1NTg1NzEsImF1dGgiOlt7ImF1dGhvcml0eSI6IlVTRVIifV19.ZfJ1t3oGwlf4RYWY9SJ7E9AvKMuV1TtIP3SAm1xCraw"
             // 토큰이 존재하는 경우에만 Authorization 헤더 추가
             if (!token.isNullOrEmpty()) {
                 requestBuilder.addHeader("Authorization", "Bearer $token")

@@ -9,10 +9,17 @@ class DateViewModel : ViewModel() {
 
     init {
         // 예시 progress 값 리스트
-        val progressValues = listOf(10, 50, 100, 90, 50, 60, 10)
+        val progressValues = listOf(100,100,100,100,100,100,100)
         generateDateItems(progressValues)
     }
 
+//    // progress 값을 업데이트하는 메서드
+//    fun updateDateItemsWithProgress(progressValues: List<Int>) {
+//        dateItems.clear() // 이전 값 초기화
+//        generateDateItems(progressValues)
+//    }
+
+    // progress 값을 사용하여 DateItem을 생성하는 메서드
     private fun generateDateItems(progressValues: List<Int>) {
         if (dateItems.isEmpty()) {
             val todayDate = LocalDate.now()
@@ -31,7 +38,7 @@ class DateViewModel : ViewModel() {
                     DayOfWeek.SATURDAY -> "토"
                 }
                 val isToday = date == todayDate
-                val progress = progressValues.getOrElse(i) { 50 } // progress 값을 가져오거나 기본값 50 사용
+                val progress = progressValues.getOrElse(i) { 0 } // progress 값을 가져오거나 기본값 50 사용
                 dateItems.add(DateItem(dayOfWeek, formattedDate, progress, isToday, date))
             }
         }

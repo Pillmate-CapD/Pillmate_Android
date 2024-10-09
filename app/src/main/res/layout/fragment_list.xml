@@ -82,7 +82,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:clickable="false"
+        android:clickable="true"
+        android:focusable="true"
         android:id="@+id/view_white"
         android:visibility="invisible"
         android:layout_width="match_parent"

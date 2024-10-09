@@ -23,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_blue_round4"
@@ -149,9 +150,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:dotColor="#4D000000"
-        app:selectedDotColor="#000000"
-        app:dotCount="3"
+        app:spi_dotColor="#4D000000"
+        app:spi_dotSelectedColor="#000000"
+        app:spi_visibleDotCount="3"
         app:layout_constraintTop_toBottomOf="@id/vp_medi_slot"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

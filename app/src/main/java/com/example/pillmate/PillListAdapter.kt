@@ -72,7 +72,7 @@ class PillListAdapter(
             //setAlarm(20,"트윈스타정")
 
 
-            if (item.isCompleted) {
+            if (item.isEaten) {
                 // 아이템이 완료된 경우
                 itemView.setBackgroundResource(R.drawable.custom_pill_background) // 기본 색상
                 pillImg.setBackgroundResource(R.drawable.img_pill_none) // 약 이미지 복용전과 복용 예정인 경우의 상태

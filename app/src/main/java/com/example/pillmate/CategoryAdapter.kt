@@ -7,7 +7,8 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class CategoryAdapter(private val itemCategory: ArrayList<CategoryItem>) :
+class CategoryAdapter(private val itemCategory: MutableList<CategoryItem>,
+                      private val onCategorySelected: (String) -> Unit) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -48,8 +49,12 @@ class CategoryAdapter(private val itemCategory: ArrayList<CategoryItem>) :
                 }
                 // Set the clicked item isSelected to true
                 item.isSelected = true
+
                 // Notify the adapter to refresh the list
                 notifyDataSetChanged()
+
+                // 선택된 카테고리를 콜백으로 전달
+                onCategorySelected(item.name)
             }
         }
     }

@@ -79,4 +79,6 @@ dependencies {
 
     implementation ("com.google.android.material:material:1.10.0")
 
+    // 알람 WorkManager하려면 필요함
+    implementation ("androidx.work:work-runtime-ktx:2.8.1")
 }

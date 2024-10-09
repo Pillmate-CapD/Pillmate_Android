@@ -32,22 +32,27 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:id="@+id/top_layout"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="16dp"
+                    android:paddingTop="22dp"
+                    android:paddingLeft="9dp"
                     android:paddingRight="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/logo"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="LOGO"
-                        android:fontFamily="@font/notosanskrsemibold"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"/>
+                    <View
+                        android:layout_width="118.63dp"
+                        android:layout_height="46dp"
+                        android:background="@drawable/ic_logo"/>
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/logo"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="LOGO"-->
+<!--                        android:fontFamily="@font/notosanskrsemibold"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="20sp"/>-->
 
                     <ImageView
                         android:clickable="true"
@@ -226,9 +231,8 @@
                     android:id="@+id/btn_all_pill"
                     app:layout_constraintTop_toBottomOf="@id/pill_list"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="73dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:clickable="true"
@@ -238,9 +242,8 @@
                         app:layout_constraintTop_toTopOf="parent"
                         android:paddingRight="20dp"
                         android:paddingLeft="20dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="75dp">
 
                         <TextView
                             android:id="@+id/txt_go"

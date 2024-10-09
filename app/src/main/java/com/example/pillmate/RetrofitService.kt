@@ -67,5 +67,6 @@ interface RetrofitService {
         @Path("available") isAvailable: Boolean // 알람 상태 (true/false)를 경로로 전달
     ): Call<String>
 
-
+    @GET("members/healthinfo")
+    fun getHealthInfo() : Call<HealthInfoResponse>
 }
