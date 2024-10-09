@@ -29,7 +29,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
+                android:layout_marginTop="15sp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -77,12 +77,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0sp"
+                android:layout_marginTop="7sp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
                     android:layout_marginLeft="60dp"
                     android:fontFamily="@font/notosanskrsemibold"
                     android:gravity="center"
@@ -92,7 +93,8 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
                     android:layout_marginLeft="68dp"
                     android:fontFamily="@font/notosanskrsemibold"
                     android:gravity="center"
@@ -102,7 +104,8 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
                     android:layout_marginLeft="63dp"
                     android:fontFamily="@font/notosanskrsemibold"
                     android:gravity="center"
@@ -121,7 +124,9 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="70dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/notosanskrsemibold"
                     android:text="평소에 느끼는 증상이나\n부작용을 모두 선택해 주세요"
                     android:textAlignment="center"
@@ -131,8 +136,9 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
-                    android:layout_marginTop="0sp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/notosanskrregular"
                     android:text="증상과 부작용을 확인하고 관리해요"
                     android:textColor="#858585"

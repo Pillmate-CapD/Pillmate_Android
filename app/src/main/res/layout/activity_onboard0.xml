@@ -23,6 +23,7 @@
         android:layout_marginLeft="22dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
         android:textSize="20dp"
         android:textColor="@color/white"/>
     <FrameLayout

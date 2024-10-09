@@ -26,37 +26,33 @@ class Onboard1Activity : AppCompatActivity() {
         }
 
         val card1: CardView = findViewById(R.id.card1)
-        setCardContent(card1, "당뇨", "혈당 조절이 어려워져\n혈당 수치가 비정상적으로 \n높아지는 만성질환", R.drawable.o_diabetes)
+        setCardContent(card1, "고지혈증", "혈중 지질 수치가 높은 질환\n", R.drawable.o_blood_cells)
         card1.setOnClickListener {
-            toggleSelection(card1, "당뇨", R.drawable.o_diabetes)
+            toggleSelection(card1, "고지혈증", R.drawable.o_blood_cells)
         }
-
         val card2: CardView = findViewById(R.id.card2)
-        setCardContent(card2, "고혈압", "혈압이 지속적으로\n높은 만성질환\n ", R.drawable.o_heartrate)
+        setCardContent(card2, "고혈압", "혈압이 지속적으로 높은 질환\n", R.drawable.o_heartrate)
         card2.setOnClickListener {
             toggleSelection(card2, "고혈압", R.drawable.o_heartrate)
         }
-
         val card3: CardView = findViewById(R.id.card3)
-        setCardContent(card3, "고지혈증", "혈중 지질 수치가\n높은 만성질환\n  ", R.drawable.o_blood_cells)
+        setCardContent(card3, "당뇨", "혈당 조절이 어려워 혈당\n수치가 높은 질환", R.drawable.o_diabetes)
         card3.setOnClickListener {
-            toggleSelection(card3, "고지혈증", R.drawable.o_blood_cells)
+            toggleSelection(card3, "당뇨", R.drawable.o_diabetes)
         }
-
         val card4: CardView = findViewById(R.id.card4)
-        setCardContent(card4, "호흡기질환", "호흡기에\n장기적인 문제가 생기는 질병\n  ", R.drawable.o_coughing_alt)
+        setCardContent(card4, "심혈관질환", "심장과 혈관에 영향을 미치는\n질환", R.drawable.o_overweight)
         card4.setOnClickListener {
-            toggleSelection(card4, "호흡기질환", R.drawable.o_coughing_alt)
+            toggleSelection(card4, "심혈관질환", R.drawable.o_overweight)
         }
-
         val card5: CardView = findViewById(R.id.card5)
-        setCardContent(card5, "심혈관질환", "심장과 혈관에 영향을\n미치는 만성 질환\n  ", R.drawable.o_overweight)
+        setCardContent(card5, "호흡기질환", "호흡기에 장기적인 문제가\n생기는 질환", R.drawable.o_coughing_alt)
         card5.setOnClickListener {
-            toggleSelection(card5, "심혈관질환", R.drawable.o_overweight)
+            toggleSelection(card5, "호흡기질환", R.drawable.o_coughing_alt)
         }
 
         val card6: CardView = findViewById(R.id.card6)
-        setCardContent(card6, "기타", "장기간에 걸쳐 지속되는\n다양한 질병\n  ", R.drawable.o_plus)
+        setCardContent(card6, "기타", "이외의 모든 질환\n", R.drawable.o_plus)
         card6.setOnClickListener {
             toggleSelection(card6, "기타", R.drawable.o_plus)
         }

@@ -3,35 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@drawable/ok_bg">
     <ImageView
         android:layout_width="115dp"
         android:layout_height="115dp"
-        android:src="@drawable/pschange"
+        android:src="@drawable/pschange_white"
         android:layout_marginTop="179dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="회원가입 완료되었습니다!"
-        android:fontFamily="@font/notosanskrsemibold"
-        android:textColor="#1E54DF"
-        android:textSize="25sp"
-        android:layout_marginTop="5dp"/>
+        android:includeFontPadding="false"
+        android:text="회원가입이 완료되었어요!"
+        android:fontFamily="@font/notosanskrbold"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        android:layout_marginTop="21dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-15dp"
-        android:text="앞으로 필메이트와 함께"
-        android:fontFamily="@font/notosanskrregular"
-        android:textColor="#1E54DF"
-        android:textSize="15sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-22dp"
-        android:text="약을 꾸준히 복용해 보세요!"
-        android:fontFamily="@font/notosanskrregular"
-        android:textColor="#1E54DF"
+        android:includeFontPadding="false"
+        android:layout_marginTop="16dp"
+        android:text="앞으로 필메이트와 함께\n약을 꾸준히 복용해 보세요!"
+        android:textAlignment="center"
+        android:fontFamily="@font/notosanskrlight"
+        android:textColor="#FFFFFF"
         android:textSize="15sp" />
     <FrameLayout
         android:layout_width="match_parent"
@@ -45,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:text="로그인하기"
-            android:background="@drawable/bt_login_enable"
+            android:background="@drawable/button_stroke_white"
             android:textColor="#ffffff"
             android:textSize="15sp"
             android:fontFamily="@font/notosanskrmedium"

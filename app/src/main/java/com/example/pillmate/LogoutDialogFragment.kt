@@ -17,6 +17,7 @@ class LogoutDialogFragment : DialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.dialog_logout, container, false)
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         // 로그아웃 버튼 처리
         val logoutButton: Button = view.findViewById(R.id.btn_logout)
