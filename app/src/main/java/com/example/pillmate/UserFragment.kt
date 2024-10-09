@@ -1,6 +1,7 @@
 package com.example.pillmate
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -50,7 +51,19 @@ class UserFragment : Fragment() {
         logoutDialogView.findViewById<View>(R.id.btn_logout).setOnClickListener {
             logoutDialog.dismiss()
             Log.d("UserFragment", "Logout button clicked")
-            logoutUser()
+            //logoutUser()
+
+            val auto = requireActivity().getSharedPreferences("autoLogin", Context.MODE_PRIVATE)
+            val autoLoginEdit = auto.edit()
+
+            autoLoginEdit.putBoolean("autoLoginUse", false)
+            autoLoginEdit.putString("Id", null)
+            autoLoginEdit.putString("Pw", null)
+            autoLoginEdit.commit()
+
+            val intent = Intent(activity, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
 
         // 취소 버튼 클릭 시

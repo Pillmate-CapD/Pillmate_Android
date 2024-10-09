@@ -9,11 +9,15 @@ data class LoginRequest(
     @SerializedName("email")
     val email: String,
     @SerializedName("password")
-    val password: String)
+    val password: String
+)
+
 data class TokenInfo(
     val name: String,
     val grantType: String,
-    val accessToken: String)
+    val accessToken: String
+)
+
 data class LoginResponse(
     val tokenInfo: TokenInfo
 )

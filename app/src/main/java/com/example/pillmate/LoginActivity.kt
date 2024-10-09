@@ -27,6 +27,60 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        App.prefs.token = null
+
+        val auto = getSharedPreferences("autoLogin", MODE_PRIVATE)
+        val autoLoginUse = auto.getBoolean("autoLoginUse", false)
+
+        if(autoLoginUse){
+            val autoId = auto.getString("Id", "")
+            val autoPw = auto.getString("Pw", "")
+            val requestBodyData = LoginRequest(autoId!!,autoPw!!)
+
+            RetrofitApi.getRetrofitService.login(requestBodyData).enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                    if (response.isSuccessful) {
+                        val loginResponse = response.body()
+
+                        // 가현 추가 중
+                        if(loginResponse != null){
+                            val accessToken = "Bearer ${loginResponse.tokenInfo.accessToken}"
+                            Log.d("LoginActivity", "로그인 성공! 액세스 토큰: $accessToken")
+
+                            val userName = loginResponse.tokenInfo.name
+                            Log.e("userName", "${userName}")
+
+                            val preferences = getSharedPreferences("userName", MODE_PRIVATE)
+                            val editor = preferences.edit()
+
+                            editor.putString("userName", userName)
+
+                            editor.commit()
+
+                            App.prefs.token = accessToken
+
+                            Log.d("Login_Token", "Access Token : ${accessToken}")
+
+                            // MainActivity로 이동
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    } else {
+                        // 로그인 실패 처리
+                        showError()
+                        Log.e("LoginActivity", "로그인 실패: ${response.code()} - ${response.message()}")
+                        Log.e("LoginActivity", "에러 응답: ${response.errorBody()?.string()}")
+                    }
+                }
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    // 네트워크 오류 등 예외 처리
+                    Log.e("LoginActivity", "네트워크 오류: ${t.message}")
+                    Toast.makeText(this@LoginActivity, "로그인 실패: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
         // 초기 로그인 버튼 비활성화
         binding.btnLogin.isEnabled = false
 
@@ -137,14 +191,44 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
 
-                    // 로그인 성공 처리 (토큰 정보 저장 등)
-                    val accessToken = loginResponse?.tokenInfo?.accessToken
-                    Log.d("LoginActivity", "로그인 성공! 액세스 토큰: $accessToken")
+                    // 가현 추가 중
+                    if(loginResponse != null){
+                        val accessToken = "Bearer ${loginResponse.tokenInfo.accessToken}"
+                        Log.d("LoginActivity", "로그인 성공! 액세스 토큰: $accessToken")
 
-                    // MainActivity로 이동
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                        val userName = loginResponse.tokenInfo.name
+
+                        if (isAutoLoginChecked){
+                            val auto = getSharedPreferences("autoLogin", MODE_PRIVATE)
+                            val autoLoginEdit = auto.edit()
+
+                            autoLoginEdit.putBoolean("autoLoginUse", true)
+                            autoLoginEdit.putString("Id", email)
+                            autoLoginEdit.putString("Pw", password)
+                            autoLoginEdit.commit()
+                        }
+
+                        Log.e("userName","${userName}")
+
+                        val preferences = getSharedPreferences("userName", MODE_PRIVATE)
+                        val editor = preferences.edit()
+
+                        editor.putString("userName", userName)
+
+                        App.prefs.token = accessToken
+
+                        // MainActivity로 이동
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                    // 로그인 성공 처리 (토큰 정보 저장 등)
+//                    val accessToken = loginResponse?.tokenInfo?.accessToken
+//                    // MainActivity로 이동
+//                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
                 } else {
                     // 로그인 실패 처리
                     showError()

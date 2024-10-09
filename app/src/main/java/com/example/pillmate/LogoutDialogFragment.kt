@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class LogoutDialogFragment : DialogFragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +43,14 @@ class LogoutDialogFragment : DialogFragment() {
     }
     private fun logout() {
         // 로그아웃 처리 및 로그인 화면으로 이동
+        val auto = requireActivity().getSharedPreferences("autoLogin", AppCompatActivity.MODE_PRIVATE)
+        val autoLoginEdit = auto.edit()
+
+        autoLoginEdit.putBoolean("autoLoginUse", false)
+        autoLoginEdit.putString("Id", null)
+        autoLoginEdit.putString("Pw", null)
+        autoLoginEdit.commit()
+
         val intent = Intent(activity, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

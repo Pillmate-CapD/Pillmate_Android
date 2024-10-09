@@ -1,6 +1,7 @@
 package com.example.pillmate
 
 import android.app.Activity
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -36,6 +37,8 @@ class HomeFragment : Fragment() {
     private lateinit var pillListAdapter: PillListAdapter
     private val categoryItems = mutableListOf<CategoryItem>()
 
+    private var userName :String? = null
+
     private val preferencesHelper: PreferencesHelper by lazy {
         PreferencesHelper(requireContext())
     }
@@ -61,35 +64,38 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        // 홈화면 => 주간 달력
-        dateAdapter = DateAdapter(dateViewModel.dateItems as ArrayList<DateItem>)
-        binding.dateList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.dateList.adapter = dateAdapter
+        val sharedPreferences = requireActivity().getSharedPreferences("userName", MODE_PRIVATE)
+        val userName = sharedPreferences.getString("userName", "손해인?")
+        if (userName!=null){
+                // 홈화면 => 주간 달력
+                dateAdapter = DateAdapter(dateViewModel.dateItems as ArrayList<DateItem>)
+                binding.dateList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                binding.dateList.adapter = dateAdapter
 
-        // 카테고리 RecyclerView 설정
-        categoryAdapter = CategoryAdapter(categoryItems) { selectedCategory ->
-            pillViewModel.filterPillItemsByCategory(selectedCategory) // 선택된 카테고리에 맞춰 필터링
-        }
-        binding.pillCategory.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.pillCategory.adapter = categoryAdapter
+                // 카테고리 RecyclerView 설정
+                categoryAdapter = CategoryAdapter(categoryItems) { selectedCategory ->
+                    pillViewModel.filterPillItemsByCategory(selectedCategory) // 선택된 카테고리에 맞춰 필터링
+                }
+                binding.pillCategory.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                binding.pillCategory.adapter = categoryAdapter
 
-        // 약 리스트 RecyclerView 설정
-        pillListAdapter = PillListAdapter(arrayListOf(), this, preferencesHelper)
-        binding.pillList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.pillList.adapter = pillListAdapter
+                // 약 리스트 RecyclerView 설정
+                pillListAdapter = PillListAdapter(arrayListOf(), this, preferencesHelper)
+                binding.pillList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                binding.pillList.adapter = pillListAdapter
 
-        // ViewModel을 통해 약 리스트 업데이트
-        pillViewModel.pillItems.observe(viewLifecycleOwner) { pillItems ->
-            pillListAdapter.updateItems(pillItems) // 필터링된 약 리스트로 업데이트
-        }
+                // ViewModel을 통해 약 리스트 업데이트
+                pillViewModel.pillItems.observe(viewLifecycleOwner) { pillItems ->
+                    pillListAdapter.updateItems(pillItems) // 필터링된 약 리스트로 업데이트
+                }
 
-        binding.alertImg.setOnClickListener {
-            val navController = findNavController()
-            navController.navigate(R.id.alarmListActivity)
-        }
+                binding.alertImg.setOnClickListener {
+                    val navController = findNavController()
+                    navController.navigate(R.id.alarmListActivity)
+                }
 
-        binding.homePillProgressBar.setMaxProgress(100)
-        binding.homePillProgressBar.setProgress(100)
+                binding.homePillProgressBar.setMaxProgress(100)
+                binding.homePillProgressBar.setProgress(100)
 
 //        // ViewModel을 사용하여 데이터 로드
 //        pillViewModel.loadPillItems(
@@ -101,27 +107,30 @@ class HomeFragment : Fragment() {
 //                PillListItem("오후 9:00", "바이토린")
 //            )
 //        )
-        fetchHealthInfo()
+                fetchHealthInfo()
 
-        // Getting the current month using Calendar
-        val calendar = Calendar.getInstance()
-        val month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+                // Getting the current month using Calendar
+                val calendar = Calendar.getInstance()
+                val month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
 
-        // Updating the TextView for current month
-        binding.homeMonth.text = month
+                // Updating the TextView for current month
+                binding.homeMonth.text = month
 
-        pillViewModel.pillItems.observe(viewLifecycleOwner) { pillItems ->
-            pillListAdapter.updateItems(pillItems)
+                pillViewModel.pillItems.observe(viewLifecycleOwner) { pillItems ->
+                    pillListAdapter.updateItems(pillItems)
+                }
+
+                binding.btnPillList.setOnClickListener {
+                    findNavController().navigate(R.id.listFragment)
+                }
+
+                binding.nonBtnAddMedi.setOnClickListener {
+                    val navController = findNavController()
+                    navController.navigate(R.id.alarmListActivity)
+                }
         }
 
-        binding.btnPillList.setOnClickListener {
-            findNavController().navigate(R.id.listFragment)
-        }
 
-        binding.nonBtnAddMedi.setOnClickListener {
-            val navController = findNavController()
-            navController.navigate(R.id.alarmListActivity)
-        }
 
         return binding.root
     }
@@ -270,6 +279,10 @@ class HomeFragment : Fragment() {
 
         // Updating the TextView for current month
         binding.homeMonth.text = month
+
+        val sharedPreferences = requireActivity().getSharedPreferences("userName", MODE_PRIVATE)
+        userName  = sharedPreferences.getString("userName","Loading name failed")
+        binding.userTxt.text = userName
         super.onResume()
     }
 }
