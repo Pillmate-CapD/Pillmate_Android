@@ -16,7 +16,7 @@
         android:background="@drawable/ic_import"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/tv_toast"
@@ -26,6 +26,7 @@
         android:layout_marginStart="9dp"
         android:fontFamily="@font/notosanskrsemibold"
         android:textSize="13sp"
+        android:paddingBottom="2.5dp"
         android:textColor="@color/white"
         android:includeFontPadding="false"
         android:layout_width="wrap_content"

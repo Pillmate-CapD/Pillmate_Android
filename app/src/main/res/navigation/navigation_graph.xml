@@ -55,5 +55,10 @@
         android:name="com.example.pillmate.Onboard3Activity"
         android:label="activity_onboard3"
         tools:layout="@layout/activity_onboard3" />
+    <activity
+        android:id="@+id/endPreActivity"
+        android:name="com.example.pillmate.EndPreActivity"
+        android:label="activity_end_pre"
+        tools:layout="@layout/activity_end_pre" />
 
 </navigation>

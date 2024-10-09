@@ -73,7 +73,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
@@ -397,7 +397,7 @@
             <!-- 다른 시간대 추가 버튼 -->
             <TextView
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="40dp"
                 android:id="@+id/btn_add_time"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"

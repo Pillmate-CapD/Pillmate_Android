@@ -14,15 +14,16 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:background="@drawable/ic_toast_check"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_toast"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/ic_import"
         app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="2.5dp"
         android:layout_marginStart="9dp"
         android:fontFamily="@font/notosanskrsemibold"
         android:textSize="13sp"

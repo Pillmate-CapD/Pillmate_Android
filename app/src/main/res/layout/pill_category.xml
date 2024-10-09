@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
+        android:includeFontPadding="false"
         android:id="@+id/pill_category_txt"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -14,8 +15,9 @@
         android:textSize="15sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#3E3E3E"
         android:text="전체"
-        android:fontFamily="@font/notosanskrmedium"
+        android:fontFamily="@font/notosanskrbold"
         />
 
     <View
@@ -28,7 +30,6 @@
         android:background="@drawable/pill_view"
         android:layout_width="0dp"
         android:layout_height="3dp"
-        android:layout_marginTop="-10dp"
         />
 
 

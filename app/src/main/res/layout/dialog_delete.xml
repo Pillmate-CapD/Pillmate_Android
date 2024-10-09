@@ -25,8 +25,8 @@
         android:fontFamily="@font/notosanskrregular"
         android:textSize="11sp"
         android:gravity="center"
-        android:text="지금 삭제하시면 해당 약 리스트는 영구적으로 삭제되며,\n
-        복원이 어려워 새롭게 추가해야 합니다."
+        android:text="지금 삭제하시면 해당 약은 영구적으로 삭제되며,\n
+        복원이 어려워 새롭게 추가해야 해요."
         android:textColor="#3E3E3E"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

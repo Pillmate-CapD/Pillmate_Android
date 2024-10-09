@@ -1,5 +1,6 @@
 package com.example.pillmate
 
+import AllFragment
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
@@ -22,11 +23,15 @@ import android.view.MenuInflater
 import android.widget.PopupMenu
 import android.view.WindowManager
 import android.widget.PopupWindow
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet.Layout
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MediListAdapter(private var medicines: List<MediListResponse>, private val context: Context, private val editMediActivityLauncher: ActivityResultLauncher<Intent>) : RecyclerView.Adapter<MediListAdapter.MediViewHolder>() {
+class MediListAdapter(private var medicines: List<MediListResponse>, private val context: Context, private val editMediActivityLauncher: ActivityResultLauncher<Intent>,private val fragment: AllFragment) : RecyclerView.Adapter<MediListAdapter.MediViewHolder>() {
 
     companion object {
         const val EDIT_REQUEST_CODE = 1001 // 적절한 값으로 상수 선언
@@ -73,7 +78,7 @@ class MediListAdapter(private var medicines: List<MediListResponse>, private val
         // 이미지 로딩 (Glide 사용)
         Glide.with(holder.itemView.context)
             .load(medi.picture)
-            .placeholder(R.drawable.bg_null) // 기본 이미지
+            .placeholder(R.drawable.bg_zoom_null) // 기본 이미지
             .into(holder.picture)
 
         // 줌 버튼 클릭 리스너 설정
@@ -83,7 +88,11 @@ class MediListAdapter(private var medicines: List<MediListResponse>, private val
 
         // 옵션 버튼 클릭 시 팝업 윈도우 생성
         holder.option.setOnClickListener {
-            showCustomPopup(holder.option, medi)
+            showCustomPopup(holder.option, medi, medi.id)
+        }
+
+        holder.picture.setOnClickListener{
+            showImageDialog(medi.picture, medi.name)
         }
     }
 
@@ -121,7 +130,7 @@ class MediListAdapter(private var medicines: List<MediListResponse>, private val
     }
 
     // 커스텀 팝업 윈도우 생성
-    private fun showCustomPopup(anchorView: View, medi: MediListResponse) {
+    private fun showCustomPopup(anchorView: View, medi: MediListResponse, id:Int) {
         // 팝업 레이아웃 인플레이트
         val popupView = LayoutInflater.from(context).inflate(R.layout.popup_menu, null)
 
@@ -151,7 +160,7 @@ class MediListAdapter(private var medicines: List<MediListResponse>, private val
         popupView.findViewById<ConstraintLayout>(R.id.btn_pop_del).setOnClickListener {
             // 삭제하기 처리
             popupWindow.dismiss() // 팝업 닫기
-            showDelDialog()
+            showDelDialog(id)
         }
 
         // 팝업 위치 설정 및 보여주기
@@ -179,7 +188,7 @@ class MediListAdapter(private var medicines: List<MediListResponse>, private val
         notifyDataSetChanged()
     }
 
-    private fun showDelDialog() {
+    private fun showDelDialog(id: Int) {
         // Dialog 생성
         val dialog = Dialog(context, R.style.CustomDialogTheme)
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_delete, null)
@@ -199,7 +208,7 @@ class MediListAdapter(private var medicines: List<MediListResponse>, private val
         val btnDelete = dialogView.findViewById<TextView>(R.id.btn_dia_del)
         btnDelete.setOnClickListener {
             // 삭제 로직 추가 (예시: 해당 약 리스트를 삭제하는 코드 추가)
-            // 예: deleteMedicine(medicineId)
+            deleteMedicine(id)
 
             // 다이얼로그 닫기
             dialog.dismiss()
@@ -212,5 +221,47 @@ class MediListAdapter(private var medicines: List<MediListResponse>, private val
         }
 
         dialog.show()
+    }
+
+    private fun deleteMedicine(id: Int){
+        val service = RetrofitApi.getRetrofitService
+        val call = service.delMedicine(id)
+
+        call.enqueue(object : Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if(response.isSuccessful){
+                    Log.d("deleteMedicine", "delete, 약물 삭제 성공")
+                    showPerfectToast("해당 약이 삭제됐어요.")
+
+                    // 삭제 후 AllFragment에서 약 리스트 다시 불러오기
+                    fragment.fetchMedicineList() // AllFragment의 메서드 호출
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                TODO("Not yet implemented")
+                showPerfectToast("API 에러")
+                Log.d("deleteMedicine", "delete, 약물 삭제 실패")
+            }
+
+        })
+    }
+
+    // 커스텀 토스트 메시지를 띄우는 함수
+    private fun showPerfectToast(message: String) {
+        // 커스텀 토스트 레이아웃을 인플레이트
+        val inflater = LayoutInflater.from(context)
+        val layout = inflater.inflate(R.layout.custom_perfect_toast, null)
+
+        // 메시지 설정
+        val textView = layout.findViewById<TextView>(R.id.tv_toast)
+        textView.text = message
+
+        // 커스텀 토스트 생성 및 설정
+        val toast = Toast(context)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.setGravity(Gravity.BOTTOM, 0, 80) // 화면 하단에 표시
+        toast.show()
     }
 }

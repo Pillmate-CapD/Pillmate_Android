@@ -39,6 +39,9 @@ class EditMediActivity : AppCompatActivity() {
     // 복약 시간대를 저장할 리스트
     private val timeSlots = mutableListOf<TimeSlotItem>()
 
+    // 약품 이름을 저장할 변수
+    private var oldMediName: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -54,6 +57,8 @@ class EditMediActivity : AppCompatActivity() {
 
         // medi 객체의 정보를 사용하여 화면에 데이터 표시
         medi?.let {
+
+            oldMediName = it.name
             // 약품명 설정
             binding.editMedi.setText(it.name)
 
@@ -83,7 +88,7 @@ class EditMediActivity : AppCompatActivity() {
         binding.spinnerDisease.isSelected = true
 
         // 리사이클러뷰 어댑터 설정
-        timeSlotAdapter = TimeSlotAdapter(timeSlots) { position ->
+        timeSlotAdapter = TimeSlotAdapter(this,timeSlots) { position ->
             showTimePickerBottomSheet(position)
         }
 
@@ -104,14 +109,14 @@ class EditMediActivity : AppCompatActivity() {
 
         // 취소 버튼 눌렀을 때 액티비티 종료
         binding.tvEditCancel.setOnClickListener {
-            finish()
+            this@EditMediActivity.finish()
         }
 
         // 수정 버튼 눌렀을 때 수정 로직 추가 (예시로 수정된 데이터를 저장하는 로직)
         binding.tvEditDone.setOnClickListener {
             // 수정된 데이터를 서버로 전송하거나 데이터베이스에 저장하는 로직 추가
             checkFieldsAndShowToast()
-            finish()
+            this@EditMediActivity.finish()
         }
     }
 
@@ -150,7 +155,9 @@ class EditMediActivity : AppCompatActivity() {
             else -> {
                 // 모든 필드가 채워져 있으면 저장 로직 수행
                 // EditText에서 값을 받아서 처리
-                val mediName = binding.editMedi.text.toString()  // 약품명
+                val oldMediName = oldMediName
+                val newMediName = binding.editMedi.text.toString()  // 약품명
+                val category = binding.spinnerDisease.text.toString()
                 val oneEat = binding.editOneEat.text.toString().toInt()  // 1회 복약량
                 val oneDay = binding.editOneDay.text.toString().toInt()  // 1일 복약횟수
                 val allDay = binding.editAllDay.text.toString().toInt()  // 총 복약일수
@@ -166,16 +173,23 @@ class EditMediActivity : AppCompatActivity() {
                 }
 
                 // 예: MediAddRequest 객체 생성 및 전송
-                val mediEditRequest = MediEditRequest(
-                    medicineName = mediName,
-                    amount = oneEat,
-                    timesPerDay = oneDay,
-                    day = allDay,
-                    timeSlotList = timeSlotRequests
-                )
+                val mediEditRequest = oldMediName?.let {
+                    MediEditRequest(
+                        oldMedicineName = it,
+                        newMedicineName = newMediName,
+                        category = category,
+                        amount = oneEat,
+                        timesPerDay = oneDay,
+                        day = allDay,
+                        timeSlotList = timeSlotRequests
+                    )
+                }
                 // 모든 필드가 채워져 있으면 저장 로직 수행
                 // 예: 데이터 저장, 서버로 전송 등
-                patchMediEdit(mediEditRequest)
+                Log.d("mediEditRequest", "MediEditRequest : ${mediEditRequest}")
+                if (mediEditRequest != null) {
+                    patchMediEdit(mediEditRequest)
+                }
                 //addAlarm()
             }
         }
@@ -218,8 +232,11 @@ class EditMediActivity : AppCompatActivity() {
                     message?.let {
                         Log.d("EditMediActivity", "약 정보 수정 성공: $it")
                         showPerfectToast("약 리스트 수정이 완료되었습니다") // 서버에서 보낸 메시지를 토스트로 표시
+
                         // 결과 전달
                         val resultIntent = Intent()
+                        resultIntent.putExtra("isMediEdited", true)
+                        Log.d("EditMediActivity", "setResult 호출됨, isMediEdited = true")
                         setResult(Activity.RESULT_OK, resultIntent)
                         finish() // 액티비티 종료
                     }

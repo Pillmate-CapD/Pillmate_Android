@@ -42,7 +42,7 @@ class WriteMediActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 리사이클러뷰 설정
-        timeSlotAdapter = TimeSlotAdapter(timeSlots) { position ->
+        timeSlotAdapter = TimeSlotAdapter(this,timeSlots) { position ->
             showTimePickerBottomSheet(position)
         }
 
@@ -323,48 +323,5 @@ class WriteMediActivity : AppCompatActivity() {
         // BottomSheetDialog 표시
         diBottomSheetDialog.show()
     }
-
-
-//    private fun addAlarm() {
-//        val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
-//
-//        // Iterate through each timeSlotRequest and post the alarm
-//        for (timeSlot in timeSlots) {
-//            val medicineName = binding.editMedi.text.toString()  // 약품명
-//            val time = timeSlot.time.toString()  // pickerTime 값 (10:00:00 등)
-//
-//            // Create the request object
-//            val addAlarmRequest = AddAlarmRequest(
-//                medicineName = medicineName,
-//                time = time
-//            )
-//
-//            // Make the API call
-//            val call = service.postAlarm(addAlarmRequest)
-//
-//            // Log the request for debugging purposes
-//            val gson = Gson()
-//            val requestJson = gson.toJson(addAlarmRequest)
-//            Log.d("WriteMediActivity", "Alarm request: $requestJson")
-//
-//            call.enqueue(object : Callback<String> {
-//                override fun onResponse(call: Call<String>, response: Response<String>) {
-//                    if (response.isSuccessful) {
-//                        val message = response.body()
-//                        Log.d("WriteMediActivity", "Alarm set successfully: $message")
-//                        showCustomToast("알람이 성공적으로 설정되었습니다.")
-//                    } else {
-//                        Log.d("WriteMediActivity", "Failed to set alarm: ${response.code()}")
-//                        showCustomToast("알람 설정에 실패했습니다.")
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<String>, t: Throwable) {
-//                    Log.e("WriteMediActivity", "Alarm API call failed", t)
-//                    showCustomToast("알람 API 호출에 실패했습니다: ${t.message}")
-//                }
-//            })
-//        }
-//    }
 
 }

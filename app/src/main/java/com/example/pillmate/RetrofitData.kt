@@ -80,11 +80,10 @@ data class MediAddRequest(
 )
 
 data class TimeSlotRequest(
-    @SerializedName("spinnerTime")
     val spinnerTime: String,
-    @SerializedName("pickerTime")
     val pickerTime: String
-)
+) : Serializable
+
 
 data class MediAddResponse(
     @SerializedName("message")
@@ -95,6 +94,7 @@ data class MediAddResponse(
 
 // 약리스트 화면에서 메디 리스트 얻기
 data class MediListResponse(
+    val id: Int,
     val picture: String,
     val name: String,
     val category: String,
@@ -123,7 +123,7 @@ data class AlarmListResponse(
     val amount: Int,
     val timesPerDay: Int,
     val day: Int,
-    val timeSlotList: List<TimeSlotResponse>,
+    val timeSlot: TimeSlotResponse,  // timeSlotList 대신 단일 timeSlot 사용
     val isAvailable: Boolean
 )
 
@@ -164,8 +164,12 @@ data class WorstRecordData(
 )
 
 data class MediEditRequest(
-    @SerializedName("medicineName")
-    val medicineName: String,
+    @SerializedName("oldMedicineName")
+    val oldMedicineName: String,
+    @SerializedName("newMedicineName")
+    val newMedicineName: String,
+    @SerializedName("category")
+    val category: String,
     @SerializedName("amount")
     val amount: Int,
     @SerializedName("timesPerDay")
@@ -186,3 +190,12 @@ data class MediInfoResponse(
     val photo: String,
     val category: String
 )
+
+data class MedicineInfo(
+    val mediName: String,
+    val category: String,
+    val oneEat: Int,
+    val oneDay: Int,
+    val allDay: Int,
+    val timeSlotList: List<TimeSlotRequest>
+) : Serializable

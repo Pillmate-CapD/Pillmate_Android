@@ -2,6 +2,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.example.pillmate.R
 import com.example.pillmate.TimeSlotItem
 
 class TimeSlotAdapter(
+    private val context: Context,
     private val timeSlots: MutableList<TimeSlotItem>,
     private val onSpinnerClickListener: (position: Int) -> Unit
 ) : RecyclerView.Adapter<TimeSlotAdapter.TimeSlotViewHolder>() {
@@ -96,8 +98,27 @@ class TimeSlotAdapter(
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, timeSlots.size)
         } else {
-            Toast.makeText(view.context, "최소 한 개의 시간대가 필요합니다.", Toast.LENGTH_SHORT).show()
+            showCustomToast("최소 한 개의 복약시간이 필요해요.")
+            //Toast.makeText(view.context, "최소 한 개의 시간대가 필요합니다.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    // 커스텀 토스트 메시지를 띄우는 함수
+    private fun showCustomToast(message: String) {
+        // 커스텀 토스트 레이아웃을 인플레이트
+        val inflater = LayoutInflater.from(context)
+        val layout = inflater.inflate(R.layout.custom_toast, null)
+
+        // 메시지 설정
+        val textView = layout.findViewById<TextView>(R.id.tv_toast)
+        textView.text = message
+
+        // 커스텀 토스트 생성 및 설정
+        val toast = Toast(context)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.setGravity(Gravity.BOTTOM, 0, 80) // 화면 하단에 표시
+        toast.show()
     }
 
     // 시간대 업데이트 함수

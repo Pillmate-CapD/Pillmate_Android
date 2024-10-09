@@ -58,7 +58,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     // BottomSheet
-    implementation ("com.google.android.material:material:1.4.0")
+    //implementation ("com.google.android.material:material:1.4.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -76,4 +76,7 @@ dependencies {
 
     implementation ("com.github.bumptech.glide:glide:4.13.0")
     implementation ("ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.2.5")
+
+    implementation ("com.google.android.material:material:1.10.0")
+
 }

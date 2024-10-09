@@ -3,9 +3,12 @@ package com.example.pillmate
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.POST
 import retrofit2.http.GET
 import retrofit2.http.PATCH
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface RetrofitService {
@@ -41,16 +44,28 @@ interface RetrofitService {
     @PATCH("medicines")
     fun patchMedi(@Body request : MediEditRequest): Call<String>
 
-    @GET("medicines/name")
-    fun getMediInfo(@Body request: MediInfoRequest) : Call<MediInfoResponse>
+    @POST("medicines/name")
+    fun postMediInfo(@Body request: List<MediInfoRequest>) : Call<List<MediInfoResponse>>
 
-    @POST("alarms")
-    fun postAlarm(@Body request: AddAlarmRequest) : Call<String>
+//    @POST("alarms")
+//    fun postAlarm(@Body request: AddAlarmRequest) : Call<String>
 
     // 로직 수정중
     @GET("alarms")
-    fun getAlarm() : Call<AlarmListResponse>
+    fun getAlarm() : Call<List<AlarmListResponse>>
 
     @GET("main")
     fun getMain() : Call<MainPageResponse>
+
+    @DELETE("medicines")
+    fun delMedicine( @Query("medicineId") medicineId: Int) : Call<String>
+
+    // 알람 True->False 현재 수정중
+    @PATCH("alarms/{alarmId}/{available}")
+    fun patchAlarm(
+        @Path("alarmId") alarmId: Int,   // 알람 ID를 경로로 전달
+        @Path("available") isAvailable: Boolean // 알람 상태 (true/false)를 경로로 전달
+    ): Call<String>
+
+
 }

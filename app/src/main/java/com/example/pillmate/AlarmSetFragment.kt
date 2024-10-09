@@ -44,33 +44,16 @@ class AlarmSetFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentAlarmSetBinding.inflate(inflater, container, false)
 
-//        binding.btnSetAlarm.setOnClickListener {
-//            //setAlarm(10,"파스틱정")
-//            Toast.makeText(requireContext(), "10초 후에 알람이 울립니다", Toast.LENGTH_SHORT).show()
-//        }
-
         // RecyclerView 설정
         recyclerView = binding.alarmListRecy
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-//        // 샘플 데이터 생성
-//        listAlarmItems = mutableListOf(
-//            ListAlarmItem("오전", "07:00", "트윈스타정 (고혈압)", "1정 | 매일 1회 | 90일", "기상 직후", true),
-//            ListAlarmItem("오후", "12:00", "다이미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 90일", "기상 직후", false),
-//            ListAlarmItem("오전", "07:00", "트윈스타정 (고혈압)", "1정 | 매일 1회 | 90일", "기상 직후", true),
-//            ListAlarmItem("오후", "12:00", "다이미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 90일", "기상 직후", false),
-//            ListAlarmItem("오전", "07:00", "트윈스타정 (고혈압)", "1정 | 매일 1회 | 90일", "기상 직후", true),
-//            ListAlarmItem("오후", "12:00", "다이미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 90일", "기상 직후", false),
-//            ListAlarmItem("오전", "07:00", "트윈스타정 (고혈압)", "1정 | 매일 1회 | 90일", "기상 직후", true),
-//            ListAlarmItem("오후", "12:00", "다이미크롱서방정 (제2형당뇨)", "1정 | 매일 1회 | 90일", "기상 직후", false)
-//        )
 
         // Adapter 설정
         adapter = ListAlarmAdapter(listAlarmItems, requireContext())
         recyclerView.adapter = adapter
 
         // 알람 Get API 연결하기
-        //getAlarmDataFromServer()
+        getAlarmDataFromServer()
 
         return binding.root
     }
@@ -81,59 +64,79 @@ class AlarmSetFragment : Fragment() {
         val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
         val call = service.getAlarm() // Alarm 데이터를 가져오는 API 호출
 
-//        // API 호출 시 AlarmListResponse가 아닌 List<AlarmItemResponse>를 받도록 수정
-//        call.enqueue(object : Callback<AlarmListResponse> {
-//            override fun onResponse(
-//                call: Call<AlarmListResponse>,
-//                response: Response<AlarmListResponse>
-//            ) {
-//                if (response.isSuccessful) {
-//                    val alarmList = response.body() ?: emptyList()
-//                    Log.d("AlarmSetFragment", "API call successful, received ${alarmList.size} alarms")
-//
-//                    // 데이터를 받아서 listAlarmItems에 추가
-//                    listAlarmItems.clear() // 기존 데이터를 초기화
-//                    listAlarmItems.addAll(alarmList.map { alarm ->
-//                        // 시간 포맷 변경 (24시간제 -> 12시간제)
-//                        val formattedTime = convert24HourTo12Hour(alarm.timeSlotList[0].pickerTime)
-//
-//                        Log.d("AlarmSetFragment", "Adding alarm: ${alarm.name} at $formattedTime")
-//
-//                        ListAlarmItem(
-//                            if (alarm.timeSlotList[0].pickerTime.split(":")[0].toInt() < 12) "오전" else "오후", // 오전/오후 구분
-//                            formattedTime, // 포맷팅된 시간
-//                            alarm.name, // 약품명
-//                            "${alarm.amount}정 | 매일 ${alarm.timesPerDay}회 | ${alarm.day}일", // 약 복용 정보
-//                            alarm.timeSlotList[0].spinnerTime, // 시간대 설명
-//                            alarm.isAvailable // 사용 가능 여부
-//                        )
-//                    })
-//                    adapter.notifyDataSetChanged() // 어댑터에 데이터가 변경되었음을 알림
-//                    Log.d("AlarmSetFragment", "Adapter notified, data updated")
-//                } else {
-//                    Log.e("AlarmSetFragment", "Failed to get alarm data: ${response.errorBody()?.string()}")
-//                    Toast.makeText(requireContext(), "알람 데이터를 가져오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<AlarmListResponse>, t: Throwable) {
-//                Log.e("AlarmSetFragment", "API call failed: ${t.message}")
-//                Toast.makeText(requireContext(), "알람 데이터를 가져오는 데 실패했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
-//            }
-//
-//        })
+        call.enqueue(object : Callback<List<AlarmListResponse>> {
+            override fun onResponse(
+                call: Call<List<AlarmListResponse>>,
+                response: Response<List<AlarmListResponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val alarmList = response.body()
+
+                    if (alarmList.isNullOrEmpty()) {
+                        // 데이터가 없거나 null인 경우
+                        binding.alarmListRecy.visibility = View.GONE
+                        binding.nonMediAlarmLayout.visibility = View.VISIBLE
+                    } else {
+                        // 데이터가 있는 경우
+                        binding.alarmListRecy.visibility = View.VISIBLE
+                        binding.nonMediAlarmLayout.visibility = View.GONE
+
+                        Log.d("AlarmSetFragment", "API call successful, received ${alarmList.size} alarms")
+
+                        // 데이터를 받아서 listAlarmItems에 추가
+                        listAlarmItems.clear() // 기존 데이터를 초기화
+                        listAlarmItems.addAll(alarmList.map { alarm ->
+                            // 시간 포맷 변경 (24시간제 -> 12시간제)
+                            val formattedTime = convert24HourTo12Hour(alarm.timeSlot.pickerTime)
+
+                            Log.d("AlarmSetFragment", "Adding alarm: ${alarm.name} at $formattedTime")
+
+                            ListAlarmItem(
+                                alarm.id,
+                                if (alarm.timeSlot.pickerTime.split(":")[0].toInt() < 12) "오전" else "오후", // 오전/오후 구분
+                                formattedTime, // 포맷팅된 시간
+                                alarm.name, // 약품명
+                                "${alarm.amount}정 | 매일 ${alarm.timesPerDay}회 | ${alarm.day}일", // 약 복용 정보
+                                alarm.timeSlot.spinnerTime, // 시간대 설명
+                                alarm.isAvailable // 사용 가능 여부
+                            )
+                        })
+                        adapter.notifyDataSetChanged() // 어댑터에 데이터가 변경되었음을 알림
+                        Log.d("AlarmSetFragment", "Adapter notified, data updated")
+                    }
+                } else {
+                    Log.e("AlarmSetFragment", "Failed to get alarm data: ${response.errorBody()?.string()}")
+                    Toast.makeText(requireContext(), "알람 데이터를 가져오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
+
+                    // API 실패 시 레이아웃 처리
+                    binding.alarmListRecy.visibility = View.GONE
+                    binding.nonMediAlarmLayout.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onFailure(call: Call<List<AlarmListResponse>>, t: Throwable) {
+                Log.e("AlarmSetFragment", "API call failed: ${t.message}")
+                Toast.makeText(requireContext(), "알람 데이터를 가져오는 데 실패했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
+
+                // 네트워크 오류 발생 시 레이아웃 처리
+                binding.alarmListRecy.visibility = View.GONE
+                binding.nonMediAlarmLayout.visibility = View.VISIBLE
+            }
+        })
     }
 
 
-    // 24시간 형식(18:00:00)을 12시간 형식(오후 6:00)으로 변환하는 함수
+    // 24시간 형식(18:00:00)을 12시간 형식(오후 06:00)으로 변환하는 함수
     private fun convert24HourTo12Hour(time: String): String {
         val hour = time.split(":")[0].toInt()
         val minute = time.split(":")[1]
         val amPm = if (hour < 12) "오전" else "오후"
         val hour12 = if (hour % 12 == 0) 12 else hour % 12
-        Log.d("AlarmSetFragment", "Converted time: $time to $amPm $hour12:$minute")
-        return "$amPm $hour12:$minute"
+        Log.d("AlarmSetFragment", "Converted time: $time to $amPm ${String.format("%02d", hour12)}:$minute")
+        return "${String.format("%02d", hour12)}:$minute"
     }
+
+
 
     override fun onResume() {
         super.onResume()
@@ -141,51 +144,4 @@ class AlarmSetFragment : Fragment() {
         Log.d("AlarmSetFragment", "Fragment resumed, fetching alarm data")
         getAlarmDataFromServer()
     }
-
-//    private fun setAlarm(seconds: Int, pillName: String) {
-//        //val context = itemView.context
-//        val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//        val intent = Intent(context, AlarmReceiver::class.java).apply {
-//            action = AlarmReceiver.ACTION_RESTART_SERVICE // 추가된 부분
-//            putExtra("pill_name", pillName)
-//        }
-//        val pendingIntent = PendingIntent.getBroadcast(
-//            context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-//        )
-//
-//        val calendar = Calendar.getInstance().apply {
-//            timeInMillis = System.currentTimeMillis()
-//            add(Calendar.SECOND, seconds)
-//        }
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-//            val canScheduleExactAlarms = alarmManager.canScheduleExactAlarms()
-//            if (!canScheduleExactAlarms) {
-//                Log.w("PillListAdapter", "Requesting exact alarm permission.")
-//                val intent = Intent().apply {
-//                    action = Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
-//                }
-//                //fragment.startActivityForResult(intent, REQUEST_CODE_SCHEDULE_EXACT_ALARM)
-//                return
-//            }
-//        }
-//
-//        try {
-//            alarmManager.setExactAndAllowWhileIdle(
-//                AlarmManager.RTC_WAKEUP,
-//                calendar.timeInMillis,
-//                pendingIntent
-//            )
-//            // Log the alarm time
-//            val formattedTime = "%02d:%02d:%02d".format(
-//                calendar.get(Calendar.HOUR_OF_DAY),
-//                calendar.get(Calendar.MINUTE),
-//                calendar.get(Calendar.SECOND)
-//            )
-//            Log.d("PillListAdapter", "Alarm set for: $formattedTime, Pill: $pillName")
-//        } catch (e: SecurityException) {
-//            Log.e("PillListAdapter", "SecurityException: ${e.message}")
-//            // Handle SecurityException gracefully, perhaps by requesting necessary permissions
-//        }
-//    }
 }

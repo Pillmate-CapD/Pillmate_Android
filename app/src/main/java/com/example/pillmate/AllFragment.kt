@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pillmate.MediListAdapter
@@ -15,12 +16,14 @@ import com.example.pillmate.MediListAdapter.Companion.EDIT_REQUEST_CODE
 import com.example.pillmate.MediListResponse
 import com.example.pillmate.R
 import com.example.pillmate.RetrofitApi
+import com.example.pillmate.databinding.FragmentAllbtnBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class AllFragment : Fragment() {
 
+    private lateinit var binding: FragmentAllbtnBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MediListAdapter
     private var medicineList: List<MediListResponse> = emptyList()
@@ -28,9 +31,15 @@ class AllFragment : Fragment() {
     private val editMediActivityLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
+        Log.d("AllFragment", "resultCode: ${result.resultCode}")
+
         if (result.resultCode == Activity.RESULT_OK) {
-            fetchMedicineList()
-            Log.d("AllFragment", "fetchMedicineList 호출됨")
+            val isMediEdited = result.data?.getBooleanExtra("isMediEdited", false) ?: false
+            if (isMediEdited) {
+                // 약물이 수정되었을 때 fetchMedicineList 호출
+                fetchMedicineList()
+                Log.d("AllFragment", "약물이 수정되어 fetchMedicineList 호출됨")
+            }
         } else {
             Log.d("AllFragment", "RESULT_OK가 아님")
         }
@@ -40,21 +49,21 @@ class AllFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_allbtn, container, false)
-        recyclerView = view.findViewById(R.id.recyclerView)
+        binding = FragmentAllbtnBinding.inflate(inflater, container, false)
 
-        // MediListAdapter 초기화 및 RecyclerView에 설정
-        adapter = MediListAdapter(emptyList(), requireContext(), editMediActivityLauncher)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        // RecyclerView 및 MediListAdapter 설정
+        adapter = MediListAdapter(emptyList(), requireContext(), editMediActivityLauncher, this)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // 약 리스트 가져오기
         fetchMedicineList()
 
-        return view
+        // 바인딩된 루트 뷰 반환
+        return binding.root
     }
 
-    private fun fetchMedicineList() {
+    fun fetchMedicineList() {
         val service = RetrofitApi.getRetrofitService
         val call = service.getMediAll()
 
@@ -65,10 +74,20 @@ class AllFragment : Fragment() {
             ) {
                 if (response.isSuccessful) {
                     val mediList = response.body()
-                    mediList?.let {
-                        medicineList = it
-                        adapter.updateData(it)
+
+                    if(mediList.isNullOrEmpty()){
+                        binding.nonMediLayout.visibility = View.VISIBLE
+                        binding.recyclerView.visibility = View.GONE
                     }
+                    else{
+                        mediList.let {
+                            medicineList = it
+                            adapter.updateData(it)
+                        }
+                        binding.nonMediLayout.visibility = View.GONE
+                        binding.recyclerView.visibility = View.VISIBLE
+                    }
+
                 } else {
                     Log.d("AllFragment", "약 리스트 가져오기 실패: ${response.code()}")
                 }
@@ -78,6 +97,12 @@ class AllFragment : Fragment() {
                 Log.e("AllFragment", "API 호출 실패", t)
             }
         })
+    }
+
+    override fun onResume() {
+        fetchMedicineList()
+
+        super.onResume()
     }
 }
 

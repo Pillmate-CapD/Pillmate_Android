@@ -73,7 +73,7 @@ class PrescriptActivity : AppCompatActivity() {
             takePicture()
         }
         binding.btnX.setOnClickListener{
-            finish()
+            this@PrescriptActivity.finish()
         }
 
         // overlayGuide의 위치와 크기를 정확히 계산
@@ -209,6 +209,7 @@ class PrescriptActivity : AppCompatActivity() {
                     val intent = Intent(this, AfterPreActivity::class.java)
                     intent.putExtra("photoPath", file?.absolutePath)
                     startActivity(intent)  // AfterPreActivity 실행
+                    this@PrescriptActivity.finish()
                 }
             } else {
                 runOnUiThread {
@@ -295,7 +296,7 @@ class PrescriptActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 Toast.makeText(this, "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show()
-                finish()
+                this@PrescriptActivity.finish()
             }
         }
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/bg_dialog_round15"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -22,8 +22,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         app:shapeAppearanceOverlay="@style/DialogRoundedImageStyle"
-        android:scaleType="fitCenter"
-        android:background="@drawable/bg_zoom_null"
+        android:scaleType="centerCrop"
+        android:background="@drawable/bg_null_medi"
         android:layout_marginTop="15dp"
         android:id="@+id/dia_pic_zoom"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +31,6 @@
         app:layout_constraintTop_toBottomOf="@id/dia_medi_name"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="202dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

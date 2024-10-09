@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pillmate.databinding.FragmentHomeBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -76,7 +80,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.homePillProgressBar.setMaxProgress(100)
-        binding.homePillProgressBar.setProgress(60)
+        binding.homePillProgressBar.setProgress(100)
 
         // ViewModel을 사용하여 데이터 로드
         pillViewModel.loadPillItems(
@@ -89,12 +93,24 @@ class HomeFragment : Fragment() {
             )
         )
 
+        // Getting the current month using Calendar
+        val calendar = Calendar.getInstance()
+        val month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+
+        // Updating the TextView for current month
+        binding.homeMonth.text = month
+
         pillViewModel.pillItems.observe(viewLifecycleOwner) { pillItems ->
             pillListAdapter.updateItems(pillItems)
         }
 
         binding.btnPillList.setOnClickListener {
             findNavController().navigate(R.id.listFragment)
+        }
+
+        binding.nonBtnAddMedi.setOnClickListener {
+            val navController = findNavController()
+            navController.navigate(R.id.alarmListActivity)
         }
 
         return binding.root
@@ -110,5 +126,74 @@ class HomeFragment : Fragment() {
                 pillListAdapter.notifyItemChanged(position)
             }
         }
+    }
+
+    private fun fetchMain(){
+        val service = RetrofitApi.getRetrofitService
+        val call = service.getMain()
+
+        call.enqueue(object : Callback<MainPageResponse>{
+            override fun onResponse(
+                call: Call<MainPageResponse>,
+                response: Response<MainPageResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val mainResponse= response.body()
+
+                    mainResponse?.let { response ->
+                        // Binding data to the TextViews
+                        binding.homePillLevel.text = "${response.grade}"
+                        binding.homePillUser.text = "${response.takenDay}일"
+                        binding.homePillDay.text = "/${response.month}일"
+                        binding.homePercent.text = "${response.rate}%"
+
+                        binding.homePillProgressBar.setProgress(response.rate)
+
+                        binding.homeGoodPillName.text = "${response.bestRecord.name}"
+                        binding.homePillGoodUser.text = "${response.bestRecord.taken} 정 "
+                        binding.homePillGoodNum.text = "/ ${response.bestRecord.scheduled} 정"
+
+                        binding.homeBadPillName.text = "${response.worstRecord.name}"
+                        binding.homePillBadUser.text = "${response.worstRecord.taken} 정 "
+                        binding.homePillBadNum.text ="/ ${response.worstRecord.scheduled} 정"
+
+                        binding.goodProgressBar.progress = response.bestRecord.scheduled
+                        binding.badProgressBar.progress = response.worstRecord.scheduled
+                        // Setting the progress bar
+                        //binding.homePillProgressBar.progress = response.rate
+
+                        if(response.medicineAlarmRecords.isNullOrEmpty()) {
+                            binding.pillCategory.visibility = View.INVISIBLE
+                            binding.pillList.visibility = View.GONE
+                            binding.btnAllPill.visibility = View.INVISIBLE
+                            binding.homeNonDataLayout.visibility = View.VISIBLE
+                        }
+                        else{
+                            binding.pillCategory.visibility = View.VISIBLE
+                            binding.pillList.visibility = View.VISIBLE
+                            binding.btnAllPill.visibility = View.VISIBLE
+                            binding.homeNonDataLayout.visibility = View.INVISIBLE
+                        }
+                    }
+
+                }
+            }
+            override fun onFailure(call: Call<MainPageResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    override fun onResume() {
+        fetchMain()
+
+        // Getting the current month using Calendar
+        val calendar = Calendar.getInstance()
+        val month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+
+        // Updating the TextView for current month
+        binding.homeMonth.text = month
+        super.onResume()
     }
 }

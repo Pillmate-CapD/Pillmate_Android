@@ -55,11 +55,11 @@ class AfterPreActivity : AppCompatActivity() {
         }
 
         binding.btnX.setOnClickListener{
-            finish()
+            this@AfterPreActivity.finish()
         }
 
         binding.btnAgain.setOnClickListener{
-            finish()
+            this@AfterPreActivity.finish()
         }
 
         binding.btnNext.setOnClickListener {
@@ -334,7 +334,7 @@ class AfterPreActivity : AppCompatActivity() {
             // 받아온 후에 해당 내용을 PreMediActivity로 사진이랑 같이 전달하기
             val intent = Intent(this, PreMediActivity::class.java)
             startActivity(intent)  // AfterPreActivity 실행
-
+            this@AfterPreActivity.finish()
 
         } catch (e: Exception) {
             Log.e("OCR_PROCESSING", "Error processing OCR response: ${e.message}")
@@ -424,45 +424,91 @@ class AfterPreActivity : AppCompatActivity() {
     private fun fetchMediInfo(updatedData: MutableList<Map<String, String>>) {
         val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
 
-        // updatedData 리스트에 있는 모든 명칭에 대해 약품 정보를 요청
-        updatedData.forEachIndexed { index, data ->
-            val name = data["명칭"] ?: ""
-            if (name.isNotBlank()) {
-                // MediInfoRequest 객체 생성
-                val request = MediInfoRequest(name)
-                Log.d("fetchMediInfo","$request")
-
-                // 서버로 API 요청 보내기
-                val call = service.getMediInfo(request)
-                call.enqueue(object : Callback<MediInfoResponse> {
-                    override fun onResponse(call: Call<MediInfoResponse>, response: Response<MediInfoResponse>) {
-                        if (response.isSuccessful) {
-                            val mediInfo = response.body()
-                            mediInfo?.let {
-                                Log.d("MediInfoResponse", "약품 이름: ${it.name}, 사진 URL: ${it.photo}, 카테고리: ${it.category}")
-
-                                // 기존 updatedData의 항목을 업데이트
-                                val updatedEntry = updatedData[index].toMutableMap().apply {
-                                    this["photo"] = it.photo
-                                    this["category"] = it.category
-                                }
-                                updatedData[index] = updatedEntry
-
-                                // 업데이트된 데이터를 로그로 출력
-                                Log.d("UpdatedData", updatedData.toString())
-                            }
-                        } else {
-                            Log.e("MediInfoResponse", "Error: ${response.code()} - 서버에서 약품 정보를 찾을 수 없습니다.")
-                        }
-                    }
-
-                    override fun onFailure(call: Call<MediInfoResponse>, t: Throwable) {
-                        Log.e("MediInfoResponse", "API 호출 실패: ${t.message}")
-                    }
-                })
-            }
+        // "명칭" 값만 추출하여 MediInfoRequest 리스트로 변환
+        val nameList = updatedData.mapNotNull { data ->
+            data["명칭"]?.let { MediInfoRequest(it) } // "명칭"이 null이 아니면 MediInfoRequest로 변환
         }
+
+        // 서버로 MediInfoRequest 리스트를 POST 요청으로 전송
+        val call = service.postMediInfo(nameList) // List<MediInfoRequest>를 전송
+        call.enqueue(object : Callback<List<MediInfoResponse>> {
+            override fun onResponse(call: Call<List<MediInfoResponse>>, response: Response<List<MediInfoResponse>>) {
+                if (response.isSuccessful) {
+                    val mediInfoList = response.body()
+                    mediInfoList?.forEach { mediInfo ->
+                        Log.d("sendNamesToServer", "약물 정보 수신 성공: ${mediInfo.name}, ${mediInfo.photo}, ${mediInfo.category}")
+
+                        // updatedData에서 해당 이름을 가진 항목을 찾아 업데이트
+                        updatedData.find { it["명칭"] == mediInfo.name }?.let { data ->
+                            val updatedEntry = data.toMutableMap().apply {
+                                this["photo"] = mediInfo.photo ?: "이미지 없음" // 사진이 null일 경우 기본값 설정
+                                this["category"] = mediInfo.category ?: "카테고리 없음" // 카테고리가 null일 경우 기본값 설정
+                            }
+                            // updatedData 리스트에서 기존 항목을 새로운 값으로 교체
+                            val index = updatedData.indexOf(data)
+                            if (index != -1) {
+                                updatedData[index] = updatedEntry
+                            }
+                        }
+                        // 업데이트된 데이터를 로그로 출력
+                        Log.d("UpdatedData", updatedData.toString())
+
+                        // 모든 데이터를 업데이트한 후 Intent로 PreMediActivity로 전환
+                        val intent = Intent(this@AfterPreActivity, PreMediActivity::class.java)
+                        // updatedData를 Intent에 담아서 전달 (Serializable 사용)
+                        intent.putExtra("updatedData", ArrayList(updatedData)) // ArrayList로 변환하여 전달
+                        startActivity(intent)
+                        this@AfterPreActivity.finish()
+                    }
+                } else {
+                    Log.e("sendNamesToServer", "Error: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<MediInfoResponse>>, t: Throwable) {
+                Log.e("sendNamesToServer", "API 호출 실패: ${t.message}")
+            }
+        })
+
+
+//        // updatedData 리스트에 있는 모든 명칭에 대해 약품 정보를 요청
+//        updatedData.forEachIndexed { index, data ->
+//            val name = data["명칭"] ?: ""
+//
+//            if (name.isNotBlank()) {
+//                // MediInfoRequest 객체 생성
+//                val request = MediInfoRequest(name)
+//                Log.d("fetchMediInfo","$request")
+//
+//                // 서버로 API 요청 보내기
+//                val call = service.postMediInfo(request)
+//                call.enqueue(object : Callback<MediInfoResponse> {
+//                    override fun onResponse(call: Call<MediInfoResponse>, response: Response<MediInfoResponse>) {
+//                        if (response.isSuccessful) {
+//                            val mediInfo = response.body()
+//                            mediInfo?.let {
+//                                Log.d("MediInfoResponse", "약품 이름: ${it.name}, 사진 URL: ${it.photo}, 카테고리: ${it.category}")
+//
+//                                // 기존 updatedData의 항목을 업데이트
+//                                val updatedEntry = updatedData[index].toMutableMap().apply {
+//                                    this["photo"] = it.photo
+//                                    this["category"] = it.category
+//                                }
+//                                updatedData[index] = updatedEntry
+//
+//                                // 업데이트된 데이터를 로그로 출력
+//                                Log.d("UpdatedData", updatedData.toString())
+//                            }
+//                        } else {
+//                            Log.e("MediInfoResponse", "Error: ${response.code()} - 서버에서 약품 정보를 찾을 수 없습니다.")
+//                        }
+//                    }
+//
+//                    override fun onFailure(call: Call<MediInfoResponse>, t: Throwable) {
+//                        Log.e("MediInfoResponse", "API 호출 실패: ${t.message}")
+//                    }
+//                })
+//            }
+//        }
     }
-
-
 }

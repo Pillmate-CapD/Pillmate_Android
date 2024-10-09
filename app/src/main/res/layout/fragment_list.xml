@@ -30,7 +30,7 @@
             android:textSize="20sp"
             android:fontFamily="@font/notosanskrsemibold"
             android:textColor="@color/white"
-            android:text="보관함"
+            android:text="약 보관함"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="30dp"/>
 
@@ -197,12 +197,5 @@
         android:backgroundTint="#1154FD"
         android:src="@drawable/plus"/>
 
-    <View
-        android:clickable="false"
-        android:id="@+id/view_black"
-        android:visibility="invisible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80000000"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
