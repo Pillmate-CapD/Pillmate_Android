@@ -34,7 +34,7 @@ class UserFragment : Fragment() {
         // 비밀번호 변경 버튼 처리
         val changePwButton: View = view.findViewById(R.id.btn_ch_pw)
         changePwButton.setOnClickListener {
-            val intent = Intent(activity, PwChangeActivity::class.java)
+            val intent = Intent(activity, PwChange1Activity::class.java)
             startActivity(intent)
         }
     }

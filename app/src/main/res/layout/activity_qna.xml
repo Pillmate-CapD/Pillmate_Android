@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <!-- 상단 뒤로가기 & 비밀번호 변경 타이틀 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:paddingTop="16dp"
+        android:background="#FFFFFF"
+        android:elevation="4dp">
+
+        <!-- 뒤로가기 버튼 -->
+        <ImageView
+            android:id="@+id/pwc_back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/signup_back"/>
+
+        <!-- 비밀번호 변경 텍스트 -->
+        <TextView
+            android:id="@+id/pwchange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="자주 묻는 질문"
+            android:fontFamily="@font/notosanskrbold"
+            android:textSize="18sp"
+            android:textColor="#3E3E3E"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="필메이트 서비스"
+        android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
+        android:textSize="15sp"
+        android:textColor="#898989"
+        android:paddingLeft="16dp"/>
+    <!-- 1-->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cardElevation="2dp"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Question1-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:gravity="center_vertical"
+                android:onClick="toggleAnswer">
+
+                <TextView
+                    android:id="@+id/tv_question1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosanskrregular"
+                    android:textColor="#3E3E3E"
+                    android:layout_weight="1"
+                    android:text="Q. 필메이트는 어떤 서비스인가요?"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/qnadown"/>
+            </LinearLayout>
+
+            <!-- Answer1-->
+            <TextView
+                android:id="@+id/tv_answer1"
+                android:background="#F5F6F8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textSize="13dp"
+                android:textColor="#6C6C6C"
+                android:fontFamily="@font/notosanskrregular"
+                android:text="‘필메이트(Pill Mate)’는 만성질환 환자를 위한 맞춤형 약 관리 및 건강 관리 서비스예요."
+                android:visibility="gone"
+                android:padding="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="약 리스트"
+        android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
+        android:textSize="15sp"
+        android:textColor="#898989"
+        android:paddingLeft="16dp"/>
+    <!-- 2-->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cardElevation="4dp"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Question2-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:gravity="center_vertical"
+                android:onClick="toggleAnswer">
+
+                <TextView
+                    android:id="@+id/tv_question2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosanskrregular"
+                    android:textColor="#3E3E3E"
+                    android:layout_weight="1"
+                    android:text="Q. 약을 추가하려면 어떻게 하나요?"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/qnadown"/>
+            </LinearLayout>
+
+            <!-- Answer2-->
+            <TextView
+                android:id="@+id/tv_answer2"
+                android:background="#F5F6F8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textSize="13dp"
+                android:textColor="#6C6C6C"
+                android:fontFamily="@font/notosanskrregular"
+                android:text="약 리스트 탭에서 우측 하단의 플러스 버튼을 누르면 다음 3가지 방법을 통해 새로 약을 추가할 수 있어요.
+                \n\n1) 직접 알약 정보 작성하기\n2) 알약을 촬영하여 인식하기\n3) 처방전/약봉투를 촬영하여 인식하기"
+                android:visibility="gone"
+                android:padding="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <!-- 3-->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cardElevation="4dp"
+        android:layout_marginTop="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Question3-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:gravity="center_vertical"
+                android:onClick="toggleAnswer">
+
+                <TextView
+                    android:id="@+id/tv_question3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosanskrregular"
+                    android:textColor="#3E3E3E"
+                    android:layout_weight="1"
+                    android:text="Q. 약 정보를 수정하려면 어떻게 하나요?"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/qnadown"/>
+            </LinearLayout>
+
+            <!-- Answer3 -->
+            <TextView
+                android:id="@+id/tv_answer3"
+                android:background="#F5F6F8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textSize="13dp"
+                android:textColor="#6C6C6C"
+                android:fontFamily="@font/notosanskrregular"
+                android:text="약 리스트 탭에서 원하는 약의 ‘정보 수정’ 버튼을 눌러 정보를 수정할 수 있어요."
+                android:visibility="gone"
+                android:padding="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <!-- 4-->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cardElevation="4dp"
+        android:layout_marginTop="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Q4 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:gravity="center_vertical"
+                android:onClick="toggleAnswer">
+
+                <TextView
+                    android:id="@+id/tv_question4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosanskrregular"
+                    android:textColor="#3E3E3E"
+                    android:layout_weight="1"
+                    android:text="Q. 약의 알람 시간을 수정하려면 어떻게 하나요?"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow4"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/qnadown"/>
+            </LinearLayout>
+
+            <!-- Answer4-->
+            <TextView
+                android:id="@+id/tv_answer4"
+                android:background="#F5F6F8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textSize="13dp"
+                android:textColor="#6C6C6C"
+                android:fontFamily="@font/notosanskrregular"
+                android:text="약 리스트 탭에서 원하는 약의 ‘정보 수정’ 버튼을 눌러 알람 시간을 수정할 수 있어요."
+                android:visibility="gone"
+                android:padding="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <!-- 5-->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cardElevation="4dp"
+        android:layout_marginTop="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Q5 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:gravity="center_vertical"
+                android:onClick="toggleAnswer">
+
+                <TextView
+                    android:id="@+id/tv_question5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosanskrregular"
+                    android:textColor="#3E3E3E"
+                    android:layout_weight="1"
+                    android:text="Q. 약 알람을 해제하려면 어떻게 하나요?"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow5"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/qnadown"/>
+            </LinearLayout>
+
+            <!-- Answer5-->
+            <TextView
+                android:id="@+id/tv_answer5"
+                android:background="#F5F6F8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textSize="13dp"
+                android:textColor="#6C6C6C"
+                android:fontFamily="@font/notosanskrregular"
+                android:text="약 리스트 탭의 알람 탭에서 각각의 약 알람을 해제하거나 다시 설정할 수 있어요."
+                android:visibility="gone"
+                android:padding="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="약/처방전/약봉투 촬영 인식"
+        android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
+        android:textSize="15sp"
+        android:textColor="#898989"
+        android:paddingLeft="16dp"/>
+    <!-- 6-->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cardElevation="4dp"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Q6 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:gravity="center_vertical"
+                android:onClick="toggleAnswer">
+
+                <TextView
+                    android:id="@+id/tv_question6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosanskrregular"
+                    android:textColor="#3E3E3E"
+                    android:layout_weight="1"
+                    android:text="Q. 알약 인식이 잘 되지 않아요."
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow6"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/qnadown"/>
+            </LinearLayout>
+
+            <!-- Answer6-->
+            <TextView
+                android:id="@+id/tv_answer6"
+                android:background="#F5F6F8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textSize="13dp"
+                android:textColor="#6C6C6C"
+                android:fontFamily="@font/notosanskrregular"
+                android:text="밝은 장소에서 평평한 바닥에 알약을 놓고 알약의 무늬가 잘 인식되도록 촬영해 주세요. 장소가 어두운 경우 플래시 기능을 켜고 촬영해 보세요."
+                android:visibility="gone"
+                android:padding="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <!-- 7-->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cardElevation="4dp"
+        android:layout_marginTop="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Q7 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:gravity="center_vertical"
+                android:onClick="toggleAnswer">
+
+                <TextView
+                    android:id="@+id/tv_question7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosanskrregular"
+                    android:textColor="#3E3E3E"
+                    android:layout_weight="1"
+                    android:text="Q. 처방전과 약봉투 인식이 잘 되지 않아요."
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow7"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/qnadown"/>
+            </LinearLayout>
+
+            <!-- Answer7-->
+            <TextView
+                android:id="@+id/tv_answer7"
+                android:background="#F5F6F8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textSize="13dp"
+                android:textColor="#6C6C6C"
+                android:fontFamily="@font/notosanskrregular"
+                android:text="밝은 장소에서 평평한 바닥에 처방전 혹은 약봉투를 놓고 글씨가 흔들리지 않고 잘 인식되도록 촬영해 주세요. 장소가 어두운 경우 플래시 기능을 켜고 촬영해 보세요."
+                android:visibility="gone"
+                android:padding="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="복약 가이드"
+        android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
+        android:textSize="15sp"
+        android:textColor="#898989"
+        android:paddingLeft="16dp"/>
+    <!-- 8-->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cardElevation="4dp"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Q6 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:gravity="center_vertical"
+                android:onClick="toggleAnswer">
+
+                <TextView
+                    android:id="@+id/tv_question8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosanskrregular"
+                    android:textColor="#3E3E3E"
+                    android:layout_weight="1"
+                    android:text="Q. 약을 먹을 때마다 알약을 인식해야 하나요?"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow8"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/qnadown"/>
+            </LinearLayout>
+
+            <!-- Answer8-->
+            <TextView
+                android:id="@+id/tv_answer8"
+                android:background="#F5F6F8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textSize="13dp"
+                android:textColor="#6C6C6C"
+                android:fontFamily="@font/notosanskrregular"
+                android:text="알약을 촬영하기 어려운 상황이라면 ‘촬영 건너뛰기’ 버튼을 눌러 바로 약 복용하기 단계로 넘어갈 수 있어요."
+                android:visibility="gone"
+                android:padding="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <!-- 9-->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cardElevation="4dp"
+        android:layout_marginTop="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Q9 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:gravity="center_vertical"
+                android:onClick="toggleAnswer">
+
+                <TextView
+                    android:id="@+id/tv_question9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosanskrregular"
+                    android:textColor="#3E3E3E"
+                    android:layout_weight="1"
+                    android:text="Q. 약을 먹지 못하는 경우 약 알람을 어떻게 하나요?"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow9"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/qnadown"/>
+            </LinearLayout>
+
+            <!-- Answer9-->
+            <TextView
+                android:id="@+id/tv_answer9"
+                android:background="#F5F6F8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textSize="13dp"
+                android:textColor="#6C6C6C"
+                android:fontFamily="@font/notosanskrregular"
+                android:text="약 알람을 받았는데 약을 먹지 못하는 경우 ‘오늘은 먹지 못하나요?’ 버튼을 눌러 해당 약 알람을 해제할 수 있어요."
+                android:visibility="gone"
+                android:padding="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
+</ScrollView>

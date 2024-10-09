@@ -118,6 +118,9 @@
             android:name=".PwChangeActivity"
             android:exported="false" />
         <activity
+            android:name=".PwChange1Activity"
+            android:exported="false" />
+        <activity
             android:name=".PwChangeOkActivity"
             android:exported="false" />
     </application>

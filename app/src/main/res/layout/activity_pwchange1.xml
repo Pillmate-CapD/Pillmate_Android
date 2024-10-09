@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <!-- 상단 뒤로가기 & 비밀번호 변경 타이틀 -->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -40,16 +39,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingRight="16dp"
-        android:paddingLeft="16dp"
-        >
+        android:paddingLeft="16dp">
 
-        <!-- 새 비밀번호 -->
+        <!-- 현재 비밀번호 -->
         <TextView
-            android:id="@+id/newpw"
+            android:id="@+id/pwnow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
-            android:text="새 비밀번호"
+            android:text="현재 비밀번호"
             android:fontFamily="@font/notosanskrsemibold"
             android:textColor="#3E3E3E"
             android:layout_marginTop="60dp"
@@ -62,11 +60,11 @@
             android:background="@drawable/bg_signup"
             android:layout_marginTop="10dp">
             <EditText
-                android:id="@+id/et_newpw"
+                android:id="@+id/et_pwnow"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="새 비밀번호"
+                android:hint="현재 비밀번호"
                 android:background="@null"
                 android:inputType="textPassword"
                 android:fontFamily="@font/notosanskrregular"
@@ -75,7 +73,7 @@
                 android:paddingLeft="16sp"
                 android:layout_gravity="center_vertical"/>
             <ImageView
-                android:id="@+id/pw_toggle2"
+                android:id="@+id/pw_toggle1"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
                 android:layout_marginEnd="11dp"
@@ -83,69 +81,13 @@
                 android:layout_gravity="center_vertical"
                 android:visibility="invisible"/>
         </LinearLayout>
-
         <!-- 비밀번호 조건 메시지 -->
         <TextView
-            android:id="@+id/pw_errorm2"
+            android:id="@+id/pw_errorm1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
-            android:text="7자 이상의 영문, 숫자, 특수문자 포함"
-            android:textSize="13sp"
-            android:fontFamily="@font/notosanskrregular"
-            android:textColor="#C0C0C0"
-            android:layout_marginLeft="5sp"
-            android:layout_marginTop="5dp"
-            android:visibility="visible"/>
-
-        <!-- 비밀번호 확인 -->
-        <TextView
-            android:id="@+id/passwordconfirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:text="새 비밀번호 확인"
-            android:fontFamily="@font/notosanskrsemibold"
-            android:textColor="#3E3E3E"
-            android:layout_marginTop="45dp"
-            android:textSize="16sp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_signup"
-            android:layout_marginTop="10dp">
-            <EditText
-                android:id="@+id/et_password_confirm"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="비밀번호를 한 번 더 입력해 주세요"
-                android:background="@null"
-                android:inputType="textPassword"
-                android:fontFamily="@font/notosanskrregular"
-                android:textColor="#696969"
-                android:textSize="15sp"
-                android:paddingLeft="16sp"
-                android:layout_gravity="center_vertical"/>
-            <ImageView
-                android:id="@+id/pw_toggle3"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_marginEnd="11dp"
-                android:src="@drawable/login_eyeoff"
-                android:layout_gravity="center_vertical"
-                android:visibility="invisible"/>
-        </LinearLayout>
-
-        <!-- 비밀번호 확인 오류 메시지 -->
-        <TextView
-            android:id="@+id/pw_errorm3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:text="비밀번호가 일치하지 않습니다"
+            android:text="정확한 비밀번호를 다시 입력해 주세요"
             android:textSize="13sp"
             android:fontFamily="@font/notosanskrregular"
             android:textColor="#DC1818"
@@ -153,7 +95,6 @@
             android:layout_marginTop="5dp"
             android:visibility="invisible"/>
     </LinearLayout>
-
     <!-- 하단에 버튼을 고정시키기 위해 FrameLayout 사용 -->
     <FrameLayout
         android:layout_width="match_parent"
@@ -163,10 +104,10 @@
 
         <!-- 변경하기 버튼 (하단에서 50dp 띄우기) -->
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_nextt"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:text="변경하기"
+            android:text="다음"
             android:background="@drawable/bt_login_disable"
             android:textColor="#898989"
             android:textSize="15sp"
@@ -176,4 +117,5 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="50dp"/>
     </FrameLayout>
+
 </LinearLayout>

@@ -27,9 +27,13 @@ interface RetrofitService {
 
 
     //마이페이지 기존 비번 확인
-    @POST("check/password")
+    @POST("members/check/password")
     suspend fun checkPassword(
-        @Body passwordCheckRequest: PasswordCheckRequest): PasswordCheckResponse
+        @Body passwordCheckRequest: PasswordCheckRequest
+    ): Boolean
+    //@POST("members/check/password")
+    //suspend fun checkPassword(
+    //@Body passwordCheckRequest: PasswordCheckRequest): PasswordCheckResponse
 
     //마이페이지 비번 변경 (new password)
     @PATCH("members/password")
