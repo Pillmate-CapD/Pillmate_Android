@@ -18,6 +18,8 @@ class PwChangeOkActivity : AppCompatActivity() {
 
         // btn_register 버튼 클릭 시 이전 화면(UserFragment)으로 돌아가기
         binding.btnRegister.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
             finish()  // 현재 Activity 종료
         }
     }
