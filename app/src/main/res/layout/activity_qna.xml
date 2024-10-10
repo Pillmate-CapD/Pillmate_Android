@@ -53,7 +53,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cardElevation="2dp"
         android:layout_marginTop="12dp">
 
         <LinearLayout
@@ -122,7 +121,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cardElevation="4dp"
         android:layout_marginTop="12dp">
 
         <LinearLayout
@@ -182,7 +180,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cardElevation="4dp"
         android:layout_marginTop="0dp">
 
         <LinearLayout
@@ -241,7 +238,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cardElevation="4dp"
         android:layout_marginTop="0dp">
 
         <LinearLayout
@@ -300,7 +296,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cardElevation="4dp"
         android:layout_marginTop="0dp">
 
         <LinearLayout
@@ -369,7 +364,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cardElevation="4dp"
         android:layout_marginTop="12dp">
 
         <LinearLayout
@@ -428,7 +422,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cardElevation="4dp"
         android:layout_marginTop="0dp">
 
         <LinearLayout
@@ -497,7 +490,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cardElevation="4dp"
         android:layout_marginTop="12dp">
 
         <LinearLayout
@@ -556,7 +548,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cardElevation="4dp"
         android:layout_marginTop="0dp">
 
         <LinearLayout
