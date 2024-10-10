@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val sharedPreferences = requireActivity().getSharedPreferences("userName", MODE_PRIVATE)
-        val userName = sharedPreferences.getString("userName", "손해인?")
+        val userName = sharedPreferences.getString("userName", "손해인")
         if (userName!=null){
                 // 홈화면 => 주간 달력
                 dateAdapter = DateAdapter(dateViewModel.dateItems as ArrayList<DateItem>)
@@ -129,9 +129,6 @@ class HomeFragment : Fragment() {
                     navController.navigate(R.id.alarmListActivity)
                 }
         }
-
-
-
         return binding.root
     }
 
@@ -195,9 +192,9 @@ class HomeFragment : Fragment() {
 
 
                         if(response.medicineAlarmRecords.isNullOrEmpty()) {
-                            binding.pillCategory.visibility = View.INVISIBLE
+                            binding.pillCategory.visibility = View.GONE
                             binding.pillList.visibility = View.GONE
-                            binding.btnAllPill.visibility = View.INVISIBLE
+                            binding.btnAllPill.visibility = View.GONE
                             binding.homeNonDataLayout.visibility = View.VISIBLE
                         }
                         else{
