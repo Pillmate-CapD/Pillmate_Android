@@ -197,6 +197,7 @@ class LoginActivity : AppCompatActivity() {
                         Log.d("LoginActivity", "로그인 성공! 액세스 토큰: $accessToken")
 
                         val userName = loginResponse.tokenInfo.name
+                        Log.e("Login_Click","Login_Btn_Click: $userName",)
 
                         if (isAutoLoginChecked){
                             val auto = getSharedPreferences("autoLogin", MODE_PRIVATE)
@@ -214,6 +215,7 @@ class LoginActivity : AppCompatActivity() {
                         val editor = preferences.edit()
 
                         editor.putString("userName", userName)
+                        editor.commit()
 
                         App.prefs.token = accessToken
 
