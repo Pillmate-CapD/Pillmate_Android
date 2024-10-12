@@ -24,10 +24,10 @@ class AlarmListActivity : AppCompatActivity() {
         binding.alarmList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.alarmList.adapter = alarmListAdapter
 
-        // 카테고리 아이템 추가
-        alarmItems.add(AlarmListItem("복약알림","\'파스틱정\'을 먹을 시간이에요", "방금 전"))
-        alarmItems.add(AlarmListItem("복약알림","\'트윈스타정\', \'디아미크롱정\'을 먹을 시간이에요", "5시간 전"))
-        alarmItems.add(AlarmListItem("건강일지알림","오늘의 건강일지를 작성해보세요", "1일 전"))
+//        // 카테고리 아이템 추가
+//        alarmItems.add(AlarmListItem("복약알림","\'파스틱정\'을 먹을 시간이에요", "방금 전"))
+//        alarmItems.add(AlarmListItem("복약알림","\'트윈스타정\', \'디아미크롱정\'을 먹을 시간이에요", "5시간 전"))
+//        alarmItems.add(AlarmListItem("건강일지알림","오늘의 건강일지를 작성해보세요", "1일 전"))
 
         binding.btnBefore.setOnClickListener {
             finish()

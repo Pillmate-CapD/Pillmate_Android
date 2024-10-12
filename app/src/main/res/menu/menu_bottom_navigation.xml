@@ -9,7 +9,7 @@
     <item
         android:id="@+id/listFragment"
         android:icon="@drawable/list"
-        android:title="약 리스트" />
+        android:title="약 보관함" />
 
     <item
         android:id="@+id/calendarFragment"
