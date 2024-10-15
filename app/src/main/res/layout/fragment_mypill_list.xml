@@ -7,9 +7,9 @@
     android:background="#F9F9F9">
     
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:background="#F9F9F9"
         android:id="@+id/recy_category"
-        android:paddingRight="16dp"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:layout_width="match_parent"

@@ -43,11 +43,25 @@ class ListFragment : Fragment() {
         binding.btnPrecription.setOnClickListener {
             val intent = Intent(requireContext(), PrescriptActivity::class.java)
             startActivity(intent)
+            binding.btnPrecription.visibility = View.INVISIBLE
+            binding.tvPrescript.visibility = View.INVISIBLE
+            binding.btnPillRecog.visibility = View.INVISIBLE
+            binding.tvPillRecog.visibility = View.INVISIBLE
+            binding.btnPillWrite.visibility = View.INVISIBLE
+            binding.tvPillWrite.visibility = View.INVISIBLE
+            binding.viewWhite.visibility = View.INVISIBLE
         }
 
         binding.btnPillWrite.setOnClickListener {
             val intent = Intent(requireContext(), WriteMediActivity::class.java)
             startActivity(intent)
+            binding.btnPrecription.visibility = View.INVISIBLE
+            binding.tvPrescript.visibility = View.INVISIBLE
+            binding.btnPillRecog.visibility = View.INVISIBLE
+            binding.tvPillRecog.visibility = View.INVISIBLE
+            binding.btnPillWrite.visibility = View.INVISIBLE
+            binding.tvPillWrite.visibility = View.INVISIBLE
+            binding.viewWhite.visibility = View.INVISIBLE
             // FAB를 닫는 메서드 호출
             if (isFabOpen) {
                 closeFab()
@@ -147,6 +161,7 @@ class ListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
         // 화면에 돌아올 때도 FAB를 닫아줌
         if (isFabOpen) {
             closeFab()

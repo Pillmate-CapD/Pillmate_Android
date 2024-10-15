@@ -1,5 +1,6 @@
 package com.example.pillmate
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -85,18 +86,10 @@ class EndPreActivity : AppCompatActivity() {
                         showCustomToast(it) // 서버에서 보낸 메시지를 토스트로 표시
                         //this@EndPreActivity.finish()
                         Log.d("EndPreActivity", "약 추가 성공: $it")
-                        showCustomToast(it) // 서버에서 보낸 메시지를 토스트로 표시
+                        showCustomToast(it) // 서버에서 보낸 메시지를 토스트로 표시ㅁ
 
-// Fragment 전환을 위한 FragmentTransaction
-                        val fragmentTransaction = supportFragmentManager.beginTransaction()
-                        val listFragment = ListFragment() // 이동할 ListFragment 인스턴스 생성
-
-// fragment_container는 ListFragment를 담을 수 있는 레이아웃 ID
-                        fragmentTransaction.replace(R.id.nav_host_fragment, listFragment)
-                        fragmentTransaction.addToBackStack(null)  // 뒤로 가기 스택에 추가 (선택 사항)
-                        fragmentTransaction.commit()  // 트랜잭션 실행
-
-// 액티비티 종료 (선택 사항)
+                        val intent = Intent(this@EndPreActivity, AddMediFinActivity::class.java)
+                        startActivity(intent)
                         finish()
                     }
                 } else {

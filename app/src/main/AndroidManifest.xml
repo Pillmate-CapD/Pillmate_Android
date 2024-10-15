@@ -34,6 +34,10 @@
         android:theme="@style/AppTheme"
         tools:targetApi="33">
         <activity
+            android:name=".AddMediFinActivity"
+            android:launchMode="singleTask"
+            android:exported="false" />
+        <activity
             android:name=".EndPreActivity"
             android:exported="false" />
         <activity
@@ -41,6 +45,7 @@
             android:exported="false" />
         <activity
             android:name=".PreMediActivity"
+            android:launchMode="singleTask"
             android:exported="false" />
         <activity
             android:name=".AfterPreActivity"

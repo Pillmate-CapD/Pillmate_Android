@@ -107,7 +107,7 @@ class HomeFragment : Fragment() {
 //                PillListItem("오후 9:00", "바이토린")
 //            )
 //        )
-                fetchHealthInfo()
+                //fetchHealthInfo()
 
                 // Getting the current month using Calendar
                 val calendar = Calendar.getInstance()
@@ -132,17 +132,6 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == REQUEST_CODE_EAT_MEDI && resultCode == Activity.RESULT_OK) {
-//            val completed = data?.getBooleanExtra("completed", false) ?: false
-//            val position = data?.getIntExtra("position", -1) ?: -1
-//            if (completed && position != -1) {
-//                pillViewModel.setPillCompleted(position, true)
-//                pillListAdapter.notifyItemChanged(position)
-//            }
-//        }
-//    }
 
     private fun fetchMain(){
         val service = RetrofitApi.getRetrofitService
@@ -165,16 +154,20 @@ class HomeFragment : Fragment() {
 
                         binding.homePillProgressBar.setProgress(response.rate)
 
-                        binding.homeGoodPillName.text = "${response.bestRecord.name}"
-                        binding.homePillGoodUser.text = "${response.bestRecord.taken} 정 "
-                        binding.homePillGoodNum.text = "/ ${response.bestRecord.scheduled} 정"
+                        // Handling bestRecord nullability
+                        val bestRecord = response.bestRecord
+                        binding.homeGoodPillName.text = bestRecord.name ?: "약을 추가해보세요"
+                        binding.homePillGoodUser.text = "${bestRecord.taken ?: 0} 정"
+                        binding.homePillGoodNum.text = "/ ${bestRecord.scheduled ?: 0} 정"
+                        binding.goodProgressBar.progress = bestRecord.scheduled ?: 100
 
-                        binding.homeBadPillName.text = "${response.worstRecord.name}"
-                        binding.homePillBadUser.text = "${response.worstRecord.taken} 정 "
-                        binding.homePillBadNum.text ="/ ${response.worstRecord.scheduled} 정"
+                        // Handling worstRecord nullability
+                        val worstRecord = response.worstRecord
+                        binding.homeBadPillName.text = worstRecord.name ?: "약을 추가해보세요"
+                        binding.homePillBadUser.text = "${worstRecord.taken ?: 0} 정"
+                        binding.homePillBadNum.text = "/ ${worstRecord.scheduled ?: 0} 정"
+                        binding.badProgressBar.progress = worstRecord.scheduled ?: 100
 
-                        binding.goodProgressBar.progress = response.bestRecord.scheduled
-                        binding.badProgressBar.progress = response.worstRecord.scheduled
                         // Setting the progress bar
                         //binding.homePillProgressBar.progress = response.rate
 
@@ -182,9 +175,31 @@ class HomeFragment : Fragment() {
                         pillViewModel.loadPillItems(
                             response.medicineAlarmRecords.map {
                                 val formattedTime = convertTimeTo12HourFormat(it.time)
-                                PillListItem(time = formattedTime, name = it.name, isEaten = it.isEaten, category = it.category)
+                                val category = it.category ?: "Unknown" // category가 null이면 기본값 "Unknown"을 사용
+                                PillListItem(time = formattedTime, name = it.name, isEaten = it.isEaten, category = category)
                             }
                         )
+
+
+                        // 약 리스트에서 중복되지 않은 카테고리 추출
+                        val uniqueCategories = mutableSetOf<String>()
+                        response.medicineAlarmRecords.forEach {
+                            val category = it.category ?: "Unknown" // category가 null이면 "Unknown" 사용
+                            uniqueCategories.add(category) // Set을 사용하면 중복이 자동으로 제거됨
+                        }
+
+                        // categoryItems 리스트 초기화 및 "전체" 추가
+                        categoryItems.clear()
+                        categoryItems.add(CategoryItem("전체", true)) // "전체" 기본 추가
+
+                        // 중복 제거된 카테고리를 categoryItems에 추가
+                        uniqueCategories.forEach { category ->
+                            categoryItems.add(CategoryItem(category))
+                        }
+
+                        // 어댑터에 변경 사항 반영
+                        categoryAdapter.notifyDataSetChanged()
+
 
                         // 서버에서 받은 progress 리스트를 ViewModel에 전달
 //                        val progressValues = response.weekRateInfoList.map { it.rate }
@@ -192,12 +207,14 @@ class HomeFragment : Fragment() {
 
 
                         if(response.medicineAlarmRecords.isNullOrEmpty()) {
+                            binding.listView.visibility = View.GONE
                             binding.pillCategory.visibility = View.GONE
                             binding.pillList.visibility = View.GONE
                             binding.btnAllPill.visibility = View.GONE
                             binding.homeNonDataLayout.visibility = View.VISIBLE
                         }
                         else{
+                            binding.listView.visibility = View.VISIBLE
                             binding.pillCategory.visibility = View.VISIBLE
                             binding.pillList.visibility = View.VISIBLE
                             binding.btnAllPill.visibility = View.VISIBLE
@@ -215,40 +232,40 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun fetchHealthInfo(){
-        val service = RetrofitApi.getRetrofitService
-        val call = service.getHealthInfo()
-
-        call.enqueue(object : Callback<HealthInfoResponse>{
-            override fun onResponse(
-                call: Call<HealthInfoResponse>,
-                response: Response<HealthInfoResponse>
-            ) {
-                if(response.isSuccessful){
-                    val healthResponse = response.body()
-
-                    healthResponse?.let{ response->
-                        // 카테고리 아이템 초기화 및 "전체" 항목 추가
-                        categoryItems.clear() // 기존 항목을 지우고 새로 추가
-                        categoryItems.add(CategoryItem("전체", true)) // 전체 항목 추가
-
-                        // diseases 리스트에서 disease 이름을 카테고리로 추가
-                        response.diseases.forEach { diseaseInfo ->
-                            categoryItems.add(CategoryItem(diseaseInfo.disease))
-                        }
-
-                        // RecyclerView 등의 어댑터에 반영
-                        categoryAdapter.notifyDataSetChanged()
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<HealthInfoResponse>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
+//    private fun fetchHealthInfo(){
+//        val service = RetrofitApi.getRetrofitService
+//        val call = service.getHealthInfo()
+//
+//        call.enqueue(object : Callback<HealthInfoResponse>{
+//            override fun onResponse(
+//                call: Call<HealthInfoResponse>,
+//                response: Response<HealthInfoResponse>
+//            ) {
+//                if(response.isSuccessful){
+//                    val healthResponse = response.body()
+//
+//                    healthResponse?.let{ response->
+//                        // 카테고리 아이템 초기화 및 "전체" 항목 추가
+//                        categoryItems.clear() // 기존 항목을 지우고 새로 추가
+//                        categoryItems.add(CategoryItem("전체", true)) // 전체 항목 추가
+//
+//                        // diseases 리스트에서 disease 이름을 카테고리로 추가
+//                        response.diseases.forEach { diseaseInfo ->
+//                            categoryItems.add(CategoryItem(diseaseInfo.disease))
+//                        }
+//
+//                        // RecyclerView 등의 어댑터에 반영
+//                        categoryAdapter.notifyDataSetChanged()
+//                    }
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<HealthInfoResponse>, t: Throwable) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
+//    }
 
     // 시간을 24시간 형식에서 12시간 형식으로 변환하는 함수
     private fun convertTimeTo12HourFormat(time: String): String {
@@ -268,7 +285,7 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         fetchMain()
-        fetchHealthInfo()
+        //fetchHealthInfo()
 
         // Getting the current month using Calendar
         val calendar = Calendar.getInstance()

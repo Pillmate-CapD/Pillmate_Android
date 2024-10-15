@@ -11,11 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.capdi_eat_test.MyPillListFragment
 import com.example.pillmate.MediListAdapter
 import com.example.pillmate.MediListAdapter.Companion.EDIT_REQUEST_CODE
 import com.example.pillmate.MediListResponse
 import com.example.pillmate.R
 import com.example.pillmate.RetrofitApi
+import com.example.pillmate.SharedViewModel
 import com.example.pillmate.databinding.FragmentAllbtnBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,24 +28,9 @@ class AllFragment : Fragment() {
     private lateinit var binding: FragmentAllbtnBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MediListAdapter
-    private var medicineList: List<MediListResponse> = emptyList()
-
-    private val editMediActivityLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        Log.d("AllFragment", "resultCode: ${result.resultCode}")
-
-        if (result.resultCode == Activity.RESULT_OK) {
-            val isMediEdited = result.data?.getBooleanExtra("isMediEdited", false) ?: false
-            if (isMediEdited) {
-                // 약물이 수정되었을 때 fetchMedicineList 호출
-                fetchMedicineList()
-                Log.d("AllFragment", "약물이 수정되어 fetchMedicineList 호출됨")
-            }
-        } else {
-            Log.d("AllFragment", "RESULT_OK가 아님")
-        }
-    }
+    private var medicineList: List<MediListResponse> = emptyList() // API로부터 받은 원본 데이터
+    private var filteredList: List<MediListResponse> = emptyList() // 필터링된 데이터
+    private var selectedCategory: String = "전체" // 기본값은 항상 '전체'
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,11 +39,11 @@ class AllFragment : Fragment() {
         binding = FragmentAllbtnBinding.inflate(inflater, container, false)
 
         // RecyclerView 및 MediListAdapter 설정
-        adapter = MediListAdapter(emptyList(), requireContext(), editMediActivityLauncher, this)
+        adapter = MediListAdapter(emptyList(), requireContext(), this, SharedViewModel())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // 약 리스트 가져오기
+        // 처음에는 기본적으로 전체 카테고리로 리스트를 보여줌
         fetchMedicineList()
 
         // 바인딩된 루트 뷰 반환
@@ -75,19 +62,16 @@ class AllFragment : Fragment() {
                 if (response.isSuccessful) {
                     val mediList = response.body()
 
-                    if(mediList.isNullOrEmpty()){
+                    if (mediList.isNullOrEmpty()) {
                         binding.nonMediLayout.visibility = View.VISIBLE
                         binding.recyclerView.visibility = View.GONE
-                    }
-                    else{
-                        mediList.let {
-                            medicineList = it
-                            adapter.updateData(it)
-                        }
-                        binding.nonMediLayout.visibility = View.GONE
-                        binding.recyclerView.visibility = View.VISIBLE
-                    }
+                    } else {
+                        // 받은 데이터 저장
+                        medicineList = mediList
 
+                        // 기본적으로 '전체' 카테고리를 선택한 상태에서 필터링
+                        filterMedicineList("전체")
+                    }
                 } else {
                     Log.d("AllFragment", "약 리스트 가져오기 실패: ${response.code()}")
                 }
@@ -97,6 +81,28 @@ class AllFragment : Fragment() {
                 Log.e("AllFragment", "API 호출 실패", t)
             }
         })
+    }
+
+    // 선택된 카테고리에 따라 필터링된 리스트를 업데이트하는 함수
+    fun filterMedicineList(category: String) {
+        selectedCategory = category // 선택된 카테고리 저장
+
+        filteredList = if (category == "전체") {
+            medicineList // 전체 카테고리 선택 시 원본 데이터 그대로 사용
+        } else {
+            medicineList.filter { it.category == category } // 선택된 카테고리에 맞춰 필터링
+        }
+
+        // 필터링된 리스트로 어댑터 업데이트
+        adapter.updateData(filteredList)
+
+        if (filteredList.isEmpty()) {
+            binding.nonMediLayout.visibility = View.VISIBLE
+            binding.recyclerView.visibility = View.GONE
+        } else {
+            binding.nonMediLayout.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
+        }
     }
 
     override fun onResume() {

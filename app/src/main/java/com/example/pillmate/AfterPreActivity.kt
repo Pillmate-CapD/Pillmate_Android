@@ -332,9 +332,11 @@ class AfterPreActivity : AppCompatActivity() {
 
             // 여기서 전달하기 전에 명칭을 서버로 보내서 서버에서 해당 약이 있는지 확인하고 사진을 받아와야 함.
             // 받아온 후에 해당 내용을 PreMediActivity로 사진이랑 같이 전달하기
-            val intent = Intent(this, PreMediActivity::class.java)
-            startActivity(intent)  // AfterPreActivity 실행
-            this@AfterPreActivity.finish()
+            val intent = Intent(this, PreMediActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            }
+            startActivity(intent)
+            finish()
 
         } catch (e: Exception) {
             Log.e("OCR_PROCESSING", "Error processing OCR response: ${e.message}")
@@ -457,6 +459,9 @@ class AfterPreActivity : AppCompatActivity() {
                         val intent = Intent(this@AfterPreActivity, PreMediActivity::class.java)
                         // updatedData를 Intent에 담아서 전달 (Serializable 사용)
                         intent.putExtra("updatedData", ArrayList(updatedData)) // ArrayList로 변환하여 전달
+                        // 기존 백스택을 모두 지우고 새 액티비티로 이동
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
                         startActivity(intent)
                         this@AfterPreActivity.finish()
                     }

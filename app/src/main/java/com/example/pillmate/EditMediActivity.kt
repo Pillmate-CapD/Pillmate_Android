@@ -116,7 +116,6 @@ class EditMediActivity : AppCompatActivity() {
         binding.tvEditDone.setOnClickListener {
             // 수정된 데이터를 서버로 전송하거나 데이터베이스에 저장하는 로직 추가
             checkFieldsAndShowToast()
-            this@EditMediActivity.finish()
         }
     }
 
@@ -231,13 +230,11 @@ class EditMediActivity : AppCompatActivity() {
                     // 성공 시 처리할 로직 추가
                     message?.let {
                         Log.d("EditMediActivity", "약 정보 수정 성공: $it")
-                        showPerfectToast("약 리스트 수정이 완료되었습니다") // 서버에서 보낸 메시지를 토스트로 표시
+                        //showPerfectToast("약 리스트 수정이 완료되었습니다") // 서버에서 보낸 메시지를 토스트로 표시
 
-                        // 결과 전달
-                        val resultIntent = Intent()
-                        resultIntent.putExtra("isMediEdited", true)
-                        Log.d("EditMediActivity", "setResult 호출됨, isMediEdited = true")
-                        setResult(Activity.RESULT_OK, resultIntent)
+                        val intent = Intent(this@EditMediActivity, AddMediFinActivity::class.java)
+                        intent.putExtra("successMessage", "약 수정이 완료되었어요!")
+                        startActivity(intent)
                         finish() // 액티비티 종료
                     }
                 } else {

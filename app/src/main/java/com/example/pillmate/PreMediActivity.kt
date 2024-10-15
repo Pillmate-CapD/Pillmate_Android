@@ -63,31 +63,31 @@ class PreMediActivity : AppCompatActivity() {
         }
 
         // 첫 번째 객체를 표시
-        displayData(currentIndex)
+
+        if(currentIndex == 10000){
+            finish()
+        }
+        else{
+            displayData(currentIndex)
+        }
 
         // "다음" 또는 "등록" 버튼 클릭 리스너
         binding.tvSave.setOnClickListener {
-            // 필수 필드를 모두 통과한 경우에만 다음 객체로 이동
             if (checkFieldsAndShowToast()) {
                 if (currentIndex < updatedData.size - 1) {
-                    // 다음 객체로 이동
                     currentIndex++
                     displayData(currentIndex)
-
-                    // 마지막 객체인 경우 "등록" 버튼으로 변경
                     if (currentIndex == updatedData.size - 1) {
                         binding.tvSave.text = "등록"
                     }
-
-                    // 시간대 초기화
-                    resetTimeSlots() // 타임슬롯을 초기화
+                    resetTimeSlots()
                 } else {
-                    // 마지막 객체에서 "등록" 버튼을 클릭한 경우
                     submitAllData()
                     finish()
                 }
             }
         }
+
 
 
         // 리사이클러뷰 어댑터 설정
@@ -113,12 +113,23 @@ class PreMediActivity : AppCompatActivity() {
         }
 
         binding.tvCancel.setOnClickListener {
-            Log.d("tvCancel", "tvCancel clicked - finishing activity.")
-            runOnUiThread {
+            if (currentIndex < updatedData.size - 1 || currentIndex == 10000) {
+                Log.d("currentIndex", "CurrentIndex, ${currentIndex}")
                 finish()
             }
+            finish()
         }
     }
+
+//    // 필드를 비우는 함수
+//    private fun clearFields() {
+//        binding.editMedi.text.clear()         // 약품명 초기화
+//        // 질병명 초기화
+//        binding.editOneEat.text.clear()       // 1회 복약량 초기화
+//        binding.editOneDay.text.clear()       // 1일 복약횟수 초기화
+//        binding.editAllDay.text.clear()       // 총 복약일수 초기화
+//        binding.imgMedi.setImageResource(R.drawable.bg_zoom_null) // 이미지 초기화
+//    }
 
 
     // 필수 필드 확인 및 저장 로직
@@ -197,14 +208,22 @@ class PreMediActivity : AppCompatActivity() {
     private fun submitAllData() {
         Log.d("MedicineList", "최종 저장된 데이터: $medicineList")
 
+        if (currentIndex == 10000) {
+            finish() // 이미 종료 상태라면 더 이상 액티비티를 열지 않음
+            return
+        }
+
         // 다음 화면으로 데이터 전달
         val intent = Intent(this, EndPreActivity::class.java)
         intent.putExtra("medicineList", ArrayList(medicineList)) // ArrayList를 Serializable로 전달
 
-        // 스택을 정리하고 EndPreActivity로 이동
+        // 기존 스택을 정리하고 새 액티비티로 이동
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
+        finish()
     }
+
+
 
 
 //    // 마지막 항목인지 확인하는 함수 (임의로 정의)
@@ -250,6 +269,21 @@ class PreMediActivity : AppCompatActivity() {
 
         // 24시간 형식으로 포맷팅
         return String.format("%02d:%02d", hourIn24Format, minute)
+    }
+
+    // 새로운 Intent가 전달될 때 UI 업데이트를 처리하는 onNewIntent
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.let {
+            // 새로운 updatedData를 받아옴
+            updatedData = it.getSerializableExtra("updatedData") as? ArrayList<Map<String, String>> ?: arrayListOf()
+
+            // 데이터가 있다면 UI를 다시 업데이트
+            if (updatedData.isNotEmpty()) {
+                currentIndex = 0 // 인덱스를 처음으로 리셋
+                displayData(currentIndex)
+            }
+        }
     }
 
     private fun displayData(index: Int) {
@@ -404,14 +438,6 @@ class PreMediActivity : AppCompatActivity() {
 
         // 어댑터에 데이터가 변경되었음을 알림
         timeSlotAdapter.notifyDataSetChanged()
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val intent = Intent(this, ListFragment::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish() // 현재 액티비티를 종료하여 스택에서 제거
     }
 
 }

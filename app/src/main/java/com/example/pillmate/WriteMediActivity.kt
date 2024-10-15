@@ -1,6 +1,7 @@
 package com.example.pillmate
 
 import TimeSlotAdapter
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -184,6 +185,8 @@ class WriteMediActivity : AppCompatActivity() {
                         Log.d("WriteMediActivity", "약 추가 성공: $it")
                         showCustomToast(it) // 서버에서 보낸 메시지를 토스트로 표시
 
+                        val intent = Intent(this@WriteMediActivity, AddMediFinActivity::class.java)
+                        startActivity(intent)
                         finish()
                     }
                 } else {
