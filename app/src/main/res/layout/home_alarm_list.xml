@@ -62,10 +62,7 @@
             android:textColor="#898989"
             android:textSize="11sp"
             android:fontFamily="@font/notosanskrmedium"/>
-        
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

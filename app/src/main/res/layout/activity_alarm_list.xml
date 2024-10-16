@@ -47,6 +47,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/tv_no_alarm"
         android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_layout"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="받은 알람이 없어요"
+        android:text="아직 알람을 받은 게 없어요"
         android:fontFamily="@font/notosanskrsemibold"
         android:textSize="20sp"
         android:includeFontPadding="false"
@@ -62,16 +63,16 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:visibility="visible"
-        android:layout_marginTop="10dp"
         android:id="@+id/alarm_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:overScrollMode="never"
-        app:layout_constraintTop_toBottomOf="@id/top_layout"
-        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_layout" />
 
 
 

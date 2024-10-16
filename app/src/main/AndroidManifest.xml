@@ -34,9 +34,15 @@
         android:theme="@style/AppTheme"
         tools:targetApi="33">
         <activity
-            android:name=".AddMediFinActivity"
-            android:launchMode="singleTask"
+            android:name=".AfterScanActivity"
             android:exported="false" />
+        <activity
+            android:name=".MediScanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddMediFinActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".EndPreActivity"
             android:exported="false" />
@@ -45,8 +51,8 @@
             android:exported="false" />
         <activity
             android:name=".PreMediActivity"
-            android:launchMode="singleTask"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".AfterPreActivity"
             android:exported="false" />

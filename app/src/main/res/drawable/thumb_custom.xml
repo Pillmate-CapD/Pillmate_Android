@@ -7,7 +7,7 @@
             <item>
                 <shape android:shape="oval">
                     <size android:width="28dp" android:height="28dp"/> <!-- 그림자의 크기 (thumb보다 약간 큼) -->
-                    <solid android:color="#000000" /> <!-- 반투명 검정 그림자 -->
+                    <solid android:color="#05000000" /> <!-- 반투명 검정 그림자 -->
                 </shape>
             </item>
             <!-- 실제 thumb -->
@@ -27,7 +27,7 @@
             <item>
                 <shape android:shape="oval">
                     <size android:width="30dp" android:height="30dp"/> <!-- 그림자의 크기 (thumb보다 약간 큼) -->
-                    <solid android:color="#80000000" /> <!-- 반투명 검정 그림자 -->
+                    <solid android:color="#00000000" /> <!-- 반투명 검정 그림자 -->
                 </shape>
             </item>
             <!-- 실제 thumb -->

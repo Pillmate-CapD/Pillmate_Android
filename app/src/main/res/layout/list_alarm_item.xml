@@ -32,64 +32,66 @@
         android:textSize="30sp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_goneMarginLeft="15dp"
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_time"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginLeft="14dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        app:layout_goneMarginLeft="15dp">
 
         <TextView
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/medication_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanskrsemibold"
             android:includeFontPadding="false"
-            android:textColor="#898989"
             android:text="트윈스타정 (고혈압)"
-            android:textSize="14sp"/>
+            android:textColor="#898989"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/medication_title"
-            android:layout_marginTop="5dp"
             android:id="@+id/medication_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/notosanskrmedium"
             android:includeFontPadding="false"
-            android:textColor="#898989"
             android:text="1정 | 매 1회 | 90일"
-            android:textSize="12sp"/>
+            android:textColor="#898989"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/medication_title" />
 
         <TextView
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/medication_info"
-            android:layout_marginTop="5dp"
             android:id="@+id/medication_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/notosanskrmedium"
             android:includeFontPadding="false"
-            android:textColor="#898989"
             android:text="기상 직후"
-            android:textSize="12sp"/>
+            android:textColor="#898989"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/medication_info" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.SwitchCompat
+        android:background="@null"
         app:elevation="4dp"
         app:showText="false"
-        app:switchMinWidth="51dp"
-        android:background="@null"
+        app:switchMinWidth="52dp"
         android:id="@+id/switch_alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        style="@style/category_toggle"
+        android:layout_marginEnd="16dp"
+        android:thumb="@drawable/thumb_custom"
+        app:track="@drawable/track_custom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

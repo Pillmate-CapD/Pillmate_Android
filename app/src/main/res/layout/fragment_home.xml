@@ -65,6 +65,8 @@
                         android:src="@drawable/alert"/>
 
                     <View
+                        android:visibility="invisible"
+                        android:id="@+id/view_exist_alarm"
                         android:layout_width="6dp"
                         android:layout_height="6dp"
                         android:background="@drawable/circle_view"
@@ -145,7 +147,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/home_non_data_layout"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

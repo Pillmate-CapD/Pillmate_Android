@@ -13,14 +13,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
+import java.util.concurrent.TimeUnit
+
 
 class PillListAdapter(
     private val pillListItem: ArrayList<PillListItem>,
-    private val fragment: Fragment,
+    private val fragment: HomeFragment,
     private val preferencesHelper: PreferencesHelper
 ) : RecyclerView.Adapter<PillListAdapter.PillListViewHolder>() {
 
@@ -51,10 +56,14 @@ class PillListAdapter(
         private val pill_now: View = itemView.findViewById(R.id.bt_eat_now)
         private val pill_before: View = itemView.findViewById(R.id.bt_eat_will)
 
+        //private val pill_switch: SwitchCompat = itemView.findViewById(R.id.switch_alarm)
+
         fun bind(item: PillListItem, position: Int) {
             // 시간 및 약물 이름 설정
             time.text = item.time
             pillName.text = item.name
+
+            //pill_switch.switchMinWidth = 51
 
             // 현재 시간 설정
             val currentTime = Calendar.getInstance()
@@ -72,6 +81,8 @@ class PillListAdapter(
             //setAlarm(20,"트윈스타정")
 
 
+
+
             if (item.isEaten) {
                 // 아이템이 완료된 경우
                 itemView.setBackgroundResource(R.drawable.custom_pill_background) // 기본 색상
@@ -86,7 +97,33 @@ class PillListAdapter(
                 time.setTextColor(Color.parseColor("#494949"))
                 pillName.setTextColor(Color.parseColor("#494949"))
             }
+//            else if(currentTimeInMinutes >= itemTimeInMinutes + 60){
+//                saveMissedPillAlarm(item.name)
+//
+//                // 현재 시간이 항목의 시간보다 2시간이상 지났거나 먹어야하는데 아직 안먹은 경우
+//                itemView.setBackgroundResource(R.drawable.bg_pill_list_check2) // 배경 색상 변경
+//                pill_done.visibility = View.INVISIBLE
+//                pill_before.visibility = View.INVISIBLE
+//                pill_now.visibility= View.VISIBLE
+//
+//                // 텍스트 색상 직접 지정 (HEX 값을 사용하여 파란색으로 설정)
+//                time.setTextColor(Color.parseColor("#1E54DF"))
+//                pillName.setTextColor(Color.parseColor("#1E54DF"))
+//
+//
+//                itemView.setOnClickListener {
+//                    // EatMediActivity로 이동
+//                    val intent = Intent(fragment.requireContext(), EatMediActivity::class.java)
+//                    intent.putExtra("pill_name", item.name)
+//                    intent.putExtra("pill_time", item.time)
+//                    intent.putExtra("position", position) // 클릭된 아이템의 position을 전달
+//                    fragment.startActivityForResult(intent, REQUEST_CODE_EAT_MEDI)
+//                }
+//            }
             else if (currentTimeInMinutes >= itemTimeInMinutes + 120){
+
+                saveMissedPillAlarm(item.name)
+
                 // 현재 시간이 항목의 시간보다 2시간이상 지났거나 먹어야하는데 아직 안먹은 경우
                 itemView.setBackgroundResource(R.drawable.bg_pill_list_check2) // 배경 색상 변경
                 pill_done.visibility = View.INVISIBLE
@@ -142,6 +179,41 @@ class PillListAdapter(
                 pillName.setTextColor(Color.parseColor("#898989"))
             }
         }
+
+        // 2시간 이후에도 안먹었ㅇ르 경우에 해당 히스토리를 남기고, 12시가 지난 경우에는 새로운 알람이 생성될 수 있도록 함.
+        // 동일한 약이어도 12시가 지났기때문에 생성할 수 있도록.
+        private fun saveMissedPillAlarm(pillName: String) {
+            val context = itemView.context
+            val sharedPreferences = context.getSharedPreferences("alarmHistory", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            // 현재 시간과 날짜 저장
+            val currentTime = Calendar.getInstance().time
+            val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) // 날짜 포맷 추가
+            val timeFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()) // 기존 시간 포맷 유지
+            val currentDate = dateFormatter.format(currentTime) // 날짜만 따로 저장
+            val alarmTimeFormatted = timeFormatter.format(currentTime) // 시간 저장
+
+            // 알람 메시지 생성 (날짜를 포함한 알람 메시지로 변경)
+            val alarmMessage = "'${pillName}'을/를 먹을 시간이에요."
+
+            // 저장된 알람 기록 리스트 불러오기 (알람 메시지와 날짜 기준)
+            val currentAlarms = sharedPreferences.getStringSet("alarms", mutableSetOf()) ?: mutableSetOf()
+
+            // 기존 알람에서 같은 날에 중복되는 알람 메시지가 있는지 확인
+            val isDuplicate = currentAlarms.any { it.contains(alarmMessage) && it.contains(currentDate) }
+
+            // 중복된 알람이 없으면 추가하고, 알람이 있음을 표시하도록 HomeFragment에 알림
+            if (!isDuplicate) {
+                currentAlarms.add("$alarmMessage, $alarmTimeFormatted") // 날짜와 시간 모두 추가
+                editor.putStringSet("alarms", currentAlarms)
+                editor.apply() // 변경사항 적용
+
+                // 알람이 추가되었으므로 HomeFragment에 알림 표시
+                fragment.showExistAlarmView()
+            }
+        }
+
 
         private fun setAlarm(hour: Int, minute: Int, pillName: String) {
             val context = itemView.context
@@ -244,4 +316,6 @@ class PillListAdapter(
         pillListItem.addAll(newItems)
         notifyDataSetChanged()
     }
+
+
 }

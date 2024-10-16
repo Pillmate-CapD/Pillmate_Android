@@ -50,6 +50,11 @@ class ListFragment : Fragment() {
             binding.btnPillWrite.visibility = View.INVISIBLE
             binding.tvPillWrite.visibility = View.INVISIBLE
             binding.viewWhite.visibility = View.INVISIBLE
+
+            // FAB를 닫는 메서드 호출
+            if (isFabOpen) {
+                closeFab()
+            }
         }
 
         binding.btnPillWrite.setOnClickListener {
@@ -62,6 +67,24 @@ class ListFragment : Fragment() {
             binding.btnPillWrite.visibility = View.INVISIBLE
             binding.tvPillWrite.visibility = View.INVISIBLE
             binding.viewWhite.visibility = View.INVISIBLE
+
+            // FAB를 닫는 메서드 호출
+            if (isFabOpen) {
+                closeFab()
+            }
+        }
+
+        binding.btnPillRecog.setOnClickListener {
+            val intent = Intent(requireContext(), MediScanActivity::class.java)
+            startActivity(intent)
+            binding.btnPrecription.visibility = View.INVISIBLE
+            binding.tvPrescript.visibility = View.INVISIBLE
+            binding.btnPillRecog.visibility = View.INVISIBLE
+            binding.tvPillRecog.visibility = View.INVISIBLE
+            binding.btnPillWrite.visibility = View.INVISIBLE
+            binding.tvPillWrite.visibility = View.INVISIBLE
+            binding.viewWhite.visibility = View.INVISIBLE
+
             // FAB를 닫는 메서드 호출
             if (isFabOpen) {
                 closeFab()

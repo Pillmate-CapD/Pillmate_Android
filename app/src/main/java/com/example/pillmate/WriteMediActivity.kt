@@ -183,7 +183,7 @@ class WriteMediActivity : AppCompatActivity() {
                     // 성공 시 처리할 로직 추가
                     message?.let {
                         Log.d("WriteMediActivity", "약 추가 성공: $it")
-                        showCustomToast(it) // 서버에서 보낸 메시지를 토스트로 표시
+                        //showCustomToast(it) // 서버에서 보낸 메시지를 토스트로 표시
 
                         val intent = Intent(this@WriteMediActivity, AddMediFinActivity::class.java)
                         startActivity(intent)

@@ -152,7 +152,7 @@ class MediListAdapter(
         }
 
         popupView.findViewById<ConstraintLayout>(R.id.btn_pop_del).setOnClickListener {
-
+            popupWindow.dismiss()
             showDelDialog(id)
         }
 
@@ -193,7 +193,7 @@ class MediListAdapter(
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful) {
                     Log.d("deleteMedicine", "delete, 약물 삭제 성공")
-                    showPerfectToast("해당 약이 삭제됐어요.")
+                    //showPerfectToast("해당 약이 삭제됐어요.")
 
                     // 약물 삭제 후 ViewModel을 통해 데이터 갱신
                     viewModel.deleteMedicine(id)
