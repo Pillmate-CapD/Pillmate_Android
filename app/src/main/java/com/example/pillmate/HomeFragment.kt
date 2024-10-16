@@ -132,6 +132,16 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    // 알람이 추가될 때 view_exist_alarm 표시
+    fun showExistAlarmView() {
+        binding.viewExistAlarm.visibility = View.VISIBLE // view_exist_alarm의 visibility를 VISIBLE로 설정
+    }
+
+    // 알람이 없을 때 view_exist_alarm 숨김
+    fun hideExistAlarmView() {
+        binding.viewExistAlarm.visibility = View.GONE // view_exist_alarm의 visibility를 GONE으로 설정
+    }
+
 
     private fun fetchMain(){
         val service = RetrofitApi.getRetrofitService

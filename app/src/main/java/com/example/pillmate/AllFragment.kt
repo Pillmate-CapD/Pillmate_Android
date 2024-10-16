@@ -64,11 +64,12 @@ class AllFragment : Fragment() {
 
                     if (mediList.isNullOrEmpty()) {
                         binding.nonMediLayout.visibility = View.VISIBLE
-                        binding.recyclerView.visibility = View.GONE
+                        binding.recyclerView.visibility = View.INVISIBLE
                     } else {
                         // 받은 데이터 저장
                         medicineList = mediList
-
+                        binding.nonMediLayout.visibility = View.INVISIBLE
+                        binding.recyclerView.visibility = View.VISIBLE
                         // 기본적으로 '전체' 카테고리를 선택한 상태에서 필터링
                         filterMedicineList("전체")
                     }
@@ -98,9 +99,9 @@ class AllFragment : Fragment() {
 
         if (filteredList.isEmpty()) {
             binding.nonMediLayout.visibility = View.VISIBLE
-            binding.recyclerView.visibility = View.GONE
+            binding.recyclerView.visibility = View.INVISIBLE
         } else {
-            binding.nonMediLayout.visibility = View.GONE
+            binding.nonMediLayout.visibility = View.INVISIBLE
             binding.recyclerView.visibility = View.VISIBLE
         }
     }

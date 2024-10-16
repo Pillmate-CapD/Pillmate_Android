@@ -219,3 +219,9 @@ data class SymptomInfo(
     val id: Int,
     val name: String
 )
+
+data class MediScanResponse(
+    val name: String,
+    val photo: String,
+    val category: String
+)
