@@ -8,8 +8,9 @@
     <style name="Theme.Pillmate" parent="Base.Theme.Pillmate" />
 
     <style name="CustomBottomNavTextAppearance" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:fontFamily">@font/notosanskrsemibold</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/notosanskrmedium</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">9sp</item>
     </style>
 
     <style name="CustomCircularProgressIndicator" parent="Widget.Material3.CircularProgressIndicator">

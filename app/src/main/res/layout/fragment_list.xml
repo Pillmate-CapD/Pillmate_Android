@@ -8,40 +8,10 @@
     tools:context=".ListFragment">
 
 
-    <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="#1E54DF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingBottom="20dp"
-        android:id="@+id/list_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:includeFontPadding="false"
-            android:id="@+id/mypill"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:fontFamily="@font/notosanskrsemibold"
-            android:textColor="@color/white"
-            android:text="약 보관함"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="30dp"/>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/list_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -57,10 +27,11 @@
             android:background="#D9D9D9"/>
 
         <com.google.android.material.tabs.TabLayout
+            android:paddingTop="70dp"
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#1E54DF"
+            android:layout_height="126dp"
+            android:background="@drawable/bg_top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -78,6 +49,21 @@
             android:id="@+id/tab_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp" />
+
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:includeFontPadding="false"
+            android:id="@+id/mypill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textColor="@color/white"
+            android:text="약 보관함"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="30dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

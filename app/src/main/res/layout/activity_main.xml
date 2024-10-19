@@ -24,16 +24,18 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/shadow_background"
-            app:layout_constraintBottom_toTopOf="@id/bottomNavi"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavi"
-            android:background="@color/white"
-            app:itemIconTint="@color/bottom_nav_icon_color_selector"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:background="@drawable/bg_btnavi_round24"
             android:backgroundTint="#00000000"
             app:itemActiveIndicatorStyle="@null"
             app:itemTextColor="@color/bottom_nav_icon_color_selector"

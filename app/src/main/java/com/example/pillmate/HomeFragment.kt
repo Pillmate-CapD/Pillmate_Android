@@ -125,8 +125,7 @@ class HomeFragment : Fragment() {
                 }
 
                 binding.nonBtnAddMedi.setOnClickListener {
-                    val navController = findNavController()
-                    navController.navigate(R.id.alarmListActivity)
+                    findNavController().navigate(R.id.listFragment)
                 }
         }
         return binding.root
