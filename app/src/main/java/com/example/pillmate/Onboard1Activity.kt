@@ -88,6 +88,7 @@ class Onboard1Activity : AppCompatActivity() {
         titleView.text = title
         descriptionView.text = description
         iconView.setImageResource(imageResId)
+        card.setCardBackgroundColor(Color.parseColor("#F5F6F8"))
         // 원래 이미지를 태그로 저장
         card.tag = imageResId
     }

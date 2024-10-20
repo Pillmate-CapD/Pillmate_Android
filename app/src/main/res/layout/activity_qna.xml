@@ -50,7 +50,6 @@
         android:paddingLeft="16dp"/>
     <!-- 1-->
     <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp">
@@ -87,7 +86,7 @@
                     android:id="@+id/iv_arrow1"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/qnadown"/>
+                    android:src="@drawable/qnadown" />
             </LinearLayout>
 
             <!-- Answer1-->
@@ -101,7 +100,7 @@
                 android:textColor="#6C6C6C"
                 android:fontFamily="@font/notosanskrregular"
                 android:text="‘필메이트(Pill Mate)’는 만성질환 환자를 위한 맞춤형 약 관리 및 건강 관리 서비스예요."
-                android:visibility="gone"
+                android:visibility="visible"
                 android:padding="16dp"/>
 
         </LinearLayout>

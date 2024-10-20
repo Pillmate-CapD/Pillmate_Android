@@ -134,6 +134,9 @@
         <activity
             android:name=".PwChangeOkActivity"
             android:exported="false" />
+        <activity
+            android:name=".QnaActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

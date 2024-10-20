@@ -54,6 +54,12 @@ class UserFragment : Fragment() {
             val intent = Intent(activity, PwChange1Activity::class.java)
             startActivity(intent)
         }
+        // 비밀번호 변경 버튼 처리
+        val qna: View = view.findViewById(R.id.btn_question)
+        qna.setOnClickListener {
+            val intent = Intent(activity, QnaActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }

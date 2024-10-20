@@ -1,0 +1,223 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F9F9F9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 오늘의 증상 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:paddingTop="16dp"
+            android:background="#FFFFFF"
+            android:elevation="4dp">
+
+            <!-- 뒤로가기 버튼 -->
+            <ImageView
+                android:id="@+id/ts_back"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/signup_back"/>
+
+            <!-- "오늘의 증상" 텍스트 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:includeFontPadding="false"
+                android:text="오늘의 증상"
+                android:fontFamily="@font/notosanskrbold"
+                android:textSize="18sp"
+                android:textColor="#3E3E3E"/>
+
+            <!-- 숫자 1, 2, 3 -->
+            <TextView
+                android:id="@+id/s3"
+                android:layout_centerVertical="true"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/onboard_step_inactive"
+                android:fontFamily="@font/notosanskrsemibold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="3"
+                android:textColor="#898989"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/s2"
+                android:layout_centerVertical="true"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_toStartOf="@id/s3"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/onboard_step_inactive"
+                android:fontFamily="@font/notosanskrsemibold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="2"
+                android:textColor="#898989"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/s1"
+                android:layout_centerVertical="true"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_toStartOf="@id/s2"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/onboard_step_active"
+                android:fontFamily="@font/notosanskrsemibold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+        <!-- 선택할 수 있는 증상 목록 영역 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="41dp"
+            android:gravity="center"
+            android:text="오늘의 증상을 선택해 주세요"
+            android:fontFamily="@font/notosanskrbold"
+            android:includeFontPadding="false"
+            android:textSize="20sp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="2개 이상 선택도 가능해요"
+            android:fontFamily="@font/notosanskrregular"
+            android:textSize="13sp"
+            android:includeFontPadding="false"
+            android:textColor="#858585"/>
+
+        <!-- "증상 없음" 카드 -->
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- 증상 선택 버튼 영역 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="41dp"
+            android:layout_marginStart="16dp"
+            android:text="✅ 손해인 님이 평소에 느끼는 증상이에요"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textSize="16sp"
+            android:textColor="#3E3E3E"/>
+
+        <!-- 증상 선택 버튼들 -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="피로감"
+                android:textSize="14sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="몸살"
+                android:textSize="14sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="근육통"
+                android:textSize="14sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="우울"
+                android:textSize="14sp" />
+
+        </GridLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="41dp"
+            android:text="🫵 다른 증상도 있어요"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textSize="16sp"
+            android:textColor="#3E3E3E"/>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:columnCount="3"
+            android:rowCount="2"
+            android:orientation="horizontal">
+        </GridLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="41dp"
+            android:text="🫵 이외에 다른 증상을 느꼈어요"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textSize="16sp"
+            android:textColor="#3E3E3E"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/etc_symptom"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="오늘의 증상을 직접 입력하세요"
+                android:fontFamily="@font/notosanskrregular"
+                android:textColorHint="#919E9E9E"
+                android:textSize="13sp"
+                android:background="@android:color/transparent"
+                android:paddingLeft="16dp" />
+
+            <!-- 연필 아이콘 (편집 아이콘) -->
+            <ImageView
+                android:id="@+id/hd_etc_icon"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="29dp"
+                android:src="@drawable/hd_etc"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>
