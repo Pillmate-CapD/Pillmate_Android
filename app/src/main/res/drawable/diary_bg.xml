@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Drop shadow layer -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" />
+            <corners android:radius="10dp" />
+            <padding
+                android:left="2dp"
+                android:top="2dp"
+                android:right="2dp"
+                android:bottom="0dp"/>
+            <shadowColor android:color="#CC000000" />
+            <shadowDx android:dx="2dp"/>
+            <shadowDy android:dy="2dp"/>
+            <shadowRadius android:radius="8dp"/>
+        </shape>
+    </item>
+
+    <!-- Background layer -->
+    <item android:top="4dp" android:left="4dp" android:right="4dp" android:bottom="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+
+</layer-list>

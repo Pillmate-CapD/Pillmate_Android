@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 드롭 섀도우 레이어 -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#F1F1F1" /> <!-- 반투명 블랙 그림자 -->
+            <size android:width="305dp" android:height="305dp" />
+            <corners android:radius="160dp" />
+        </shape>
+    </item>
+
+    <!-- 바깥 원 (gradient 적용) -->
+    <item android:left="1.5dp" android:top="1.5dp" android:right="1.5dp" android:bottom="1.5dp">
+        <shape android:shape="oval">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="150dp"
+                android:startColor="#FFFFFF"
+                android:endColor="#F1F1F1"
+                android:centerX="50%"
+                android:centerY="50%"
+                android:centerColor="#FFFFFF" />
+            <size android:width="300dp" android:height="300dp" />
+            <corners android:radius="150dp" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 트랙의 배경 (0-10까지의 범위에서 채워지지 않은 부분) -->
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="20dp" /> <!-- 둥근 모서리 설정 -->
+            <size android:height="24dp"/>
+            <solid android:color="#EAEAEA"/> <!-- 배경색(연한 회색) -->
+        </shape>
+    </item>
+
+    <!-- 트랙의 진행 (현재 선택된 범위까지 채워진 부분) -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="20dp" /> <!-- 둥근 모서리 설정 -->
+                <size android:height="24dp"/> <!-- 진행바 높이 설정 -->
+                <gradient
+                    android:startColor="#E4EBFE"
+                    android:endColor="#6890F7"
+                    android:angle="0" /> <!-- 그라데이션 색상 설정 -->
+            </shape>
+        </clip>
+    </item>
+</layer-list>

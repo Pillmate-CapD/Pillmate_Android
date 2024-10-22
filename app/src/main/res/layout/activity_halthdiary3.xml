@@ -101,5 +101,44 @@
         android:textSize="13sp"
         android:includeFontPadding="false"
         android:textColor="#858585"/>
+    <!-- 텍스트 입력 공간 -->
+    <EditText
+        android:id="@+id/diary_input"
+        android:layout_width="match_parent"
+        android:layout_height="355dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/diary_bg"
+        android:hint="300자 이내로 일기를 작성해 주세요."
+        android:elevation="1dp"
+        android:padding="16dp"
+        android:gravity="top"
+        android:minHeight="180dp"
+        android:textColorHint="#C0C0C0"
+        android:fontFamily="@font/notosanskrregular"
+        android:includeFontPadding="false"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/d_btn_f"
+            android:layout_width="match_parent"
+            android:layout_height="45sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/button_blue"
+            android:text="완료"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrmedium"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
 </LinearLayout>

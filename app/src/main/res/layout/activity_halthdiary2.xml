@@ -80,5 +80,239 @@
             android:textColor="#1E54DF"
             android:textSize="10sp" />
     </RelativeLayout>
+    <!-- 건강기록 문구 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        android:gravity="center"
+        android:text="오늘의 통증을 점수로 매겨주세요"
+        android:fontFamily="@font/notosanskrbold"
+        android:includeFontPadding="false"
+        android:textSize="20sp"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="드래그하여 점수를 매겨주세요"
+        android:fontFamily="@font/notosanskrregular"
+        android:textSize="13sp"
+        android:includeFontPadding="false"
+        android:textColor="#858585"/>
+    <!-- 점수 표시 TextView -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        android:layout_gravity="center">
+
+        <!-- 가장 바깥 원 -->
+        <View
+            android:id="@+id/outerCircle"
+            android:layout_width="266dp"
+            android:layout_height="266dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/outer_circle_drawable"/>
+
+        <!-- 중간 원 -->
+        <View
+            android:id="@+id/middleCircle"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/outer_circle_drawable2" />
+
+        <!-- 가장 안쪽 원 -->
+        <View
+            android:id="@+id/innerCircle"
+            android:layout_width="196dp"
+            android:layout_height="196dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/outer_circle_drawable3" />
+
+        <!-- 통증 점수 텍스트 -->
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingTop="12dp"
+            android:text="1점"
+            android:textSize="45sp"
+            android:textColor="#3e3e3e"
+            android:fontFamily="@font/notosanskrbold"
+            android:includeFontPadding="false" />
+
+        <!-- "오늘의 통증 점수" 텍스트 -->
+        <TextView
+            android:id="@+id/tv_pain_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="77dp"
+            android:text="오늘의 통증 점수"
+            android:textSize="11sp"
+            android:textColor="#898989"
+            android:fontFamily="@font/notosanskrbold"
+            android:includeFontPadding="false" />
+    </RelativeLayout>
+
+    <!-- 설명 텍스트 -->
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="21dp"
+        android:text="&quot;통증이 미미하거나 없어요&quot;"
+        android:textSize="15sp"
+        android:fontFamily="@font/notosanskrmedium"
+        android:textColor="#858585"
+        android:includeFontPadding="false"
+        android:gravity="center" />
+
+    <!-- SeekBar -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp">
+        <View
+            android:id="@+id/symptom_x"
+            android:layout_width="62dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/symptom_x" />
+
+        <!-- 통증 최대 이미지 및 텍스트 -->
+        <TextView
+            android:id="@+id/symp_x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/symptom_x"
+            android:layout_alignTop="@id/symptom_x"
+            android:layout_alignEnd="@id/symptom_x"
+            android:layout_alignBottom="@id/symptom_x"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="-4dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/notosanskrmedium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="통증 없음"
+            android:textColor="#ffffff"
+            android:textSize="11sp" />
+
+        <View
+            android:id="@+id/symptom_o"
+            android:layout_width="62dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/symptom_o" />
+
+        <TextView
+            android:id="@+id/symp_o"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/symptom_o"
+            android:layout_alignTop="@id/symptom_o"
+            android:layout_alignEnd="@id/symptom_o"
+            android:layout_alignBottom="@id/symptom_o"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="-4dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/notosanskrmedium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="통증 최대"
+            android:textColor="#ffffff"
+            android:textSize="11sp" />
+
+    </RelativeLayout>
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:max="10"
+        android:progress="1"
+        android:progressDrawable="@drawable/seekbar_progress"
+        android:thumb="@drawable/seekbar_thumb"
+        android:splitTrack="false"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="39dp"
+        android:paddingRight="39dp">
+
+        <!-- 0점 텍스트 -->
+        <TextView
+            android:id="@+id/tv_score_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="1dp"
+            android:text="0"
+            android:textSize="15sp"
+            android:textColor="#949494"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrbold"/>
+
+        <!-- 5점 텍스트 -->
+        <TextView
+            android:id="@+id/tv_score_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="1dp"
+            android:text="5"
+            android:textSize="15sp"
+            android:textColor="#949494"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrbold"/>
+
+        <!-- 10점 텍스트 -->
+        <TextView
+            android:id="@+id/tv_score_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="1dp"
+            android:text="10"
+            android:textSize="15sp"
+            android:textColor="#949494"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrbold"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/d_btn_f"
+            android:layout_width="match_parent"
+            android:layout_height="45sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/button_blue"
+            android:text="다음"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrmedium"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
 </LinearLayout>
