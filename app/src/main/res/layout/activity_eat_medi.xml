@@ -17,21 +17,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="32dp">
         <ImageView
             android:id="@+id/icon1"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="0dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/eatmedi_sample1"
             />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="72dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="0sp"
             android:layout_marginTop="0sp"
+            android:includeFontPadding="false"
             android:fontFamily="@font/notosanskrmedium"
             android:text="약 먹을 시간이에요!\n아래 복용 과정을 따라주세요"
             android:textColor="#3e3e3e"
@@ -42,7 +43,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10sp">
+        android:layout_marginTop="25sp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

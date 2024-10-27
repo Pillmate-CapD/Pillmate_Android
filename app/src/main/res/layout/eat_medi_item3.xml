@@ -9,8 +9,9 @@
         android:orientation="horizontal">
     <TextView
         android:id="@+id/step3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_gravity="center_vertical"
         android:text="3"
         android:textSize="15sp"
         android:background="@drawable/eatmedi_open"
@@ -21,8 +22,9 @@
         android:id="@+id/b_step_title3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10sp"
+        android:layout_marginLeft="13sp"
         android:fontFamily="@font/notosanskrsemibold"
+        android:includeFontPadding="false"
         android:text="약 복용하기"
         android:textColor="#000000"
         android:textSize="18sp"
@@ -33,8 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/eatmedi_button1">
     <LinearLayout
         android:layout_width="wrap_content"
@@ -84,35 +85,38 @@
         <ImageView
             android:id="@+id/medieat_image"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginRight="20dp"
+            android:layout_height="260dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:background="@drawable/eatmedi_sample_d2"
-            android:layout_gravity="center"/>
+            android:layout_marginRight="20dp"
+            android:background="@drawable/eatmedi_sample_d2" />
 
         <TextView
             android:id="@+id/step3_description"
             android:layout_width="wrap_content"
-            android:layout_height="31dp"
+            android:layout_height="wrap_content"
             android:text="물과 함께 복용해 주세요!"
             android:textColor="#3e3e3e"
             android:fontFamily="@font/notosanskrmedium"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5sp"
+            android:includeFontPadding="false"
+            android:layout_marginTop="16sp"
             android:textSize="15sp"/>
         <Button
             android:id="@+id/step_button3"
             android:background="@drawable/button_blue"
             android:text="복용을 완료했어요"
             android:fontFamily="@font/notosanskrmedium"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginRight="19dp"
+            android:layout_marginLeft="19dp"
             android:textSize="15sp"
             android:textColor="#ffffff"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="19sp"
-            android:layout_gravity="center"/>
+            android:layout_height="50dp"
+            android:layout_marginTop="16sp"
+            android:includeFontPadding="false"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
     </LinearLayout>

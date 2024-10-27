@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- card_symptom_emoji.xml -->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="2dp"
+    android:background="#F5F6F8">
+    <LinearLayout
+        android:layout_width="161dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="19dp">
+
+<!-- 이모지 (왼쪽) -->
+<ImageView
+    android:id="@+id/symptom_img"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:src="@drawable/onboard3btn1"
+    android:layout_marginEnd="7dp"
+    android:contentDescription="질병 이모지" />
+
+<!-- 텍스트 (중앙) -->
+<TextView
+    android:id="@+id/symptom_name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="피로감"
+    android:fontFamily="@font/notosanskrsemibold"
+    android:includeFontPadding="false"
+    android:textSize="14sp"
+    android:textColor="#3E3E3E" />
+
+<!-- 체크박스 (오른쪽) -->
+        <ImageView
+            android:id="@+id/symptom_check"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:src="@drawable/symptom_ncheck"
+            android:layout_marginEnd="19dp"
+            android:contentDescription="질병 이모지" />
+
+</LinearLayout>
+    </androidx.cardview.widget.CardView>

@@ -10,21 +10,23 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/step1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:text="1"
             android:textSize="15sp"
             android:background="@drawable/eatmedi_open"
             android:textColor="#FF453A"
+            android:layout_gravity="center_vertical"
             android:gravity="center"
             android:visibility="visible"/>
         <TextView
             android:id="@+id/b_step_title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
+            android:layout_marginLeft="13sp"
             android:fontFamily="@font/notosanskrsemibold"
             android:text="먹을 약 인증하기"
+            android:includeFontPadding="false"
             android:textColor="#000000"
             android:textSize="18sp"
             android:visibility="visible"/>
@@ -35,10 +37,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/eatmedi_button1">
-    <LinearLayout
+
+        <TextView
+            android:id="@+id/step1_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13sp"
+            android:layout_marginTop="11sp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrbold"
+            android:text="파스틱정 (제2형당뇨)"
+            android:textColor="#3e3e3e"
+            android:textSize="15sp"
+            android:visibility="visible" />
+
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -61,18 +76,8 @@
             android:textColor="#1C1C1C"
             android:visibility="gone"
             android:textSize="15sp"/>
-        <TextView
-            android:id="@+id/step1_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:layout_marginTop="-13sp"
-            android:fontFamily="@font/notosanskrbold"
-            android:text="파스틱정 (제2형당뇨)"
-            android:textColor="#3e3e3e"
-            android:visibility="visible"
-            android:textSize="15sp"/>
-    </LinearLayout>
+
+        </LinearLayout>
 
 
     <LinearLayout
@@ -81,12 +86,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="visible"
-        android:layout_marginTop="-7dp">
+        android:layout_marginTop="0dp">
 
         <ImageView
             android:id="@+id/medi_image"
             android:layout_width="match_parent"
             android:layout_height="225dp"
+            android:layout_marginTop="11dp"
             android:layout_gravity="center"
             android:src="@drawable/eatmedi_sample_d1" />
 
@@ -97,21 +103,24 @@
             android:fontFamily="@font/notosanskrmedium"
             android:textSize="15sp"
             android:textColor="@color/white"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+            android:includeFontPadding="false"
+            android:layout_marginRight="19dp"
+            android:layout_marginLeft="19dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="16sp"
             android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/pass1"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="2sp"
+            android:layout_marginTop="13sp"
             android:fontFamily="@font/notosanskrmedium"
             android:text="인증 건너뛰기"
+            android:layout_marginBottom="20dp"
+            android:includeFontPadding="false"
             android:textColor="#1E54DF"
             android:textSize="13sp" />
     </LinearLayout>
@@ -119,7 +128,7 @@
     <LinearLayout
         android:id="@+id/important"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
@@ -139,6 +148,7 @@
             android:layout_marginLeft="9sp"
             android:fontFamily="@font/notosanskrsemibold"
             android:text="해당 약을 촬영하면 맞는지 확인해 드려요"
+            android:includeFontPadding="false"
             android:textColor="#ffffff"
             android:textSize="13sp"
             android:visibility="visible"/>
