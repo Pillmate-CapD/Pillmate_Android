@@ -45,6 +45,15 @@ data class SignUpResponse(
     val grantType: String,
     val accessToken: String
 )
+//이메일 중복 체크
+data class EmailCheckRequest(
+    val email: String
+)
+
+// EmailCheckResponse.kt
+data class EmailCheckResponse(
+    val message: String
+)
 
 //로그아웃
 data class LogoutResponse(

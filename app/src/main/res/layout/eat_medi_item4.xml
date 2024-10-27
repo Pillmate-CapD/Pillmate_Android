@@ -45,9 +45,10 @@
             android:id="@+id/step_check"
             android:layout_width="25sp"
             android:layout_height="25sp"
-            android:src="@drawable/check"
+            android:src="@drawable/eatmedi_checkcheck"
             android:visibility="gone"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="17dp"
             android:layout_marginLeft="20dp"/>
         <TextView
             android:id="@+id/step4_"
@@ -57,6 +58,8 @@
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
             android:textStyle="bold"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="17dp"
             android:background="@drawable/eatmedi_open"
             android:textColor="#FF453A"
             android:gravity="center"
@@ -68,6 +71,7 @@
             android:text="다음 약 일정 확인하기"
             android:textColor="#1C1C1C"
             android:visibility="gone"
+            android:layout_gravity="center_vertical"
             android:textSize="15sp"
             android:fontFamily="@font/notosanskrsemibold"
             android:layout_marginLeft="10sp"/>

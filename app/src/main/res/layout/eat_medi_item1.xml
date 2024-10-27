@@ -63,7 +63,8 @@
             android:layout_height="26sp"
             android:src="@drawable/eatmedi_checkcheck"
             android:visibility="gone"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="17dp"
             android:layout_marginLeft="20dp"/>
 
         <TextView
@@ -73,6 +74,7 @@
             android:layout_marginLeft="10sp"
             android:fontFamily="@font/notosanskrsemibold"
             android:text="먹을 약 인증하기"
+            android:layout_gravity="center_vertical"
             android:textColor="#1C1C1C"
             android:visibility="gone"
             android:textSize="15sp"/>

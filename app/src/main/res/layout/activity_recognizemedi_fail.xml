@@ -16,9 +16,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="알약 인식에 실패했어요"
-        android:layout_marginTop="40sp"
+        android:layout_marginTop="42sp"
         android:textSize="20sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/notosanskrbold"
+        android:includeFontPadding="false"
         android:textColor="#3E3E3E"
         android:layout_gravity="center"/>
     <TextView
@@ -28,27 +29,43 @@
         android:text="알약에 각인된 모양이 잘 보이도록 촬영해 주세요\n평평한 바닥에 놓고 촬영하면 더 잘 인식돼요"
         android:textAlignment="center"
         android:textColor="#858585"
+        android:fontFamily="@font/notosanskrregular"
+        android:includeFontPadding="false"
         android:layout_marginTop="11sp"
         android:textSize="13sp"
         android:layout_gravity="center"/>
-    <Button
-        android:id="@+id/fail_button1"
-        android:background="@drawable/button_blue"
-        android:text="다시 촬영하기"
-        android:textColor="@color/white"
-        android:layout_width="350sp"
-        android:layout_height="55sp"
-        android:layout_marginTop="80sp"
-        android:layout_gravity="center"/>
-    <Button
-        android:id="@+id/fail_button2"
-        android:background="@drawable/button_skyblue"
-        android:text="이전으로"
-        android:textColor="#1E54DF"
-        android:layout_width="350sp"
-        android:layout_height="55sp"
-        android:layout_marginTop="10sp"
-        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginTop="103sp">
+        <Button
+            android:id="@+id/fail_button1"
+            android:background="@drawable/button_blue"
+            android:text="다시 촬영하기"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/notosanskrmedium"
+            android:textSize="15dp"
+            android:layout_height="45sp"
+            android:includeFontPadding="false"
+            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/fail_button2"
+            android:background="@drawable/button_skyblue"
+            android:text="이전으로"
+            android:textColor="#1E54DF"
+            android:layout_width="match_parent"
+            android:layout_height="45sp"
+            android:fontFamily="@font/notosanskrmedium"
+            android:includeFontPadding="false"
+            android:textSize="15dp"
+            android:layout_marginTop="10sp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

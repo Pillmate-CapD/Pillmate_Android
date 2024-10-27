@@ -23,6 +23,9 @@ interface RetrofitService {
     @POST("members/signup")
     fun signup(@Body request: SignUpRequest): Call<SignUpResponse>
 
+    //이메일 중복 체크
+    @POST("members/check/email")
+    suspend fun checkEmail(@Body request: EmailCheckRequest): Response<EmailCheckResponse>
 
     //로그아웃
     @POST("members/logout")

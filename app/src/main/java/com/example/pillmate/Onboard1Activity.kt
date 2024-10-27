@@ -64,6 +64,9 @@ class Onboard1Activity : AppCompatActivity() {
         updateNextButtonState() // 초기 상태 설정
         btnNext.setOnClickListener {
             if (selectedDiseases.isNotEmpty()) {
+                // 선택된 질병을 가나다순으로 정렬
+                val sortedDiseases = selectedDiseases.sorted()
+
                 // 전달받은 이메일, 비밀번호, 이름 가져오기
                 val email = intent.getStringExtra("email") ?: ""
                 val password = intent.getStringExtra("password") ?: ""
@@ -74,7 +77,7 @@ class Onboard1Activity : AppCompatActivity() {
                     putExtra("email", email)
                     putExtra("password", password)
                     putExtra("name", name)
-                    putStringArrayListExtra("selectedDiseases", ArrayList(selectedDiseases))
+                    putStringArrayListExtra("selectedDiseases", ArrayList(sortedDiseases))
                 }
                 startActivity(intent)
             }
