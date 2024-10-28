@@ -24,6 +24,7 @@ import java.util.Locale
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var pillListAdapter: PillListAdapter
+    private lateinit var remainMediAdapter: RemainMediAdapter
 
     private var userName :String? = null
 
@@ -47,13 +48,18 @@ class HomeFragment : Fragment() {
             binding.pillList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             binding.pillList.adapter = pillListAdapter
 
+            // RemainMediAdapter 초기화 및 설정
+            remainMediAdapter = RemainMediAdapter(listOf()) // 빈 리스트로 초기화
+            binding.remainMediRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.remainMediRecycler.adapter = remainMediAdapter
+
             // ViewModel을 통해 약 리스트 업데이트
             pillViewModel.pillItems.observe(viewLifecycleOwner) { pillItems ->
                 pillListAdapter.updateItems(pillItems) // 필터링 없이 전체 약 리스트 업데이트
             }
 
-            binding.homePillProgressBar.setMaxProgress(100)
-            binding.homePillProgressBar.setProgress(100)
+//            binding.homePillProgressBar.setMaxProgress(100)
+//            binding.homePillProgressBar.setProgress(100)
 
 
             // 현재 월 업데이트
@@ -65,7 +71,7 @@ class HomeFragment : Fragment() {
             binding.calMonth.text = month
             binding.calDay.text = day
 
-            binding.homeMonth.text = month
+            //binding.homeMonth.text = month
 
             binding.btnPillList.setOnClickListener {
                 findNavController().navigate(R.id.listFragment)
@@ -127,6 +133,9 @@ class HomeFragment : Fragment() {
                         val remainingMedicineNames = response.remainingMedicine.joinToString(" | ") { it.name }
                         binding.tvLastMedi.text = remainingMedicineNames
 
+                        val remainingMedicineItems = response.remainingMedicine.map { RemainMediItem(it.name, it.day) }
+                        remainMediAdapter.updateItems(remainingMedicineItems)
+
                         // 화면 업데이트
                         if (response.medicineAlarmRecords.isNullOrEmpty()) {
                             Log.d("fetchMain", "No medicine records found - updating UI to show no data layout")
@@ -166,7 +175,7 @@ class HomeFragment : Fragment() {
         fetchMain()
         val calendar = Calendar.getInstance()
         val month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
-        binding.homeMonth.text = month
+        //binding.homeMonth.text = month
 
         val sharedPreferences = requireActivity().getSharedPreferences("userName", MODE_PRIVATE)
         userName = sharedPreferences.getString("userName", "Loading name failed")
