@@ -1,336 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".CalendarFragment">
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- 상단 파란색 배경 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBlueBackground"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="건강 기록"
-        android:fontFamily="@font/notosanskrsemibold"
-        android:textColor="@color/black"
+        android:background="@drawable/diarymain_bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 상단 타이틀 영역 -->
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="건강 기록"
+            android:textSize="20sp"
+            android:fontFamily="@font/notosanskrbold"
+            android:includeFontPadding="false"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingStart="16dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="29dp"/>
+
+        <!-- 날짜 표시 영역 -->
+        <TextView
+            android:id="@+id/ym_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2024년 10월"
+            android:includeFontPadding="false"
+            android:textSize="18sp"
+            android:fontFamily="@font/notosanskrmedium"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/titleTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingStart="16dp"
+            android:paddingBottom="12dp"/>
+
+        <!-- 드롭다운 화살표 버튼 -->
+        <ImageView
+            android:id="@+id/dropdownButton"
+            android:layout_width="34sp"
+            android:layout_height="34sp"
+            android:src="@drawable/diary_date_drop"
+            android:contentDescription="Open date picker"
+            app:layout_constraintTop_toTopOf="@id/ym_txt"
+            app:layout_constraintBottom_toBottomOf="@id/ym_txt"
+            app:layout_constraintStart_toEndOf="@id/ym_txt"
+            android:paddingStart="-6dp"
+            android:paddingBottom="10dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 복용 상태 표시 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/eatmedidate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/topBlueBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/cal_title"
-        android:textSize="17sp"
-        />
+        android:paddingStart="16dp"
+        android:paddingTop="25dp">
 
-    <TextView
-        app:layout_constraintTop_toBottomOf="@id/cal_title"
-        android:id="@+id/monthYearText"
-        android:layout_width="wrap_content"
+        <!-- 아이콘 이미지 -->
+        <ImageView
+            android:id="@+id/medicineStatusIcon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/diary_eatmedi_eximg"
+            android:contentDescription="Medicine icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- 복용 상태 텍스트 -->
+        <TextView
+            android:id="@+id/eatmedi_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="필메이트와"
+            android:includeFontPadding="false"
+            android:textSize="18sp"
+            android:fontFamily="@font/notosanskrregular"
+            android:textColor="#1E54DF"
+            app:layout_constraintTop_toTopOf="@id/medicineStatusIcon"
+            app:layout_constraintBottom_toBottomOf="@id/medicineStatusIcon"
+            app:layout_constraintStart_toEndOf="@id/medicineStatusIcon"
+            android:layout_marginStart="8dp"/>
+        <TextView
+            android:id="@+id/eatmedi_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 복용 1일째"
+            android:includeFontPadding="false"
+            android:textSize="18sp"
+            android:fontFamily="@font/notosanskrbold"
+            android:textColor="#1E54DF"
+            app:layout_constraintTop_toTopOf="@id/medicineStatusIcon"
+            app:layout_constraintBottom_toBottomOf="@id/medicineStatusIcon"
+            app:layout_constraintStart_toEndOf="@id/eatmedi_"
+            android:layout_marginStart="0dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 요일 표시 -->
+    <GridLayout
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@id/eatmedidate"
+        android:id="@+id/weekDaysGrid"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="2024년 8월"
-        android:fontFamily="@font/notosanskrsemibold"
-        android:textColor="@color/black"
+        android:columnCount="7"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp">
 
-    <ImageButton
-        android:padding="10dp"
-        android:id="@+id/prevMonthButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Previous Month"
-        android:src="@drawable/ic_left"
-        app:layout_constraintBottom_toBottomOf="@+id/monthYearText"
-        app:layout_constraintEnd_toStartOf="@id/monthYearText"
-        app:layout_constraintTop_toTopOf="@id/monthYearText" />
-
-    <ImageButton
-        android:padding="10dp"
-        android:id="@+id/nextMonthButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Next Month"
-        android:src="@drawable/ic_right"
-        app:layout_constraintBottom_toBottomOf="@+id/monthYearText"
-        app:layout_constraintStart_toEndOf="@id/monthYearText"
-        app:layout_constraintTop_toTopOf="@id/monthYearText" />
-
-        <GridLayout
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginTop="-15dp"
-            app:layout_constraintTop_toBottomOf="@id/monthYearText"
-            android:id="@+id/weekDaysGrid"
+        <!-- 일 -->
+        <TextView
+            android:fontFamily="@font/notosanskrmedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:columnCount="7"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:padding="8dp">
+            android:layout_columnWeight="1"
+            android:text="일"
+            android:includeFontPadding="false"
+            android:textSize="13sp"
+            android:textColor="#FF453A"
+            android:gravity="center"/>
 
-            <!-- 일 -->
-            <TextView
-                android:fontFamily="@font/notosanskrsemibold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="일"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:gravity="center"/>
+        <!-- 요일 텍스트뷰들 추가 -->
+        <!-- 월 -->
+        <TextView
+            android:fontFamily="@font/notosanskrmedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="월"
+            android:includeFontPadding="false"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
 
-            <!-- 요일 텍스트뷰들 추가 -->
-            <!-- 월 -->
-            <TextView
-                android:fontFamily="@font/notosanskrsemibold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="월"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:gravity="center"/>
+        <!-- 화 -->
+        <TextView
+            android:fontFamily="@font/notosanskrmedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="화"
+            android:includeFontPadding="false"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
 
-            <!-- 화 -->
-            <TextView
-                android:fontFamily="@font/notosanskrsemibold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="화"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:gravity="center"/>
+        <!-- 수 -->
+        <TextView
+            android:fontFamily="@font/notosanskrmedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="수"
+            android:includeFontPadding="false"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
 
-            <!-- 수 -->
-            <TextView
-                android:fontFamily="@font/notosanskrsemibold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="수"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:gravity="center"/>
+        <!-- 목 -->
+        <TextView
+            android:fontFamily="@font/notosanskrmedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="목"
+            android:includeFontPadding="false"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
 
-            <!-- 목 -->
-            <TextView
-                android:fontFamily="@font/notosanskrsemibold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="목"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:gravity="center"/>
+        <!-- 금 -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="금"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrmedium"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
 
-            <!-- 금 -->
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="금"
-                android:fontFamily="@font/notosanskrsemibold"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:gravity="center"/>
+        <!-- 토 -->
+        <TextView
+            android:fontFamily="@font/notosanskrmedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="토"
+            android:includeFontPadding="false"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+    </GridLayout>
 
-            <!-- 토 -->
-            <TextView
-                android:fontFamily="@font/notosanskrsemibold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="토"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:gravity="center"/>
-        </GridLayout>
 
+    <!-- 캘린더 RecyclerView (날짜 표시) -->
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="-25dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/weekDaysGrid"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"/>
-
-<!--    <TextView-->
-<!--        android:id="@+id/txt_cal"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:text="건강 기록"-->
-<!--        android:fontFamily="@font/notosanskrsemibold"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:textSize="17sp"/>-->
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/layout_month"-->
-<!--        android:paddingLeft="16dp"-->
-<!--        android:paddingRight="16dp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/txt_cal"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        >-->
-
-<!--        &lt;!&ndash; 다음 달로 이동하는 버튼 &ndash;&gt;-->
-<!--        <ImageButton-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@id/monthTextView"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/monthTextView"-->
-<!--            android:id="@+id/prevMonthButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--            android:src="@drawable/ic_left" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/monthTextView"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="2024년 4월"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:fontFamily="@font/notosanskrsemibold"-->
-<!--            app:layout_constraintStart_toEndOf="@id/prevMonthButton"-->
-<!--            app:layout_constraintEnd_toStartOf="@id/nextMonthButton"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/prevMonthButton"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"/>-->
-
-<!--        &lt;!&ndash; 다음 달로 이동하는 버튼 &ndash;&gt;-->
-<!--        <ImageButton-->
-<!--            android:id="@+id/nextMonthButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--            android:src="@drawable/ic_right"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/monthTextView"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/monthTextView" />-->
-
-<!--        &lt;!&ndash; 요일 표시 그리드 레이아웃 &ndash;&gt;-->
-
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--    <GridLayout-->
-<!--        android:layout_marginTop="-15dp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/layout_month"-->
-<!--        android:id="@+id/weekDaysGrid"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:columnCount="7"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:padding="8dp">-->
-
-<!--        &lt;!&ndash; 일 &ndash;&gt;-->
-<!--        <TextView-->
-<!--            android:fontFamily="@font/notosanskrregular"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_columnWeight="1"-->
-<!--            android:text="일"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:gravity="center"/>-->
-
-<!--        &lt;!&ndash; 요일 텍스트뷰들 추가 &ndash;&gt;-->
-<!--        &lt;!&ndash; 월 &ndash;&gt;-->
-<!--        <TextView-->
-<!--            android:fontFamily="@font/notosanskrregular"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_columnWeight="1"-->
-<!--            android:text="월"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:gravity="center"/>-->
-
-<!--        &lt;!&ndash; 화 &ndash;&gt;-->
-<!--        <TextView-->
-<!--            android:fontFamily="@font/notosanskrregular"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_columnWeight="1"-->
-<!--            android:text="화"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:gravity="center"/>-->
-
-<!--        &lt;!&ndash; 수 &ndash;&gt;-->
-<!--        <TextView-->
-<!--            android:fontFamily="@font/notosanskrregular"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_columnWeight="1"-->
-<!--            android:text="수"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:gravity="center"/>-->
-
-<!--        &lt;!&ndash; 목 &ndash;&gt;-->
-<!--        <TextView-->
-<!--            android:fontFamily="@font/notosanskrregular"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_columnWeight="1"-->
-<!--            android:text="목"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:gravity="center"/>-->
-
-<!--        &lt;!&ndash; 금 &ndash;&gt;-->
-<!--        <TextView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_columnWeight="1"-->
-<!--            android:text="금"-->
-<!--            android:fontFamily="@font/notosanskrregular"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:gravity="center"/>-->
-
-<!--        &lt;!&ndash; 토 &ndash;&gt;-->
-<!--        <TextView-->
-<!--            android:fontFamily="@font/notosanskrregular"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_columnWeight="1"-->
-<!--            android:text="토"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:gravity="center"/>-->
-<!--    </GridLayout>-->
-
-<!--    <RecyclerView-->
-<!--        android:id="@+id/calendarRecyclerView"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:scrollbars="none"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/monthYearText"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:padding="16dp"/>-->
-
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
+
+

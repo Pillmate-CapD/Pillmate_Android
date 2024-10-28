@@ -1,56 +1,58 @@
 package com.example.pillmate
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pillmate.databinding.ActivityQnaBinding
 
 class QnaActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityQnaBinding
-    private var isAnswer1Visible = false
+    // TextView와 ImageView 리스트 선언
+    private val answerTextViews = mutableListOf<TextView>()
+    private val arrowImageViews = mutableListOf<ImageView>()
+    private val answerVisibilities = BooleanArray(9) // 각 답변의 가시성 상태 저장
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityQnaBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_qna)
 
-        // 뒤로가기 버튼 클릭 시 이전 화면으로 돌아가기
-        binding.pwcBack.setOnClickListener {
-            finish()
+        // 반복문으로 ID 연결 및 클릭 리스너 설정
+        for (i in 1..9) {
+            // TextView와 ImageView를 동적으로 가져오기
+            val answerId = resources.getIdentifier("tv_answer$i", "id", packageName)
+            val arrowId = resources.getIdentifier("iv_arrow$i", "id", packageName)
+
+            val tvAnswer = findViewById<TextView>(answerId)
+            val ivArrow = findViewById<ImageView>(arrowId)
+
+            answerTextViews.add(tvAnswer)
+            arrowImageViews.add(ivArrow)
+
+            // 클릭 리스너 설정
+            ivArrow.setOnClickListener {
+                toggleAnswer(i - 1) // 인덱스 i-1 전달 (0부터 시작하도록)
+            }
         }
-
-        /*// 첫 번째 질문 토글 동작 설정
-        binding.tvQuestion1.setOnClickListener {
-            Log.d("QnaActivity", "Question 1 clicked")
-            toggleAnswer(
-                isAnswer1Visible,
-                binding.ivArrow1,
-                binding.tvAnswer1
-            )
-            isAnswer1Visible = !isAnswer1Visible
-            Log.d("QnaActivity", "isAnswer1Visible: $isAnswer1Visible")
-        }*/
     }
 
-    // 답변 토글 메소드
-    private fun toggleAnswer(isVisible: Boolean, arrow: ImageView, answer: TextView) {
-        Log.d("QnaActivity", "Toggling answer visibility: isVisible = $isVisible")
-        if (isVisible) {
-            // 답변 숨기기
-            answer.visibility = View.GONE
-            arrow.setImageResource(R.drawable.qnadown)
-            Log.d("QnaActivity", "Answer hidden")
-            //arrow.animate().rotation(0f).setDuration(300).start()  // 화살표 원상복귀
+    private fun toggleAnswer(index: Int) {
+        // 현재 상태에 따라 가시성 및 애니메이션 설정
+        val isCurrentlyVisible = answerVisibilities[index]
+        if (isCurrentlyVisible) {
+            // 답변이 보이는 상태에서 감추기
+            answerTextViews[index].visibility = View.GONE
+            // 화살표 이미지 180도에서 0도로 회전 (접기)
+            ObjectAnimator.ofFloat(arrowImageViews[index], "rotation", 180f, 0f).start()
         } else {
-            // 답변 보이기
-            answer.visibility = View.VISIBLE
-            arrow.setImageResource(R.drawable.qnadown)
-            Log.d("QnaActivity", "Answer visible")
-            //arrow.animate().rotation(180f).setDuration(300).start()  // 화살표 180도 회전
+            // 답변이 숨겨진 상태에서 보이게 하기
+            answerTextViews[index].visibility = View.VISIBLE
+            // 화살표 이미지 0도에서 180도로 회전 (펼치기)
+            ObjectAnimator.ofFloat(arrowImageViews[index], "rotation", 0f, 180f).start()
         }
+        // 가시성 상태 반대로 토글
+        answerVisibilities[index] = !isCurrentlyVisible
     }
 }
+

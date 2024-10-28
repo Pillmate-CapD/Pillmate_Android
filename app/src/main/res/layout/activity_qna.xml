@@ -100,7 +100,7 @@
                 android:textColor="#6C6C6C"
                 android:fontFamily="@font/notosanskrregular"
                 android:text="‘필메이트(Pill Mate)’는 만성질환 환자를 위한 맞춤형 약 관리 및 건강 관리 서비스예요."
-                android:visibility="visible"
+                android:visibility="gone"
                 android:padding="16dp"/>
 
         </LinearLayout>
@@ -171,9 +171,12 @@
                 \n\n1) 직접 알약 정보 작성하기\n2) 알약을 촬영하여 인식하기\n3) 처방전/약봉투를 촬영하여 인식하기"
                 android:visibility="gone"
                 android:padding="16dp"/>
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#4DB6B6B6" />
     <!-- 3-->
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -232,6 +235,10 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#4DB6B6B6" />
     <!-- 4-->
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -290,6 +297,10 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#4DB6B6B6" />
     <!-- 5-->
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -416,6 +427,10 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#4DB6B6B6" />
     <!-- 7-->
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -542,6 +557,10 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#4DB6B6B6" />
     <!-- 9-->
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"

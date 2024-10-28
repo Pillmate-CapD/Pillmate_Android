@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UserFragment">
+    tools:context=".UserFragment"
+    android:background="#F5F6F8">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_top"
@@ -13,70 +14,87 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/mypage_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <View
-            android:id="@+id/mint"
-            android:layout_width="100dp"
-            android:layout_height="11dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="-10dp"
-            android:background="#08D2C8"
-            app:layout_constraintStart_toStartOf="@id/tv_user"
-            app:layout_constraintEnd_toEndOf="@id/tv_user"
-            app:layout_constraintTop_toBottomOf="@id/tv_user"/>
-
+        android:layout_height="297dp">
+        <!-- 상단 타이틀 영역 -->
         <TextView
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="64dp"
-            android:id="@+id/tv_user"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="마이페이지"
+            android:textSize="20sp"
+            android:fontFamily="@font/notosanskrbold"
+            android:includeFontPadding="false"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingStart="16dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="39dp"/>
+        <!-- 왼쪽에 위치할 이미지 -->
+        <ImageView
+            android:id="@+id/image_top"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/mypage_img"
+            app:layout_constraintTop_toBottomOf="@id/titleTextView"
+            app:layout_constraintStart_toStartOf="parent" />
+        <!-- 이름 -->
+        <!-- 이미지 오른쪽에 이름 텍스트 -->
+        <TextView
+            android:id="@+id/tv_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="-2dp"
             android:includeFontPadding="false"
             android:text="손해인"
             android:textColor="@color/white"
-            android:fontFamily="@font/notosanskrbold"
-            android:textSize="24sp"/>
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="@id/image_top"
+            app:layout_constraintStart_toEndOf="@id/image_top" />
         <TextView
-            android:layout_marginTop="71dp"
+            android:layout_marginTop="6dp"
             app:layout_constraintStart_toEndOf="@id/tv_user"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user"
+            app:layout_constraintTop_toTopOf="@id/tv_user"
             android:layout_width="wrap_content"
             android:includeFontPadding="false"
             android:layout_height="wrap_content"
-            android:text=" 님,"
-            android:fontFamily="@font/notosanskrmedium"
+            android:text=" 님"
+            android:fontFamily="@font/notosanskrsemibold"
             android:textColor="@color/white"
-            android:textSize="20sp"/>
-
+            android:textSize="15sp"/>
         <TextView
             android:id="@+id/tv_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
-            android:layout_marginBottom="65dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="31dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="3dp"
             android:fontFamily="@font/notosanskrregular"
-            android:text="오늘도 \n필메이트와 함께\n건강한 하루 보내세요!"
+            android:text="오늘도 필메이트와\n함께 건강한 하루 보내세요!"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@id/image_top"
             app:layout_constraintTop_toBottomOf="@id/tv_user" />
-        <!-- 오른쪽에 추가할 이미지뷰 -->
-        <ImageView
-            android:id="@+id/image_top"
-            android:layout_width="182dp"
-            android:layout_height="145dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="52dp"
-            android:src="@drawable/mypage_ex_img"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.108" />
+        <!-- 새로운 텍스트 뷰: 10월 복용 현황 -->
+        <TextView
+            android:id="@+id/tv_october_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:layout_marginStart="25dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:text="10월 복용 현황"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_sub" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
