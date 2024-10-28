@@ -12,7 +12,10 @@ import androidx.work.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class PillAlarmWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
@@ -24,7 +27,9 @@ class PillAlarmWorker(context: Context, workerParams: WorkerParameters) : Worker
 
     private fun fetchPillDataAndSetAlarms(context: Context) {
         val service = RetrofitApi.getRetrofitService
-        val call = service.getMain()
+        val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+        val call = service.getMain(currentTime)
+        //val call = service.getMain()
 
         call.enqueue(object : Callback<MainPageResponse> {
             override fun onResponse(
@@ -39,7 +44,7 @@ class PillAlarmWorker(context: Context, workerParams: WorkerParameters) : Worker
                                 time = it.time, // 시간 정보는 추가적인 포맷팅이 필요할 수 있음
                                 name = it.name,
                                 isEaten = it.isEaten,
-                                category = it.category
+                                medicineId = it.medicineId
                             )
                         }
 

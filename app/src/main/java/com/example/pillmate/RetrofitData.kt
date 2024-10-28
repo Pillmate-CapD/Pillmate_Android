@@ -142,26 +142,35 @@ data class AlarmListResponse(
 
 
 data class MainPageResponse(
-    val weekRateInfoList: List<WeekRateRequest>,
-    val medicineAlarmRecords: List<MedicineAlarmRequest>,
-    val grade: String,
-    val takenDay: Int,
-    val month: Int,
-    val rate: Int,
+    val upcomingAlarm: UpcomingAlarmRequest,
+    val missedAlarms: List<MissedAlarmsRequest>,
+    val medicineAlarmRecords: List<MedicineAlarmRecordsRequest>,
+    val remainingMedicine: List<RemainingMedicineRequest>,
     val bestRecord: BestRecordData,
     val worstRecord: WorstRecordData
 )
 
-data class WeekRateRequest(
-    val date: String,
-    val rate: Int
+data class UpcomingAlarmRequest(
+    val medicineName: String,
+    val time: String
 )
 
-data class MedicineAlarmRequest(
+data class MissedAlarmsRequest(
+    val name: String,
+    val time: String
+)
+
+data class MedicineAlarmRecordsRequest(
     val name: String,
     val time: String,
     val category: String,
-    val isEaten: Boolean
+    val isEaten: Boolean,
+    val medicineId: Int
+)
+
+data class RemainingMedicineRequest(
+    val name: String,
+    val day: Int
 )
 
 data class BestRecordData(

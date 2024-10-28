@@ -13,22 +13,12 @@ class PillViewModel : ViewModel() {
     private val _pillItems = MutableLiveData<List<PillListItem>>()
     val pillItems: LiveData<List<PillListItem>> get() = _pillItems
 
-    private var allPillItems: List<PillListItem> = listOf() // 전체 약 리스트를 저장
-
+    // 전체 약 리스트를 불러오는 함수
     fun loadPillItems(items: List<PillListItem>) {
-        allPillItems = items // 전체 약 리스트 저장
-        _pillItems.value = items // 처음에는 전체 약 리스트 표시
-    }
-
-    // 카테고리 선택 시 해당하는 약만 필터링하여 표시
-    fun filterPillItemsByCategory(category: String) {
-        _pillItems.value = if (category == "전체") {
-            allPillItems // 전체 카테고리 선택 시 전체 리스트 표시
-        } else {
-            allPillItems.filter { it.category == category } // 선택한 카테고리에 해당하는 약만 필터링
-        }
+        _pillItems.value = items // 전체 약 리스트 표시
     }
 }
+
 
 
 //class PillViewModel(application: Application) : AndroidViewModel(application) {

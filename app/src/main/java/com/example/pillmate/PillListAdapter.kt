@@ -210,7 +210,7 @@ class PillListAdapter(
                 editor.apply() // 변경사항 적용
 
                 // 알람이 추가되었으므로 HomeFragment에 알림 표시
-                fragment.showExistAlarmView()
+                //fragment.showExistAlarmView()
             }
         }
 

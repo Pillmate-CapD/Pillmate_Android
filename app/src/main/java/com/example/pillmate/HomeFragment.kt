@@ -1,41 +1,29 @@
 package com.example.pillmate
 
-import android.app.Activity
 import android.content.Context.MODE_PRIVATE
-import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.pillmate.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.DayOfWeek
-import java.time.LocalDate
+import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalAdjusters
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var dateAdapter: DateAdapter
-    private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var pillListAdapter: PillListAdapter
-    private val categoryItems = mutableListOf<CategoryItem>()
 
     private var userName :String? = null
 
@@ -43,20 +31,7 @@ class HomeFragment : Fragment() {
         PreferencesHelper(requireContext())
     }
 
-    private val REQUEST_CODE_EAT_MEDI = 1001
-
-    private val dateViewModel: DateViewModel by viewModels()
     private val pillViewModel: PillViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        // 카테고리 아이템 추가
-//        categoryItems.add(CategoryItem("전체", true))
-//        categoryItems.add(CategoryItem("고혈압"))
-//        categoryItems.add(CategoryItem("고지혈증"))
-//        categoryItems.add(CategoryItem("당뇨"))
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,245 +41,135 @@ class HomeFragment : Fragment() {
 
         val sharedPreferences = requireActivity().getSharedPreferences("userName", MODE_PRIVATE)
         val userName = sharedPreferences.getString("userName", "손해인")
-        if (userName!=null){
-                // 홈화면 => 주간 달력
-                dateAdapter = DateAdapter(dateViewModel.dateItems as ArrayList<DateItem>)
-                binding.dateList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                binding.dateList.adapter = dateAdapter
+        if (userName != null) {
+            // 약 리스트 RecyclerView 설정
+            pillListAdapter = PillListAdapter(arrayListOf(), this, preferencesHelper)
+            binding.pillList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            binding.pillList.adapter = pillListAdapter
 
-                // 카테고리 RecyclerView 설정
-                categoryAdapter = CategoryAdapter(categoryItems) { selectedCategory ->
-                    pillViewModel.filterPillItemsByCategory(selectedCategory) // 선택된 카테고리에 맞춰 필터링
-                }
-                binding.pillCategory.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                binding.pillCategory.adapter = categoryAdapter
+            // ViewModel을 통해 약 리스트 업데이트
+            pillViewModel.pillItems.observe(viewLifecycleOwner) { pillItems ->
+                pillListAdapter.updateItems(pillItems) // 필터링 없이 전체 약 리스트 업데이트
+            }
 
-                // 약 리스트 RecyclerView 설정
-                pillListAdapter = PillListAdapter(arrayListOf(), this, preferencesHelper)
-                binding.pillList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                binding.pillList.adapter = pillListAdapter
+            binding.homePillProgressBar.setMaxProgress(100)
+            binding.homePillProgressBar.setProgress(100)
 
-                // ViewModel을 통해 약 리스트 업데이트
-                pillViewModel.pillItems.observe(viewLifecycleOwner) { pillItems ->
-                    pillListAdapter.updateItems(pillItems) // 필터링된 약 리스트로 업데이트
-                }
 
-                binding.alertImg.setOnClickListener {
-                    val navController = findNavController()
-                    navController.navigate(R.id.alarmListActivity)
-                }
+            // 현재 월 업데이트
+            // 현재 월과 일 업데이트
+            val calendar = Calendar.getInstance()
+            val month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+            val day = calendar.get(Calendar.DAY_OF_MONTH).toString()
 
-                binding.homePillProgressBar.setMaxProgress(100)
-                binding.homePillProgressBar.setProgress(100)
+            binding.calMonth.text = month
+            binding.calDay.text = day
 
-//        // ViewModel을 사용하여 데이터 로드
-//        pillViewModel.loadPillItems(
-//            listOf(
-//                PillListItem("오전 8:00", "트윈스타정", fal),
-//                PillListItem("오전 11:00", "디아미크롱서방정"),
-//                PillListItem("오후 12:00", "파스틱정"),
-//                PillListItem("오후 6:30", "파스틱정"),
-//                PillListItem("오후 9:00", "바이토린")
-//            )
-//        )
-                //fetchHealthInfo()
+            binding.homeMonth.text = month
 
-                // Getting the current month using Calendar
-                val calendar = Calendar.getInstance()
-                val month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+            binding.btnPillList.setOnClickListener {
+                findNavController().navigate(R.id.listFragment)
+            }
 
-                // Updating the TextView for current month
-                binding.homeMonth.text = month
-
-                pillViewModel.pillItems.observe(viewLifecycleOwner) { pillItems ->
-                    pillListAdapter.updateItems(pillItems)
-                }
-
-                binding.btnPillList.setOnClickListener {
-                    findNavController().navigate(R.id.listFragment)
-                }
-
-                binding.nonBtnAddMedi.setOnClickListener {
-                    findNavController().navigate(R.id.listFragment)
-                }
+            binding.nonBtnAddMedi.setOnClickListener {
+                findNavController().navigate(R.id.listFragment)
+            }
         }
         return binding.root
     }
 
-    // 알람이 추가될 때 view_exist_alarm 표시
-    fun showExistAlarmView() {
-        binding.viewExistAlarm.visibility = View.VISIBLE // view_exist_alarm의 visibility를 VISIBLE로 설정
-    }
-
-    // 알람이 없을 때 view_exist_alarm 숨김
-    fun hideExistAlarmView() {
-        binding.viewExistAlarm.visibility = View.GONE // view_exist_alarm의 visibility를 GONE으로 설정
-    }
-
-
     private fun fetchMain(){
         val service = RetrofitApi.getRetrofitService
-        val call = service.getMain()
+        val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+        Log.d("fetchMain", "Current Time: $currentTime")
 
-        call.enqueue(object : Callback<MainPageResponse>{
+        // API 호출 준비 단계
+        val call = service.getMain(currentTime)
+        Log.d("fetchMain", "API Call Initiated with time parameter: $currentTime")
+
+        call.enqueue(object : Callback<MainPageResponse> {
             override fun onResponse(
                 call: Call<MainPageResponse>,
                 response: Response<MainPageResponse>
             ) {
+                Log.d("fetchMain", "API Response Received")
+                Log.d("fetchMain", "Response Code: ${response.code()}")
+                Log.d("fetchMain", "Response Message: ${response.message()}")
+
                 if (response.isSuccessful) {
-                    val mainResponse= response.body()
+                    val mainResponse = response.body()
+                    Log.d("fetchMain", "Response Body: $mainResponse")
 
                     mainResponse?.let { response ->
-                        // Binding data to the TextViews
-                        binding.homePillLevel.text = "${response.grade}"
-                        binding.homePillUser.text = "${response.takenDay}일"
-                        binding.homePillDay.text = "/${response.month}일"
-                        binding.homePercent.text = "${response.rate}%"
+                        Log.d("fetchMain", "Parsed Response Data: $response")
 
-                        binding.homePillProgressBar.setProgress(response.rate)
-
-                        // Handling bestRecord nullability
-                        val bestRecord = response.bestRecord
-                        binding.homeGoodPillName.text = bestRecord.name ?: "약을 추가해보세요"
-                        binding.homePillGoodUser.text = "${bestRecord.taken ?: 0} 정"
-                        binding.homePillGoodNum.text = "/ ${bestRecord.scheduled ?: 0} 정"
-                        binding.goodProgressBar.progress = bestRecord.scheduled ?: 100
-
-                        // Handling worstRecord nullability
-                        val worstRecord = response.worstRecord
-                        binding.homeBadPillName.text = worstRecord.name ?: "약을 추가해보세요"
-                        binding.homePillBadUser.text = "${worstRecord.taken ?: 0} 정"
-                        binding.homePillBadNum.text = "/ ${worstRecord.scheduled ?: 0} 정"
-                        binding.badProgressBar.progress = worstRecord.scheduled ?: 100
-
-                        // Setting the progress bar
-                        //binding.homePillProgressBar.progress = response.rate
-
-
+                        // 데이터를 ViewModel에 전달
                         pillViewModel.loadPillItems(
                             response.medicineAlarmRecords.map {
                                 val formattedTime = convertTimeTo12HourFormat(it.time)
-                                val category = it.category ?: "Unknown" // category가 null이면 기본값 "Unknown"을 사용
-                                PillListItem(time = formattedTime, name = it.name, isEaten = it.isEaten, category = category)
+                                PillListItem(time = formattedTime, name = it.name, isEaten = it.isEaten, medicineId = it.medicineId)
                             }
                         )
 
+                        // medicineAlarmRecords 개수 로그 출력
+                        val medicineRecordCount = response.medicineAlarmRecords.size
+                        binding.mediNum.text="총 ${medicineRecordCount}정"
 
-                        // 약 리스트에서 중복되지 않은 카테고리 추출
-                        val uniqueCategories = mutableSetOf<String>()
-                        response.medicineAlarmRecords.forEach {
-                            val category = it.category ?: "Unknown" // category가 null이면 "Unknown" 사용
-                            uniqueCategories.add(category) // Set을 사용하면 중복이 자동으로 제거됨
-                        }
+                        // upcomingAlarm의 medicineName과 time을 변환하여 UI에 표시
+                        val upcomingAlarm = response.upcomingAlarm
+                        val formattedTime = convertTimeTo12HourFormat(upcomingAlarm.time)
+                        binding.tvNextMedi.text = "$formattedTime ${upcomingAlarm.medicineName}"
 
-                        // categoryItems 리스트 초기화 및 "전체" 추가
-                        categoryItems.clear()
-                        categoryItems.add(CategoryItem("전체", true)) // "전체" 기본 추가
+                        val remainingAlarm = response.remainingMedicine.size
+                        binding.tvLastMediGuide.text="복용 안한 약 일정이 ${remainingAlarm}개 있어!"
 
-                        // 중복 제거된 카테고리를 categoryItems에 추가
-                        uniqueCategories.forEach { category ->
-                            categoryItems.add(CategoryItem(category))
-                        }
+                        // remainingMedicine의 name 필드를 | 구분자로 연결하여 표시
+                        val remainingMedicineNames = response.remainingMedicine.joinToString(" | ") { it.name }
+                        binding.tvLastMedi.text = remainingMedicineNames
 
-                        // 어댑터에 변경 사항 반영
-                        categoryAdapter.notifyDataSetChanged()
-
-
-                        // 서버에서 받은 progress 리스트를 ViewModel에 전달
-//                        val progressValues = response.weekRateInfoList.map { it.rate }
-//                        dateViewModel.updateDateItemsWithProgress(progressValues)
-
-
-                        if(response.medicineAlarmRecords.isNullOrEmpty()) {
-                            binding.listView.visibility = View.GONE
-                            binding.pillCategory.visibility = View.GONE
+                        // 화면 업데이트
+                        if (response.medicineAlarmRecords.isNullOrEmpty()) {
+                            Log.d("fetchMain", "No medicine records found - updating UI to show no data layout")
                             binding.pillList.visibility = View.GONE
                             binding.btnAllPill.visibility = View.GONE
                             binding.homeNonDataLayout.visibility = View.VISIBLE
-                        }
-                        else{
-                            binding.listView.visibility = View.VISIBLE
-                            binding.pillCategory.visibility = View.VISIBLE
+                        } else {
+                            Log.d("fetchMain", "Medicine records found - updating UI to show data")
                             binding.pillList.visibility = View.VISIBLE
                             binding.btnAllPill.visibility = View.VISIBLE
                             binding.homeNonDataLayout.visibility = View.GONE
                         }
                     }
-
+                } else {
+                    Log.d("fetchMain", "Response was unsuccessful")
                 }
             }
+
             override fun onFailure(call: Call<MainPageResponse>, t: Throwable) {
-                TODO("Not yet implemented")
-
+                Log.e("fetchMain", "API Call Failed", t)
             }
-
         })
     }
 
-//    private fun fetchHealthInfo(){
-//        val service = RetrofitApi.getRetrofitService
-//        val call = service.getHealthInfo()
-//
-//        call.enqueue(object : Callback<HealthInfoResponse>{
-//            override fun onResponse(
-//                call: Call<HealthInfoResponse>,
-//                response: Response<HealthInfoResponse>
-//            ) {
-//                if(response.isSuccessful){
-//                    val healthResponse = response.body()
-//
-//                    healthResponse?.let{ response->
-//                        // 카테고리 아이템 초기화 및 "전체" 항목 추가
-//                        categoryItems.clear() // 기존 항목을 지우고 새로 추가
-//                        categoryItems.add(CategoryItem("전체", true)) // 전체 항목 추가
-//
-//                        // diseases 리스트에서 disease 이름을 카테고리로 추가
-//                        response.diseases.forEach { diseaseInfo ->
-//                            categoryItems.add(CategoryItem(diseaseInfo.disease))
-//                        }
-//
-//                        // RecyclerView 등의 어댑터에 반영
-//                        categoryAdapter.notifyDataSetChanged()
-//                    }
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<HealthInfoResponse>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
-//    }
 
-    // 시간을 24시간 형식에서 12시간 형식으로 변환하는 함수
     private fun convertTimeTo12HourFormat(time: String): String {
-        // "HH:mm:ss" 형식을 LocalTime으로 파싱
         val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
         val localTime = LocalTime.parse(time, timeFormatter)
-
-        // 12시간 형식으로 변환
         val hour = localTime.hour
         val minute = localTime.minute
         val amPm = if (hour < 12) "오전" else "오후"
         val formattedHour = if (hour % 12 == 0) 12 else hour % 12
-
-        // "오전 7:00", "오후 10:00" 형식으로 반환
         return "$amPm $formattedHour:${String.format("%02d", minute)}"
     }
 
     override fun onResume() {
         fetchMain()
-        //fetchHealthInfo()
-
-        // Getting the current month using Calendar
         val calendar = Calendar.getInstance()
         val month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
-
-        // Updating the TextView for current month
         binding.homeMonth.text = month
 
         val sharedPreferences = requireActivity().getSharedPreferences("userName", MODE_PRIVATE)
-        userName  = sharedPreferences.getString("userName","Loading name failed")
+        userName = sharedPreferences.getString("userName", "Loading name failed")
         binding.userTxt.text = userName
         super.onResume()
     }

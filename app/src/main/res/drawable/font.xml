@@ -6,4 +6,7 @@
     <font android:font = "@font/notosanskrregular" />
     <font android:font = "@font/notosanskrbold" />
     <font android:font = "@font/notosanskrextrabold" />
+    <font android:font = "@font/sfprodisplaybold" />
+    <font android:font = "@font/sfprodisplaysemibold" />
+    <font android:font = "@font/sfprodisplayheavy" />
 </font-family>

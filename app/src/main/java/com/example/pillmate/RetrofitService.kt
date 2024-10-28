@@ -65,7 +65,7 @@ interface RetrofitService {
     fun getAlarm() : Call<List<AlarmListResponse>>
 
     @GET("main")
-    fun getMain() : Call<MainPageResponse>
+    fun getMain(@Query(value = "time", encoded = true) time: String) : Call<MainPageResponse>
 
     @DELETE("medicines")
     fun delMedicine( @Query("medicineId") medicineId: Int) : Call<String>

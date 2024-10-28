@@ -1,7 +1,7 @@
 package com.example.pillmate
 
 // time: 알람 시간, pillName: 약 이름
-data class PillListItem(val time: String, val name: String, var isEaten: Boolean, val category: String) {
+data class PillListItem(val time: String, val name: String, var isEaten: Boolean, var medicineId: Int) {
     // 시간 문자열에서 시간 부분만을 추출하는 함수
     fun extractHour(): Int {
         // 시간 문자열을 공백을 기준으로 분할하여 시간 부분을 가져옵니다.
