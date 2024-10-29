@@ -57,7 +57,7 @@
         android:textColor="@color/white"
         android:textSize="11sp"
         android:fontFamily="@font/notosanskrmedium"
-        android:background="@drawable/ic_chatBubble"/>
+        android:background="@drawable/ic_chat_bubble"/>
 
     <!-- 가로로 스크롤되는 ViewPager2 추가 -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -283,7 +283,7 @@
             android:layout_marginRight="16dp"
             android:fontFamily="@font/notosanskrbold"
             android:includeFontPadding="false"
-            android:text="8개"
+            android:text="1개"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_end_3"

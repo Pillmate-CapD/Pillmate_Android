@@ -76,7 +76,6 @@ class WriteMediActivity : AppCompatActivity() {
     // TODO: 2) spinnerTime이랑 pickerTime이랑 리스트형태로 받을 수 있는지? => 서버
 
 
-    // 필수 필드 확인 및 커스텀 토스트 메시지 표시
     private fun checkFieldsAndShowToast() {
         // 필수 필드 체크
         val isMediNameEmpty = binding.editMedi.text.isNullOrEmpty()
@@ -127,22 +126,89 @@ class WriteMediActivity : AppCompatActivity() {
                     )
                 }
 
-                // 예: MediAddRequest 객체 생성 및 전송
-                val mediAddRequest = MediAddRequest(
-                    medicineName = mediName,
-                    disease = disease,
-                    amount = oneEat,
-                    timesPerDay = oneDay,
-                    day = allDay,
-                    timeSlotList = timeSlotRequests
-                )
-                // 모든 필드가 채워져 있으면 저장 로직 수행
-                // 예: 데이터 저장, 서버로 전송 등
-                sendMediAdd(mediAddRequest)
-                //addAlarm()
+                // 데이터를 `Intent`에 담아 전달
+                val intent = Intent(this, MediCheckActivity::class.java).apply {
+                    putExtra("mediName", mediName)
+                    putExtra("disease", disease)
+                    putExtra("oneEat", oneEat)
+                    putExtra("oneDay", oneDay)
+                    putExtra("allDay", allDay)
+                    putExtra("timeSlotList", Gson().toJson(timeSlotRequests))  // Gson으로 리스트 직렬화
+                }
+                startActivity(intent)
+                finish()
             }
         }
     }
+
+
+//    // 필수 필드 확인 및 커스텀 토스트 메시지 표시
+//    private fun checkFieldsAndShowToast() {
+//        // 필수 필드 체크
+//        val isMediNameEmpty = binding.editMedi.text.isNullOrEmpty()
+//        val isDiseaseEmpty = binding.spinnerDisease.text.isNullOrEmpty()
+//        val isOneEatEmpty = binding.editOneEat.text.isNullOrEmpty()
+//        val isOneDayEmpty = binding.editOneDay.text.isNullOrEmpty()
+//        val isAllDayEmpty = binding.editAllDay.text.isNullOrEmpty()
+//
+//        // 모든 시간대가 선택되었는지 확인 (spinnerTime과 pickerTime 모두)
+//        val areAllTimeSlotsSelected = timeSlots.all { it.isTimeSelected && it.isTimeChanged }
+//
+//        // 각 필드별로 확인하고 메시지 띄우기
+//        when {
+//            isMediNameEmpty -> {
+//                showCustomToast("약품명을 입력해주세요.")
+//            }
+//            isDiseaseEmpty -> {
+//                showCustomToast("질병을 선택해주세요.")
+//            }
+//            isOneEatEmpty -> {
+//                showCustomToast("1회 복약량을 입력해주세요.")
+//            }
+//            isOneDayEmpty -> {
+//                showCustomToast("1일 복약횟수를 입력해주세요.")
+//            }
+//            isAllDayEmpty -> {
+//                showCustomToast("총 복약일수를 입력해주세요.")
+//            }
+//            !areAllTimeSlotsSelected -> {
+//                showCustomToast("복약 시간을 입력해주세요.")
+//            }
+//            else -> {
+//                // 모든 필드가 채워져 있으면 저장 로직 수행
+//                // EditText에서 값을 받아서 처리
+//                val mediName = binding.editMedi.text.toString()  // 약품명
+//                val disease = binding.spinnerDisease.text.toString() // 질병
+//                val oneEat = binding.editOneEat.text.toString().toInt()  // 1회 복약량
+//                val oneDay = binding.editOneDay.text.toString().toInt()  // 1일 복약횟수
+//                val allDay = binding.editAllDay.text.toString().toInt()  // 총 복약일수
+//                // 복약 시간대도 데이터를 받을 필요가 있다면 처리 추가
+//                //val times = timeSlots.map { it.timeValue }  // 시간대 데이터
+//
+//                // TimeSlotItem 리스트를 TimeSlotRequest 리스트로 변환
+//                val timeSlotRequests = timeSlots.map { timeSlot ->
+//                    TimeSlotRequest(
+//                        spinnerTime = timeSlot.timeLabel, // 예: "기상 직후"
+//                        pickerTime = convertTo24HourFormat(timeSlot.time) // 12시간제를 24시간제로 변환한 값
+//                    )
+//                }
+//
+//                // 예: MediAddRequest 객체 생성 및 전송
+//                val mediAddRequest = MediAddRequest(
+//                    medicineName = mediName,
+//                    disease = disease,
+//                    amount = oneEat,
+//                    timesPerDay = oneDay,
+//                    day = allDay,
+//                    timeSlotList = timeSlotRequests
+//                )
+//                // 모든 필드가 채워져 있으면 저장 로직 수행
+//                // 예: 데이터 저장, 서버로 전송 등
+//                sendMediAdd(mediAddRequest)
+//                //addAlarm()
+//            }
+//        }
+//    }
 
     // 12시간제(오전/오후) 시간을 24시간제 시간으로 변환하는 함수
     private fun convertTo24HourFormat(time: String): String {
