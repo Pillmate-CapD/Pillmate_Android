@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MediCheckActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 취소 버튼 -->
+        <View
+            android:id="@+id/tv_cancel"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/close_btn"
+            android:fontFamily="@font/notosanskrregular"
+            android:includeFontPadding="false"
+            android:clickable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- 제목 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="약 리스트 추가"
+            android:textColor="#3E3E3E"
+            android:textSize="18sp"
+            android:fontFamily="@font/notosanskrbold"
+            android:includeFontPadding="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    <TextView
+        android:elevation="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="-20dp"
+        app:layout_constraintBottom_toTopOf="@id/medi_viewPager"
+        app:layout_constraintEnd_toEndOf="@id/medi_viewPager"
+        android:layout_width="196dp"
+        android:layout_height="39dp"
+        android:text="질병과 약 정보가 맞는지 확인해 주세요."
+        android:gravity="top|center"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:fontFamily="@font/notosanskrmedium"
+        android:background="@drawable/ic_chatBubble"/>
+
+    <!-- 가로로 스크롤되는 ViewPager2 추가 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@id/top_layout"
+        android:id="@+id/medi_viewPager"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/bg_17_gray"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/vp_medi_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanskrbold"
+            android:includeFontPadding="false"
+            android:text="파스틱정 (제 2형 당뇨)"
+            android:textColor="#3E3E3E"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_blue_round4"
+            android:fontFamily="@font/notosanskrmedium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:paddingLeft="15dp"
+            android:paddingTop="3dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="4dp"
+            android:text="당뇨"
+            android:textColor="#1E54DF"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/vp_medi_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/vp_tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textColor="#3E3E3E"
+            app:layout_constraintTop_toBottomOf="@id/vp_medi_name"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="25dp"
+            android:textSize="13sp"
+            android:text="1회 복약량"/>
+
+        <TextView
+            android:id="@+id/vp_medi_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:includeFontPadding="false"
+            android:text="1회"
+            android:textColor="#3E3E3E"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/vp_tv_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/vp_tv_2" />
+
+        <TextView
+            android:id="@+id/vp_tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textColor="#3E3E3E"
+            app:layout_constraintTop_toBottomOf="@id/vp_tv_1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="25dp"
+            android:textSize="13sp"
+            android:text="1일 복약횟수"/>
+
+        <TextView
+            android:id="@+id/vp_medi_perday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:includeFontPadding="false"
+            android:text="1정"
+            android:textColor="#3E3E3E"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/vp_tv_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/vp_tv_1" />
+
+        <TextView
+            android:id="@+id/vp_tv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textColor="#3E3E3E"
+            app:layout_constraintTop_toBottomOf="@id/vp_tv_2"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="25dp"
+            android:textSize="13sp"
+            android:text="총 복약일수"/>
+
+        <TextView
+            android:id="@+id/vp_medi_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:includeFontPadding="false"
+            android:text="90일"
+            android:textColor="#3E3E3E"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/vp_tv_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/vp_tv_3" />
+
+        <TextView
+            android:id="@+id/vp_tv_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textColor="#3E3E3E"
+            app:layout_constraintTop_toBottomOf="@id/vp_tv_3"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="25dp"
+            android:textSize="13sp"
+            android:text="복약시간"/>
+
+        <TextView
+            android:id="@+id/vp_medi_slot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:includeFontPadding="false"
+            android:text="기상 직후 | 오전 06:00\n점심 식전 | 오전 11:00"
+            android:textColor="#3E3E3E"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/vp_tv_4" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/medi_end_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/medi_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_check_day"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="35dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrmedium"
+            android:textSize="15sp"
+            android:textColor="#696969"
+            android:text="등록일자"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_check_day_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/notosanskrmedium"
+            android:includeFontPadding="false"
+            android:text="24.04.10"
+            android:textColor="#3E3E3E"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_check_day"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_check_day" />
+
+        <View
+            android:id="@+id/end_view"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_check_day"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D9D9D9"/>
+
+        <TextView
+            android:layout_marginTop="25dp"
+            android:id="@+id/tv_end_3"
+            app:layout_constraintTop_toBottomOf="@id/end_view"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrbold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="총 약 개수"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_all_medi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/notosanskrbold"
+            android:includeFontPadding="false"
+            android:text="8개"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_end_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_end_3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/btn_pre_add_medi"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/button_blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:fontFamily="@font/notosanskrmedium"
+        android:textSize="15sp"
+        android:textAlignment="center"
+        android:text="약 등록하기"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
