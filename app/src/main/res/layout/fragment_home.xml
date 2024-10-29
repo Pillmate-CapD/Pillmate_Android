@@ -798,7 +798,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosanskrbold"
-                    android:paddingLeft="16dp"
+                    android:paddingLeft="18dp"
                     android:text="약별 복용 현황"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>

@@ -88,14 +88,14 @@ class MyPillListFragment : Fragment() {
                             setupCategoryAdapter(updatedCategories)
 
                             // 카테고리 뷰를 보여줌
-                            binding.recyCategory.visibility = View.VISIBLE
+                            //binding.recyCategory.visibility = View.VISIBLE
                         } else {
                             // 카테고리가 없으면 카테고리 뷰를 숨김
-                            binding.recyCategory.visibility = View.GONE
+                            //binding.recyCategory.visibility = View.GONE
                         }
                     } else {
                         // 약물이 없는 경우 카테고리 뷰를 숨김
-                        binding.recyCategory.visibility = View.GONE
+                        //binding.recyCategory.visibility = View.GONE
                         Log.d("MyPillListFragment", "약물이 없습니다.")
                     }
                 } else {
@@ -120,10 +120,10 @@ class MyPillListFragment : Fragment() {
             fragment?.filterMedicineList(selectedCategory)
         }
 
-        binding.recyCategory.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = categoryAdapter
-        }
+//        binding.recyCategory.apply {
+//            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+//            adapter = categoryAdapter
+//        }
     }
 
     // 카테고리 어댑터 설정
