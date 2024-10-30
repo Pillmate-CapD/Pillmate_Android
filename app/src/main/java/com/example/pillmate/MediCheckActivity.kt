@@ -1,5 +1,6 @@
 package com.example.pillmate
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.pillmate.databinding.ActivityAddMediFinBinding
 import com.example.pillmate.databinding.ActivityMediCheckBinding
 import com.google.gson.Gson
@@ -90,6 +94,8 @@ class MediCheckActivity : AppCompatActivity() {
                         //showCustomToast(it) // 서버에서 보낸 메시지를 토스트로 표시
 
                         val intent = Intent(this@MediCheckActivity, AddMediFinActivity::class.java)
+                        triggerPillAlarmWorker(this@MediCheckActivity)
+                        Log.d("triggerAlarm", "Trigger Alarm: 알람을 재구성 호출")
                         startActivity(intent)
                         finish()
                     }
@@ -102,5 +108,15 @@ class MediCheckActivity : AppCompatActivity() {
                 Log.e("WriteMediActivity", "API 호출 실패", t)
             }
         })
+    }
+
+    // PillAlarmWorker를 트리거하는 함수
+    private fun triggerPillAlarmWorker(context: Context) {
+        val workRequest = OneTimeWorkRequestBuilder<PillAlarmWorker>().build()
+        WorkManager.getInstance(context).enqueueUniqueWork(
+            "PillAlarmWorker",
+            ExistingWorkPolicy.REPLACE,
+            workRequest
+        )
     }
 }

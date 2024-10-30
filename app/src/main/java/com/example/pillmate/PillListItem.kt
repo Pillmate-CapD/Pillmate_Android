@@ -1,40 +1,56 @@
 package com.example.pillmate
 
+import android.util.Log
+
 // time: 알람 시간, pillName: 약 이름
 data class PillListItem(val time: String, val name: String, var isEaten: Boolean, var medicineId: Int) {
-    // 시간 문자열에서 시간 부분만을 추출하는 함수
+    // 시간 문자열에서 시간 부분을 추출하는 함수
     fun extractHour(): Int {
-        // 시간 문자열을 공백을 기준으로 분할하여 시간 부분을 가져옵니다.
         val parts = time.split(" ")
-        val amPm = parts.getOrNull(0) // "오전", "오후" 부분을 가져옵니다.
-        val timePart = parts.getOrNull(1) // "7:00" 부분을 가져옵니다.
+        val amPm = parts.getOrNull(0) // "오전" 또는 "오후"
+        val timePart = parts.getOrNull(1) // "21:46:00" 등
 
-        // 시간 부분이 null이면 0을 반환합니다.
-        if (amPm == null || timePart == null) {
-            return 0
-        }
+        if (timePart != null) {
+            val hour = timePart.split(":")[0].toIntOrNull() ?: return 0
+            Log.d("PillListItem", "Extracted hour before AM/PM check: $hour")
 
-        // 시간 부분에서 "오전"인 경우 시간을 그대로 반환하고,
-        // "오후"인 경우 시간을 12시간 더한 값을 반환합니다.
-        val hourPart = timePart.split(":")[0].toInt()
-        return if (amPm == "오전") {
-            hourPart
-        } else {
-            if (hourPart == 12) hourPart else hourPart + 12
+            return when (amPm) {
+                "오전" -> if (hour == 12) 0 else hour // 오전 12시는 0시로 변환
+                "오후" -> if (hour == 12) 12 else hour + 12 // 오후 12시는 그대로 12시, 그 외 오후는 12 추가
+                else -> hour // 오전/오후 없을 경우 그대로 사용
+            }
         }
+        Log.e("PillListItem", "Failed to extract hour from time: $time")
+        return 0
     }
 
     // 시간 문자열에서 분 부분을 추출하는 함수
     fun extractMinute(): Int {
-        val parts = time.split(" ")
-        val timePart = parts.getOrNull(1) // "7:00" 부분을 가져옵니다.
+        val timePart = time.split(" ").getOrNull(1) ?: return 0 // "21:46:00"과 같은 부분만 가져옴
+        val minute = timePart.split(":").getOrNull(1)?.toIntOrNull() ?: 0
+        Log.d("PillListItem", "Extracted minute: $minute from time: $time")
+        return minute
+    }
 
-        // 시간 부분이 null이면 0을 반환합니다.
-        if (timePart == null) {
-            return 0
-        }
+    // 시간 문자열에서 시 부분을 추출하는 함수
+    fun extractHourAlarm(): Int {
+        return time.split(":").getOrNull(0)?.toIntOrNull() ?: 0
+    }
 
-        // 시간 부분에서 분을 반환합니다.
-        return timePart.split(":")[1].toInt()
+    // 시간 문자열에서 분 부분을 추출하는 함수
+    fun extractMinuteAlarm(): Int {
+        return time.split(":").getOrNull(1)?.toIntOrNull() ?: 0
+    }
+
+    // 오후인지 확인하는 메서드
+    fun isPm(): Boolean {
+        return time.startsWith("오후")
+    }
+
+    // 24시간 형식으로 반환하는 함수 (HH:mm 형식)
+    fun to24HourFormat(): String {
+        val hour = extractHour()
+        val minute = extractMinute()
+        return String.format("%02d:%02d", hour, minute)
     }
 }

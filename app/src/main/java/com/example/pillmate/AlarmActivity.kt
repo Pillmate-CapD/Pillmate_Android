@@ -5,15 +5,21 @@ import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
 import android.os.PowerManager
+import android.util.Log
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.example.pillmate.databinding.ActivityAlarmBinding
 import com.example.pillmate.databinding.ActivityAlarmListBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -30,6 +36,14 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
 
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val pillName = intent.getStringExtra("pill_name") ?: "Unknown"
+        val pillImgUrl = intent.getStringExtra("pill_image_url") // String으로 받기
+
+        Log.d("AlarmActivity", "pillName: $pillName, pillImgUrl: $pillImgUrl")
+        binding.pillName.text = pillName
+
+        fetchMediInfo(pillName)
 
         // xml에서 텍스트 밑줄
         binding.btnTodayNone.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG)
@@ -122,5 +136,39 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
 
     override fun onAlarmDismiss() {
         finish()
+    }
+
+    private fun fetchMediInfo(pillName: String) {
+        val service = RetrofitApi.getRetrofitService
+
+        Log.d("pillName", "MediInfo pillName: ${pillName}")
+
+        val request = MediInfoRequest(pillName)
+        val call = service.postMediInfo(listOf(request))
+        call.enqueue(object : Callback<List<MediInfoResponse>> {
+            override fun onResponse(call: Call<List<MediInfoResponse>>, response: Response<List<MediInfoResponse>>) {
+                if (response.isSuccessful) {
+                    val mediInfoList = response.body()
+                    mediInfoList?.firstOrNull()?.let { mediInfo ->
+                        Log.d("fetchMediInfo", "약물 정보 수신 성공: ${mediInfo.name}, ${mediInfo.photo}, ${mediInfo.category}")
+
+                        // Glide를 사용하여 이미지 로드, 기본 이미지 처리
+                        Glide.with(this@AlarmActivity)
+                            .load(mediInfo.photo)  // String URL을 직접 사용
+                            .placeholder(R.drawable.bg_zoom_null)
+                            .error(R.drawable.bg_zoom_null)
+                            .into(binding.pillImg)
+                        Log.d("mediInfo pillInfo Image", "mediInfo photo: ${mediInfo.photo}")
+
+                    }
+                } else {
+                    Log.e("fetchMediInfo", "Error: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<MediInfoResponse>>, t: Throwable) {
+                Log.e("fetchMediInfo", "API 호출 실패: ${t.message}")
+            }
+        })
     }
 }

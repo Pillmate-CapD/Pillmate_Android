@@ -121,7 +121,6 @@ class PillListAdapter(
 //                }
 //            }
             else if (currentTimeInMinutes >= itemTimeInMinutes + 120){
-
                 saveMissedPillAlarm(item.name)
 
                 // 현재 시간이 항목의 시간보다 2시간이상 지났거나 먹어야하는데 아직 안먹은 경우

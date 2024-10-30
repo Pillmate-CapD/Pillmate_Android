@@ -149,6 +149,36 @@ class HomeFragment : Fragment() {
                             binding.btnAllPill.visibility = View.VISIBLE
                             binding.homeNonDataLayout.visibility = View.GONE
                         }
+
+                        binding.homeGoodPillName.text = response.bestRecord.name
+                        binding.homePillGoodUser.text = "${response.bestRecord.taken}정 "
+                        binding.homePillGoodNum.text = "/ ${response.bestRecord.scheduled}정 "
+
+                        // taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
+                        val taken = response.bestRecord.taken
+                        val scheduled = response.bestRecord.scheduled
+                        val percentage = if (scheduled != 0) (taken * 100) / scheduled else 0
+
+                        binding.goodProgressBar.setProgress(percentage)
+
+                        binding.homeBadPillName.text = response.worstRecord.name
+                        binding.homePillBadUser.text = "${response.worstRecord.taken}정 "
+                        binding.homePillBadNum.text = "/ ${response.worstRecord.scheduled}정 "
+
+                        // taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
+                        val bTaken = response.bestRecord.taken
+                        val bScheduled = response.bestRecord.scheduled
+                        val bPercentage = if (bScheduled != 0) (bTaken * 100) / bScheduled else 0
+
+                        binding.goodProgressBar.setProgress(bPercentage)
+//                        if (bPercentage==1){
+//                            Log.d("percentage", "bPercentage: ${bPercentage}")
+//                            binding.goodProgressBar.setProgress(0)
+//                        }
+//                        else{
+//                            Log.d("percentage", "bPercentage full: ${bPercentage}")
+//                            binding.goodProgressBar.setProgress(bPercentage)
+//                        }
                     }
                 } else {
                     // 응답이 실패했을 때의 처리

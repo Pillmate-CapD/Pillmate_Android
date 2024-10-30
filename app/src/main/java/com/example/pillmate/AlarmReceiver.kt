@@ -16,7 +16,6 @@ class AlarmReceiver : BroadcastReceiver() {
         val pillName = intent.getStringExtra("pill_name")
         Log.d("AlarmReceiver", "Alarm received for pill: $pillName")
 
-        // AlarmService 시작
         val serviceIntent = Intent(context, AlarmService::class.java).apply {
             putExtra("pill_name", pillName)
         }

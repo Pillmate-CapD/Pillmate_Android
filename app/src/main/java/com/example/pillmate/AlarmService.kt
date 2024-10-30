@@ -16,6 +16,9 @@ import android.os.IBinder
 import android.provider.Settings
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AlarmService : Service() {
     private val CHANNEL_ID = "AlarmChannel"
@@ -131,4 +134,49 @@ class AlarmService : Service() {
             ringtone.stop()
         }
     }
+
+    private fun fetchMediInfo(pillName: String) {
+        val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
+
+        // "명칭" 값을 MediInfoRequest 객체로 변환
+        val request = MediInfoRequest(pillName)
+
+        // 서버로 MediInfoRequest 리스트를 POST 요청으로 전송
+        val call = service.postMediInfo(listOf(request)) // 단일 요청 리스트로 전송
+        call.enqueue(object : Callback<List<MediInfoResponse>> {
+            override fun onResponse(call: Call<List<MediInfoResponse>>, response: Response<List<MediInfoResponse>>) {
+                if (response.isSuccessful) {
+                    val mediInfoList = response.body()
+                    mediInfoList?.forEach { mediInfo ->
+                        Log.d("fetchMediInfo", "약물 정보 수신 성공: ${mediInfo.name}, ${mediInfo.photo}, ${mediInfo.category}")
+
+                        // 받은 약물 정보를 처리 (필요한 곳에 표시하거나 저장)
+                        val updatedData = mapOf(
+                            "명칭" to mediInfo.name,
+                            "photo" to (mediInfo.photo ?: "이미지 없음"),
+                            "category" to (mediInfo.category ?: "카테고리 없음")
+                        )
+
+                        // 업데이트된 데이터를 로그로 출력
+                        Log.d("UpdatedData", updatedData.toString())
+
+                        // 데이터를 사용할 Activity로 전달하고자 하는 경우
+                        val intent = Intent(this@AlarmService, PreMediActivity::class.java).apply {
+                            putExtra("updatedData", ArrayList(listOf(updatedData))) // ArrayList로 변환하여 전달
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
+                        startActivity(intent)
+                    }
+                } else {
+                    Log.e("fetchMediInfo", "Error: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<MediInfoResponse>>, t: Throwable) {
+                Log.e("fetchMediInfo", "API 호출 실패: ${t.message}")
+            }
+        })
+    }
+
+
 }

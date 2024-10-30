@@ -44,13 +44,14 @@
             app:layout_constraintTop_toBottomOf="@id/pill_view"/>
 
         <TextView
+            android:layout_marginTop="8dp"
             android:id="@+id/remain_time_medi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="88일 남음"
-            android:fontFamily="@font/notosanskrmedium"
-            android:textSize="11sp"
-            android:textColor="#898989"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:textSize="12sp"
+            android:textColor="#1E54DF"
             android:includeFontPadding="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
