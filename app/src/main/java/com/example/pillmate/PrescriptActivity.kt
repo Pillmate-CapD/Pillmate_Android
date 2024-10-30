@@ -104,6 +104,10 @@ class PrescriptActivity : AppCompatActivity() {
                 binding.overlayGuide.viewTreeObserver.removeOnGlobalLayoutListener(this)
             }
         })
+
+        binding.btnFlash.setOnClickListener{
+            toggleFlash()
+        }
     }
 
     // dp를 px로 변환하는 함수

@@ -31,7 +31,7 @@
         android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#1E54DF"
+        android:background="#101010"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -76,20 +76,43 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg_line_prescript"/>
 
-    <!-- 오버레이 내부 요소들 -->
-    <TextView
-        android:id="@+id/tv_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="점선 표시에 맞춰 촬영해주세요"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/bg_white_round40"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="22dp"
+        android:paddingStart="22dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="80dp"
-        android:fontFamily="@font/notosanskrmedium"
-        android:gravity="center" />
+        android:layout_marginTop="89dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view_caution"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_caution"/>
+
+        <TextView
+            android:layout_marginLeft="11dp"
+            app:layout_constraintStart_toEndOf="@id/view_caution"
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="점선 표시에 맞춰 촬영해 주세요"
+            android:textColor="#1E54DF"
+            android:textSize="13sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/notosanskrbold"
+            android:gravity="center" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- 갤러리 버튼 -->
     <View

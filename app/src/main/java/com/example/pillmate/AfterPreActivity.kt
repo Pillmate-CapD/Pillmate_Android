@@ -64,15 +64,15 @@ class AfterPreActivity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             //OCR 실행을 여기서 바로 할건지 아니면,
-//            if(photoPath != null){
-//                // BitmapFactory를 사용하여 이미지 파일을 Bitmap으로 로드
-//                val bitmap = BitmapFactory.decodeFile(photoPath)
-//
-//                performOcrWithBitmap(bitmap)
-//                binding.loadingLayout.visibility = View.VISIBLE
-//            }
+            if(photoPath != null){
+                // BitmapFactory를 사용하여 이미지 파일을 Bitmap으로 로드
+                val bitmap = BitmapFactory.decodeFile(photoPath)
 
-            performOcrWithLocalImage()
+                performOcrWithBitmap(bitmap)
+                binding.loadingLayout.visibility = View.VISIBLE
+            }
+
+            //performOcrWithLocalImage()
             //performOcrWithBitmap(bitmap)
             binding.loadingLayout.visibility = View.VISIBLE
         }
