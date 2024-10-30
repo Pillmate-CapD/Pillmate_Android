@@ -105,7 +105,8 @@
         android:layout_marginTop="224dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/bg_rec"
+        android:elevation="4dp"
+        android:background="@drawable/bg_white_round20"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -115,6 +116,8 @@
             android:id="@+id/main_eat_layout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="23dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -140,8 +143,9 @@
                 android:textSize="25sp"
                 android:fontFamily="@font/notosanskrextrabold"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt1"
-                android:layout_marginTop="13dp" />
+                android:layout_marginTop="11dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- 복용 현황 텍스트와 진행 상황 -->
@@ -149,6 +153,8 @@
             android:id="@+id/main_eat_layout2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginTop="23dp"
+            android:layout_marginLeft="32dp"
             app:layout_constraintStart_toEndOf="@id/main_eat_layout1"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -175,6 +181,7 @@
                 android:textSize="20sp"
                 android:fontFamily="@font/notosanskrextrabold"
                 app:layout_constraintTop_toBottomOf="@id/txt2"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="8dp" />
 
@@ -188,6 +195,7 @@
                 android:textSize="17sp"
                 android:fontFamily="@font/notosanskrmedium"
                 app:layout_constraintTop_toBottomOf="@id/home_pill_user"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/home_pill_user" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -200,8 +208,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/background_circle"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/mypage_score_bg"
+            app:layout_constraintTop_toTopOf="@id/home_pill_progressBar"
+            app:layout_constraintBottom_toBottomOf="@id/home_pill_progressBar"
+            app:layout_constraintStart_toStartOf="@id/home_pill_progressBar"
+            app:layout_constraintEnd_toEndOf="@id/home_pill_progressBar" />
 
-        <!-- 퍼센트 텍스트 -->
         <TextView
             android:id="@+id/home_percent"
             android:layout_width="wrap_content"
@@ -210,45 +226,60 @@
             android:textColor="@color/selected_icon_color"
             android:textSize="20sp"
             android:fontFamily="@font/notosanskrextrabold"
-            app:layout_constraintTop_toTopOf="@id/home_pill_progressBar"
-            app:layout_constraintBottom_toBottomOf="@id/home_pill_progressBar"
-            app:layout_constraintStart_toStartOf="@id/home_pill_progressBar"
-            app:layout_constraintEnd_toEndOf="@id/home_pill_progressBar" />
+            app:layout_constraintTop_toTopOf="@id/background_circle"
+            app:layout_constraintBottom_toBottomOf="@id/background_circle"
+            app:layout_constraintStart_toStartOf="@id/background_circle"
+            app:layout_constraintEnd_toEndOf="@id/background_circle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_top"
+        android:id="@+id/label"
         android:layout_width="match_parent"
-        android:paddingRight="20dp"
-        android:paddingTop="67dp"
-        android:paddingLeft="30dp"
-        android:layout_height="0dp">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_round20"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:elevation="4dp"
+        android:layout_marginTop="67dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:paddingTop="27dp"
+            android:paddingBottom="27dp"
+            android:paddingRight="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
         <!-- 내 건강 정보 항목 -->
         <ImageView
             android:id="@+id/icon_my_health"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/my_1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tv_my_health"
-            android:layout_marginEnd="10dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_my_health"
-            app:layout_constraintStart_toEndOf="@id/icon_my_health"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:text="내 건강 정보"
+            android:layout_marginLeft="11dp"
             android:fontFamily="@font/notosanskrregular"
+            android:includeFontPadding="false"
+            android:text="내 건강 정보"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_marginLeft="11dp"/>
+            app:layout_constraintStart_toEndOf="@id/icon_my_health"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/btn_my_health"
@@ -258,30 +289,38 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_my_health"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_my_health" />
-
-
+            <!-- 구분선 -->
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="27dp"
+                android:background="#D2D2D2"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_health" />
         <!-- 자주 묻는 질문 항목 -->
         <ImageView
             android:id="@+id/icon_question"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/my_2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_health"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="10dp"/>
+            app:layout_constraintTop_toBottomOf="@id/view1" />
 
         <TextView
             android:id="@+id/tv_question"
-            app:layout_constraintStart_toEndOf="@id/icon_question"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_health"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="자주 묻는 질문"
+            android:layout_marginLeft="11dp"
             android:fontFamily="@font/notosanskrregular"
+            android:text="자주 묻는 질문"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_marginLeft="11dp"/>
+            app:layout_constraintStart_toEndOf="@id/icon_question"
+            android:layout_marginTop="27dp"
+            android:includeFontPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/view1" />
 
         <View
             android:id="@+id/btn_question"
@@ -291,29 +330,39 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_question"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_question" />
+            <!-- 구분선 -->
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="27dp"
+                android:background="#D2D2D2"
+                app:layout_constraintTop_toBottomOf="@id/tv_question" />
 
         <!-- 도움말 항목 -->
         <ImageView
             android:id="@+id/icon_help"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/my3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_question"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="10dp"/>
+            app:layout_constraintTop_toBottomOf="@id/view2" />
 
         <TextView
             android:id="@+id/tv_help"
-            app:layout_constraintStart_toEndOf="@id/icon_help"
-            app:layout_constraintTop_toBottomOf="@id/tv_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="도움말"
+            android:layout_marginLeft="11dp"
             android:fontFamily="@font/notosanskrregular"
+            android:text="도움말"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_marginLeft="11dp"/>
+            app:layout_constraintStart_toEndOf="@id/icon_help"
+            android:layout_marginTop="27dp"
+            android:includeFontPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/view2" />
 
         <View
             android:id="@+id/btn_help"
@@ -323,29 +372,39 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_help"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_help" />
+            <!-- 구분선 -->
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="27dp"
+                android:background="#D2D2D2"
+                app:layout_constraintTop_toBottomOf="@id/tv_help" />
 
         <!-- 비밀번호 변경 항목 -->
         <ImageView
             android:id="@+id/icon_ch_pw"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/my_4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_help"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="10dp"/>
+            app:layout_constraintTop_toBottomOf="@id/view3" />
 
         <TextView
             android:id="@+id/tv_ch_pw"
-            app:layout_constraintStart_toEndOf="@id/icon_ch_pw"
-            app:layout_constraintTop_toBottomOf="@id/tv_help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="비밀번호 변경"
+            android:layout_marginLeft="11dp"
             android:fontFamily="@font/notosanskrregular"
+            android:text="비밀번호 변경"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_marginLeft="11dp"/>
+            app:layout_constraintStart_toEndOf="@id/icon_ch_pw"
+            android:layout_marginTop="27dp"
+            android:includeFontPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/view3" />
 
         <View
             android:id="@+id/btn_ch_pw"
@@ -356,21 +415,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_ch_pw" />
 
-        <!-- 로그아웃 항목 -->
-        <TextView
-            android:id="@+id/tv_logout"
-            android:layout_marginTop="25dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_ch_pw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:text="로그아웃"
-            android:fontFamily="@font/notosanskrregular"
-            android:textColor="#FF0000"
-            android:textSize="16sp"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 로그아웃 항목 -->
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/notosanskrregular"
+        android:includeFontPadding="false"
+        android:text="로그아웃"
+        android:textColor="#FF0000"
+        android:textSize="16sp"
+        android:layout_marginLeft="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
