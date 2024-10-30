@@ -38,9 +38,9 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
         setContentView(binding.root)
 
         val pillName = intent.getStringExtra("pill_name") ?: "Unknown"
-        val pillImgUrl = intent.getStringExtra("pill_image_url") // String으로 받기
+        //val pillImgUrl = intent.getStringExtra("pill_image_url") // String으로 받기
 
-        Log.d("AlarmActivity", "pillName: $pillName, pillImgUrl: $pillImgUrl")
+        //Log.d("AlarmActivity", "pillName: $pillName, pillImgUrl: $pillImgUrl")
         binding.pillName.text = pillName
 
         fetchMediInfo(pillName)
@@ -72,7 +72,13 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
             flag = false
             stopAlarm()
             // EatMediActivity로 이동
-            val intent = Intent(this, EatMediActivity::class.java)
+//            val intent = Intent(this, EatMediActivity::class.java)
+
+            // EatMediActivity로 이동하며 pillName 값 전달
+            val intent = Intent(this, EatMediActivity::class.java).apply {
+                putExtra("pill_name", pillName)
+            }
+
             startActivity(intent)
             finish()
         }
