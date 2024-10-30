@@ -140,6 +140,15 @@
         <activity
             android:name=".QnaActivity"
             android:exported="false" />
+        <activity
+            android:name=".HealthDiary1Activity"
+            android:exported="false" />
+        <activity
+            android:name=".HealthDiary2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".HealthDiary3Activity"
+            android:exported="false" />
     </application>
 
 </manifest>
