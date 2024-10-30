@@ -4,6 +4,8 @@ import AllFragment
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -46,6 +48,7 @@ class MediListAdapter(
         val realTime: TextView = itemView.findViewById(R.id.medication_realTime)
         val zoom: View = itemView.findViewById(R.id.btn_img_zoom)
         val option: View = itemView.findViewById(R.id.btn_modi)
+        val category: TextView = itemView.findViewById(R.id.tv_category)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MediViewHolder {
@@ -66,10 +69,44 @@ class MediListAdapter(
             val formattedRealTime = "${timeSlot.pickerTime}"
 
             holder.realTime.text = formatTime(formattedRealTime)
-            holder.time.text = formattedTime
+            holder.time.text = "${formattedTime} /"
         } else {
             holder.time.text = "시간대 없음"
             holder.realTime.text = "시간대 없음"
+        }
+
+        // 카테고리에 따라 텍스트와 배경색 설정
+        holder.category.text = medi.category // 예: "심혈관질환"
+        val background = holder.category.background as GradientDrawable
+        when (medi.category) {
+            "심혈관질환" -> {
+                background.setColor(Color.parseColor("#40FFCEDF"))
+                holder.category.setTextColor(Color.parseColor("#FD5592"))
+            }
+            "고혈압" -> {
+                background.setColor(Color.parseColor("#E6EBFA"))
+                holder.category.setTextColor(Color.parseColor("#1E54DF"))
+            }
+            "당뇨" -> {
+                background.setColor(Color.parseColor("#D6F0EF"))
+                holder.category.setTextColor(Color.parseColor("#0CBBB2"))
+            }
+            "고지혈증" -> {
+                background.setColor(Color.parseColor("#B0FFBCB8"))
+                holder.category.setTextColor(Color.parseColor("#FF453A"))
+            }
+            "호흡기질환" -> {
+                background.setColor(Color.parseColor("#5CFFEDB1"))
+                holder.category.setTextColor(Color.parseColor("#F2BE00"))
+            }
+            "기타" -> {
+                background.setColor(Color.parseColor("#EAEAEA"))
+                holder.category.setTextColor(Color.parseColor("#9D9D9D"))
+            }
+            else -> {
+                background.setColor(Color.parseColor("#EAEAEA"))
+                holder.category.setTextColor(Color.parseColor("#9D9D9D"))
+            }
         }
 
         // 이미지 로딩 (Glide 사용)
