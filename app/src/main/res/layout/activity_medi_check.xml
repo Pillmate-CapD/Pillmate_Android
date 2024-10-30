@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="@id/medi_viewPager"
         android:layout_width="196dp"
         android:layout_height="39dp"
-        android:text="질병과 약 정보가 맞는지 확인해 주세요."
+        android:text=" 질병과 약 정보가 맞는지 확인해 주세요."
         android:gravity="top|center"
         android:textColor="@color/white"
         android:textSize="11sp"
