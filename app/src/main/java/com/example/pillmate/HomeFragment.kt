@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pillmate.databinding.FragmentHomeBinding
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -150,7 +151,25 @@ class HomeFragment : Fragment() {
                         }
                     }
                 } else {
-                    Log.d("fetchMain", "Response was unsuccessful")
+                    // 응답이 실패했을 때의 처리
+                    response.errorBody()?.string()?.let { errorBody ->
+                        try {
+                            val errorJson = JSONObject(errorBody)
+                            val code = errorJson.optString("code")
+
+                            if (code == "NOT_FOUND_ALARM") {
+                                Log.d("fetchMain", "No active alarm found - showing no data layout")
+                                binding.homeNonDataLayout.visibility = View.VISIBLE
+                                binding.pillList.visibility = View.GONE
+                                binding.btnAllPill.visibility = View.GONE
+                                //binding.tvLastMediGuide.text = message
+                            } else {
+                                Log.d("fetchMain", "Unhandled error code: $code")
+                            }
+                        } catch (e: Exception) {
+                            Log.e("fetchMain", "Error parsing error response: ${e.message}")
+                        }
+                    }
                 }
             }
 

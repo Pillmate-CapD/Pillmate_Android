@@ -142,7 +142,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/notosanskrbold"
-                        android:text="총 3정"
+                        android:text="총 0정"
                         android:textColor="@color/white"
                         android:textSize="24sp"
                         app:layout_constraintTop_toBottomOf="@id/user_txt3"
@@ -298,7 +298,7 @@
                         app:layout_constraintStart_toStartOf="@id/next_medi_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="오전 7시 트윈스타정"
+                        android:text="다음 약 일정이 없어요!"
                         android:layout_marginTop="5dp"
                         android:textSize="13sp"
                         android:fontFamily="@font/notosanskrbold"
@@ -351,7 +351,7 @@
                         app:layout_constraintStart_toEndOf="@id/medi_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="복용 안한 약 일정이 1개 있어!"
+                        android:text="복용 안한 약 일정이 0개 있어!"
                         android:layout_marginTop="12dp"
                         android:textSize="16sp"
                         android:fontFamily="@font/notosanskrsemibold"
@@ -359,19 +359,21 @@
 
                     <TextView
                         android:id="@+id/tv_last_medi"
-                        android:textColor="#FFEDB1"
-                        android:elevation="10dp"
-                        android:layout_marginLeft="10dp"
-                        app:layout_constraintStart_toEndOf="@id/medi_view"
-                        app:layout_constraintBottom_toBottomOf="@id/medi_view"
-                        app:layout_constraintTop_toBottomOf="@id/tv_last_medi_guide"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="7시 트윈스타정 | 디아미크로서방정"
-                        android:layout_marginTop="5dp"
-                        android:textSize="13sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:elevation="10dp"
                         android:fontFamily="@font/notosanskrsemibold"
-                        android:includeFontPadding="false"/>
+                        android:includeFontPadding="false"
+                        android:paddingRight="15dp"
+                        android:text="아직 복용해야 하는 약이 없어요"
+                        android:textColor="#FFEDB1"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="@id/medi_view"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_not_eaten_medi"
+                        app:layout_constraintStart_toEndOf="@id/medi_view"
+                        app:layout_constraintTop_toBottomOf="@id/tv_last_medi_guide" />
 
                     <View
                         android:id="@+id/btn_not_eaten_medi"
@@ -437,10 +439,10 @@
                     android:layout_width="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txt_sub"
+                    app:layout_constraintTop_toBottomOf="@id/txt_sub2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="39dp">
                     
                     <View

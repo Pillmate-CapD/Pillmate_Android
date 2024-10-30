@@ -4,6 +4,7 @@
     android:layout_height="140dp"
     android:layout_marginEnd="9dp"
     android:layout_marginBottom="3dp"
+    android:layout_marginStart="2dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_18_gray"
     android:elevation="1dp">
@@ -26,10 +27,13 @@
             android:background="@drawable/ic_pill"/>
 
         <TextView
+            android:gravity="center"
             android:layout_marginTop="15dp"
             android:id="@+id/remain_item_medi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:text="트윈스타정"
             android:fontFamily="@font/notosanskrsemibold"
             android:textSize="13sp"
