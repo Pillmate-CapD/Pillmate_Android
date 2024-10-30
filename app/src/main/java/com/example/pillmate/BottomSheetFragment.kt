@@ -2,11 +2,13 @@ package com.example.pillmate
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.pillmate.databinding.FragmentBottomSheetBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
@@ -33,6 +35,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     ): View? {
         binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
 
+
         binding.btnCancelAlarm.setOnClickListener {
             dismiss()
         }
@@ -55,6 +58,18 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
         return binding.root
     }
+
+//    override fun onCreateDialog(savedInstanceState: Bundle?): BottomSheetDialog {
+//        val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+//
+//        dialog.window?.apply {
+//            setBackgroundDrawableResource(android.R.color.transparent)
+//            setDimAmount(0.3f)  // 배경 흐림 정도 설정
+//            decorView.setBackgroundColor(Color.parseColor("#66000000")) // 검정색 + 40% 투명도
+//        }
+//
+//        return dialog
+//    }
 
     override fun getTheme(): Int {
         return R.style.BottomSheetDialogTheme

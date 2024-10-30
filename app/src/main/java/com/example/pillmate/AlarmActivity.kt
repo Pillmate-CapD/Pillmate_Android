@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import android.os.PowerManager
 import android.util.Log
 import android.view.WindowManager
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.pillmate.databinding.ActivityAlarmBinding
 import com.example.pillmate.databinding.ActivityAlarmListBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -86,8 +89,7 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
         binding.btnTodayNone.setOnClickListener {
             flag = false
             stopAlarm()
-            val bottomSheetFragment = BottomSheetFragment()
-            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            showAlarmBottomSheet()
         }
     }
 
@@ -142,6 +144,30 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
 
     override fun onAlarmDismiss() {
         finish()
+    }
+
+    // BottomSheetDialog를 열어 시간대를 선택하는 함수
+    private fun showAlarmBottomSheet() {
+        val bottomSheetDialog = BottomSheetDialog(this,R.style.AppBottomSheetDialogTheme)
+        val bottomSheetView = layoutInflater.inflate(R.layout.fragment_bottom_sheet, null)
+
+        // BottomSheetDialog에 레이아웃 설정
+        bottomSheetDialog.setContentView(bottomSheetView)
+
+        // 배경 흐림과 색상 설정
+        bottomSheetDialog.window?.apply {
+            // 다이얼로그 자체 배경을 투명하게 설정
+            setBackgroundDrawableResource(android.R.color.transparent)
+
+            // 배경 흐림 설정
+            setDimAmount(0.3f) // 0.0f ~ 1.0f로 흐림 정도 설정
+
+            // 뒷배경 색상 설정 (검정색에 40% 투명도)
+            decorView.setBackgroundColor(Color.parseColor("#66000000")) // 검정색 + 40% 투명도
+        }
+
+        // BottomSheetDialog 표시
+        bottomSheetDialog.show()
     }
 
     private fun fetchMediInfo(pillName: String) {
