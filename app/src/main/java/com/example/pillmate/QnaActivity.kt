@@ -18,6 +18,12 @@ class QnaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qna)
 
+        // 뒤로 가기 버튼 설정
+        val backButton = findViewById<ImageView>(R.id.pwc_back)
+        backButton.setOnClickListener {
+            finish() // 현재 액티비티 종료
+        }
+
         // 반복문으로 ID 연결 및 클릭 리스너 설정
         for (i in 1..9) {
             // TextView와 ImageView를 동적으로 가져오기
