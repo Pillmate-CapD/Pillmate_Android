@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 바깥 원 (직선형 그라데이션 적용) -->
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:type="linear"
+                android:startColor="#544CA2"
+                android:endColor="#7B367C"
+                android:angle="90"  />
+            <!-- 그라데이션 방향: 90도(위에서 아래로) -->
+            <size android:width="300dp" android:height="300dp"/>
+            <corners android:radius="150dp"/>
+        </shape>
+    </item>
+</layer-list>

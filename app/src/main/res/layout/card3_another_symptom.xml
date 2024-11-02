@@ -9,7 +9,7 @@
     app:cardCornerRadius="35dp"
     app:cardElevation="2dp"
     android:background="#F5F6F8"
-    android:id="@+id/symptom_card">
+    android:id="@+id/a_symptom_card">
 
     <LinearLayout
         android:layout_width="100dp"
@@ -20,7 +20,7 @@
 
         <!-- 이모지 이미지 (중앙) -->
         <ImageView
-            android:id="@+id/symptom_img"
+            android:id="@+id/a_symptom_img"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/onboard3btn4"
@@ -29,7 +29,7 @@
 
         <!-- 증상 이름 텍스트 (중앙) -->
         <TextView
-            android:id="@+id/symptom_name"
+            android:id="@+id/a_symptom_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"

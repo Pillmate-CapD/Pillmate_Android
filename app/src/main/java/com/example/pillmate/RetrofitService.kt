@@ -27,6 +27,10 @@ interface RetrofitService {
     @POST("members/check/email")
     suspend fun checkEmail(@Body request: EmailCheckRequest): Response<EmailCheckResponse>
 
+    // 다이어리 1페이지
+    @GET("members/healthinfo")
+    fun getDiarySymptoms(): Call<HealthDataResponse>
+
     //로그아웃
     @POST("members/logout")
     suspend fun logout(): LogoutResponse

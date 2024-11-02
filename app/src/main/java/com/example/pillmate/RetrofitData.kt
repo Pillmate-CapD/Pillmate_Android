@@ -83,6 +83,16 @@ data class PasswordChangeRequest(
     val newPassword: String
 )
 
+//일기 1페이지
+data class DiarySymptom(
+    val id: Int,
+    val name: String
+)
+data class HealthDataResponse(
+    val symptoms: List<DiarySymptom>
+)
+
+
 // 약 직접 추가
 data class MediAddRequest(
     @SerializedName("medicineName")

@@ -1,7 +1,7 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F9F9F9">
 
     <!-- ScrollView로 내용 감싸기 -->
@@ -116,14 +116,71 @@
                 android:textColor="#858585"/>
 
             <!-- "증상 없음" 카드 -->
-            <include
-                android:id="@+id/no_symptom"
-                android:layout_width="match_parent"
-                android:layout_height="83dp"
-                android:layout_marginTop="41dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
-                layout="@layout/card1_no_symptom"/>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/noSymptomRoot"
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            app:cardCornerRadius="23dp"
+            app:cardElevation="2dp"
+            android:background="@color/white"> <!-- 카드 배경 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical"> <!-- 세로 중앙 정렬 -->
+        <!-- 이미지 (왼쪽) -->
+        <ImageView
+            android:id="@+id/symptom_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/no_symptom1"
+            android:contentDescription="증상 없음 아이콘"
+            android:layout_marginEnd="11dp" />
+
+        <!-- 텍스트 (오른쪽) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 증상 제목 -->
+            <TextView
+                android:id="@+id/symptom_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="증상 없음"
+                android:fontFamily="@font/notosanskrsemibold"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:textColor="#3E3E3E"/>
+            <!-- 추가 설명 텍스트 -->
+            <TextView
+                android:id="@+id/symptom_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_height="wrap_content"
+                android:text="오늘은 아프지 않아요! 컨디션이 좋아요 :)"
+                android:fontFamily="@font/notosanskrregular"
+                android:includeFontPadding="false"
+                android:textSize="11sp"
+                android:textColor="#898989" />
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
             <!-- 증상 선택 버튼 영역 -->
 
@@ -176,6 +233,7 @@
                 android:textSize="16sp"
                 android:textColor="#3E3E3E"/>
             <GridLayout
+                android:id="@+id/another_sumptom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -190,7 +248,10 @@
                     android:id="@+id/an_symptom1"
                     layout="@layout/card3_another_symptom"
                     android:layout_width="wrap_content"
-                    android:layout_height="110dp"/>
+                    android:layout_height="110dp"
+                    android:layout_margin="11dp"/>
+
+
             </GridLayout>
             <TextView
                 android:layout_width="wrap_content"
