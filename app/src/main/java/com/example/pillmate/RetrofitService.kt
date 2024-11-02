@@ -31,6 +31,10 @@ interface RetrofitService {
     @POST("members/logout")
     suspend fun logout(): LogoutResponse
 
+    //마이페이지 복약 정보
+    @GET("members")
+    suspend fun getUserStatus(): UserStatusResponse
+
 
     //마이페이지 기존 비번 확인
     @POST("members/check/password")

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="9dp"
+    android:background="@drawable/bg_white_round18_5"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
+    <!-- 색상 네모 표시 -->
+    <View
+        android:id="@+id/colorIndicator"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/color_indicator_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/medicineTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오전 12:00"
+        android:layout_marginLeft="11dp"
+        android:textColor="#898989"
+        android:textSize="13sp"
+        android:fontFamily="@font/notosanskrregular"
+        app:layout_constraintStart_toEndOf="@id/colorIndicator"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/medicineName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="프리세정"
+        android:textColor="#000000"
+        android:textSize="13sp"
+        android:fontFamily="@font/notosanskrregular"
+        app:layout_constraintStart_toEndOf="@id/medicineTime"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="9dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="503dp"
+    android:background="@drawable/bg_white_round15"
+    android:elevation="4dp"
+    android:paddingTop="25dp"
+    android:paddingBottom="25dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <!-- 오늘의 통증 섹션 -->
+    <ImageView
+        android:id="@+id/todayPainIcon"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:src="@drawable/diary_ic"
+        android:contentDescription="오늘의 통증 아이콘"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/todayPainHeader" />
+
+    <TextView
+        android:id="@+id/todayPainHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:includeFontPadding="false"
+        android:text="오늘의 통증"
+        android:textColor="#3e3e3e"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/todayPainIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/todayPainIcon"
+        android:layout_marginStart="10dp" />
+
+    <TextView
+        android:id="@+id/painTags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
+        android:text="#두통 #어지럼증"
+        android:textColor="#1E54DF"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/todayPainIcon"
+        app:layout_constraintTop_toBottomOf="@id/todayPainHeader"
+        android:layout_marginTop="11dp" />
+
+    <!-- 구분선 1 -->
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="#D9D9D9"
+        app:layout_constraintTop_toBottomOf="@id/painTags"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- 통증 정도 섹션 -->
+    <ImageView
+        android:id="@+id/painLevelIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/diary_ic"
+        android:contentDescription="통증 정도 아이콘"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider1"
+        app:layout_constraintBottom_toBottomOf="@id/painLevelHeader"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/painLevelHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:includeFontPadding="false"
+        android:text="통증 정도"
+        android:textColor="#3e3e3e"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/painLevelIcon"
+        app:layout_constraintBottom_toBottomOf="@id/painLevelIcon"
+        android:layout_marginStart="10dp" />
+
+    <TextView
+        android:id="@+id/painScore"
+        android:layout_width="42dp"
+        android:layout_height="22dp"
+        android:elevation="1dp"
+        android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
+        android:text="8점"
+        android:gravity="center"
+        android:textColor="#FF453A"
+        android:textSize="11sp"
+        android:backgroundTint="#FFD1CE"
+        android:background="@drawable/bg_white_round4"
+        app:layout_constraintStart_toStartOf="@id/painLevelIcon"
+        app:layout_constraintTop_toBottomOf="@id/painLevelIcon"
+        android:layout_marginTop="11dp" />
+
+    <TextView
+        android:id="@+id/painDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
+        android:text="통증이 상당해서 참기가 어려워요"
+        android:textColor="#898989"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/painScore"
+        app:layout_constraintTop_toTopOf="@id/painScore"
+        app:layout_constraintBottom_toBottomOf="@id/painScore"
+        android:layout_marginStart="8dp" />
+
+    <!-- 구분선 2 -->
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="#D9D9D9"
+        app:layout_constraintTop_toBottomOf="@id/painScore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- 한 줄 일기 섹션 -->
+    <ImageView
+        android:id="@+id/diaryIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/diary_ic"
+        android:contentDescription="일기 아이콘"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider2"
+        app:layout_constraintBottom_toBottomOf="@id/diaryHeader"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/diaryHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:includeFontPadding="false"
+        android:text="한 줄 일기"
+        android:textColor="#3e3e3e"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/diaryIcon"
+        app:layout_constraintBottom_toBottomOf="@id/diaryIcon"
+        android:layout_marginStart="10dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/diaryContentBackground"
+        android:layout_width="0dp"
+        android:layout_height="246dp"
+        android:background="@drawable/bg_lightgray_round15"
+        android:backgroundTint="#FBFCFF"
+        android:elevation="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/diaryHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="11dp">
+
+        <!-- 텍스트 내용 -->
+        <TextView
+            android:id="@+id/diaryContent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/notosanskrregular"
+            android:includeFontPadding="false"
+            android:text="오늘은 컨디션이 나쁘지 않았다. 가끔 어지럼증을 느끼긴 했지만 괜찮았다..."
+            android:textColor="#3e3e3e"
+            android:textSize="13sp"
+            android:padding="16dp"
+            android:gravity="top|start"
+            android:scrollbars="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.pillmate.databinding.FragmentUserBinding
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 class UserFragment : Fragment() {
     private lateinit var binding: FragmentUserBinding
@@ -37,10 +38,35 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // SharedPreferences에서 사용자 이름 가져오기 (여기 수정함)
+        // 현재 월 가져오기 및 설정
+        val calendar = Calendar.getInstance()
+        val currentMonth = calendar.get(Calendar.MONTH) + 1 // 0부터 시작하므로 +1 필요
+        binding.tvOctoberStatus.text = "${currentMonth}월 복용 현황"
+
+        // SharedPreferences에서 사용자 이름 가져오기
         val sharedPreferences = requireActivity().getSharedPreferences("userName", Context.MODE_PRIVATE)
         userName = sharedPreferences.getString("userName", "이름을 불러오는데 실패했습니다")
         binding.tvUser.text = userName  // 사용자 이름을 TextView에 설정
+
+        // 복약 순응도, 복용 현황, 점수 데이터 불러오기
+        lifecycleScope.launch {
+            try {
+                val userStatus = retrofitService.getUserStatus()
+                binding.homePillLevel.text = userStatus.grade       // 복약 순응도
+                // 복용 일수
+                val formattedDay = if (userStatus.takenDay in 0..9) "  ${userStatus.takenDay}일" else "${userStatus.takenDay}일"
+                binding.homePillUser.text = formattedDay
+                //binding.homePillUser.text = "${userStatus.takenDay}일"  // 복용 일수
+                binding.homePillDay.text = "/${userStatus.month}일"      // 총 일수
+                binding.homePercent.text = "${userStatus.rate}점"        // 점수
+
+                // ProgressBar의 점수를 직접 설정
+                binding.homePillProgressBar.setProgress(userStatus.rate)
+
+            } catch (e: Exception) {
+                Log.e("UserFragment", "Failed to fetch user status: ${e.message}")
+            }
+        }
 
         // 로그아웃 버튼 처리
         val logoutTextView: TextView = view.findViewById(R.id.tv_logout)

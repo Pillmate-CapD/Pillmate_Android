@@ -60,6 +60,13 @@ data class LogoutResponse(
     val memberId: Int
 )
 
+//마이페이지 복약정보
+data class UserStatusResponse(
+    val grade: String,      // "매우 우수"
+    val takenDay: Int,      // 복용한 일수 (예: 28)
+    val month: Int,         // 한 달의 총 일수 (예: 31)
+    val rate: Int           // 점수 (예: 90)
+)
 
 //마이페이지 기존 비밀번호 확인
 data class PasswordCheckRequest(
