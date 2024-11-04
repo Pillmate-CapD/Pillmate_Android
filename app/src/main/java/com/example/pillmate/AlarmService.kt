@@ -40,7 +40,7 @@ class AlarmService : Service() {
         startForeground(NOTIFICATION_ID, notification)
 
         // Start the alarm sound and vibration
-        startAlarm()
+        startAlarm(intent)
 
         // Start AlarmActivity
         startAlarmActivity(intent)
@@ -127,8 +127,11 @@ class AlarmService : Service() {
         }
     }
 
-    private fun startAlarm() {
-        val alarmSound: Uri = Uri.parse("android.resource://${packageName}/raw/alarm1")
+    private fun startAlarm(intent: Intent?) {
+        // Intent에서 sound 정보를 가져와서 사운드를 결정
+        val soundType = intent?.getStringExtra("sound") ?: "alarm1"
+        val alarmSound: Uri = Uri.parse("android.resource://${packageName}/raw/$soundType")
+
         mediaPlayer = MediaPlayer.create(this, alarmSound).apply {
             isLooping = true // 반복 재생 설정
             start()

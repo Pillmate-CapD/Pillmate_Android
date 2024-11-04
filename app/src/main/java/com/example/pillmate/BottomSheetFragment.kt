@@ -40,20 +40,28 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             dismiss()
         }
 
+        // 얘는 그냥 지금 당장 알람 소리만 끄는 것 같음
         binding.btnFinAlarm.setOnClickListener {
-            // 알람 서비스 중지
-            val serviceIntent = Intent(context, AlarmService::class.java)
-            context?.stopService(serviceIntent)
 
-            // 알람 매니저에서 알람을 제거 (선택 사항)
-            // val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            // val alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
-            //     PendingIntent.getBroadcast(context, ALARM_REQUEST_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_MUTABLE)
-            // }
-            // alarmManager.cancel(alarmIntent)
-
-            listener?.onAlarmDismiss()
+//            // 알람 서비스 중지
+//            val serviceIntent = Intent(context, AlarmService::class.java)
+//            context?.stopService(serviceIntent)
+//
+//            // 알람 매니저에서 알람을 제거 (선택 사항)
+//            // val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//            // val alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
+//            //     PendingIntent.getBroadcast(context, ALARM_REQUEST_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_MUTABLE)
+//            // }
+//            // alarmManager.cancel(alarmIntent)
+//
+//            listener?.onAlarmDismiss()
             dismiss()
+        }
+
+        binding.btnCheckAlarm.setOnClickListener{
+            // TODO - 알람을 on/off 하는 기능 추가하기
+
+
         }
 
         return binding.root

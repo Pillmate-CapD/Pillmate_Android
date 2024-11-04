@@ -3,22 +3,19 @@ package com.example.pillmate
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.PowerManager
 import android.util.Log
 import android.widget.Toast
 
 class AlarmReceiver : BroadcastReceiver() {
-    companion object {
-        const val ACTION_RESTART_SERVICE = "Restart"
-    }
-
     override fun onReceive(context: Context, intent: Intent) {
-        val pillName = intent.getStringExtra("pill_name")
-        Log.d("AlarmReceiver", "Alarm received for pill: $pillName")
-
+        // 알람 발생 시 서비스에 사운드 정보와 함께 전달
         val serviceIntent = Intent(context, AlarmService::class.java).apply {
-            putExtra("pill_name", pillName)
+            putExtra("pill_name", intent.getStringExtra("pill_name"))
+            putExtra("sound", intent.getStringExtra("sound") ?: "alarm1") // 기본값은 "alarm1"
         }
-        context.startForegroundService(serviceIntent)
+        context.startService(serviceIntent)
     }
 }

@@ -26,6 +26,9 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import android.app.AlarmManager
+import android.app.PendingIntent
+
 
 
 class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListener {
@@ -91,6 +94,43 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
             stopAlarm()
             showAlarmBottomSheet()
         }
+
+        binding.btnRealarm.setOnClickListener {
+            // 현재 시간 기준으로 5분 후로 알람 시간 설정
+            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val alarmIntent = Intent(this, AlarmReceiver::class.java).apply {
+                putExtra("pill_name", "알람 리마인더")
+                putExtra("sound", "alarm2") // 알람 사운드를 구분하기 위한 추가 데이터
+            }
+            val pendingIntent = PendingIntent.getBroadcast(
+                this, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+
+            // 5분 후의 시간 계산
+            val triggerTime = Calendar.getInstance().apply {
+                add(Calendar.MINUTE, 5) // 5분 추가
+            }.timeInMillis
+
+            try {
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    triggerTime,
+                    pendingIntent
+                )
+
+                // 알람 예약 시간 로그 출력
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                val formattedTime = dateFormat.format(triggerTime)
+                Log.d("AlarmService", "알람이 예약되었습니다: $formattedTime")
+
+            } catch (e: SecurityException) {
+                Log.e("AlarmService", "정확한 알람 예약에 실패했습니다: ${e.message}")
+                // 사용자에게 알림이나 다른 예외 처리 로직 추가
+            }
+
+            Log.d("AlarmService", "5분 뒤에 알람이 설정되었습니다.")
+        }
+
     }
 
     private fun updateTimeText() {
