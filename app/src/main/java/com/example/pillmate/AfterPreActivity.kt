@@ -325,7 +325,7 @@ class AfterPreActivity : AppCompatActivity() {
                 //Log.d("ExtractedData", "정제된 명칭: ${cleanedName}, 1회 투약량: ${data["1회 투약량"]}, 1일 투여횟수: ${data["1일 투여횟수"]}, 총 투약일수: ${data["총 투약일수"]}")
             }
 
-            Log.d("UpdatedData", "${updatedData}")
+            Log.d("UpdatedData", "Update Data ${updatedData}")
 
             // 명칭 전달해서 해당 약이 있는지 확인하고 사진 받아오는 함수
             fetchMediInfo(updatedData)
@@ -440,7 +440,7 @@ class AfterPreActivity : AppCompatActivity() {
                     mediInfoList?.forEach { mediInfo ->
                         Log.d("sendNamesToServer", "약물 정보 수신 성공: ${mediInfo.name}, ${mediInfo.photo}, ${mediInfo.category}")
 
-                        // updatedData에서 해당 이름을 가진 항목을 찾아 업데이트
+                        // updatedData에서 해당 이름을 가진 항목을 찾아d 업데이트
                         updatedData.find { it["명칭"] == mediInfo.name }?.let { data ->
                             val updatedEntry = data.toMutableMap().apply {
                                 this["photo"] = mediInfo.photo ?: "이미지 없음" // 사진이 null일 경우 기본값 설정
@@ -453,7 +453,7 @@ class AfterPreActivity : AppCompatActivity() {
                             }
                         }
                         // 업데이트된 데이터를 로그로 출력
-                        Log.d("UpdatedData", updatedData.toString())
+                        Log.d("UpdatedData", "updateData 출력 ${updatedData.toString()}")
 
                         // 모든 데이터를 업데이트한 후 Intent로 PreMediActivity로 전환
                         val intent = Intent(this@AfterPreActivity, PreMediActivity::class.java)

@@ -8,6 +8,7 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
@@ -24,6 +25,8 @@ class AlarmService : Service() {
     private val CHANNEL_ID = "AlarmChannel"
     private val NOTIFICATION_ID = 101
     private lateinit var ringtone: Ringtone
+
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -60,6 +63,7 @@ class AlarmService : Service() {
         startActivity(activityIntent)
     }
 
+
     private fun createNotification(intent: Intent?): Notification {
         Log.d("AlarmService", "createNotification called")
         val pillName = intent?.getStringExtra("pill_name") ?: "Unknown"
@@ -73,8 +77,8 @@ class AlarmService : Service() {
 
         createNotificationChannel()
 
-        val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-        Log.d("AlarmService", "Creating notification with sound: $alarmSound")
+        val alarmSound: Uri = Uri.parse("android.resource://${packageName}/raw/alarm1")
+        Log.d("AlarmService", "Creating notification with custom sound: $alarmSound")
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("알람")
@@ -124,14 +128,17 @@ class AlarmService : Service() {
     }
 
     private fun startAlarm() {
-        val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-        ringtone = RingtoneManager.getRingtone(applicationContext, alarmSound)
-        ringtone.play()
+        val alarmSound: Uri = Uri.parse("android.resource://${packageName}/raw/alarm1")
+        mediaPlayer = MediaPlayer.create(this, alarmSound).apply {
+            isLooping = true // 반복 재생 설정
+            start()
+        }
     }
 
     private fun stopAlarm() {
-        if (this::ringtone.isInitialized && ringtone.isPlaying) {
-            ringtone.stop()
+        if (this::mediaPlayer.isInitialized && mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
+            mediaPlayer.release() // MediaPlayer 해제
         }
     }
 
