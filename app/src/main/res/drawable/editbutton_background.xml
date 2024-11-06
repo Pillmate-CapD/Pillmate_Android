@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 버튼 본체 레이어 -->
+    <item android:top="3dp" android:bottom="3dp" android:left="3dp" android:right="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" /> <!-- 버튼 색상 -->
+            <corners android:radius="25dp" /> <!-- 둥근 모서리 반경 -->
+        </shape>
+    </item>
+</layer-list>
