@@ -14,6 +14,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pillmate.databinding.ActivityOnboard3Binding
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonPrimitive
+import com.google.gson.JsonSerializer
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,6 +68,11 @@ class Onboard3Activity : AppCompatActivity() {
         val name = intent.getStringExtra("name") ?: ""
         val selectedDiseases = intent.getStringArrayListExtra("selectedDiseases") ?: arrayListOf()
         val diseaseStartDates = intent.getSerializableExtra("diseaseStartDates") as? HashMap<String, String> ?: hashMapOf()
+        if (diseaseStartDates != null) {
+            Log.d("Onboard3Activity1", "Received diseaseStartDates: $diseaseStartDates")
+        } else {
+            Log.e("Onboard3Activity1", "Failed to receive diseaseStartDates")
+        }
 
         // 버튼 설정
         setupButtons()
@@ -77,22 +85,26 @@ class Onboard3Activity : AppCompatActivity() {
                 // 질병 리스트 생성
                 val diseases = selectedDiseases.mapNotNull { disease ->
                     val startDateString = diseaseStartDates[disease] ?: return@mapNotNull null
-                    val cleanDateString = startDateString.replace(Regex("[^0-9-]"), "")
-                    val startDateParts = cleanDateString.split("-")
+                    val cleanDateString = startDateString.replace(Regex("[^0-9]"), "-") // 숫자 외 문자 제거
+                    val startDateParts = cleanDateString.split("-").filter { it.isNotEmpty() } // 빈 요소 제거
 
-                    // startDateParts의 길이를 체크하여 올바르게 처리
                     if (startDateParts.size == 2) {
-                        val year = startDateParts[0].toIntOrNull()
-                        val month = startDateParts[1].toIntOrNull()
-                        if (year != null && month != null) {
-                            // 숫자 추출 후 LocalDate로 변환 (일(day)은 1로 설정)
+                        try {
+                            val year = startDateParts[0].toInt()
+                            val month = startDateParts[1].toInt()
                             val startDate = LocalDate.of(year, month, 1)
+                            Log.d("Onboard3Activity", "Disease created: $disease with startDate: $startDate")
                             Disease(disease, startDate)
-                        } else null
+                        } catch (e: Exception) {
+                            Log.e("Onboard3Activity", "Error parsing date for $disease: $startDateString", e)
+                            null
+                        }
                     } else {
+                        Log.e("Onboard3Activity", "Invalid date format for $disease: $startDateString")
                         null
                     }
                 }
+
 
                 // 증상 리스트 생성
                 val symptoms = selectedSymptoms.map { symptomName ->

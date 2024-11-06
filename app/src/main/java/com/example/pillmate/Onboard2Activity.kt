@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -95,7 +96,9 @@ class Onboard2Activity : AppCompatActivity() {
                 dateEditTexts.forEachIndexed { index, editText ->
                     val diseaseName = selectedDiseases[index] // 질병 이름
                     diseaseStartDates[diseaseName] = editText.text.toString() // 질병과 날짜 매핑
+                    Log.d("DiseaseStartDates", "Saved $diseaseName with date: ${editText.text}")
                 }
+                Log.d("DiseaseStartDates", "Final map: $diseaseStartDates")
                 val intent = Intent(this, Onboard3Activity::class.java).apply {
                     putExtra("email", email)
                     putExtra("password", password)
