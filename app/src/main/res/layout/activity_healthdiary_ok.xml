@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/ok_bg"
+    >
+    <ImageView
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:src="@drawable/pschange_white"
+        android:layout_marginTop="179dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="수정이\n완료되었어요!"
+        android:fontFamily="@font/notosanskrbold"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:layout_marginTop="21dp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="확인"
+            android:background="@drawable/button_stroke_white"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanskrmedium"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="50dp"/>
+    </FrameLayout>
+</LinearLayout>

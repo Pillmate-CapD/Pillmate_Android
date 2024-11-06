@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/noSymptomRoot"
+    android:orientation="vertical"
+    android:layout_marginStart="1dp"
+    android:layout_marginEnd="1dp"
+    android:background="@drawable/bg_graybg_bluestroke"> <!-- 배경 설정 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical"> <!-- 세로 중앙 정렬 -->
+
+            <!-- 이미지 (왼쪽) -->
+            <ImageView
+                android:id="@+id/symptom_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/onboard3btn1"
+                android:contentDescription="증상 없음 아이콘"
+                android:layout_marginEnd="8dp" />
+
+            <!-- 텍스트 (오른쪽) -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- 증상 제목 -->
+                <TextView
+                    android:id="@+id/symptom_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="증상 없음"
+                    android:fontFamily="@font/notosanskrbold"
+                    android:textSize="18sp"
+                    android:includeFontPadding="false"
+                    android:textColor="#3E3E3E" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

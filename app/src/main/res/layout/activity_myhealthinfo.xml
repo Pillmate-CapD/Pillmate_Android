@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 상단 뒤로가기 & 비밀번호 변경 타이틀 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:paddingTop="16dp"
+            android:background="#FFFFFF"
+            android:elevation="4dp">
+
+            <!-- 뒤로가기 버튼 -->
+            <ImageView
+                android:id="@+id/pwc_back"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/signup_back" />
+
+            <!-- 비밀번호 변경 텍스트 -->
+            <TextView
+                android:id="@+id/pwchange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="내 건강정보"
+                android:fontFamily="@font/notosanskrbold"
+                android:textSize="18sp"
+                android:textColor="#3E3E3E" />
+        </RelativeLayout>
+
+        <!-- 내가 앓고 있는 만성질환 섹션 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginTop="35dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내가 앓고 있는"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosanskrbold"
+                android:textSize="20sp"
+                android:textColor="#3E3E3E"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 만성질환"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosanskrbold"
+                android:textSize="20sp"
+                android:textColor="#1E54DF"
+                android:layout_marginStart="0dp"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/btnEditDisease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수정하기"
+                android:elevation="2dp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosanskrregular"
+                android:textSize="13sp"
+                android:textColor="#1E54DF" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수정하기 버튼을 누르면 수정이 가능해요!"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrregular"
+            android:textSize="13sp"
+            android:textColor="#858585"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginTop="0dp"/>
+
+        <!-- 만성질환 리스트 표시 영역 -->
+        <LinearLayout
+            android:id="@+id/diseaseContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_lightgray_round17"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:paddingTop="17dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="25dp">
+            <!-- 동적으로 추가될 항목들 -->
+            <include
+                android:id="@+id/card1"
+                layout="@layout/myhealthinfo_item1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- 평소 느끼는 증상 · 부작용 섹션 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginTop="35dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="평소 느끼는"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosanskrbold"
+                android:textSize="20sp"
+                android:textColor="#3E3E3E"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 증상・부작용"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosanskrbold"
+                android:textSize="20sp"
+                android:textColor="#1E54DF"
+                android:layout_marginStart="0dp"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnEditSymptoms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수정하기"
+                android:elevation="2dp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosanskrregular"
+                android:textSize="13sp"
+                android:textColor="#1E54DF"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수정하기 버튼을 누르면 수정이 가능해요!"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskrregular"
+            android:textSize="13sp"
+            android:textColor="#858585"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="0dp"/>
+
+        <!-- 증상 리스트 표시 영역 -->
+        <LinearLayout
+            android:id="@+id/symptomContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+            <!-- 동적으로 추가될 항목들 -->
+            <include
+                android:id="@+id/card2"
+                layout="@layout/myhealthinfo_item2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

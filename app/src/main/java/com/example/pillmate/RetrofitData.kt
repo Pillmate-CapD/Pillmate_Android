@@ -92,6 +92,22 @@ data class HealthDataResponse(
     val symptoms: List<DiarySymptom>
 )
 
+//내 건강정보
+data class MyHealthInfo(
+    val id: Int,
+    val disease: String,
+    val startDate: String
+)
+
+data class MyHealthInfoResponse(
+    val diseases: List<MyHealthInfo>,
+    val symptoms: List<MySymptom>
+)
+data class MySymptom(
+    val id: Int,
+    val name: String
+)
+
 
 // 약 직접 추가
 data class MediAddRequest(
