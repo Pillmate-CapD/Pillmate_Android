@@ -96,16 +96,16 @@ class MediListAdapter(
                 holder.category.setTextColor(Color.parseColor("#FF453A"))
             }
             "호흡기질환" -> {
-                background.setColor(Color.parseColor("#5CFFEDB1"))
-                holder.category.setTextColor(Color.parseColor("#F2BE00"))
+                background.setColor(Color.parseColor("#5CEDF2A3"))
+                holder.category.setTextColor(Color.parseColor("#E2B100"))
             }
             "기타" -> {
-                background.setColor(Color.parseColor("#EAEAEA"))
-                holder.category.setTextColor(Color.parseColor("#9D9D9D"))
+                background.setColor(Color.parseColor("#F0DDF7"))
+                holder.category.setTextColor(Color.parseColor("#951FC0"))
             }
             else -> {
-                background.setColor(Color.parseColor("#EAEAEA"))
-                holder.category.setTextColor(Color.parseColor("#9D9D9D"))
+                background.setColor(Color.parseColor("#F0DDF7"))
+                holder.category.setTextColor(Color.parseColor("#951FC0"))
             }
         }
 

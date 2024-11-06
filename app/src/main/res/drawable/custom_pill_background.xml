@@ -2,5 +2,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <solid android:color="#FBFBFB"/> <!-- 배경색을 여기서 설정합니다 -->
-    <corners android:radius="6dp" />
 </shape>

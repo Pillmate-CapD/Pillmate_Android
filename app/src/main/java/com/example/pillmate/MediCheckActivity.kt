@@ -2,6 +2,8 @@ package com.example.pillmate
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -70,6 +72,39 @@ class MediCheckActivity : AppCompatActivity() {
 
         binding.tvCancel.setOnClickListener {
         finish()
+        }
+
+        // 카테고리에 따라 텍스트와 배경색 설정
+        val background = binding.tvCategory.background as GradientDrawable
+        when (disease) {
+            "심혈관질환" -> {
+                background.setColor(Color.parseColor("#40FFCEDF"))
+                binding.tvCategory.setTextColor(Color.parseColor("#FD5592"))
+            }
+            "고혈압" -> {
+                background.setColor(Color.parseColor("#E6EBFA"))
+                binding.tvCategory.setTextColor(Color.parseColor("#1E54DF"))
+            }
+            "당뇨" -> {
+                background.setColor(Color.parseColor("#D6F0EF"))
+                binding.tvCategory.setTextColor(Color.parseColor("#0CBBB2"))
+            }
+            "고지혈증" -> {
+                background.setColor(Color.parseColor("#B0FFBCB8"))
+                binding.tvCategory.setTextColor(Color.parseColor("#FF453A"))
+            }
+            "호흡기질환" -> {
+                background.setColor(Color.parseColor("#5CEDF2A3"))
+                binding.tvCategory.setTextColor(Color.parseColor("#E2B100"))
+            }
+            "기타" -> {
+                background.setColor(Color.parseColor("#F0DDF7"))
+                binding.tvCategory.setTextColor(Color.parseColor("#951FC0"))
+            }
+            else -> {
+                background.setColor(Color.parseColor("#F0DDF7"))
+                binding.tvCategory.setTextColor(Color.parseColor("#951FC0"))
+            }
         }
     }
 
