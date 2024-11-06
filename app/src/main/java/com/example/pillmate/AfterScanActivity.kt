@@ -34,16 +34,19 @@ class AfterScanActivity : AppCompatActivity() {
 
         // Intent로부터 이미지 파일 경로를 받음
         val photoPath = intent.getStringExtra("photoPath")
+        var bitmap: Bitmap? = null
+
         if (photoPath != null) {
             // BitmapFactory를 사용하여 이미지 파일을 Bitmap으로 로드
-            val bitmap = BitmapFactory.decodeFile(photoPath)
-
+            bitmap = BitmapFactory.decodeFile(photoPath)
             // ImageView에 비트맵 설정
             binding.imgMediCamera.setImageBitmap(bitmap)
         }
 
-        // img_new_test_medi 이미지를 API에 전송
-        mediScanWithLocalImage()
+        // bitmap이 null이 아닌 경우에만 API 호출
+        bitmap?.let {
+            mediScanWithBitmap(it)
+        }
 
         // 나머지 버튼 클릭 리스너 설정
         binding.btnX.setOnClickListener {
@@ -60,16 +63,6 @@ class AfterScanActivity : AppCompatActivity() {
             binding.loadingLayout.visibility = View.VISIBLE
             this@AfterScanActivity.finish()
         }
-    }
-
-    private fun getBitmapFromLocalFile(): Bitmap {
-        val drawableId = R.drawable.img_new_test_medi
-        return BitmapFactory.decodeResource(resources, drawableId)
-    }
-
-    private fun mediScanWithLocalImage() {
-        val bitmap = getBitmapFromLocalFile()
-        mediScanWithBitmap(bitmap)
     }
 
     private fun createMultipartBodyFromBitmap(bitmap: Bitmap, fileName: String): MultipartBody.Part {
@@ -108,7 +101,7 @@ class AfterScanActivity : AppCompatActivity() {
                         val dataList = arrayListOf(responseData.category, responseData.name, responseData.photo)
                         val intent = Intent(this@AfterScanActivity, ScanFinActivity::class.java).apply {
                             putStringArrayListExtra("dataList", dataList)
-                            Log.d("dataList","dataList: ${dataList}")
+                            Log.d("dataList", "dataList: $dataList")
                         }
                         startActivity(intent)
                         finish()
