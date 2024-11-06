@@ -97,5 +97,5 @@ interface RetrofitService {
     @POST("predict")
     fun postScanMedi(
         @Part file: MultipartBody.Part // 파일 전송을 위한 파라미터
-    ): Call<MediScanResponse>
+    ): Call<List<MediScanResponse>>
 }

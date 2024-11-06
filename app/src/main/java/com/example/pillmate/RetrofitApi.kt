@@ -10,7 +10,7 @@ object RetrofitApi {
     private val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
 
     private const val BASE_URL = "https://www.pillmate.shop/api/v1/"
-    private const val BASE_URL_MEDI = "https://615c-34-125-120-95.ngrok-free.app/"
+    private const val BASE_URL_MEDI = "https://c784-34-147-64-158.ngrok-free.app/"
 
     // Gson 빌더 설정 (lenient 모드 활성화)
     private val gson = GsonBuilder()

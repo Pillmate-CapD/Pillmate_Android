@@ -88,21 +88,35 @@ class AfterScanActivity : AppCompatActivity() {
     }
 
     private fun mediScanWithBitmap(bitmap: Bitmap) {
-        val filePart = createMultipartBodyFromBitmap(bitmap, "temp_image.jpg")
-        val service = RetrofitApi.getMediRetrofitService
+        Log.d("mediScanWithBitmap", "Bitmap 준비 완료, 파일 생성 시작")
 
+        val filePart = createMultipartBodyFromBitmap(bitmap, "temp_image.jpg")
+        Log.d("mediScanWithBitmap", "MultipartBody 생성 완료")
+
+        val service = RetrofitApi.getMediRetrofitService
         val call = service.postScanMedi(filePart)
-        call.enqueue(object : Callback<MediScanResponse> {
-            override fun onResponse(call: Call<MediScanResponse>, response: Response<MediScanResponse>) {
+
+        Log.d("mediScanWithBitmap", "API 호출 시작")
+
+        call.enqueue(object : Callback<List<MediScanResponse>> {  // List 형태로 수정
+            override fun onResponse(
+                call: Call<List<MediScanResponse>>,
+                response: Response<List<MediScanResponse>>
+            ) {
                 if (response.isSuccessful) {
                     val responseData = response.body()
-                    if (responseData != null) {
+                    if (responseData != null && responseData.isNotEmpty()) {
                         // 데이터를 ArrayList로 묶어서 전달
-                        val dataList = arrayListOf(responseData.category, responseData.name, responseData.photo)
-                        val intent = Intent(this@AfterScanActivity, ScanFinActivity::class.java).apply {
-                            putStringArrayListExtra("dataList", dataList)
-                            Log.d("dataList", "dataList: $dataList")
-                        }
+                        val dataList = arrayListOf(
+                            responseData[0].category,
+                            responseData[0].name,
+                            responseData[0].photo
+                        )
+                        val intent =
+                            Intent(this@AfterScanActivity, ScanFinActivity::class.java).apply {
+                                putStringArrayListExtra("dataList", dataList)
+                                Log.d("dataList", "dataList: $dataList")
+                            }
                         startActivity(intent)
                         finish()
                     }
@@ -111,7 +125,7 @@ class AfterScanActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<MediScanResponse>, t: Throwable) {
+            override fun onFailure(call: Call<List<MediScanResponse>>, t: Throwable) {
                 Log.e("API Error", "에러: ${t.message}")
             }
         })

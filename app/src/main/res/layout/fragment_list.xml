@@ -31,7 +31,6 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="126dp"
-            android:background="@drawable/bg_top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -59,8 +58,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="20sp"
-            android:fontFamily="@font/notosanskrsemibold"
-            android:textColor="@color/white"
+            android:fontFamily="@font/notosanskrbold"
+            android:textColor="#3E3E3E"
             android:text="약 보관함"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="30dp"/>
