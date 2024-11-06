@@ -30,8 +30,10 @@ class EatMediActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Intent에서 전달된 약명을 받아옴
-        val pillName = intent.getStringExtra("pill_name") ?: "Unknown"  // 여기 추가
+        // Intent에서 전달된 데이터를 받아옴
+        val pillName = intent.getStringExtra("pill_name") ?: "Unknown"
+        val photourl = intent.getStringExtra("pill_image_url")
+        val source = intent.getStringExtra("source") ?: "default"
 
         // 단계 리스트 초기화
         steps.add(EatMedi(R.layout.eat_medi_item1, isVisible = true, isCompleted = false))

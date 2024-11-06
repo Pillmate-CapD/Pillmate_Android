@@ -36,6 +36,7 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
     private lateinit var calendar: Calendar
     private lateinit var powerManager: PowerManager
     private var flag = true
+    private var pillImgUrl: String? = null // 이미지 URL 저장
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +84,8 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
             // EatMediActivity로 이동하며 pillName 값 전달
             val intent = Intent(this, EatMediActivity::class.java).apply {
                 putExtra("pill_name", pillName)
+                putExtra("pill_image_url", pillImgUrl) // 이미지 URL 전달
+                putExtra("source", "alarm") //하늘 추가
             }
 
             startActivity(intent)
@@ -223,7 +226,7 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
                     val mediInfoList = response.body()
                     mediInfoList?.firstOrNull()?.let { mediInfo ->
                         Log.d("fetchMediInfo", "약물 정보 수신 성공: ${mediInfo.name}, ${mediInfo.photo}, ${mediInfo.category}")
-
+                        pillImgUrl = mediInfo.photo // 이미지 URL 저장
                         // Glide를 사용하여 이미지 로드, 기본 이미지 처리
                         Glide.with(this@AlarmActivity)
                             .load(mediInfo.photo)  // String URL을 직접 사용

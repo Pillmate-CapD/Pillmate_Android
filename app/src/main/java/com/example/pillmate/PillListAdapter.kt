@@ -147,6 +147,7 @@ class PillListAdapter(
                     intent.putExtra("pill_name", item.name)
                     intent.putExtra("pill_time", item.time)
                     intent.putExtra("position", position) // 클릭된 아이템의 position을 전달
+                    intent.putExtra("source", "list") //하늘 추가
                     fragment.startActivityForResult(intent, REQUEST_CODE_EAT_MEDI)
                 }
             } else if (currentTimeInMinutes >= itemTimeInMinutes - 60) {
