@@ -37,6 +37,7 @@ class MyHealthInfoActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     response.body()?.let { healthInfo ->
                         Log.d("MyHealthInfoActivity", "API 호출 성공, 데이터 수신됨")
+                        Log.d("MyHealthInfoActivity", "Diseases 데이터: ${healthInfo.diseases}")
                         displayDiseases(healthInfo.diseases)
                         displaySymptoms(healthInfo.symptoms)
                     } ?: run {
