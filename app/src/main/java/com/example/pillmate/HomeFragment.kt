@@ -39,6 +39,18 @@ class HomeFragment : Fragment() {
 
     private val pillViewModel: PillViewModel by viewModels()
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        alarmDatabase = AlarmDatabase.getInstance(requireContext())
+
+        // 데이터 변경 감지
+        alarmDatabase.alarmLogDao().getAllLogsLiveData().observe(viewLifecycleOwner) { logs ->
+            // 데이터가 있을 경우 view_exist_alarm 보이기, 없을 경우 숨기기
+            binding.viewExistAlarm.visibility = if (logs.isNotEmpty()) View.VISIBLE else View.GONE
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,14 +60,6 @@ class HomeFragment : Fragment() {
         val sharedPreferences = requireActivity().getSharedPreferences("userName", MODE_PRIVATE)
         val userName = sharedPreferences.getString("userName", "손해인")
         if (userName != null) {
-
-            alarmDatabase = AlarmDatabase.getInstance(requireContext())
-
-            // 데이터 변경 감지
-            alarmDatabase.alarmLogDao().getAllLogsLiveData().observe(viewLifecycleOwner) { logs ->
-                // 데이터가 있을 경우 view_exist_alarm 보이기, 없을 경우 숨기기
-                binding.viewExistAlarm.visibility = if (logs.isNotEmpty()) View.VISIBLE else View.GONE
-            }
 
             // 약 리스트 RecyclerView 설정
             pillListAdapter = PillListAdapter(arrayListOf(), this, preferencesHelper)
