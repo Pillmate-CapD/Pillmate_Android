@@ -1,5 +1,6 @@
 package com.example.pillmate
 
+import android.animation.ValueAnimator
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -81,6 +83,39 @@ class HomeFragment : Fragment() {
             binding.nonBtnAddMedi.setOnClickListener {
                 findNavController().navigate(R.id.listFragment)
             }
+
+            binding.btnNextMedi.setOnClickListener {
+                // 목표 위치 계산
+                val targetY = binding.middleLayout.top
+
+                // ValueAnimator로 스크롤 애니메이션 설정
+                val animator = ValueAnimator.ofInt(binding.scrollView.scrollY, targetY)
+                animator.duration = 500 // 애니메이션 지속 시간 (1000ms = 1초)
+                animator.interpolator = DecelerateInterpolator() // 점점 느려지는 효과
+
+                animator.addUpdateListener { valueAnimator ->
+                    val animatedValue = valueAnimator.animatedValue as Int
+                    binding.scrollView.scrollTo(0, animatedValue)
+                }
+                animator.start()
+            }
+
+            binding.btnNotEatenMedi.setOnClickListener {
+                // 목표 위치 계산
+                val targetY = binding.middleLayout.top
+
+                // ValueAnimator로 스크롤 애니메이션 설정
+                val animator = ValueAnimator.ofInt(binding.scrollView.scrollY, targetY)
+                animator.duration = 500 // 애니메이션 지속 시간 (1000ms = 1초)
+                animator.interpolator = DecelerateInterpolator() // 점점 느려지는 효과
+
+                animator.addUpdateListener { valueAnimator ->
+                    val animatedValue = valueAnimator.animatedValue as Int
+                    binding.scrollView.scrollTo(0, animatedValue)
+                }
+                animator.start()
+            }
+
         }
         return binding.root
     }
@@ -169,6 +204,9 @@ class HomeFragment : Fragment() {
                         val bTaken = response.bestRecord.taken
                         val bScheduled = response.bestRecord.scheduled
                         val bPercentage = if (bScheduled != 0) (bTaken * 100) / bScheduled else 0
+
+                        binding.tvInfo.text = "${response.bestRecord.taken}정으로 제일 잘 챙겨 먹었어요!"
+                        binding.tvBadInfo.text = "${response.worstRecord.taken}정으로 조금 더 열심히 복용해보세요!"
 
                         binding.goodProgressBar.setProgress(bPercentage)
 //                        if (bPercentage==1){

@@ -8,6 +8,7 @@
     android:background="@color/back_color">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +21,7 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:paddingBottom="70dp"
+                android:paddingBottom="60dp"
                 android:id="@+id/best_top_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,26 +45,26 @@
                         android:background="@drawable/ic_logo"/>
 
 
-<!--                    <ImageView-->
-<!--                        android:clickable="true"-->
-<!--                        android:id="@+id/alert_img"-->
-<!--                        app:layout_constraintTop_toTopOf="parent"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        android:layout_width="30dp"-->
-<!--                        android:layout_height="30dp"-->
-<!--                        android:src="@drawable/alert"/>-->
+                    <ImageView
+                        android:clickable="true"
+                        android:id="@+id/alert_img"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/alert"/>
 
-<!--                    <View-->
-<!--                        android:visibility="invisible"-->
-<!--                        android:id="@+id/view_exist_alarm"-->
-<!--                        android:layout_width="6dp"-->
-<!--                        android:layout_height="6dp"-->
-<!--                        android:background="@drawable/circle_view"-->
-<!--                        app:layout_constraintEnd_toEndOf="@id/alert_img"-->
-<!--                        app:layout_constraintTop_toTopOf="@id/alert_img"-->
-<!--                        android:layout_marginTop="1dp"-->
-<!--                        android:layout_marginRight="4dp" />-->
+                    <View
+                        android:visibility="invisible"
+                        android:id="@+id/view_exist_alarm"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:background="@drawable/circle_view"
+                        app:layout_constraintEnd_toEndOf="@id/alert_img"
+                        app:layout_constraintTop_toTopOf="@id/alert_img"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="4dp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -227,7 +228,7 @@
                         android:layout_marginTop="11dp"
                         android:id="@+id/main_cal"
                         android:layout_width="98dp"
-                        android:layout_height="98dp"
+                        android:layout_height="100dp"
                         android:background="@drawable/ic_main_cal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_today"/>
@@ -268,10 +269,11 @@
                         app:layout_constraintStart_toEndOf="@id/main_cal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/main_cal"
-                        app:layout_constraintBottom_toBottomOf="@id/main_cal"
                         android:background="@drawable/bg_white_round25"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"/>
+                        android:layout_height="94dp">
+
+                    </View>
 
                     <TextView
                         android:textColor="#3E3E3E"
@@ -282,40 +284,74 @@
                         app:layout_constraintStart_toStartOf="@id/next_medi_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="다음 약 일정"
-                        android:textSize="16sp"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/notosanskrbold"
+                        android:text="오후 12시 파스틱정"
+                        android:textSize="15sp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/notosanskrsemibold"
                         android:includeFontPadding="false"/>
 
 
                     <TextView
                         android:id="@+id/tv_next_medi"
-                        android:textColor="@color/selected_icon_color"
+                        android:textColor="#3E3E3E"
                         android:elevation="10dp"
                         android:layout_marginLeft="20dp"
                         app:layout_constraintTop_toBottomOf="@+id/tv_next"
                         app:layout_constraintStart_toStartOf="@id/next_medi_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="다음 약 일정이 없어요!"
-                        android:layout_marginTop="5dp"
-                        android:textSize="13sp"
-                        android:fontFamily="@font/notosanskrbold"
+                        android:text="가장 먼저 먹어야 할 약이에요!"
+
+                        android:textSize="11sp"
+                        android:fontFamily="@font/notosanskrregular"
                         android:includeFontPadding="false"/>
 
                     <View
-                        android:id="@+id/btn_next_medi"
-                        android:clickable="true"
-                        android:layout_marginRight="13dp"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="10dp"
                         android:elevation="10dp"
+                        android:layout_width="43dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/ic_cal_img"
                         app:layout_constraintEnd_toEndOf="@id/next_medi_layout"
-                        app:layout_constraintTop_toTopOf="@id/next_medi_layout"
+                        app:layout_constraintTop_toTopOf="@id/next_medi_layout"/>
+
+<!--                    <View-->
+<!--                        android:id="@+id/btn_next_medi"-->
+<!--                        android:clickable="true"-->
+<!--                        android:layout_marginRight="13dp"-->
+<!--                        android:layout_width="24dp"-->
+<!--                        android:layout_height="24dp"-->
+<!--                        android:elevation="10dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="@id/next_medi_layout"-->
+<!--                        app:layout_constraintTop_toTopOf="@id/next_medi_layout"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/next_medi_layout"-->
+<!--                        android:background="@drawable/ic_btn_right"-->
+<!--                        android:backgroundTint="@color/black"/>-->
+
+                    <TextView
+                        android:clickable="true"
+                        android:background="@drawable/bg_btn_back"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:id="@+id/btn_next_medi"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/notosanskrbold"
+                        app:layout_goneMarginTop="11dp"
+                        android:includeFontPadding="false"
+                        android:text="다음 약 먹으러 가기"
+                        android:textColor="#1E54DF"
+                        android:textSize="11sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginBottom="11dp"
+                        app:layout_constraintStart_toStartOf="@id/next_medi_layout"
+                        android:gravity="center"
+                        app:layout_constraintTop_toBottomOf="@id/tv_next_medi"
                         app:layout_constraintBottom_toBottomOf="@id/next_medi_layout"
-                        android:background="@drawable/ic_btn_right"
-                        android:backgroundTint="@color/black"/>
+                        />
 
                     <View
                         android:id="@+id/last_layout"
@@ -330,7 +366,7 @@
                         android:layout_height="74dp"
                         app:layout_constraintTop_toBottomOf="@id/next_medi_layout"
                         android:background="@drawable/bg_15_blue"/>
-                    
+
                     <View
                         android:id="@+id/medi_view"
                         android:layout_marginLeft="11dp"
@@ -362,7 +398,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:elevation="10dp"
                         android:fontFamily="@font/notosanskrsemibold"
                         android:includeFontPadding="false"
@@ -415,7 +451,7 @@
                     android:fontFamily="@font/notosanskrbold"
                     android:layout_marginLeft="16dp"
                     android:text="오늘 복용 전체 일정"
-                    android:textColor="@color/black"
+                    android:textColor="#3E3E3E"
                     android:textSize="18sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
@@ -428,8 +464,8 @@
                     android:fontFamily="@font/notosanskrregular"
                     android:layout_marginLeft="16dp"
                     android:text="오늘 복용하실 약 알람 리스트에요"
-                    android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textColor="#858585"
+                    android:textSize="13sp"
                     app:layout_constraintTop_toBottomOf="@+id/txt_sub"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -499,44 +535,53 @@
 <!--                    app:layout_constraintStart_toStartOf="parent"-->
 <!--                    app:layout_constraintTop_toBottomOf="@id/txt_sub" />-->
 
-<!--                <View-->
-<!--                    android:id="@+id/list_view"-->
-<!--                    app:layout_constraintBottom_toTopOf="@id/pill_list"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="1dp"-->
-<!--                    android:background="#E6E6E6"/>-->
+                <View
+                    android:id="@+id/list_view"
+                    app:layout_constraintBottom_toTopOf="@id/pill_list"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_height="0.5dp"
+                    android:background="#91D2D2D2"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/pill_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="18dp"
                     android:overScrollMode="never"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txt_sub2" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="16dp"
                     android:visibility="visible"
                     android:clickable="true"
                     android:id="@+id/btn_all_pill"
                     app:layout_constraintTop_toBottomOf="@id/pill_list"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_width="match_parent"
                     android:layout_height="73dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:clickable="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         android:id="@+id/btn_pill_list"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:paddingRight="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@drawable/bg_12_button"
+                        android:clickable="true"
                         android:paddingLeft="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="75dp">
+                        android:paddingRight="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:id="@+id/txt_go"
@@ -544,25 +589,27 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:fontFamily="@font/notosanskrsemibold"
-                            app:layout_constraintEnd_toStartOf="@id/view"
-                            android:text="약 전체 보러가기"
-                            android:textColor="#09C8BF"
+                            android:fontFamily="@font/notosanskrmedium"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="약 알람 전체 보기"
+                            android:textColor="#1E54DF"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <View
-                            android:layout_marginLeft="5dp"
                             android:id="@+id/view"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            app:layout_constraintStart_toEndOf="@id/txt_go"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/txt_go"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/ic_btn_right"
+                            android:backgroundTint="#1E54DF"
                             app:layout_constraintBottom_toBottomOf="@id/txt_go"
-                            android:background="@drawable/ic_next_all"/>
+                            app:layout_constraintStart_toEndOf="@id/txt_go"
+                            app:layout_constraintTop_toTopOf="@id/txt_go" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -592,7 +639,7 @@
                     android:textSize="18sp"
                     android:textColor="#3E3E3E"
                     android:includeFontPadding="false"
-                    android:text="약별 처방 기간"/>
+                    android:text="약별 남은 복용 기간"/>
 
                 <TextView
                     android:id="@+id/eaten_sub_title"
@@ -601,7 +648,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/eaten_title"
                     android:fontFamily="@font/notosanskrregular"
-                    android:textSize="11sp"
+                    android:textSize="13sp"
                     android:textColor="#858585"
                     android:includeFontPadding="false"
                     android:text="남은 복용 기간을 확인 후 약을 처방 받으세요!"/>
@@ -806,224 +853,445 @@
                     android:textSize="18sp"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_good"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="3dp"
                     app:layout_constraintTop_toBottomOf="@id/txt3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:clipChildren="false"
-                    android:clipToPadding="false">
+                    android:background="@drawable/bg_13_background"
+                    android:elevation="2dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
 
-                    <!-- 첫 번째 레이아웃 -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_good"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:padding="10dp"
-                        android:elevation="2dp"
-                        android:background="@drawable/custom_pill_background"
+                    <TextView
+                        android:id="@+id/tv_win"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/layout_bad">
-
-                        <TextView
-                            android:layout_marginTop="-8dp"
-                            android:id="@+id/txt_good"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/notosanskrbold"
-                            android:text="#잘 챙겨 먹었다!"
-                            android:textColor="@color/selected_icon_color"
-                            android:textSize="12sp" />
-
-                        <View
-                            android:id="@+id/pill_good_img"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_good"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="16dp"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@drawable/ic_pill_img"/>
-
-                        <TextView
-                            android:layout_marginTop="3dp"
-                            android:includeFontPadding="false"
-                            android:id="@+id/home_good_pill_name"
-                            app:layout_constraintTop_toBottomOf="@id/pill_good_img"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/notosanskrbold"
-                            android:text="약을 추가해보세요"
-                            android:textColor="@color/selected_icon_color"
-                            android:textSize="12sp" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/layout_pill"
-                            android:layout_marginTop="5dp"
-                            app:layout_constraintTop_toBottomOf="@id/home_good_pill_name"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:includeFontPadding="false"
-                                android:id="@+id/home_pill_good_user"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/notosanskrbold"
-                                android:text="0정 "
-                                android:textColor="@color/selected_icon_color"
-                                android:textSize="10sp" />
-
-                            <TextView
-                                android:includeFontPadding="false"
-                                android:id="@+id/home_pill_good_num"
-                                app:layout_constraintStart_toEndOf="@id/home_pill_good_user"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/notosanskrmedium"
-                                android:text="/ 0정"
-                                android:textColor="#3E3E3E"
-                                android:textSize="10sp" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <ProgressBar
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginBottom="5dp"
-                            app:layout_constraintTop_toBottomOf="@id/layout_pill"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:id="@+id/good_progressBar"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="90dp"
-                            android:layout_height="8dp"
-                            android:progressDrawable="@drawable/progress_gradient"
-                            android:progress="100"
-                            android:max="100"
-                            android:layout_centerInParent="true"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <!-- 두 번째 레이아웃 -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_bad"
-                        android:layout_width="0dp"
+                        android:textColor="#08D2C8"
+                        android:includeFontPadding="false"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:padding="10dp"
+                        android:fontFamily="@font/notosanskrbold"
+                        android:textSize="20sp"
+                        android:text="복용률 1위"/>
+
+                    <TextView
+                        android:layout_marginLeft="11dp"
+                        android:id="@+id/home_good_pill_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskrbold"
+                        android:includeFontPadding="false"
+                        android:text="트윈스타정"
+                        android:textColor="#3E3E3E"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_win"
+                        app:layout_constraintStart_toEndOf="@id/tv_win" />
+
+                    <TextView
+                        android:id="@+id/tv_info"
+                        android:layout_marginTop="11dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskrregular"
+                        android:includeFontPadding="false"
+                        android:text="100정으로 제일 잘 챙겨 먹었어요!"
+                        android:textColor="#898989"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_win"
+                        />
+
+                    <ProgressBar
                         android:elevation="2dp"
-                        android:background="@drawable/custom_pill_background"
-                        app:layout_constraintStart_toEndOf="@+id/layout_good"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_info"
+                        android:id="@+id/good_progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="11dp"
+                        android:progressDrawable="@drawable/progress_gradient"
+                        android:progress="100"
+                        android:max="100"
+                        android:layout_centerInParent="true"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="3dp"
+                        android:id="@+id/layout_pill"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/good_progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
                         <TextView
-                            android:layout_marginTop="-8dp"
-                            android:id="@+id/txt_bad"
+                            android:includeFontPadding="false"
+                            android:id="@+id/home_pill_good_user"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/notosanskrbold"
-                            android:text="#좀 더 열심히 먹자!"
-                            android:textColor="@color/selected_icon_color"
-                            android:textSize="12sp" />
-
-                        <View
-                            android:id="@+id/pill_bad_img"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_bad"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="16dp"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@drawable/ic_pill_img"/>
+                            android:fontFamily="@font/notosanskrmedium"
+                            android:text="0정 "
+                            android:textColor="#3F3F3F"
+                            android:textSize="11sp" />
 
                         <TextView
-                            android:layout_marginTop="3dp"
                             android:includeFontPadding="false"
-                            android:id="@+id/home_bad_pill_name"
-                            app:layout_constraintTop_toBottomOf="@id/pill_bad_img"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            android:id="@+id/home_pill_good_num"
+                            app:layout_constraintStart_toEndOf="@id/home_pill_good_user"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/notosanskrbold"
-                            android:text="약을 추가해보세요"
-                            android:textColor="@color/selected_icon_color"
-                            android:textSize="12sp" />
+                            android:fontFamily="@font/notosanskrmedium"
+                            android:text="/ 0정"
+                            android:textColor="#3F3F3F"
+                            android:textSize="11sp" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/layout_pill_bad"
-                            app:layout_constraintTop_toBottomOf="@id/home_bad_pill_name"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:includeFontPadding="false"
-                                android:id="@+id/home_pill_bad_user"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/notosanskrbold"
-                                android:text="0정 "
-                                android:textColor="@color/selected_icon_color"
-                                android:textSize="10sp" />
-
-                            <TextView
-                                android:includeFontPadding="false"
-                                android:id="@+id/home_pill_bad_num"
-                                app:layout_constraintStart_toEndOf="@id/home_pill_bad_user"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/notosanskrmedium"
-                                android:text="/ 0정"
-                                android:textColor="#3E3E3E"
-                                android:textSize="10sp" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <ProgressBar
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginBottom="5dp"
-                            app:layout_constraintTop_toBottomOf="@id/layout_pill_bad"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:id="@+id/bad_progressBar"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="90dp"
-                            android:layout_height="8dp"
-                            android:progressDrawable="@drawable/progress_gradient"
-                            android:progress="100"
-                            android:max="100"
-                            android:layout_centerInParent="true"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--                    &lt;!&ndash; 첫 번째 레이아웃 &ndash;&gt;-->
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_good"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="8dp"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:elevation="2dp"-->
+<!--                        android:background="@drawable/custom_pill_background"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/layout_bad">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_marginTop="-8dp"-->
+<!--                            android:id="@+id/txt_good"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/notosanskrbold"-->
+<!--                            android:text="#잘 챙겨 먹었다!"-->
+<!--                            android:textColor="@color/selected_icon_color"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                        <View-->
+<!--                            android:id="@+id/pill_good_img"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/txt_good"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:layout_marginTop="16dp"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:background="@drawable/ic_pill_img"/>-->
+
+<!--                        <TextView-->
+<!--                            android:layout_marginTop="3dp"-->
+<!--                            android:includeFontPadding="false"-->
+<!--                            android:id="@+id/home_good_pill_name"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/pill_good_img"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/notosanskrbold"-->
+<!--                            android:text="약을 추가해보세요"-->
+<!--                            android:textColor="@color/selected_icon_color"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:id="@+id/layout_pill"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/home_good_pill_name"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content">-->
+
+<!--                            <TextView-->
+<!--                                android:includeFontPadding="false"-->
+<!--                                android:id="@+id/home_pill_good_user"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"-->
+<!--                                app:layout_constraintTop_toTopOf="parent"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/notosanskrbold"-->
+<!--                                android:text="0정 "-->
+<!--                                android:textColor="@color/selected_icon_color"-->
+<!--                                android:textSize="10sp" />-->
+
+<!--                            <TextView-->
+<!--                                android:includeFontPadding="false"-->
+<!--                                android:id="@+id/home_pill_good_num"-->
+<!--                                app:layout_constraintStart_toEndOf="@id/home_pill_good_user"-->
+<!--                                app:layout_constraintTop_toTopOf="parent"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/notosanskrmedium"-->
+<!--                                android:text="/ 0정"-->
+<!--                                android:textColor="#3E3E3E"-->
+<!--                                android:textSize="10sp" />-->
+
+<!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                        <ProgressBar-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/layout_pill"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:id="@+id/good_progressBar"-->
+<!--                            style="?android:attr/progressBarStyleHorizontal"-->
+<!--                            android:layout_width="90dp"-->
+<!--                            android:layout_height="8dp"-->
+<!--                            android:progressDrawable="@drawable/progress_gradient"-->
+<!--                            android:progress="100"-->
+<!--                            android:max="100"-->
+<!--                            android:layout_centerInParent="true"/>-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                    &lt;!&ndash; 두 번째 레이아웃 &ndash;&gt;-->
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/layout_bad"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:elevation="2dp"-->
+<!--                        android:background="@drawable/custom_pill_background"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/layout_good"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_marginTop="-8dp"-->
+<!--                            android:id="@+id/txt_bad"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/notosanskrbold"-->
+<!--                            android:text="#좀 더 열심히 먹자!"-->
+<!--                            android:textColor="@color/selected_icon_color"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                        <View-->
+<!--                            android:id="@+id/pill_bad_img"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/txt_bad"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:layout_marginTop="16dp"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:background="@drawable/ic_pill_img"/>-->
+
+<!--                        <TextView-->
+<!--                            android:layout_marginTop="3dp"-->
+<!--                            android:includeFontPadding="false"-->
+<!--                            android:id="@+id/home_bad_pill_name"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/pill_bad_img"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/notosanskrbold"-->
+<!--                            android:text="약을 추가해보세요"-->
+<!--                            android:textColor="@color/selected_icon_color"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:id="@+id/layout_pill_bad"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/home_bad_pill_name"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content">-->
+
+<!--                            <TextView-->
+<!--                                android:includeFontPadding="false"-->
+<!--                                android:id="@+id/home_pill_bad_user"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"-->
+<!--                                app:layout_constraintTop_toTopOf="parent"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/notosanskrbold"-->
+<!--                                android:text="0정 "-->
+<!--                                android:textColor="@color/selected_icon_color"-->
+<!--                                android:textSize="10sp" />-->
+
+<!--                            <TextView-->
+<!--                                android:includeFontPadding="false"-->
+<!--                                android:id="@+id/home_pill_bad_num"-->
+<!--                                app:layout_constraintStart_toEndOf="@id/home_pill_bad_user"-->
+<!--                                app:layout_constraintTop_toTopOf="parent"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/notosanskrmedium"-->
+<!--                                android:text="/ 0정"-->
+<!--                                android:textColor="#3E3E3E"-->
+<!--                                android:textSize="10sp" />-->
+
+<!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                        <ProgressBar-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            android:layout_marginBottom="5dp"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/layout_pill_bad"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:id="@+id/bad_progressBar"-->
+<!--                            style="?android:attr/progressBarStyleHorizontal"-->
+<!--                            android:layout_width="90dp"-->
+<!--                            android:layout_height="8dp"-->
+<!--                            android:progressDrawable="@drawable/progress_gradient"-->
+<!--                            android:progress="100"-->
+<!--                            android:max="100"-->
+<!--                            android:layout_centerInParent="true"/>-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <View
+                    android:id="@+id/dot1"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_good"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:background="@drawable/ic_dot"/>
+
+                <View
+                    android:id="@+id/dot2"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dot1"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:background="@drawable/ic_dot"/>
+
+                <View
+                    android:id="@+id/dot3"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dot2"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:background="@drawable/ic_dot"/>
 
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginBottom="3dp"
+                    android:id="@+id/layout_bad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/bg_13_background"
+                    android:elevation="2dp"
+                    android:padding="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dot3">
 
+                    <TextView
+                        android:id="@+id/tv_worst"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskrbold"
+                        android:includeFontPadding="false"
+                        android:text="복용률 최하위"
+                        android:textColor="#08D2C8"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/home_bad_pill_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp"
+                        android:fontFamily="@font/notosanskrbold"
+                        android:includeFontPadding="false"
+                        android:text="파스틱정"
+                        android:textColor="#3E3E3E"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_worst"
+                        app:layout_constraintStart_toEndOf="@id/tv_worst" />
+
+                    <TextView
+                        android:id="@+id/tv_bad_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:fontFamily="@font/notosanskrregular"
+                        android:includeFontPadding="false"
+                        android:text="70정으로 조금 더 열심히 복용해보세요!"
+                        android:textColor="#898989"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_worst" />
+
+                    <ProgressBar
+                        android:id="@+id/bad_progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="11dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="16dp"
+                        android:elevation="2dp"
+                        android:max="100"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progress_gradient"
+                        app:layout_constraintTop_toBottomOf="@id/tv_bad_info" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_pill_bad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/bad_progressBar">
+
+                        <TextView
+                            android:id="@+id/home_pill_bad_user"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskrmedium"
+                            android:includeFontPadding="false"
+                            android:text="0정 "
+                            android:textColor="#3F3F3F"
+                            android:textSize="11sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/home_pill_bad_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskrmedium"
+                            android:includeFontPadding="false"
+                            android:text="/ 0정"
+                            android:textColor="#3F3F3F"
+                            android:textSize="11sp"
+                            app:layout_constraintStart_toEndOf="@id/home_pill_bad_user"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
