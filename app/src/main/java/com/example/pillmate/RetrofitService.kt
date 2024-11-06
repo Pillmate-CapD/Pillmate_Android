@@ -31,6 +31,10 @@ interface RetrofitService {
     @GET("members/healthinfo")
     fun getDiarySymptoms(): Call<HealthDataResponse>
 
+    //내 건강정보
+    @GET("members/healthinfo")
+    fun getMyHealthInfo(): Call<MyHealthInfoResponse>
+
     //로그아웃
     @POST("members/logout")
     suspend fun logout(): LogoutResponse

@@ -87,6 +87,12 @@ class UserFragment : Fragment() {
             startActivity(intent)
         }
 
+        val myhealth: View = view.findViewById(R.id.btn_my_health)
+        myhealth.setOnClickListener {
+            val intent = Intent(activity, MyHealthInfoActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 

@@ -114,6 +114,28 @@ class EatMediAdapter(
 
                 }
             }
+            // 1단계: 약명만 표시
+            if (position == 0) {
+                stepDescription?.text = step.pillName
+            }
+
+            // 2단계: 약명 + "이 맞아요" 텍스트와 색상 적용
+            if (position == 1) {
+                val pillName = step.pillName  // 나 여기 추가함
+                val spannable = SpannableStringBuilder("$pillName 이 맞아요")
+                spannable.setSpan(
+                    ForegroundColorSpan(Color.parseColor("#1E54DF")),
+                    0, pillName.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                spannable.setSpan(
+                    ForegroundColorSpan(Color.parseColor("#3E3E3E")),
+                    pillName.length + 1,
+                    spannable.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                stepDescription?.text = spannable  // 나 여기 추가함
+            }
             // 2단계의 medicheck_image 설정
             if (position == 1 && step.photoPath != null) {
                 val bitmap = BitmapFactory.decodeFile(step.photoPath)

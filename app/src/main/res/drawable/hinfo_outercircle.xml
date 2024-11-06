@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 바깥 원 (직선형 그라데이션 적용) -->
+    <item>
+        <shape android:shape="oval">
+           <solid android:color="#4D2E67FF"/>
+            <size android:width="19.16dp" android:height="19.16dp"/>
+        </shape>
+    </item>
+</layer-list>

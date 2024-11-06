@@ -152,6 +152,9 @@
         <activity
             android:name=".HealthDiary3Activity"
             android:exported="false" />
+        <activity
+            android:name=".MyHealthInfoActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
