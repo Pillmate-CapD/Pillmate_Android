@@ -2,6 +2,7 @@ package com.example.pillmate
 
 import android.animation.ValueAnimator
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -28,6 +29,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var pillListAdapter: PillListAdapter
     private lateinit var remainMediAdapter: RemainMediAdapter
+    private lateinit var alarmDatabase: AlarmDatabase
 
     private var userName :String? = null
 
@@ -46,6 +48,15 @@ class HomeFragment : Fragment() {
         val sharedPreferences = requireActivity().getSharedPreferences("userName", MODE_PRIVATE)
         val userName = sharedPreferences.getString("userName", "손해인")
         if (userName != null) {
+
+            alarmDatabase = AlarmDatabase.getInstance(requireContext())
+
+            // 데이터 변경 감지
+            alarmDatabase.alarmLogDao().getAllLogsLiveData().observe(viewLifecycleOwner) { logs ->
+                // 데이터가 있을 경우 view_exist_alarm 보이기, 없을 경우 숨기기
+                binding.viewExistAlarm.visibility = if (logs.isNotEmpty()) View.VISIBLE else View.GONE
+            }
+
             // 약 리스트 RecyclerView 설정
             pillListAdapter = PillListAdapter(arrayListOf(), this, preferencesHelper)
             binding.pillList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -63,6 +74,12 @@ class HomeFragment : Fragment() {
 
 //            binding.homePillProgressBar.setMaxProgress(100)
 //            binding.homePillProgressBar.setProgress(100)
+
+            binding.alertImg.setOnClickListener {
+                binding.viewExistAlarm.visibility = View.INVISIBLE
+                val intent = Intent(context, AlarmListActivity::class.java)
+                startActivity(intent)
+            }
 
 
             // 현재 월 업데이트

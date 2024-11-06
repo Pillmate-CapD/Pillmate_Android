@@ -1,17 +1,18 @@
 package com.example.pillmate
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pillmate.databinding.ActivityAlarmListBinding
-import java.text.SimpleDateFormat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Calendar
-import java.util.Locale
+import java.util.Date
 import java.util.concurrent.TimeUnit
 
 class AlarmListActivity : AppCompatActivity() {
@@ -21,6 +22,9 @@ class AlarmListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // roomdb에 내용 너무 많아서 일단 삭제할 때 사용함
+        //clearAllAlarmLogs()
 
         binding = ActivityAlarmListBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -38,54 +42,40 @@ class AlarmListActivity : AppCompatActivity() {
         }
     }
 
-
     private fun loadAlarmHistory() {
-        val sharedPreferences = getSharedPreferences("alarmHistory", MODE_PRIVATE)
-        val savedAlarms = sharedPreferences.getStringSet("alarms", mutableSetOf())
+        val alarmDatabase = AlarmDatabase.getInstance(this)
 
-        // savedAlarms 로그로 출력
-        Log.d("AlarmListActivity", "Saved Alarms: $savedAlarms")
+        CoroutineScope(Dispatchers.IO).launch {
+            val logs = alarmDatabase.alarmLogDao().getAllLogs()
 
-        // Create a new list for alarm items
-        val newAlarms = mutableListOf<AlarmListItem>()
-
-        savedAlarms?.forEach { alarmData ->
-            val alarmDetails = alarmData.split(", ")
-            if (alarmDetails.size == 2) {
-                val alarmMessage = alarmDetails[0]
-                val alarmTime = alarmDetails[1]
-                val timeAgo = getTimeAgo(alarmTime)
-
-                // 알람 항목을 로그로 출력
-                Log.d("AlarmListActivity", "Alarm Message: $alarmMessage, Alarm Time: $alarmTime")
-
-                // 새로운 알람 항목 추가
-                newAlarms.add(AlarmListItem("복약알림", alarmMessage, timeAgo))
+            val newAlarms = logs.map { log: AlarmLog ->  // 여기에서 타입 명시
+                AlarmListItem(
+                    type = "복약알림",
+                    des = log.message,
+                    time = getTimeAgo(log.timestamp)
+                )
             }
-        }
 
-        // 어댑터에 데이터를 전달하고 업데이트
-        alarmListAdapter.updateAlarmList(newAlarms)
+            withContext(Dispatchers.Main) {
+                // 어댑터의 updateAlarmList 메서드를 사용하여 데이터 갱신
+                alarmListAdapter.updateAlarmList(newAlarms)
 
-        // "알림이 없습니다" 메시지를 처리
-        if (newAlarms.isEmpty()) {
-            binding.tvNoAlarm.visibility = View.VISIBLE // Show "No alarms" message
-        } else {
-            binding.tvNoAlarm.visibility = View.GONE
+                // "알림이 없습니다" 메시지를 처리
+                binding.tvNoAlarm.visibility = if (newAlarms.isEmpty()) View.VISIBLE else View.GONE
+
+                // tv_alarm_bottom 가시성 설정
+                binding.tvAlarmBottom.visibility = if (newAlarms.isNotEmpty()) View.VISIBLE else View.GONE
+            }
+
         }
     }
 
 
 
-    fun getTimeAgo(time: String): String {
-        // time이 "yyyy-MM-dd HH:mm:ss" 형식으로 넘어올 것으로 가정
-        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val alarmTime = formatter.parse(time)
-
+    private fun getTimeAgo(time: Date): String {
         val currentTime = Calendar.getInstance().time
-        val diffInMillis = currentTime.time - alarmTime.time
+        val diffInMillis = currentTime.time - time.time
 
-        // 차이를 계산하여 시간 단위로 변환
         val diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis)
         val diffInHours = TimeUnit.MILLISECONDS.toHours(diffInMillis)
         val diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillis)
@@ -98,4 +88,14 @@ class AlarmListActivity : AppCompatActivity() {
             else -> "${diffInDays}일 전"
         }
     }
+
+    private fun clearAllAlarmLogs() {
+        val alarmDatabase = AlarmDatabase.getInstance(this)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            alarmDatabase.alarmLogDao().deleteAllLogs()
+            Log.d("AlarmDatabase", "All logs deleted")
+        }
+    }
 }
+

@@ -12,8 +12,7 @@
         android:id="@+id/home_alarm_img"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:background="@drawable/circle_view"
-        android:backgroundTint="#E6EBFA"
+        android:background="@drawable/ic_pill_alarm_list"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />

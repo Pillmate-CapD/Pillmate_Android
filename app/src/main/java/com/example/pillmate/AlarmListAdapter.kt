@@ -39,8 +39,8 @@ class AlarmListAdapter (private val alarmListItem : ArrayList<AlarmListItem>) :
     }
 
     fun updateAlarmList(newAlarms: List<AlarmListItem>) {
-        alarmListItem.clear() // 기존 데이터를 초기화
-        alarmListItem.addAll(newAlarms) // 새로운 알람 리스트 추가
+        alarmListItem.clear() // 기존 데이터 초기화
+        alarmListItem.addAll(newAlarms) // 새로운 데이터 추가
         notifyDataSetChanged() // RecyclerView 갱신
     }
 

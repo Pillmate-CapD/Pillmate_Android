@@ -17,8 +17,12 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
@@ -80,15 +84,17 @@ class PillListAdapter(
 
             //setAlarm(20,"트윈스타정")
 
-
-
+//            // 2시간 이상 지났을 때 알람 발생
+//            if (currentTimeInMinutes >= itemTimeInMinutes + 120 && !item.isEaten) {
+//                saveMissedPillAlarm(item.name)
+//            }
 
             if (item.isEaten) {
                 // 아이템이 완료된 경우
                 itemView.setBackgroundResource(R.drawable.custom_pill_background) // 기본 색상
                 pillImg.setBackgroundResource(R.drawable.img_pill_none) // 약 이미지 복용전과 복용 예정인 경우의 상태
                 pill_done.visibility = View.VISIBLE
-                pill_now.visibility= View.INVISIBLE
+                pill_now.visibility = View.INVISIBLE
 
                 pill_before.visibility = View.INVISIBLE
                 itemView.setOnClickListener(null) // 클릭 비활성화
@@ -120,14 +126,15 @@ class PillListAdapter(
 //                    fragment.startActivityForResult(intent, REQUEST_CODE_EAT_MEDI)
 //                }
 //            }
-            else if (currentTimeInMinutes >= itemTimeInMinutes + 120){
+            else if (currentTimeInMinutes >= itemTimeInMinutes + 120) {
                 saveMissedPillAlarm(item.name)
+                // 알람이 발생했을 때
 
                 // 현재 시간이 항목의 시간보다 2시간이상 지났거나 먹어야하는데 아직 안먹은 경우
                 itemView.setBackgroundResource(R.drawable.bg_pill_list_check2) // 배경 색상 변경
                 pill_done.visibility = View.INVISIBLE
                 pill_before.visibility = View.INVISIBLE
-                pill_now.visibility= View.VISIBLE
+                pill_now.visibility = View.VISIBLE
 
                 // 텍스트 색상 직접 지정 (HEX 값을 사용하여 파란색으로 설정)
                 time.setTextColor(Color.parseColor("#1E54DF"))
@@ -142,13 +149,12 @@ class PillListAdapter(
                     intent.putExtra("position", position) // 클릭된 아이템의 position을 전달
                     fragment.startActivityForResult(intent, REQUEST_CODE_EAT_MEDI)
                 }
-            }
-            else if (currentTimeInMinutes >= itemTimeInMinutes - 60) {
+            } else if (currentTimeInMinutes >= itemTimeInMinutes - 60) {
                 // 현재 시간이 항목의 시간보다 한 시간 전이거나 같은 경우
                 itemView.setBackgroundResource(R.drawable.bg_list_now) // 배경 색상 변경
                 pill_done.visibility = View.INVISIBLE
                 pill_before.visibility = View.INVISIBLE
-                pill_now.visibility= View.VISIBLE
+                pill_now.visibility = View.VISIBLE
 
                 // 텍스트 색상 직접 지정 (HEX 값을 사용하여 파란색으로 설정)
                 time.setTextColor(Color.parseColor("#1E54DF"))
@@ -163,14 +169,13 @@ class PillListAdapter(
                     fragment.startActivityForResult(intent, REQUEST_CODE_EAT_MEDI)
                 }
 
-            }
-            else {
+            } else {
                 // 그 외의 경우 기본 배경 색상 사용
                 itemView.setBackgroundResource(R.drawable.custom_pill_background) // 기본 색상
                 pillImg.setBackgroundResource(R.drawable.img_pill_none) // 약 이미지 복용전과 복용 예정인 경우의 상태
 
                 pill_done.visibility = View.INVISIBLE
-                pill_now.visibility= View.INVISIBLE
+                pill_now.visibility = View.INVISIBLE
                 pill_before.visibility = View.VISIBLE
 
                 // 텍스트 색상 직접 지정 (HEX 값을 사용하여 파란색으로 설정)
@@ -179,40 +184,45 @@ class PillListAdapter(
             }
         }
 
-        // 2시간 이후에도 안먹었ㅇ르 경우에 해당 히스토리를 남기고, 12시가 지난 경우에는 새로운 알람이 생성될 수 있도록 함.
-        // 동일한 약이어도 12시가 지났기때문에 생성할 수 있도록.
         private fun saveMissedPillAlarm(pillName: String) {
             val context = itemView.context
-            val sharedPreferences = context.getSharedPreferences("alarmHistory", Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
+            val alarmMessage = "'$pillName'을/를 복용할 시간입니다."
+            val currentTimestamp = Date()
 
-            // 현재 시간과 날짜 저장
-            val currentTime = Calendar.getInstance().time
-            val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) // 날짜 포맷 추가
-            val timeFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()) // 기존 시간 포맷 유지
-            val currentDate = dateFormatter.format(currentTime) // 날짜만 따로 저장
-            val alarmTimeFormatted = timeFormatter.format(currentTime) // 시간 저장
+            // 현재 날짜로 날짜 형식 설정
+            val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val currentDate = dateFormatter.format(currentTimestamp)
 
-            // 알람 메시지 생성 (날짜를 포함한 알람 메시지로 변경)
-            val alarmMessage = "'${pillName}'을/를 먹을 시간이에요."
+            CoroutineScope(Dispatchers.IO).launch {
+                val alarmDatabase = AlarmDatabase.getInstance(context)
+                val existingLogs = alarmDatabase.alarmLogDao()
+                    .getLogsForDate(alarmMessage, currentDate) // 같은 날 저장된 로그 확인
 
-            // 저장된 알람 기록 리스트 불러오기 (알람 메시지와 날짜 기준)
-            val currentAlarms = sharedPreferences.getStringSet("alarms", mutableSetOf()) ?: mutableSetOf()
-
-            // 기존 알람에서 같은 날에 중복되는 알람 메시지가 있는지 확인
-            val isDuplicate = currentAlarms.any { it.contains(alarmMessage) && it.contains(currentDate) }
-
-            // 중복된 알람이 없으면 추가하고, 알람이 있음을 표시하도록 HomeFragment에 알림
-            if (!isDuplicate) {
-                currentAlarms.add("$alarmMessage, $alarmTimeFormatted") // 날짜와 시간 모두 추가
-                editor.putStringSet("alarms", currentAlarms)
-                editor.apply() // 변경사항 적용
-
-                // 알람이 추가되었으므로 HomeFragment에 알림 표시
-                //fragment.showExistAlarmView()
+                if (existingLogs.isEmpty()) { // 같은 날짜에 중복된 로그가 없을 때만 저장
+                    saveAlarmToDatabase(context, alarmMessage, currentTimestamp)
+                } else {
+                    Log.d(
+                        "AlarmDatabase",
+                        "Duplicate entry for today, not inserting: $alarmMessage"
+                    )
+                }
             }
         }
 
+        fun saveAlarmToDatabase(context: Context, message: String, timestamp: Date) {
+            val alarmLog = AlarmLog(message = message, timestamp = timestamp)
+            val alarmDatabase = AlarmDatabase.getInstance(context)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val existingLog = alarmDatabase.alarmLogDao().findLog(message, timestamp)
+                if (existingLog == null) {
+                    alarmDatabase.alarmLogDao().insertLog(alarmLog)
+                    Log.d("AlarmDatabase", "Data inserted: $alarmLog")
+                } else {
+                    Log.d("AlarmDatabase", "Duplicate entry not inserted: $alarmLog")
+                }
+            }
+        }
 
         private fun setAlarm(hour: Int, minute: Int, pillName: String) {
             val context = itemView.context
@@ -221,7 +231,10 @@ class PillListAdapter(
                 putExtra("pill_name", pillName)
             }
             val pendingIntent = PendingIntent.getBroadcast(
-                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
 
             val calendar = Calendar.getInstance().apply {
@@ -261,53 +274,6 @@ class PillListAdapter(
                 // Handle SecurityException gracefully, perhaps by requesting necessary permissions
             }
         }
-
-//        private fun setAlarm(seconds: Int, pillName: String) {
-//            val context = itemView.context
-//            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//            val intent = Intent(context, AlarmReceiver::class.java).apply {
-//                action = AlarmReceiver.ACTION_RESTART_SERVICE // 추가된 부분
-//                putExtra("pill_name", pillName)
-//            }
-//            val pendingIntent = PendingIntent.getBroadcast(
-//                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-//            )
-//
-//            val calendar = Calendar.getInstance().apply {
-//                timeInMillis = System.currentTimeMillis()
-//                add(Calendar.SECOND, seconds)
-//            }
-//
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-//                val canScheduleExactAlarms = alarmManager.canScheduleExactAlarms()
-//                if (!canScheduleExactAlarms) {
-//                    Log.w("PillListAdapter", "Requesting exact alarm permission.")
-//                    val intent = Intent().apply {
-//                        action = Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
-//                    }
-//                    fragment.startActivityForResult(intent, REQUEST_CODE_SCHEDULE_EXACT_ALARM)
-//                    return
-//                }
-//            }
-//
-//            try {
-//                alarmManager.setExactAndAllowWhileIdle(
-//                    AlarmManager.RTC_WAKEUP,
-//                    calendar.timeInMillis,
-//                    pendingIntent
-//                )
-//                // Log the alarm time
-//                val formattedTime = "%02d:%02d:%02d".format(
-//                    calendar.get(Calendar.HOUR_OF_DAY),
-//                    calendar.get(Calendar.MINUTE),
-//                    calendar.get(Calendar.SECOND)
-//                )
-//                Log.d("PillListAdapter", "Alarm set for: $formattedTime, Pill: $pillName")
-//            } catch (e: SecurityException) {
-//                Log.e("PillListAdapter", "SecurityException: ${e.message}")
-//                // Handle SecurityException gracefully, perhaps by requesting necessary permissions
-//            }
-//        }
     }
 
     fun updateItems(newItems: List<PillListItem>) {
@@ -315,6 +281,4 @@ class PillListAdapter(
         pillListItem.addAll(newItems)
         notifyDataSetChanged()
     }
-
-
 }
