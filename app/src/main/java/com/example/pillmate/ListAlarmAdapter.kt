@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
@@ -71,8 +72,13 @@ class ListAlarmAdapter(
 
     // 텍스트 색상 설정 메서드
     private fun setTextColors(holder: ListAlarmViewHolder, isAlarmOn: Boolean) {
+
+        val defaultTypeface = ResourcesCompat.getFont(holder.itemView.context, R.font.notosanskrlight)
+        val activeTypeface = ResourcesCompat.getFont(holder.itemView.context, R.font.notosanskrregular)
+
         if (isAlarmOn) {
             val activeColor = Color.parseColor("#3E3E3E")
+            holder.tvAmPm.typeface = activeTypeface
             holder.tvAmPm.setTextColor(activeColor)
             holder.tvTime.setTextColor(activeColor)
             holder.medicationTitle.setTextColor(activeColor)
@@ -81,6 +87,7 @@ class ListAlarmAdapter(
         } else {
             // 기본 색상으로 설정 (예: 검정색)
             val defaultColor = Color.parseColor("#898989")
+            holder.tvAmPm.typeface = defaultTypeface
             holder.tvAmPm.setTextColor(defaultColor)
             holder.tvTime.setTextColor(defaultColor)
             holder.medicationTitle.setTextColor(defaultColor)

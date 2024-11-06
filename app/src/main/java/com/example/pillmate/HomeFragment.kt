@@ -186,7 +186,7 @@ class HomeFragment : Fragment() {
                         val remainingMedicineNames = response.remainingMedicine.joinToString(" | ") { it.name }
                         binding.tvLastMedi.text = remainingMedicineNames
 
-                        val remainingMedicineItems = response.remainingMedicine.map { RemainMediItem(it.name, it.day) }
+                        val remainingMedicineItems = response.remainingMedicine.map { RemainMediItem(it.name, it.category, it.day) }
                         remainMediAdapter.updateItems(remainingMedicineItems)
 
                         // 화면 업데이트

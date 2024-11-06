@@ -203,6 +203,7 @@ data class MedicineAlarmRecordsRequest(
 
 data class RemainingMedicineRequest(
     val name: String,
+    val category: String,
     val day: Int
 )
 

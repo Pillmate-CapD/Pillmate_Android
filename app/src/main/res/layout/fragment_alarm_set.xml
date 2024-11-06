@@ -30,18 +30,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="144dp"
-            android:layout_height="149dp"
-            android:background="@drawable/ic_character" />
+            android:layout_width="171dp"
+            android:layout_height="186dp"
+            android:background="@drawable/ic_no_data" />
 
         <TextView
             android:id="@+id/tv"
             android:layout_marginTop="10dp"
             android:includeFontPadding="false"
             android:textColor="#3E3E3E"
-            android:fontFamily="@font/notosanskrmedium"
+            android:fontFamily="@font/notosanskrbold"
             android:textSize="15sp"
-            android:text="약 알람이 없어요"
+            android:text="보관함 내에 약 알람이 없어요"
             app:layout_constraintTop_toBottomOf="@id/view_character"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
             android:textColor="#898989"
             android:fontFamily="@font/notosanskrmedium"
             android:textSize="14sp"
-            android:text="복용할 약을 추가해 보세요!"/>
+            android:text="복용할 약을 추가하여 알람 서비스를 받아 보세요!"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

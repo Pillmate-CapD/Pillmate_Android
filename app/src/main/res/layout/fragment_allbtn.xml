@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFFFFF"
+    android:background="#F9F9F9"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,9 +27,9 @@
 
             <View
                 android:id="@+id/view_character"
-                android:layout_width="144dp"
-                android:layout_height="149dp"
-                android:background="@drawable/ic_character"
+                android:layout_width="171dp"
+                android:layout_height="186dp"
+                android:background="@drawable/ic_no_data"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,9 +39,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/notosanskrmedium"
+                android:fontFamily="@font/notosanskrbold"
                 android:includeFontPadding="false"
-                android:text="약 리스트가 없어요"
+                android:text="보관함 내에 약 리스트가 없어요"
                 android:textColor="#3E3E3E"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="95dp"
-    android:layout_height="140dp"
+    android:layout_height="130dp"
     android:layout_marginEnd="9dp"
     android:layout_marginBottom="3dp"
     android:layout_marginStart="2dp"
@@ -22,13 +22,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="32.3dp"
-            android:layout_height="32.74dp"
-            android:background="@drawable/ic_pill"/>
+            android:layout_width="40.47dp"
+            android:layout_height="51.35dp"
+            android:background="@drawable/sample1"/>
 
         <TextView
             android:gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="3dp"
             android:id="@+id/remain_item_medi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@id/pill_view"/>
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="3dp"
             android:id="@+id/remain_time_medi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -34,8 +34,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tabIndicatorColor="@color/white"
-            app:tabIndicatorHeight="3dp"
+            app:tabIndicatorColor="#1E54DF"
+            app:tabIndicatorHeight="5dp"
             app:tabRippleColor="@android:color/transparent"
             app:tabTextAppearance="@style/MyTabTextStyle" />
         

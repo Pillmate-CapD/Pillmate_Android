@@ -116,7 +116,7 @@ class AlarmSetFragment : Fragment() {
 
             override fun onFailure(call: Call<List<AlarmListResponse>>, t: Throwable) {
                 Log.e("AlarmSetFragment", "API call failed: ${t.message}")
-                Toast.makeText(requireContext(), "알람 데이터를 가져오는 데 실패했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "알람 데이터를 가져오는 데 실패했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
 
                 // 네트워크 오류 발생 시 레이아웃 처리
                 binding.alarmListRecy.visibility = View.GONE
