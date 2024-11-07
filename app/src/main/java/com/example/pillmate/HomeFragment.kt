@@ -3,6 +3,7 @@ package com.example.pillmate
 import android.animation.ValueAnimator
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -84,6 +85,9 @@ class HomeFragment : Fragment() {
                 val intent = Intent(context, AlarmListActivity::class.java)
                 startActivity(intent)
             }
+
+            binding.btnNextMedi.isEnabled = false
+            binding.btnNextMedi.isClickable = false
 
 
             // 현재 월 업데이트
@@ -178,17 +182,32 @@ class HomeFragment : Fragment() {
                         val medicineRecordCount = response.medicineAlarmRecords.size
                         binding.mediNum.text="총 ${medicineRecordCount}정"
 
+                        if(medicineRecordCount > 0){
+                            binding.tvNextMedi.text = "가장 먼저 먹어야 할 약이에요!"
+                            binding.btnNextMedi.text = "다음 약 먹으러 가기"
+                            binding.btnNextMedi.isEnabled = true
+                            binding.btnNextMedi.isClickable = true
+                            binding.btnNextMedi.backgroundTintList = null
+                            binding.btnNextMedi.alpha = 1f
+                            binding.btnNextMedi.setTextColor(Color.parseColor("#1E54DF"))
+
+                        }
+
                         // upcomingAlarm의 medicineName과 time을 변환하여 UI에 표시
                         val upcomingAlarm = response.upcomingAlarm
                         val formattedTime = convertTimeTo12HourFormat(upcomingAlarm.time)
-                        binding.tvNextMedi.text = "$formattedTime ${upcomingAlarm.medicineName}"
+                        binding.tvNext.text = "$formattedTime ${upcomingAlarm.medicineName}"
 
                         val remainingAlarm = response.remainingMedicine.size
                         binding.tvLastMediGuide.text="복용 안한 약 일정이 ${remainingAlarm}개 있어!"
 
-                        // remainingMedicine의 name 필드를 | 구분자로 연결하여 표시
-                        val remainingMedicineNames = response.remainingMedicine.joinToString(" | ") { it.name }
+                        val remainingMedicineNames = if (response.remainingMedicine.size > 1) {
+                            "${response.remainingMedicine.first().name} 외 ${response.remainingMedicine.size - 1}정"
+                        } else {
+                            response.remainingMedicine.first().name
+                        }
                         binding.tvLastMedi.text = remainingMedicineNames
+
 
                         val remainingMedicineItems = response.remainingMedicine.map { RemainMediItem(it.name, it.category, it.day) }
                         remainMediAdapter.updateItems(remainingMedicineItems)

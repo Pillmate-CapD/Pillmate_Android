@@ -284,7 +284,7 @@
                         app:layout_constraintStart_toStartOf="@id/next_medi_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="오후 12시 파스틱정"
+                        android:text="오늘 먹을 약이 없어요!"
                         android:textSize="15sp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/notosanskrsemibold"
@@ -300,21 +300,21 @@
                         app:layout_constraintStart_toStartOf="@id/next_medi_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="가장 먼저 먹어야 할 약이에요!"
-
+                        android:text="약을 추가해 보세요!"
                         android:textSize="11sp"
                         android:fontFamily="@font/notosanskrregular"
                         android:includeFontPadding="false"/>
 
                     <View
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="10dp"
-                        android:elevation="10dp"
+                        android:id="@+id/view5"
                         android:layout_width="43dp"
                         android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="10dp"
                         android:background="@drawable/ic_cal_img"
+                        android:elevation="10dp"
                         app:layout_constraintEnd_toEndOf="@id/next_medi_layout"
-                        app:layout_constraintTop_toTopOf="@id/next_medi_layout"/>
+                        app:layout_constraintTop_toTopOf="@id/next_medi_layout" />
 
 <!--                    <View-->
 <!--                        android:id="@+id/btn_next_medi"-->
@@ -330,7 +330,8 @@
 <!--                        android:backgroundTint="@color/black"/>-->
 
                     <TextView
-                        android:clickable="true"
+                        android:clickable="false"
+                        android:enabled="false"
                         android:background="@drawable/bg_btn_back"
                         android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp"
@@ -339,10 +340,11 @@
                         android:layout_height="30dp"
                         android:elevation="10dp"
                         android:fontFamily="@font/notosanskrbold"
+                        android:backgroundTint="#7AD9D9D9"
                         app:layout_goneMarginTop="11dp"
                         android:includeFontPadding="false"
                         android:text="다음 약 먹으러 가기"
-                        android:textColor="#1E54DF"
+                        android:textColor="@color/white"
                         android:textSize="11sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginTop="9dp"

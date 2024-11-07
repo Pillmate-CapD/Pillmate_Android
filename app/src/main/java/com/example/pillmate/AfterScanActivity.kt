@@ -43,10 +43,7 @@ class AfterScanActivity : AppCompatActivity() {
             binding.imgMediCamera.setImageBitmap(bitmap)
         }
 
-        // bitmap이 null이 아닌 경우에만 API 호출
-        bitmap?.let {
-            mediScanWithBitmap(it)
-        }
+
 
         // 나머지 버튼 클릭 리스너 설정
         binding.btnX.setOnClickListener {
@@ -61,6 +58,12 @@ class AfterScanActivity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             binding.loadingLayout.visibility = View.VISIBLE
+
+            // bitmap이 null이 아닌 경우에만 API 호출
+            bitmap?.let {
+                mediScanWithBitmap(it)
+            }
+
             this@AfterScanActivity.finish()
         }
     }
