@@ -108,6 +108,13 @@ data class MySymptom(
     val name: String
 )
 
+//복약과정(약명,카테고리,이미지url)
+data class PillInfo(
+    val name: String,
+    val photo: String,
+    val category: String
+)
+
 
 // 약 직접 추가
 data class MediAddRequest(

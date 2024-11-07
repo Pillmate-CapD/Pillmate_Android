@@ -35,6 +35,10 @@ interface RetrofitService {
     @GET("members/healthinfo")
     fun getMyHealthInfo(): Call<MyHealthInfoResponse>
 
+    //복약과정(약명,카테고리,이미지url)
+    @POST("medicines/name")
+    fun getPillInfo(@Body names: List<Map<String, String>>): Call<List<PillInfo>>
+
     //로그아웃
     @POST("members/logout")
     suspend fun logout(): LogoutResponse

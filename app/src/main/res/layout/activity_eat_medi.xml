@@ -20,11 +20,11 @@
         android:layout_marginTop="32dp">
         <ImageView
             android:id="@+id/icon1"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginTop="0dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/eatmedi_sample1"
+            android:src="@drawable/eatmediemoji"
             />
 
         <TextView

@@ -32,7 +32,7 @@ class EatMediActivity : AppCompatActivity() {
 
         // Intent에서 전달된 데이터를 받아옴
         val pillName = intent.getStringExtra("pill_name") ?: "Unknown"
-        val photourl = intent.getStringExtra("pill_image_url")
+        //val photourl = intent.getStringExtra("pill_image_url")
         val source = intent.getStringExtra("source") ?: "default"
 
         // 단계 리스트 초기화
@@ -44,6 +44,9 @@ class EatMediActivity : AppCompatActivity() {
         // 어댑터 초기화 및 RecyclerView에 설정
         adapter = EatMediAdapter(steps, this::onStepButtonClick, this::onSkipButtonClick)
         recyclerView.adapter = adapter
+
+        steps[0].pillName = pillName // 약명
+        steps[1].pillName = pillName
 
         // Intent에서 전달된 사진 경로를 받아옴
         val photoPath = intent.getStringExtra("photoPath")

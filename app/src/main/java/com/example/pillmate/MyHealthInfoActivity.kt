@@ -21,6 +21,11 @@ class MyHealthInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_myhealthinfo)
+        // 뒤로 가기 버튼 설정
+        val backButton = findViewById<ImageView>(R.id.pwc_back)
+        backButton.setOnClickListener {
+            finish() // 현재 액티비티 종료
+        }
 
         diseaseContainer = findViewById(R.id.diseaseContainer)
         symptomContainer = findViewById(R.id.symptomContainer)

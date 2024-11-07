@@ -58,6 +58,7 @@ class EatMediAdapter(
         private val stepTitle: TextView? = itemView.findViewById(R.id.step_title1) ?: itemView.findViewById(R.id.step_title2) ?: itemView.findViewById(R.id.step_title3) ?: itemView.findViewById(R.id.step_title4)
         private val passButton: TextView? = itemView.findViewById(R.id.pass1)  // Pass 버튼은 첫 번째 단계에만 존재
         private val stepDescription: TextView? = itemView.findViewById(R.id.step1_description)
+        private val step2Description: TextView? = itemView.findViewById(R.id.step2_description)  // 2단계 설명
         val medicheckImage: ImageView? = itemView.findViewById(R.id.medicheck_image)  // 2단계 이미지 뷰
 
         fun bind(step: EatMedi, position: Int) {
@@ -121,8 +122,8 @@ class EatMediAdapter(
 
             // 2단계: 약명 + "이 맞아요" 텍스트와 색상 적용
             if (position == 1) {
-                val pillName = step.pillName  // 나 여기 추가함
-                val spannable = SpannableStringBuilder("$pillName 이 맞아요")
+                val pillName = step.pillName
+                val spannable = SpannableStringBuilder("$pillName 맞아요")
                 spannable.setSpan(
                     ForegroundColorSpan(Color.parseColor("#1E54DF")),
                     0, pillName.length,
@@ -134,7 +135,7 @@ class EatMediAdapter(
                     spannable.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
-                stepDescription?.text = spannable  // 나 여기 추가함
+                step2Description?.text = spannable  // 나 여기 추가함
             }
             // 2단계의 medicheck_image 설정
             if (position == 1 && step.photoPath != null) {
