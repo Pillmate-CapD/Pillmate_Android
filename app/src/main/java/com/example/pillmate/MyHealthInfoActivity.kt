@@ -56,44 +56,103 @@ class MyHealthInfoActivity : AppCompatActivity() {
 
     private fun displayDiseases(diseases: List<MyHealthInfo>) {
         diseaseContainer.removeAllViews()
-        Log.d("MyHealthInfoActivity", "Diseases 리스트 크기: ${diseases.size}")
 
-        for ((index, disease) in diseases.withIndex()) {
+        // 날짜순으로 정렬 (오름차순: 오래된 날짜가 위로)
+        val sortedDiseases = diseases.sortedBy { it.startDate }
+        Log.d("MyHealthInfoActivity", "정렬된 Diseases 리스트 크기: ${sortedDiseases.size}")
+
+        for ((index, disease) in sortedDiseases.withIndex()) {
             val itemView = LayoutInflater.from(this).inflate(R.layout.myhealthinfo_item1, diseaseContainer, false)
 
             val tvDate: TextView = itemView.findViewById(R.id.tv_date)
             val tvTitle: TextView = itemView.findViewById(R.id.tv_title)
+            val ivIcon: ImageView = itemView.findViewById(R.id.iv_icon)
+            val tvSubtitle: TextView = itemView.findViewById(R.id.tv_subtitle)
             val flCircle1: View = itemView.findViewById(R.id.fl_circles1)
             val flCircle2: View = itemView.findViewById(R.id.fl_circles2)
             val verticalLine: View = itemView.findViewById(R.id.vertical_line)
 
             tvDate.text = disease.startDate
             tvTitle.text = disease.disease
+            setDiseaseContent(disease.disease, ivIcon, tvSubtitle)
             Log.d("MyHealthInfoActivity", "Displaying disease: ${disease.disease}, startDate: ${disease.startDate}")
 
-            if (index % 2 == 0) { // 짝수 (빨간색)
-                flCircle1.setBackgroundColor(Color.parseColor("#30FF453A"))
-                flCircle2.setBackgroundColor(Color.parseColor("#FF453A"))
-                verticalLine.setBackgroundResource(R.drawable.hinfo_line2)
-            } else { // 홀수 (파란색)
-                flCircle1.setBackgroundColor(Color.parseColor("#4D2E67FF"))
-                flCircle2.setBackgroundColor(Color.parseColor("#1E54DF"))
+            if (index % 2 == 0) { // 짝수일 때
+                flCircle1.setBackgroundResource(R.drawable.hinfo_outercircle)
+                flCircle2.setBackgroundResource(R.drawable.hinfo_innercircle)
                 verticalLine.setBackgroundResource(R.drawable.hinfo_line)
+            } else { // 홀수일 때
+                flCircle1.setBackgroundResource(R.drawable.hinfo_outercircle2)
+                flCircle2.setBackgroundResource(R.drawable.hinfo_innercircle2)
+                verticalLine.setBackgroundResource(R.drawable.hinfo_line2)
             }
 
-            if (index == diseases.lastIndex) {
+            if (index == sortedDiseases.lastIndex) {
                 verticalLine.visibility = View.GONE
+                // 마지막 항목에 bottomMargin을 1dp로 설정
+                val layoutParams = itemView.layoutParams as LinearLayout.LayoutParams
+                layoutParams.bottomMargin = 5.toPx() // 1dp를 픽셀로 변환
+                itemView.layoutParams = layoutParams
+            }
+            // 두 번째 항목부터 marginTop을 -8dp로 설정
+            if (index > 0) {
+                val layoutParams = itemView.layoutParams as LinearLayout.LayoutParams
+                layoutParams.topMargin = (-8).toPx() // -8dp를 픽셀로 변환
+                itemView.layoutParams = layoutParams
             }
 
             diseaseContainer.addView(itemView)
         }
     }
+    // 특정 질병 이름에 따른 아이콘과 설명을 설정하는 함수
+    private fun setDiseaseContent(diseaseName: String, ivIcon: ImageView, tvSubtitle: TextView) {
+        when (diseaseName) {
+            "고지혈증" -> {
+                ivIcon.setImageResource(R.drawable.o_blood_cells)
+                tvSubtitle.text = "혈중 지질 수치가 높은 질환"
+            }
+
+            "고혈압" -> {
+                ivIcon.setImageResource(R.drawable.o_heartrate)
+                tvSubtitle.text = "혈압이 지속적으로 높은 질환"
+            }
+
+            "당뇨" -> {
+                ivIcon.setImageResource(R.drawable.o_diabetes)
+                tvSubtitle.text = "혈당 조절이 어려워 혈당 수치가 높은 질환"
+            }
+
+            "심혈관질환" -> {
+                ivIcon.setImageResource(R.drawable.o_overweight)
+                tvSubtitle.text = "심장과 혈관에 영향을 미치는 질환"
+            }
+
+            "호흡기질환" -> {
+                ivIcon.setImageResource(R.drawable.o_coughing_alt)
+                tvSubtitle.text = "호흡기에 장기적인 문제가 생기는 질환"
+            }
+
+            "기타" -> {
+                ivIcon.setImageResource(R.drawable.o_plus)
+                tvSubtitle.text = "이외의 모든 질환"
+            }
+
+            else -> {
+                ivIcon.setImageResource(R.drawable.o_plus)
+                tvSubtitle.text = "알 수 없는 질환"
+            }
+        }
+    }
+
+    // dp 값을 px로 변환
+    private fun Int.toPx(): Int = (this * resources.displayMetrics.density).toInt()
+
 
     private fun displaySymptoms(symptoms: List<MySymptom>) {
         symptomContainer.removeAllViews()
         Log.d("MyHealthInfoActivity", "Symptoms 리스트 크기: ${symptoms.size}")
 
-        for (symptom in symptoms) {
+        for ((index, symptom) in symptoms.withIndex()) {
             val itemView = LayoutInflater.from(this).inflate(R.layout.myhealthinfo_item2, symptomContainer, false)
 
             val symptomTitle: TextView = itemView.findViewById(R.id.symptom_title)
@@ -106,6 +165,13 @@ class MyHealthInfoActivity : AppCompatActivity() {
                 symptomIcon.setImageResource(resId)
             } else {
                 symptomIcon.setImageResource(R.drawable.onboard3btn1) // 기본 이미지
+            }
+
+            // 두 번째 항목부터 marginTop을 7dp로 설정
+            if (index > 0) {
+                val layoutParams = itemView.layoutParams as LinearLayout.LayoutParams
+                layoutParams.topMargin = 7.toPx()
+                itemView.layoutParams = layoutParams
             }
 
             symptomContainer.addView(itemView)
