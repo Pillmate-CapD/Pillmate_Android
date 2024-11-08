@@ -97,7 +97,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loading_layout"
         android:visibility="invisible"
-        android:background="#F5F6F8"
+        android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +106,6 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -119,10 +118,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/recog_ing_image"
-                android:layout_width="164sp"
-                android:layout_height="164sp"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_loading"/>
+                android:src="@raw/loading"/>
 
             <TextView
                 android:layout_marginTop="19dp"

@@ -105,9 +105,9 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.listFragment)
             }
 
-            binding.nonBtnAddMedi.setOnClickListener {
-                findNavController().navigate(R.id.listFragment)
-            }
+//            binding.nonBtnAddMedi.setOnClickListener {
+//                findNavController().navigate(R.id.listFragment)
+//            }
 
             binding.btnNextMedi.setOnClickListener {
                 // 목표 위치 계산
@@ -170,7 +170,6 @@ class HomeFragment : Fragment() {
                     mainResponse?.let { response ->
                         Log.d("fetchMain", "Parsed Response Data: $response")
 
-                        // 데이터를 ViewModel에 전달
                         pillViewModel.loadPillItems(
                             response.medicineAlarmRecords.map {
                                 val formattedTime = convertTimeTo12HourFormat(it.time)
@@ -212,15 +211,20 @@ class HomeFragment : Fragment() {
                         val remainingMedicineItems = response.remainingMedicine.map { RemainMediItem(it.name, it.category, it.day) }
                         remainMediAdapter.updateItems(remainingMedicineItems)
 
+                        // 리스트가 비어있는지 확인하여 tvNoEaten의 visibility를 변경
+                        binding.tvNoEaten.visibility = if (remainingMedicineItems.isEmpty()) View.VISIBLE else View.GONE
+
+
                         // 화면 업데이트
                         if (response.medicineAlarmRecords.isNullOrEmpty()) {
                             Log.d("fetchMain", "No medicine records found - updating UI to show no data layout")
-                            binding.pillList.visibility = View.GONE
-                            binding.btnAllPill.visibility = View.GONE
+                            //binding.pillList.visibility = View.VISIBLE
+                            binding.btnAllPill.visibility = View.VISIBLE
                             binding.homeNonDataLayout.visibility = View.VISIBLE
                         } else {
                             Log.d("fetchMain", "Medicine records found - updating UI to show data")
                             binding.pillList.visibility = View.VISIBLE
+                            binding.txtGo.text = "약 알람 전체 보기"
                             binding.btnAllPill.visibility = View.VISIBLE
                             binding.homeNonDataLayout.visibility = View.GONE
                         }
@@ -269,7 +273,15 @@ class HomeFragment : Fragment() {
                                 Log.d("fetchMain", "No active alarm found - showing no data layout")
                                 binding.homeNonDataLayout.visibility = View.VISIBLE
                                 binding.pillList.visibility = View.GONE
-                                binding.btnAllPill.visibility = View.GONE
+                                binding.btnAllPill.visibility = View.VISIBLE
+
+                                binding.txt4.visibility = View.VISIBLE
+                                binding.layoutGood.visibility = View.INVISIBLE
+                                binding.layoutBad.visibility = View.INVISIBLE
+                                binding.dot1.visibility = View.INVISIBLE
+                                binding.dot2.visibility = View.INVISIBLE
+                                binding.dot3.visibility = View.INVISIBLE
+                                binding.tvNoEaten.visibility = View.VISIBLE
                                 //binding.tvLastMediGuide.text = message
                             } else {
                                 Log.d("fetchMain", "Unhandled error code: $code")

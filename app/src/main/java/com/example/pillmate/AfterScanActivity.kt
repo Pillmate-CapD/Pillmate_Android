@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.example.pillmate.databinding.ActivityAfterPreBinding
 import com.example.pillmate.databinding.ActivityAfterScanBinding
 import okhttp3.MediaType
@@ -32,6 +33,9 @@ class AfterScanActivity : AppCompatActivity() {
         binding = ActivityAfterScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Glide.with(this).load(R.raw.loading).override(560, 560).into(binding.scanImgImage)
+
+
         // Intent로부터 이미지 파일 경로를 받음
         val photoPath = intent.getStringExtra("photoPath")
         var bitmap: Bitmap? = null
@@ -43,29 +47,50 @@ class AfterScanActivity : AppCompatActivity() {
             binding.imgMediCamera.setImageBitmap(bitmap)
         }
 
-
-
         // 나머지 버튼 클릭 리스너 설정
         binding.btnX.setOnClickListener {
-            binding.loadingLayout.visibility = View.GONE
             this@AfterScanActivity.finish()
         }
 
         binding.btnAgain.setOnClickListener {
-            binding.loadingLayout.visibility = View.GONE
             this@AfterScanActivity.finish()
         }
 
         binding.btnNext.setOnClickListener {
-            binding.loadingLayout.visibility = View.VISIBLE
+            //OCR 실행을 여기서 바로 할건지 아니면,
+            if(photoPath != null){
+                // BitmapFactory를 사용하여 이미지 파일을 Bitmap으로 로드
+                val bitmap = BitmapFactory.decodeFile(photoPath)
 
-            // bitmap이 null이 아닌 경우에만 API 호출
-            bitmap?.let {
-                mediScanWithBitmap(it)
+                mediScanWithBitmap(bitmap)
+                binding.loadingLayout.visibility = View.VISIBLE
             }
 
-            this@AfterScanActivity.finish()
+            //performOcrWithLocalImage()
+            //performOcrWithBitmap(bitmap)
+            binding.loadingLayout.visibility = View.VISIBLE
         }
+
+        Glide.with(this).load(R.raw.loading).into(binding.scanImgImage)
+
+//        binding.btnNext.setOnClickListener {
+//
+//
+//            if (photoPath != null) {
+//                // BitmapFactory를 사용하여 이미지 파일을 Bitmap으로 로드
+//                val bitmap = BitmapFactory.decodeFile(photoPath)
+//
+//                if (bitmap != null) {
+//                    mediScanWithBitmap(bitmap)
+//                    binding.loadingLayout.visibility = View.VISIBLE
+//                    this@AfterScanActivity.finish()
+//                } else {
+//                    Log.e("AfterScanActivity", "Bitmap이 null입니다.")
+//                }
+//            } else {
+//                Log.e("AfterScanActivity", "photoPath가 null입니다.")
+//            }
+//        }
     }
 
     private fun createMultipartBodyFromBitmap(bitmap: Bitmap, fileName: String): MultipartBody.Part {

@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.pillmate.databinding.ActivityAfterPreBinding
 import org.json.JSONArray
 import org.json.JSONObject
@@ -61,6 +62,8 @@ class AfterPreActivity : AppCompatActivity() {
         binding.btnAgain.setOnClickListener{
             this@AfterPreActivity.finish()
         }
+
+        Glide.with(this).load(R.raw.loading).into(binding.recogIngImage)
 
         binding.btnNext.setOnClickListener {
             //OCR 실행을 여기서 바로 할건지 아니면,

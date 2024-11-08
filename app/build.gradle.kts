@@ -77,6 +77,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
 
     implementation ("com.github.bumptech.glide:glide:4.13.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.13.0")
     implementation ("ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.2.5")
 
     implementation ("com.google.android.material:material:1.10.0")
