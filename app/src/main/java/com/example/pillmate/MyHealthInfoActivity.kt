@@ -35,6 +35,12 @@ class MyHealthInfoActivity : AppCompatActivity() {
             val intent = Intent(this, MyHealthEditSActivity::class.java)
             startActivity(intent)
         }
+        val editd = findViewById<Button>(R.id.btnEditDisease)
+        editd.setOnClickListener {
+            // Intent 생성
+            val intent = Intent(this, MyHealthEditDActivity::class.java)
+            startActivity(intent)
+        }
 
         diseaseContainer = findViewById(R.id.diseaseContainer)
         symptomContainer = findViewById(R.id.symptomContainer)

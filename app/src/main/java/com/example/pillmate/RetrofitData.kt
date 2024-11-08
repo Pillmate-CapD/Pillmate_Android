@@ -123,7 +123,7 @@ data class EditGMyHealthInfo(
 data class EditGMySymptom(
     val id: Int,
     val name: String
-)
+): Serializable
 
 data class EditGMyHealthInfoResponse(
     val diseases: List<EditGMyHealthInfo>,
