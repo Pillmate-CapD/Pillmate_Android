@@ -3,12 +3,12 @@
     android:shape="rectangle">
 
     <solid android:color="@color/white"/>
-    <stroke android:color="#DC1818" android:width="1.5dp"/>
+    <stroke android:color="#DC1818" android:width="1dp"/>
 
     <!-- 각각의 모서리 반경 설정 -->
     <corners
         android:topLeftRadius="10dp"
         android:topRightRadius="10dp"
-        android:bottomLeftRadius="0dp"
-        android:bottomRightRadius="0dp"/>
+        android:bottomLeftRadius="10dp"
+        android:bottomRightRadius="10dp"/>
 </shape>

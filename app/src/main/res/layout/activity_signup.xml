@@ -42,15 +42,18 @@
 
     <!-- 이름 -->
     <TextView
+        android:includeFontPadding="false"
         android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:text="이름"
-        android:fontFamily="@font/notosanskrsemibold"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/notosanskrbold"
         android:textColor="#3E3E3E"
         android:textSize="16sp" />
 
     <EditText
+        android:includeFontPadding="false"
         android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -65,13 +68,14 @@
 
     <!-- 이메일 & 중복확인 -->
     <TextView
+        android:includeFontPadding="false"
         android:id="@+id/email"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:text="이메일"
-        android:fontFamily="@font/notosanskrsemibold"
+        android:fontFamily="@font/notosanskrbold"
         android:textColor="#3E3E3E"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:textSize="16sp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,6 +84,7 @@
         android:background="@drawable/bg_signup"
         android:layout_marginTop="10dp">
         <EditText
+            android:includeFontPadding="false"
             android:id="@+id/et_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -113,27 +118,28 @@
     </LinearLayout>
         <!-- 중복확인 오류 메시지 -->
         <TextView
+            android:includeFontPadding="false"
             android:id="@+id/emailcheck_errorm"
             android:layout_width="match_parent"
-            android:layout_height="26sp"
+            android:layout_height="wrap_content"
             android:text="올바른 이메일을 입력해 주세요"
             android:textSize="13sp"
             android:fontFamily="@font/notosanskrregular"
             android:textColor="#DC1818"
-            android:layout_marginLeft="5sp"
-            android:layout_marginTop="-7dp"
+            android:layout_marginTop="5dp"
             android:visibility="invisible"/>
 
 
     <!-- 비밀번호 -->
         <TextView
+            android:includeFontPadding="false"
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="33dp"
+            android:layout_height="wrap_content"
             android:text="비밀번호"
-            android:fontFamily="@font/notosanskrsemibold"
+            android:fontFamily="@font/notosanskrbold"
             android:textColor="#3E3E3E"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="11dp"
             android:textSize="16sp"/>
 
         <LinearLayout
@@ -143,6 +149,7 @@
             android:background="@drawable/bg_signup"
             android:layout_marginTop="10dp">
             <EditText
+                android:includeFontPadding="false"
                 android:id="@+id/et_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -166,26 +173,27 @@
         </LinearLayout>
         <!-- 비밀번호 조건 메시지 -->
         <TextView
+            android:includeFontPadding="false"
             android:id="@+id/password_errorm"
             android:layout_width="match_parent"
-            android:layout_height="26sp"
+            android:layout_height="wrap_content"
             android:text="7자 이상의 영문, 숫자, 특수문자 포함"
             android:textSize="13sp"
             android:fontFamily="@font/notosanskrregular"
             android:textColor="#C0C0C0"
-            android:layout_marginLeft="5sp"
-            android:layout_marginTop="-7dp"
+            android:layout_marginTop="5dp"
             android:visibility="visible"/>
 
     <!-- 비밀번호 확인 -->
         <TextView
+            android:includeFontPadding="false"
             android:id="@+id/passwordconfirm"
             android:layout_width="match_parent"
-            android:layout_height="33dp"
+            android:layout_height="wrap_content"
             android:text="비밀번호 확인"
-            android:fontFamily="@font/notosanskrsemibold"
+            android:fontFamily="@font/notosanskrbold"
             android:textColor="#3E3E3E"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="11dp"
             android:textSize="16sp"/>
 
         <LinearLayout
@@ -195,6 +203,7 @@
             android:background="@drawable/bg_signup"
             android:layout_marginTop="10dp">
             <EditText
+                android:includeFontPadding="false"
                 android:id="@+id/et_password_confirm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -218,6 +227,7 @@
         </LinearLayout>
         <!-- 비밀번호 확인 오류 메시지 -->
         <TextView
+            android:includeFontPadding="false"
             android:id="@+id/password_confirm_errorm"
             android:layout_width="match_parent"
             android:layout_height="26sp"
@@ -225,12 +235,16 @@
             android:textSize="13sp"
             android:fontFamily="@font/notosanskrregular"
             android:textColor="#DC1818"
-            android:layout_marginLeft="5sp"
-            android:layout_marginTop="-7dp"
+            android:layout_marginTop="5dp"
             android:visibility="invisible"/>
 
     <!-- 가입하기 버튼 -->
     <Button
+        android:includeFontPadding="false"
+        android:elevation="2dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
         android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

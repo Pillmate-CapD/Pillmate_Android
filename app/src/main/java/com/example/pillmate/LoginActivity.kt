@@ -158,9 +158,9 @@ class LoginActivity : AppCompatActivity() {
     private fun toggleAutoLogin() {
         isAutoLoginChecked = !isAutoLoginChecked
         if (isAutoLoginChecked) {
-            binding.ivAutoLogin.setImageResource(R.drawable.autologincheck_after)
+            binding.ivAutoLogin.setImageResource(R.drawable.ic_check_circle_color)
         } else {
-            binding.ivAutoLogin.setImageResource(R.drawable.autologincheck_before)
+            binding.ivAutoLogin.setImageResource(R.drawable.ic_check_circle)
         }
     }
 
