@@ -1,10 +1,12 @@
 package com.example.pillmate
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -25,6 +27,13 @@ class MyHealthInfoActivity : AppCompatActivity() {
         val backButton = findViewById<ImageView>(R.id.pwc_back)
         backButton.setOnClickListener {
             finish() // 현재 액티비티 종료
+        }
+
+        val edits = findViewById<Button>(R.id.btnEditSymptoms)
+        edits.setOnClickListener {
+            // Intent 생성
+            val intent = Intent(this, MyHealthEditSActivity::class.java)
+            startActivity(intent)
         }
 
         diseaseContainer = findViewById(R.id.diseaseContainer)
@@ -204,6 +213,10 @@ class MyHealthInfoActivity : AppCompatActivity() {
             "우울" -> "onboard3btn17"
             else -> "default_image" // 기본 이미지 이름
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        loadMyHealthInfo()
     }
 }
 

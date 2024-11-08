@@ -35,6 +35,16 @@ interface RetrofitService {
     @GET("members/healthinfo")
     fun getMyHealthInfo(): Call<MyHealthInfoResponse>
 
+    @PATCH("members/healthinfo")
+    fun updateMyHealthInfo(@Body request: MyHealthInfoRequest): Call<Void>
+
+    //내 건강정보 수정
+    @GET("members/healthinfo")
+    fun getEditMyHealthInfo(): Call<EditGMyHealthInfoResponse>
+
+    @PATCH("members/healthinfo")
+    fun updateEditMyHealthInfo(@Body request: EditPMyHealthInfoRequest): Call<Void>
+
     //복약과정(약명,카테고리,이미지url)
     @POST("medicines/name")
     fun getPillInfo(@Body names: List<Map<String, String>>): Call<List<PillInfo>>

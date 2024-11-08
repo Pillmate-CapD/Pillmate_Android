@@ -155,6 +155,12 @@
         <activity
             android:name=".MyHealthInfoActivity"
             android:exported="false" />
+        <activity
+            android:name=".MyHealthEditSActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyHealthEditDActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

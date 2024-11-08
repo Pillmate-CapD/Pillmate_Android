@@ -108,6 +108,42 @@ data class MySymptom(
     val name: String
 )
 
+data class MyHealthInfoRequest(
+    val diseases: List<MyHealthInfo>, // 기존 질병 데이터 유지
+    val symptoms: List<MySymptom>     // 수정된 증상 데이터
+)
+
+//내건강정보 수정
+data class EditGMyHealthInfo(
+    val id: Int,
+    val disease: String,
+    val startDate: String
+)
+
+data class EditGMySymptom(
+    val id: Int,
+    val name: String
+)
+
+data class EditGMyHealthInfoResponse(
+    val diseases: List<EditGMyHealthInfo>,
+    val symptoms: List<EditGMySymptom>
+)
+data class EditPMyHealthInfo(
+    val disease: String,
+    val startDate: String
+)
+
+data class EditPMySymptom(
+    val name: String
+)
+
+data class EditPMyHealthInfoRequest(
+    val diseases: List<EditPMyHealthInfo>,
+    val symptoms: List<EditPMySymptom>
+)
+
+
 //복약과정(약명,카테고리,이미지url)
 data class PillInfo(
     val name: String,
