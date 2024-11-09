@@ -74,6 +74,8 @@ fun setAlarmForPill(context: Context, pill: PillListItem) {
     val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     val intent = Intent(context, AlarmReceiver::class.java).apply {
         putExtra("pill_name", pill.name)
+        putExtra("pill_time",pill.time)
+        putExtra("pill_id",pill.medicineId)
     }
 
     val pendingIntent = PendingIntent.getBroadcast(

@@ -67,10 +67,14 @@ class AlarmService : Service() {
     private fun createNotification(intent: Intent?): Notification {
         Log.d("AlarmService", "createNotification called")
         val pillName = intent?.getStringExtra("pill_name") ?: "Unknown"
+        val pillTime = intent?.getStringExtra("pill_time") ?: "Unknown"
+        val pillId = intent?.getIntExtra("pill_id",-1)
 
         val activityIntent = Intent(this, AlarmActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra("pill_name", pillName)
+            putExtra("pill_time",pillTime)
+            putExtra("pill_id",pillId)
         }
         val pendingIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_MUTABLE)
         val fullscreenPendingIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
