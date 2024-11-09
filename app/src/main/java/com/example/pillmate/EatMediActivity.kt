@@ -3,12 +3,20 @@ package com.example.pillmate
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class EatMediActivity : AppCompatActivity() {
 
@@ -34,6 +42,15 @@ class EatMediActivity : AppCompatActivity() {
         val pillName = intent.getStringExtra("pill_name") ?: "Unknown"
         //val photourl = intent.getStringExtra("pill_image_url")
         val source = intent.getStringExtra("source") ?: "default"
+        //val pillTime = intent.getStringExtra("pill_time") ?: "14:00:00"
+        //val medicineId = intent.getIntExtra("medicineId", 0)
+        // 복약 과정 다음 알람 정보를 API로 받아옴
+        val pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
+        val medicineId = intent.getIntExtra("pill_id", -1)
+        // Intent에서 받아온 값 로그 출력
+        Log.d("fetchNextMedicineInfo", "Intent로 받은 값 - pillName: $pillName, pillTime: $pillTime, medicineId: $medicineId")
+
+        fetchNextMedicineInfo(pillTime, medicineId)
 
         // 단계 리스트 초기화
         steps.add(EatMedi(R.layout.eat_medi_item1, isVisible = true, isCompleted = false))
@@ -48,7 +65,7 @@ class EatMediActivity : AppCompatActivity() {
         steps[0].pillName = pillName // 약명
         steps[1].pillName = pillName
 
-        // Intent에서 전달된 사진 경로를 받아옴
+        // Intent에서 전달된 사진 경로를 받아옴 2단계
         val photoPath = intent.getStringExtra("photoPath")
 
         // 사진 경로가 있다면 두 번째 단계에 해당 사진을 설정
@@ -60,6 +77,91 @@ class EatMediActivity : AppCompatActivity() {
         // Intent에서 전달된 position 값을 저장
         itemPosition = intent.getIntExtra("position", -1)
     }
+
+    // 다음 알람 정보를 API로 받아오는 메서드
+    private fun fetchNextMedicineInfo(time: String, medicineId: Int) {
+        val localTime = convertToLocalTime(time)
+        val formattedTime = localTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+        Log.d("fetchNextMedicineInfo", "변환된 요청 파라미터 - time: $formattedTime, medicineId: $medicineId")
+
+        if (medicineId == -1) {
+            Log.e("fetchNextMedicineInfo", "잘못된 medicineId: $medicineId")
+            return
+        }
+
+        val service = RetrofitApi.getRetrofitService
+        val call = service.getMedicineInfo(formattedTime, medicineId)
+
+        call.enqueue(object : Callback<MedicineResponse> {
+            override fun onResponse(call: Call<MedicineResponse>, response: Response<MedicineResponse>) {
+                if (response.isSuccessful) {
+                    val medicineInfo = response.body()
+                    medicineInfo?.let {
+                        val formattedTimeText = formatTimeTo12Hour(it.time)
+                        //val nextMedicineText = "다음에 먹을 약은\n오늘 $formattedTimeText ${it.medicineName}\n이에요"
+                        val nextMedicineText = "다음에 먹을 약은\n오늘 $formattedTimeText ‘${it.medicineName}’\n이에요"
+
+                        steps[3].pillName = nextMedicineText
+                        Log.d("fetchNextMedicineInfo", "4단계 텍스트 설정: $nextMedicineText")
+                        //adapter.notifyItemChanged(3)
+                        adapter.notifyDataSetChanged()
+                    }
+                } else {
+                    Log.e("fetchNextMedicineInfo", "API 호출 실패: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<MedicineResponse>, t: Throwable) {
+                Log.e("fetchNextMedicineInfo", "API 호출 실패: ${t.message}")
+            }
+        })
+    }
+
+    // 시간을 LocalTime 형식("HH:mm:ss")으로 변환
+    private fun convertToLocalTime(time: String): LocalTime {
+        return try {
+            // "오전/오후 h:mm" 형식인지 확인하고 변환
+            if (time.matches(Regex("^(오전|오후) \\d{1,2}:\\d{2}$"))) {
+                val formatter = DateTimeFormatter.ofPattern("a h:mm", Locale.KOREA) // 한국 로케일 사용
+                val parsedTime = LocalTime.parse(time, formatter)
+
+                // 오전/오후에 따라 24시간 형식으로 변환
+                if (time.startsWith("오후") && parsedTime.hour < 12) {
+                    parsedTime.plusHours(12)
+                } else if (time.startsWith("오전") && parsedTime.hour == 12) {
+                    LocalTime.of(0, parsedTime.minute)
+                } else {
+                    parsedTime
+                }
+            }
+            // 이미 "HH:mm:ss" 형식인 경우 그대로 반환
+            else if (time.matches(Regex("\\d{2}:\\d{2}:\\d{2}"))) {
+                LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm:ss"))
+            } else {
+                throw IllegalArgumentException("유효하지 않은 시간 형식: $time")
+            }
+        } catch (e: Exception) {
+            Log.e("convertToLocalTime", "시간 변환 오류: ${e.message}")
+            LocalTime.MIDNIGHT
+        }
+    }
+
+
+    // 24시간 형식("HH:mm:ss")을 12시간 형식("오전/오후")으로 변환
+    private fun formatTimeTo12Hour(time: String): String {
+        return try {
+            val inputFormat = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.getDefault())
+            val outputFormat = DateTimeFormatter.ofPattern("a h시 mm분", Locale.getDefault())
+            val localTime = LocalTime.parse(time, inputFormat)
+            localTime.format(outputFormat)
+        } catch (e: Exception) {
+            Log.e("formatTimeTo12Hour", "시간 변환 오류: ${e.message}")
+            "오전 12시 00분"
+        }
+    }
+
+
+
 
     // 단계 버튼 클릭 시 호출되는 메서드
     private fun onStepButtonClick(position: Int) {

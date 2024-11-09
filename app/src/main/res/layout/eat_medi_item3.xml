@@ -127,7 +127,5 @@
     <ImageView
         android:id="@+id/line"
         android:layout_width="12sp"
-        android:layout_height="12sp"
-        android:src="@drawable/line"
-        android:layout_marginLeft="20dp"/>
+        android:layout_height="0sp"/>
 </LinearLayout>

@@ -45,9 +45,16 @@ interface RetrofitService {
     @PATCH("members/healthinfo")
     fun updateEditMyHealthInfo(@Body request: EditPMyHealthInfoRequest): Call<Void>
 
+    //복약과정 다음 알람정보
+    @GET("medicines")
+    fun getMedicineInfo(
+        @Query("time") time: String,          // 복용 시간 쿼리 파라미터
+        @Query("medicineId") medicineId: Int  // 약 ID 쿼리 파라미터
+    ): Call<MedicineResponse>
+
     //복약과정(약명,카테고리,이미지url)
     @POST("medicines/name")
-    fun getPillInfo(@Body names: List<Map<String, String>>): Call<List<PillInfo>>
+    fun getMedicineInfo(@Body names: List<MedicineNameRequest>): Call<List<MedicineInfoResponse>>
 
     //로그아웃
     @POST("members/logout")

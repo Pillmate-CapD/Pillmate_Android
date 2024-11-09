@@ -9,6 +9,7 @@ import android.text.TextPaint
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.TypefaceSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,22 +44,40 @@ class EatMediAdapter(
 
     override fun getItemCount(): Int = steps.size  // 단계 리스트 크기 반환
 
-    override fun getItemViewType(position: Int): Int = steps[position].layoutRes  // 각 단계의 레이아웃 리소스 ID 반환
+    override fun getItemViewType(position: Int): Int =
+        steps[position].layoutRes  // 각 단계의 레이아웃 리소스 ID 반환
 
     inner class StepViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val rootLayout: View = itemView.findViewById(R.id.root_layout)
-        private val stepContent: View = itemView.findViewById(R.id.step_content1) ?: itemView.findViewById(R.id.step_content2) ?: itemView.findViewById(R.id.step_content3) ?: itemView.findViewById(R.id.step_content4)
-        private val stepButton: Button = itemView.findViewById(R.id.step_button1) ?: itemView.findViewById(R.id.step_button2) ?: itemView.findViewById(R.id.step_button3) ?: itemView.findViewById(R.id.step_button4)
+        private val stepContent: View =
+            itemView.findViewById(R.id.step_content1) ?: itemView.findViewById(R.id.step_content2)
+            ?: itemView.findViewById(R.id.step_content3)
+            ?: itemView.findViewById(R.id.step_content4)
+        private val stepButton: Button =
+            itemView.findViewById(R.id.step_button1) ?: itemView.findViewById(R.id.step_button2)
+            ?: itemView.findViewById(R.id.step_button3) ?: itemView.findViewById(R.id.step_button4)
         private val stepCheck: ImageView? = itemView.findViewById(R.id.step_check)
-        private val stepText: TextView? = itemView.findViewById(R.id.step1) ?: itemView.findViewById(R.id.step2) ?: itemView.findViewById(R.id.step3) ?: itemView.findViewById(R.id.step4)
-        private val stepText_b: TextView? = itemView.findViewById(R.id.step2_) ?: itemView.findViewById(R.id.step3_)?: itemView.findViewById(R.id.step4_)
-        private val b_stepTitle: TextView? = itemView.findViewById(R.id.b_step_title1) ?: itemView.findViewById(R.id.b_step_title2)?: itemView.findViewById(R.id.b_step_title3)?: itemView.findViewById(R.id.b_step_title4)
+        private val stepText: TextView? =
+            itemView.findViewById(R.id.step1) ?: itemView.findViewById(R.id.step2)
+            ?: itemView.findViewById(R.id.step3) ?: itemView.findViewById(R.id.step4)
+        private val stepText_b: TextView? =
+            itemView.findViewById(R.id.step2_) ?: itemView.findViewById(R.id.step3_)
+            ?: itemView.findViewById(R.id.step4_)
+        private val b_stepTitle: TextView? =
+            itemView.findViewById(R.id.b_step_title1) ?: itemView.findViewById(R.id.b_step_title2)
+            ?: itemView.findViewById(R.id.b_step_title3)
+            ?: itemView.findViewById(R.id.b_step_title4)
         private val important: LinearLayout? = itemView.findViewById(R.id.important)
-        private val stepTitle: TextView? = itemView.findViewById(R.id.step_title1) ?: itemView.findViewById(R.id.step_title2) ?: itemView.findViewById(R.id.step_title3) ?: itemView.findViewById(R.id.step_title4)
-        private val passButton: TextView? = itemView.findViewById(R.id.pass1)  // Pass 버튼은 첫 번째 단계에만 존재
+        private val stepTitle: TextView? =
+            itemView.findViewById(R.id.step_title1) ?: itemView.findViewById(R.id.step_title2)
+            ?: itemView.findViewById(R.id.step_title3) ?: itemView.findViewById(R.id.step_title4)
+        private val passButton: TextView? =
+            itemView.findViewById(R.id.pass1)  // Pass 버튼은 첫 번째 단계에만 존재
         private val stepDescription: TextView? = itemView.findViewById(R.id.step1_description)
-        private val step2Description: TextView? = itemView.findViewById(R.id.step2_description)  // 2단계 설명
+        private val step4Description: TextView? = itemView.findViewById(R.id.step4_description)
+        private val step2Description: TextView? =
+            itemView.findViewById(R.id.step2_description)  // 2단계 설명
         val medicheckImage: ImageView? = itemView.findViewById(R.id.medicheck_image)  // 2단계 이미지 뷰
 
         fun bind(step: EatMedi, position: Int) {
@@ -87,30 +106,30 @@ class EatMediAdapter(
                 stepCheck?.visibility = View.GONE
                 stepText?.visibility = View.VISIBLE
                 stepTitle?.visibility = View.GONE
-                b_stepTitle?.visibility=View.VISIBLE
+                b_stepTitle?.visibility = View.VISIBLE
                 stepText_b?.visibility = View.GONE
                 stepText?.setBackgroundResource(R.drawable.eatmedi_open)
-                important?.visibility=View.VISIBLE
+                important?.visibility = View.VISIBLE
             } else {
                 if (position < getCurrentStepPosition()) {
                     // 현재 단계 전
                     stepCheck?.visibility = View.VISIBLE
                     stepText?.visibility = View.GONE
                     stepTitle?.visibility = View.VISIBLE
-                    b_stepTitle?.visibility=View.GONE
+                    b_stepTitle?.visibility = View.GONE
                     stepText?.setBackgroundResource(R.drawable.eatmedi_open)
-                    stepDescription?.visibility=View.GONE
+                    stepDescription?.visibility = View.GONE
                     stepText_b?.visibility = View.GONE
-                    important?.visibility=View.GONE
+                    important?.visibility = View.GONE
 
                 } else {
                     // 현재 단계 후
                     stepCheck?.visibility = View.GONE
                     stepText?.visibility = View.GONE
                     stepTitle?.visibility = View.VISIBLE
-                    b_stepTitle?.visibility=View.GONE
-                    stepDescription?.visibility=View.GONE
-                    important?.visibility=View.GONE
+                    b_stepTitle?.visibility = View.GONE
+                    stepDescription?.visibility = View.GONE
+                    important?.visibility = View.GONE
                     stepText_b?.visibility = View.VISIBLE
 
                 }
@@ -142,25 +161,13 @@ class EatMediAdapter(
                 val bitmap = BitmapFactory.decodeFile(step.photoPath)
                 medicheckImage?.setImageBitmap(bitmap)
             }
-            /*if (position == 3) { // 4번째 단계인 경우
-                val spannable = SpannableStringBuilder(stepDescription?.text)
-                val start = spannable.indexOf("오늘 오후 7시 30분")
-                val end = start + "오늘 오후 7시 30분\n당뇨약 '파스타정'".length
-
-                if (start >= 0) {
-                    spannable.setSpan(
-                        ForegroundColorSpan(Color.parseColor("#1E54DF")),
-                        start,
-                        end,
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                    )
-                    val typeface = ResourcesCompat.getFont(itemView.context, R.font.notosanskrbold)
-                    if (typeface != null) {
-                        spannable.setSpan(CustomTypefaceSpan(typeface), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    }
-                    stepDescription?.text = spannable
-                }
-            }*/
+            // 4단계: 다음에 먹을 약 텍스트 표시
+            if (position == 3) {
+                //stepDescription?.text = step.pillName // 4단계 텍스트 설정
+                Log.d("StepViewHolder", "4단계 텍스트 설정 시작 - pillName: ${step.pillName}")
+                step4Description?.text = step.pillName // 4단계 텍스트 설정
+                step4Description?.invalidate() // 강제 UI 업데이트
+            }
             // stepTitle 폰트 크기 설정
             if (step.isVisible) {
                 stepTitle?.textSize = 16f
@@ -171,6 +178,7 @@ class EatMediAdapter(
 
 
         }
+
         private fun getCurrentStepPosition(): Int {
             for (i in steps.indices) {
                 if (!steps[i].isCompleted) return i
@@ -178,6 +186,7 @@ class EatMediAdapter(
             return steps.size
         }
     }
+
     // CustomTypefaceSpan 클래스 정의
     class CustomTypefaceSpan(private val newType: Typeface) : TypefaceSpan("") {
 

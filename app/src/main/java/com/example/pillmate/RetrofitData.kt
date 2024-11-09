@@ -143,12 +143,20 @@ data class EditPMyHealthInfoRequest(
     val symptoms: List<EditPMySymptom>
 )
 
+//복약과정 다음 알람정보
+data class MedicineResponse(
+    val medicineName: String,
+    val time: String
+)
 
 //복약과정(약명,카테고리,이미지url)
-data class PillInfo(
+data class MedicineInfoResponse(
     val name: String,
     val photo: String,
     val category: String
+)
+data class MedicineNameRequest(
+    val name: String
 )
 
 

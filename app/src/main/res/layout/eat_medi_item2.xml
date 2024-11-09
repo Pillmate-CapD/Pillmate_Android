@@ -128,5 +128,5 @@
     <ImageView
         android:id="@+id/line"
         android:layout_width="12sp"
-        android:layout_height="25sp"/>
+        android:layout_height="0sp"/>
 </LinearLayout>
