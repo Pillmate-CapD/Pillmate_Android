@@ -106,7 +106,10 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
             // 현재 시간 기준으로 5분 후로 알람 시간 설정
             val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val alarmIntent = Intent(this, AlarmReceiver::class.java).apply {
-                putExtra("pill_name", "알람 리마인더")
+                //putExtra("pill_name", "알람 리마인더")
+                putExtra("pill_name", pillName)
+                putExtra("pill_time", pillTime)
+                putExtra("pill_id",pillId)
                 putExtra("sound", "alarm2") // 알람 사운드를 구분하기 위한 추가 데이터
             }
             val pendingIntent = PendingIntent.getBroadcast(
