@@ -53,7 +53,7 @@ class PillAlarmWorker(context: Context, workerParams: WorkerParameters) : Worker
                         pillList.forEach { pill ->
                             Log.d(
                                 "PillAlarmWorker",
-                                "알람 설정 준비 중 - 약 이름: ${pill.name}, 복용 시간: ${pill.time}"
+                                "알람 설정 준비 중 - 약 이름: ${pill.name}, 복용 시간: ${pill.time}, 약 id: ${pill.medicineId}"
                             )
                             setAlarmForPill(context, pill)
                         }
@@ -100,7 +100,7 @@ fun setAlarmForPill(context: Context, pill: PillListItem) {
         }
     }
 
-    Log.d("AlarmManager", "알람 설정 준비 완료 - 약 이름: ${pill.name}, 알람 시간: ${calendar.time}")
+    Log.d("AlarmManager", "알람 설정 준비 완료 - 약 이름: ${pill.name}, 알람 시간: ${calendar.time}, 약 id: ${pill.medicineId}")
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         if (!alarmManager.canScheduleExactAlarms()) {

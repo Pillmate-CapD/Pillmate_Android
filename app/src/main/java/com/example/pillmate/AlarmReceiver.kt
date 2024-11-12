@@ -11,13 +11,25 @@ import android.widget.Toast
 
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        // 알람 발생 시 서비스에 사운드 정보와 함께 전달
+        // Intent에서 모든 데이터를 받아 변수로 저장
+        val pillName = intent.getStringExtra("pill_name") ?: "Unknown"
+        val pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
+        val pillId = intent.getIntExtra("pill_id", -1)
+        val sound = intent.getStringExtra("sound") ?: "alarm1" // 기본값은 "alarm1"
+
+        // 모든 데이터를 서비스 Intent에 전달
         val serviceIntent = Intent(context, AlarmService::class.java).apply {
-            putExtra("pill_name", intent.getStringExtra("pill_name"))
-            putExtra("pill_time",intent.getStringExtra("pill_time"))
-            putExtra("pill_id",intent.getIntExtra("pill_id", -1))
-            putExtra("sound", intent.getStringExtra("sound") ?: "alarm1") // 기본값은 "alarm1"
+            putExtra("pill_name", pillName)
+            putExtra("pill_time", pillTime)
+            putExtra("pill_id", pillId)
+            putExtra("sound", sound)
         }
+
+        // 로그로 확인
+        Log.d("Receiver Data", "Pill Name: $pillName, Pill Time: $pillTime, Pill Id: $pillId, Sound: $sound")
+
+        // 서비스 시작
         context.startService(serviceIntent)
     }
 }
+

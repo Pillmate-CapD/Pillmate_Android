@@ -197,15 +197,21 @@ class HomeFragment : Fragment() {
                         val formattedTime = convertTimeTo12HourFormat(upcomingAlarm.time)
                         binding.tvNext.text = "$formattedTime ${upcomingAlarm.medicineName}"
 
-                        val remainingAlarm = response.remainingMedicine.size
-                        binding.tvLastMediGuide.text="복용 안한 약 일정이 ${remainingAlarm}개 있어!"
+                        // isEaten이 false인 약 리스트 필터링
+                        val remainingMedicine = response.medicineAlarmRecords.filter { !it.isEaten }
+                        val remainingAlarmCount = remainingMedicine.size
 
-                        val remainingMedicineNames = if (response.remainingMedicine.size > 1) {
-                            "${response.remainingMedicine.first().name} 외 ${response.remainingMedicine.size - 1}정"
+                        // 복용 안한 약 개수 텍스트 설정
+                        binding.tvLastMediGuide.text = "복용 안한 약 일정이 ${remainingAlarmCount}개 있어!"
+
+                        // 복용 안한 약 이름 리스트 생성
+                        val remainingMedicineNames = if (remainingAlarmCount > 1) {
+                            "${remainingMedicine.first().name} 외 ${remainingAlarmCount - 1}정"
                         } else {
-                            response.remainingMedicine.first().name
+                            remainingMedicine.firstOrNull()?.name ?: "없음"
                         }
                         binding.tvLastMedi.text = remainingMedicineNames
+
 
 
                         val remainingMedicineItems = response.remainingMedicine.map { RemainMediItem(it.name, it.category, it.day) }
@@ -233,26 +239,28 @@ class HomeFragment : Fragment() {
                         binding.homePillGoodUser.text = "${response.bestRecord.taken}정 "
                         binding.homePillGoodNum.text = "/ ${response.bestRecord.scheduled}정 "
 
-                        // taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
-                        val taken = response.bestRecord.taken
-                        val scheduled = response.bestRecord.scheduled
-                        val percentage = if (scheduled != 0) (taken * 100) / scheduled else 0
+                        // bestRecord의 taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
+                        val bestTaken = response.bestRecord.taken
+                        val bestScheduled = response.bestRecord.scheduled
+                        val bestPercentage = if (bestScheduled != 0) (bestTaken * 100) / bestScheduled else 0
 
-                        binding.goodProgressBar.setProgress(percentage)
+// worstRecord의 taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
+                        val worstTaken = response.worstRecord.taken
+                        val worstScheduled = response.worstRecord.scheduled
+                        val worstPercentage = if (worstScheduled != 0) (worstTaken * 100) / worstScheduled else 0
+
+
+                        binding.goodProgressBar.setProgress(bestPercentage)
 
                         binding.homeBadPillName.text = response.worstRecord.name
                         binding.homePillBadUser.text = "${response.worstRecord.taken}정 "
                         binding.homePillBadNum.text = "/ ${response.worstRecord.scheduled}정 "
 
-                        // taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
-                        val bTaken = response.bestRecord.taken
-                        val bScheduled = response.bestRecord.scheduled
-                        val bPercentage = if (bScheduled != 0) (bTaken * 100) / bScheduled else 0
 
                         binding.tvInfo.text = "${response.bestRecord.taken}정으로 제일 잘 챙겨 먹었어요!"
                         binding.tvBadInfo.text = "${response.worstRecord.taken}정으로 조금 더 열심히 복용해보세요!"
 
-                        binding.goodProgressBar.setProgress(bPercentage)
+                        binding.badProgressBar.setProgress(worstPercentage)
 //                        if (bPercentage==1){
 //                            Log.d("percentage", "bPercentage: ${bPercentage}")
 //                            binding.goodProgressBar.setProgress(0)

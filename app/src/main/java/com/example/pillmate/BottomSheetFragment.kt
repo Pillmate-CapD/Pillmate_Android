@@ -33,7 +33,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
+        //binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
 
 
         binding.btnCancelAlarm.setOnClickListener {
