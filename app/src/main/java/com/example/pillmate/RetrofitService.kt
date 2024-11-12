@@ -54,7 +54,7 @@ interface RetrofitService {
 
     //복약과정(약명,카테고리,이미지url)
     @POST("medicines/name")
-    fun getMedicineInfo(@Body names: List<MedicineNameRequest>): Call<List<MedicineInfoResponse>>
+    fun fetchMedicineDetails(@Body names: List<MedicineNameRequest>): Call<List<MedicineInfoResponse>>
 
     //로그아웃
     @POST("members/logout")
