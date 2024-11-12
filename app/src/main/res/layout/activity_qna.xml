@@ -61,6 +61,7 @@
 
             <!-- Question1-->
             <LinearLayout
+                android:id="@+id/qt1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -129,6 +130,7 @@
 
             <!-- Question2-->
             <LinearLayout
+                android:id="@+id/qt2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -191,6 +193,7 @@
 
             <!-- Question3-->
             <LinearLayout
+                android:id="@+id/qt3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -253,6 +256,7 @@
 
             <!-- Q4 -->
             <LinearLayout
+                android:id="@+id/qt4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -315,6 +319,7 @@
 
             <!-- Q5 -->
             <LinearLayout
+                android:id="@+id/qt5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -383,6 +388,7 @@
 
             <!-- Q6 -->
             <LinearLayout
+                android:id="@+id/qt6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -445,6 +451,7 @@
 
             <!-- Q7 -->
             <LinearLayout
+                android:id="@+id/qt7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -513,6 +520,7 @@
 
             <!-- Q6 -->
             <LinearLayout
+                android:id="@+id/qt8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -575,6 +583,7 @@
 
             <!-- Q9 -->
             <LinearLayout
+                android:id="@+id/qt9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

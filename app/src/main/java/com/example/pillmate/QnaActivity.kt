@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -26,18 +27,20 @@ class QnaActivity : AppCompatActivity() {
 
         // 반복문으로 ID 연결 및 클릭 리스너 설정
         for (i in 1..9) {
-            // TextView와 ImageView를 동적으로 가져오기
+            // TextView와 ImageView, 질문 Layout을 동적으로 가져오기
+            val questionLayoutId = resources.getIdentifier("qt$i", "id", packageName)
             val answerId = resources.getIdentifier("tv_answer$i", "id", packageName)
             val arrowId = resources.getIdentifier("iv_arrow$i", "id", packageName)
 
+            val questionLayout = findViewById<LinearLayout>(questionLayoutId)
             val tvAnswer = findViewById<TextView>(answerId)
             val ivArrow = findViewById<ImageView>(arrowId)
 
             answerTextViews.add(tvAnswer)
             arrowImageViews.add(ivArrow)
 
-            // 클릭 리스너 설정
-            ivArrow.setOnClickListener {
+            // 질문 Layout에 클릭 리스너 설정
+            questionLayout.setOnClickListener {
                 toggleAnswer(i - 1) // 인덱스 i-1 전달 (0부터 시작하도록)
             }
         }

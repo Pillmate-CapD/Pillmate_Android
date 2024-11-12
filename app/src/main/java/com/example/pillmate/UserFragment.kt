@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.pillmate.databinding.FragmentUserBinding
@@ -94,6 +95,28 @@ class UserFragment : Fragment() {
         }
 
 
+        val heathLayout: ConstraintLayout = view.findViewById(R.id.my_health_layout)
+        heathLayout.setOnClickListener {
+            val intent = Intent(activity, MyHealthInfoActivity::class.java)
+            startActivity(intent)
+        }
+
+        val questionLayout: ConstraintLayout = view.findViewById(R.id.question_layout)
+        questionLayout.setOnClickListener {
+            val intent = Intent(activity, QnaActivity::class.java)
+            startActivity(intent)
+        }
+
+        val helpLayout: ConstraintLayout = view.findViewById(R.id.help_layout)
+        helpLayout.setOnClickListener {
+
+        }
+
+        val changeLayout: ConstraintLayout = view.findViewById(R.id.change_layout)
+        changeLayout.setOnClickListener {
+            val intent = Intent(activity, PwChange1Activity::class.java)
+            startActivity(intent)
+        }
     }
 
     // 로그아웃 다이얼로그 표시
