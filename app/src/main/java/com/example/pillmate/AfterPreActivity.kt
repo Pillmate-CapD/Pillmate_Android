@@ -343,6 +343,14 @@ class AfterPreActivity : AppCompatActivity() {
 
         } catch (e: Exception) {
             Log.e("OCR_PROCESSING", "Error processing OCR response: ${e.message}")
+
+            val intent =
+                Intent(this@AfterPreActivity, FailActivity::class.java).apply {
+                    putExtra("CheckActivity", "preActivity")
+                }
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+            finish()
             e.printStackTrace()
         }
     }

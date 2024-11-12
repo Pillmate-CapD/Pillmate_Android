@@ -34,6 +34,9 @@
         android:theme="@style/AppTheme"
         tools:targetApi="33">
         <activity
+            android:name=".FailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ScanFinActivity"
             android:exported="false" />
         <activity
@@ -162,8 +165,8 @@
             android:name=".MyHealthEditDActivity"
             android:exported="false" />
         <activity
-        android:name=".MyHealthEditD2Activity"
-        android:exported="false" />
+            android:name=".MyHealthEditD2Activity"
+            android:exported="false" />
     </application>
 
 </manifest>

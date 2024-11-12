@@ -150,6 +150,12 @@ class AfterScanActivity : AppCompatActivity() {
                     }
                 } else {
                     Log.e("After Scan API Error", "응답 실패")
+                    val intent =
+                        Intent(this@AfterScanActivity, FailActivity::class.java).apply {
+                        }
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
+                    finish()
                 }
             }
 
