@@ -56,9 +56,16 @@ class AlarmService : Service() {
 
     private fun startAlarmActivity(intent: Intent?) {
         Log.d("AlarmService", "Starting AlarmActivity")
+        val pillName = intent?.getStringExtra("pill_name") ?: "Unknown"
+        val pillTime = intent?.getStringExtra("pill_time") ?: "Unknown"
+        val pillId = intent?.getIntExtra("pill_id",-1)
+        Log.d("pillId_AlarmService", "pillId: ${pillId}")
+
         val activityIntent = Intent(this, AlarmActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            putExtra("pill_name", intent?.getStringExtra("pill_name"))
+            putExtra("pill_name", pillName)
+            putExtra("pill_time",pillTime)
+            putExtra("pill_id",pillId)
         }
         startActivity(activityIntent)
     }
@@ -69,6 +76,7 @@ class AlarmService : Service() {
         val pillName = intent?.getStringExtra("pill_name") ?: "Unknown"
         val pillTime = intent?.getStringExtra("pill_time") ?: "Unknown"
         val pillId = intent?.getIntExtra("pill_id",-1)
+        Log.d("pillId_AlarmService2", "pillId: ${pillId}")
 
         val activityIntent = Intent(this, AlarmActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -134,6 +142,9 @@ class AlarmService : Service() {
     private fun startAlarm(intent: Intent?) {
         // Intent에서 sound 정보를 가져와서 사운드를 결정
         val soundType = intent?.getStringExtra("sound") ?: "alarm1"
+        val pillId = intent?.getIntExtra("pill_id",-1)
+        Log.d("pillId_AlarmService3", "pillId: ${pillId}")
+
         val alarmSound: Uri = Uri.parse("android.resource://${packageName}/raw/$soundType")
 
         mediaPlayer = MediaPlayer.create(this, alarmSound).apply {
