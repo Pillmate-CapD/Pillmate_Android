@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var remainMediAdapter: RemainMediAdapter
     private lateinit var alarmDatabase: AlarmDatabase
 
-    private var userName :String? = null
+    private var userName: String? = null
 
     private val preferencesHelper: PreferencesHelper by lazy {
         PreferencesHelper(requireContext())
@@ -64,12 +64,14 @@ class HomeFragment : Fragment() {
 
             // 약 리스트 RecyclerView 설정
             pillListAdapter = PillListAdapter(arrayListOf(), this, preferencesHelper)
-            binding.pillList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            binding.pillList.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             binding.pillList.adapter = pillListAdapter
 
             // RemainMediAdapter 초기화 및 설정
             remainMediAdapter = RemainMediAdapter(listOf()) // 빈 리스트로 초기화
-            binding.remainMediRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.remainMediRecycler.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.remainMediRecycler.adapter = remainMediAdapter
 
             // ViewModel을 통해 약 리스트 업데이트
@@ -145,7 +147,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun fetchMain(){
+    private fun fetchMain() {
         val service = RetrofitApi.getRetrofitService
         val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
         Log.d("fetchMain", "Current Time: $currentTime")
@@ -173,15 +175,20 @@ class HomeFragment : Fragment() {
                         pillViewModel.loadPillItems(
                             response.medicineAlarmRecords.map {
                                 val formattedTime = convertTimeTo12HourFormat(it.time)
-                                PillListItem(time = formattedTime, name = it.name, isEaten = it.isEaten, medicineId = it.medicineId)
+                                PillListItem(
+                                    time = formattedTime,
+                                    name = it.name,
+                                    isEaten = it.isEaten,
+                                    medicineId = it.medicineId
+                                )
                             }
                         )
 
                         // medicineAlarmRecords 개수 로그 출력
                         val medicineRecordCount = response.medicineAlarmRecords.size
-                        binding.mediNum.text="총 ${medicineRecordCount}정"
+                        binding.mediNum.text = "총 ${medicineRecordCount}정"
 
-                        if(medicineRecordCount > 0){
+                        if (medicineRecordCount > 0) {
                             binding.tvNextMedi.text = "가장 먼저 먹어야 할 약이에요!"
                             binding.btnNextMedi.text = "다음 약 먹으러 가기"
                             binding.btnNextMedi.isEnabled = true
@@ -213,17 +220,26 @@ class HomeFragment : Fragment() {
                         binding.tvLastMedi.text = remainingMedicineNames
 
 
-
-                        val remainingMedicineItems = response.remainingMedicine.map { RemainMediItem(it.name, it.category, it.day) }
+                        val remainingMedicineItems = response.remainingMedicine.map {
+                            RemainMediItem(
+                                it.name,
+                                it.category,
+                                it.day
+                            )
+                        }
                         remainMediAdapter.updateItems(remainingMedicineItems)
 
                         // 리스트가 비어있는지 확인하여 tvNoEaten의 visibility를 변경
-                        binding.tvNoEaten.visibility = if (remainingMedicineItems.isEmpty()) View.VISIBLE else View.GONE
+                        binding.tvNoEaten.visibility =
+                            if (remainingMedicineItems.isEmpty()) View.VISIBLE else View.GONE
 
 
                         // 화면 업데이트
                         if (response.medicineAlarmRecords.isNullOrEmpty()) {
-                            Log.d("fetchMain", "No medicine records found - updating UI to show no data layout")
+                            Log.d(
+                                "fetchMain",
+                                "No medicine records found - updating UI to show no data layout"
+                            )
                             //binding.pillList.visibility = View.VISIBLE
                             binding.btnAllPill.visibility = View.VISIBLE
                             binding.homeNonDataLayout.visibility = View.VISIBLE
@@ -242,12 +258,14 @@ class HomeFragment : Fragment() {
                         // bestRecord의 taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
                         val bestTaken = response.bestRecord.taken
                         val bestScheduled = response.bestRecord.scheduled
-                        val bestPercentage = if (bestScheduled != 0) (bestTaken * 100) / bestScheduled else 0
+                        val bestPercentage =
+                            if (bestScheduled != 0) (bestTaken * 100) / bestScheduled else 0
 
 // worstRecord의 taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
                         val worstTaken = response.worstRecord.taken
                         val worstScheduled = response.worstRecord.scheduled
-                        val worstPercentage = if (worstScheduled != 0) (worstTaken * 100) / worstScheduled else 0
+                        val worstPercentage =
+                            if (worstScheduled != 0) (worstTaken * 100) / worstScheduled else 0
 
 
                         binding.goodProgressBar.setProgress(bestPercentage)
@@ -261,14 +279,7 @@ class HomeFragment : Fragment() {
                         binding.tvBadInfo.text = "${response.worstRecord.taken}정으로 조금 더 열심히 복용해보세요!"
 
                         binding.badProgressBar.setProgress(worstPercentage)
-//                        if (bPercentage==1){
-//                            Log.d("percentage", "bPercentage: ${bPercentage}")
-//                            binding.goodProgressBar.setProgress(0)
-//                        }
-//                        else{
-//                            Log.d("percentage", "bPercentage full: ${bPercentage}")
-//                            binding.goodProgressBar.setProgress(bPercentage)
-//                        }
+
                     }
                 } else {
                     // 응답이 실패했을 때의 처리

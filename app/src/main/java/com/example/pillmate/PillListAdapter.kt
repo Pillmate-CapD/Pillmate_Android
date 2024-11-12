@@ -153,7 +153,7 @@ class PillListAdapter(
                 }
             } else if (currentTimeInMinutes >= itemTimeInMinutes - 60) {
                 // 현재 시간이 항목의 시간보다 한 시간 전이거나 같은 경우
-                itemView.setBackgroundResource(R.drawable.bg_list_now) // 배경 색상 변경
+                itemView.setBackgroundResource(R.drawable.bg_pill_list_check2) // 배경 색상 변경
                 pill_done.visibility = View.INVISIBLE
                 pill_before.visibility = View.INVISIBLE
                 pill_now.visibility = View.VISIBLE
