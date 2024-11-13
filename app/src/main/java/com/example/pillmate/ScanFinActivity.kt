@@ -45,6 +45,9 @@ class ScanFinActivity : AppCompatActivity() {
         binding = ActivityScanFinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 각 입력 필드가 포커스를 얻을 때 해당 위치로 스크롤
+        setScrollOnFocus()
+
         // Intent로부터 데이터 리스트 수신
         val dataList = intent.getStringArrayListExtra("dataList")
 
@@ -313,5 +316,53 @@ class ScanFinActivity : AppCompatActivity() {
 
         // BottomSheetDialog 표시
         diBottomSheetDialog.show()
+    }
+
+    private fun setScrollOnFocus() {
+        // 약품명 EditText 포커스 시 스크롤
+        binding.editMedi.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editMedi)
+            }
+        }
+
+        // 질병 선택 스피너 포커스 시 스크롤
+        binding.spinnerDisease.setOnClickListener {
+            scrollToView(binding.spinnerDisease)
+        }
+
+        // 1회 복약량 EditText 포커스 시 스크롤
+        binding.editOneEat.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editOneEat)
+            }
+        }
+
+        // 1일 복약횟수 EditText 포커스 시 스크롤
+        binding.editOneDay.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editOneDay)
+            }
+        }
+
+        // 총 복약일수 EditText 포커스 시 스크롤
+        binding.editAllDay.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editAllDay)
+            }
+        }
+
+        binding.timeSlotRecy.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editAllDay)
+            }
+        }
+    }
+
+    // 뷰로 스크롤하는 함수
+    private fun scrollToView(view: View) {
+        binding.nestedScrollView.post {
+            binding.nestedScrollView.smoothScrollTo(0, view.top)
+        }
     }
 }

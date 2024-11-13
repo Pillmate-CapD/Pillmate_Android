@@ -47,11 +47,21 @@ class PreMediActivity : AppCompatActivity() {
         TimeSlotItem(generateUniqueId(), "기상 직후")
     )
 
+
+    override fun onResume() {
+        super.onResume()
+        // 화면 갱신 시 최상단으로 스크롤
+        scrollToTop()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityPreMediBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // 각 입력 필드가 포커스를 얻을 때 해당 위치로 스크롤
+        setScrollOnFocus()
 
         // Intent에서 updatedData를 수신
         updatedData = intent.getSerializableExtra("updatedData") as? ArrayList<Map<String, String>> ?: arrayListOf()
@@ -121,6 +131,53 @@ class PreMediActivity : AppCompatActivity() {
         }
     }
 
+    private fun setScrollOnFocus() {
+        // 약품명 EditText 포커스 시 스크롤
+        binding.editMedi.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editMedi)
+            }
+        }
+
+        // 질병 선택 스피너 포커스 시 스크롤
+        binding.spinnerDisease.setOnClickListener {
+            scrollToView(binding.spinnerDisease)
+        }
+
+        // 1회 복약량 EditText 포커스 시 스크롤
+        binding.editOneEat.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editOneEat)
+            }
+        }
+
+        // 1일 복약횟수 EditText 포커스 시 스크롤
+        binding.editOneDay.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editOneDay)
+            }
+        }
+
+        // 총 복약일수 EditText 포커스 시 스크롤
+        binding.editAllDay.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editAllDay)
+            }
+        }
+
+        binding.timeSlotRecy.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editAllDay)
+            }
+        }
+    }
+
+    // 뷰로 스크롤하는 함수
+    private fun scrollToView(view: View) {
+        binding.nestedScrollView.post {
+            binding.nestedScrollView.smoothScrollTo(0, view.top)
+        }
+    }
 //    // 필드를 비우는 함수
 //    private fun clearFields() {
 //        binding.editMedi.text.clear()         // 약품명 초기화
@@ -438,6 +495,13 @@ class PreMediActivity : AppCompatActivity() {
 
         // 어댑터에 데이터가 변경되었음을 알림
         timeSlotAdapter.notifyDataSetChanged()
+    }
+
+    // 최상단으로 스크롤하는 함수
+    private fun scrollToTop() {
+        binding.nestedScrollView.post {
+            binding.nestedScrollView.scrollTo(0, 0)  // 최상단으로 이동
+        }
     }
 
 }

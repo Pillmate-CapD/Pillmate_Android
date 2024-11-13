@@ -42,6 +42,9 @@ class WriteMediActivity : AppCompatActivity() {
         binding = ActivityWriteMediBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 각 입력 필드가 포커스를 얻을 때 해당 위치로 스크롤
+        setScrollOnFocus()
+
         // 리사이클러뷰 설정
         timeSlotAdapter = TimeSlotAdapter(this,timeSlots) { position ->
             showTimePickerBottomSheet(position)
@@ -72,9 +75,53 @@ class WriteMediActivity : AppCompatActivity() {
         }
     }
 
-    // TODO: 1) spinnerTime이랑 pickerTime 다 받아야되니까 그 값을 같이 저장할 수 있도록 해줘 => 서버도 변경되어야 할듯
-    // TODO: 2) spinnerTime이랑 pickerTime이랑 리스트형태로 받을 수 있는지? => 서버
+    private fun setScrollOnFocus() {
+        // 약품명 EditText 포커스 시 스크롤
+        binding.editMedi.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editMedi)
+            }
+        }
 
+        // 질병 선택 스피너 포커스 시 스크롤
+        binding.spinnerDisease.setOnClickListener {
+            scrollToView(binding.spinnerDisease)
+        }
+
+        // 1회 복약량 EditText 포커스 시 스크롤
+        binding.editOneEat.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editOneEat)
+            }
+        }
+
+        // 1일 복약횟수 EditText 포커스 시 스크롤
+        binding.editOneDay.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editOneDay)
+            }
+        }
+
+        // 총 복약일수 EditText 포커스 시 스크롤
+        binding.editAllDay.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editAllDay)
+            }
+        }
+
+        binding.timeSlotRecy.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                scrollToView(binding.editAllDay)
+            }
+        }
+    }
+
+    // 뷰로 스크롤하는 함수
+    private fun scrollToView(view: View) {
+        binding.nestedScrollView.post {
+            binding.nestedScrollView.smoothScrollTo(0, view.top)
+        }
+    }
 
     private fun checkFieldsAndShowToast() {
         // 필수 필드 체크
