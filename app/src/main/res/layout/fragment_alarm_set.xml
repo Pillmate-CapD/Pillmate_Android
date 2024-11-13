@@ -30,13 +30,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="171dp"
-            android:layout_height="186dp"
+            android:layout_width="144dp"
+            android:layout_height="154.85dp"
             android:background="@drawable/ic_no_data" />
 
         <TextView
             android:id="@+id/tv"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="34dp"
             android:includeFontPadding="false"
             android:textColor="#3E3E3E"
             android:fontFamily="@font/notosanskrbold"

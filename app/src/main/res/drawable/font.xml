@@ -9,4 +9,5 @@
     <font android:font = "@font/sfprodisplaybold" />
     <font android:font = "@font/sfprodisplaysemibold" />
     <font android:font = "@font/sfprodisplayheavy" />
+    <font android:font = "@font/gapyeongwave" />
 </font-family>

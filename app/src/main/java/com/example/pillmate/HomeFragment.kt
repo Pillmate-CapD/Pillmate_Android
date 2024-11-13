@@ -285,6 +285,8 @@ class HomeFragment : Fragment() {
 
                         binding.badProgressBar.setProgress(worstPercentage)
 
+                        binding.tvWorst.text = "복용률 ${remainingAlarmCount}위"
+
                     }
                 } else {
                     // 응답이 실패했을 때의 처리
