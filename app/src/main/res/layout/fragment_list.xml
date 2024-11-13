@@ -85,7 +85,7 @@
         android:id="@+id/tv_pill_write"
         android:gravity="center"
         android:textSize="14sp"
-        android:fontFamily="@font/notosanskrsemibold"
+        android:fontFamily="@font/notosanskrbold"
         android:layout_marginRight="10dp"
         android:textColor="@color/black"
         android:visibility="invisible"
@@ -93,7 +93,8 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_pill_write"
-        app:fabCustomSize="50dp"
+        app:borderWidth="0dp"
+        app:fabCustomSize="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -116,7 +117,7 @@
         android:id="@+id/tv_pill_recog"
         android:gravity="center"
         android:textSize="14sp"
-        android:fontFamily="@font/notosanskrsemibold"
+        android:fontFamily="@font/notosanskrbold"
         android:layout_marginRight="10dp"
         android:textColor="@color/black"
         android:visibility="invisible"
@@ -124,7 +125,8 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_pill_recog"
-        app:fabCustomSize="50dp"
+        app:fabCustomSize="40dp"
+        app:borderWidth="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -147,15 +149,16 @@
         android:id="@+id/tv_prescript"
         android:gravity="center"
         android:textSize="14sp"
-        android:fontFamily="@font/notosanskrsemibold"
+        android:fontFamily="@font/notosanskrbold"
         android:layout_marginRight="10dp"
         android:textColor="@color/black"
         android:visibility="invisible"
-        android:text="처방전 / 약봉투 인식하기"/>
+        android:text="처방전 인식하기"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_precription"
-        app:fabCustomSize="50dp"
+        app:borderWidth="0dp"
+        app:fabCustomSize="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -171,6 +174,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         app:layout_constraintEnd_toEndOf="parent"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/fab"
         app:fabCustomSize="60dp"
