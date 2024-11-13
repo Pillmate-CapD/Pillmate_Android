@@ -179,7 +179,8 @@ class HomeFragment : Fragment() {
                                     time = formattedTime,
                                     name = it.name,
                                     isEaten = it.isEaten,
-                                    medicineId = it.medicineId
+                                    medicineId = it.medicineId,
+                                    alarmId = it.alarmId
                                 )
                             }
                         )

@@ -43,7 +43,8 @@ class PillAlarmWorker(context: Context, workerParams: WorkerParameters) : Worker
                                 time = it.time,
                                 name = it.name,
                                 isEaten = it.isEaten,
-                                medicineId = it.medicineId
+                                medicineId = it.medicineId,
+                                alarmId = it.alarmId
                             )
                         }
 
@@ -76,6 +77,7 @@ fun setAlarmForPill(context: Context, pill: PillListItem) {
         putExtra("pill_name", pill.name)
         putExtra("pill_time",pill.time)
         putExtra("pill_id",pill.medicineId)
+        putExtra("alarm_id",pill.alarmId)
     }
 
     val pendingIntent = PendingIntent.getBroadcast(
@@ -100,7 +102,7 @@ fun setAlarmForPill(context: Context, pill: PillListItem) {
         }
     }
 
-    Log.d("AlarmManager", "알람 설정 준비 완료 - 약 이름: ${pill.name}, 알람 시간: ${calendar.time}, 약 id: ${pill.medicineId}")
+    Log.d("AlarmManager", "알람 설정 준비 완료 - 약 이름: ${pill.name}, 알람 시간: ${calendar.time}, 약 id: ${pill.medicineId}, 알람 id: ${pill.alarmId}")
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         if (!alarmManager.canScheduleExactAlarms()) {

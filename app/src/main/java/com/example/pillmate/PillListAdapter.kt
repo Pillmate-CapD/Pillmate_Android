@@ -92,7 +92,7 @@ class PillListAdapter(
             if (item.isEaten) {
                 // 아이템이 완료된 경우
                 itemView.setBackgroundResource(R.drawable.custom_pill_background) // 기본 색상
-                pillImg.setBackgroundResource(R.drawable.img_pill_none) // 약 이미지 복용전과 복용 예정인 경우의 상태
+                //pillImg.setBackgroundResource(R.drawable.img_pill_none) // 약 이미지 복용전과 복용 예정인 경우의 상태
                 pill_done.visibility = View.VISIBLE
                 pill_now.visibility = View.INVISIBLE
 
@@ -147,6 +147,7 @@ class PillListAdapter(
                     intent.putExtra("pill_name", item.name)
                     intent.putExtra("pill_time", item.time)
                     intent.putExtra("pill_id",item.medicineId)
+                    intent.putExtra("alarm_id",item.alarmId)
                     intent.putExtra("position", position) // 클릭된 아이템의 position을 전달
                     intent.putExtra("source", "list") //하늘 추가
                     fragment.startActivityForResult(intent, REQUEST_CODE_EAT_MEDI)
@@ -168,6 +169,7 @@ class PillListAdapter(
                     intent.putExtra("pill_name", item.name)
                     intent.putExtra("pill_time", item.time)
                     intent.putExtra("pill_id",item.medicineId)
+                    intent.putExtra("alarm_id",item.alarmId)
                     intent.putExtra("position", position) // 클릭된 아이템의 position을 전달
                     fragment.startActivityForResult(intent, REQUEST_CODE_EAT_MEDI)
                 }

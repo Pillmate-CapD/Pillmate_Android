@@ -15,6 +15,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val pillName = intent.getStringExtra("pill_name") ?: "Unknown"
         val pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
         val pillId = intent.getIntExtra("pill_id", -1)
+        val alarmId = intent.getIntExtra("alarm_id", -1)
         val sound = intent.getStringExtra("sound") ?: "alarm1" // 기본값은 "alarm1"
 
         // 모든 데이터를 서비스 Intent에 전달
@@ -22,11 +23,12 @@ class AlarmReceiver : BroadcastReceiver() {
             putExtra("pill_name", pillName)
             putExtra("pill_time", pillTime)
             putExtra("pill_id", pillId)
+            putExtra("alarm_id", alarmId)
             putExtra("sound", sound)
         }
 
         // 로그로 확인
-        Log.d("Receiver Data", "Pill Name: $pillName, Pill Time: $pillTime, Pill Id: $pillId, Sound: $sound")
+        Log.d("Receiver Data", "Pill Name: $pillName, Pill Time: $pillTime, Pill Id: $pillId, AlarmId: $alarmId, Sound: $sound")
 
         // 서비스 시작
         context.startService(serviceIntent)
