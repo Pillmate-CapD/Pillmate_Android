@@ -140,6 +140,7 @@ class AfterScanActivity : AppCompatActivity() {
                             responseData[0].name,
                             responseData[0].photo
                         )
+                        Log.d("ScanMedi", "알약 인식 성공: $dataList")
                         val intent =
                             Intent(this@AfterScanActivity, ScanFinActivity::class.java).apply {
                                 putStringArrayListExtra("dataList", dataList)

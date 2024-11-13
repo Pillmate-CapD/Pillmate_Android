@@ -8,12 +8,15 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.IBinder
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.provider.Settings
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -25,6 +28,7 @@ class AlarmService : Service() {
     private val CHANNEL_ID = "AlarmChannel"
     private val NOTIFICATION_ID = 101
     private lateinit var ringtone: Ringtone
+    private lateinit var vibrator: Vibrator
 
     private lateinit var mediaPlayer: MediaPlayer
 
@@ -149,11 +153,20 @@ class AlarmService : Service() {
         val pillId = intent?.getIntExtra("pill_id",-1)
         Log.d("pillId_AlarmService3", "pillId: ${pillId}")
 
+        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val alarmSound: Uri = Uri.parse("android.resource://${packageName}/raw/$soundType")
-
+        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM), 0)
         mediaPlayer = MediaPlayer.create(this, alarmSound).apply {
             isLooping = true // 반복 재생 설정
             start()
+        }
+
+        // 진동 시작
+        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 1000, 500, 1000), 0))
+        } else {
+            vibrator.vibrate(longArrayOf(0, 1000, 500, 1000), 0)
         }
     }
 
@@ -162,6 +175,7 @@ class AlarmService : Service() {
             mediaPlayer.stop()
             mediaPlayer.release() // MediaPlayer 해제
         }
+        vibrator.cancel()
     }
 
     private fun fetchMediInfo(pillName: String) {
