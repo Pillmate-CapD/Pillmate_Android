@@ -3,7 +3,7 @@ package com.example.pillmate
 import android.util.Log
 
 // time: 알람 시간, pillName: 약 이름
-data class PillListItem(val time: String, val name: String, var isEaten: Boolean, var medicineId: Int) {
+data class PillListItem(val time: String, val name: String, var isEaten: Boolean, var medicineId: Int, var alarmId:Int) {
     // 시간 문자열에서 시간 부분을 추출하는 함수
     fun extractHour(): Int {
         val parts = time.split(" ")

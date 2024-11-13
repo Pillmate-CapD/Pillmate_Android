@@ -59,6 +59,7 @@ class AlarmService : Service() {
         val pillName = intent?.getStringExtra("pill_name") ?: "Unknown"
         val pillTime = intent?.getStringExtra("pill_time") ?: "Unknown"
         val pillId = intent?.getIntExtra("pill_id",-1)
+        val alarmId = intent?.getIntExtra("alarm_id",-1)
         Log.d("pillId_AlarmService", "pillId: ${pillId}")
 
         val activityIntent = Intent(this, AlarmActivity::class.java).apply {
@@ -66,6 +67,7 @@ class AlarmService : Service() {
             putExtra("pill_name", pillName)
             putExtra("pill_time",pillTime)
             putExtra("pill_id",pillId)
+            putExtra("alarm_id",alarmId)
         }
         startActivity(activityIntent)
     }
@@ -76,6 +78,7 @@ class AlarmService : Service() {
         val pillName = intent?.getStringExtra("pill_name") ?: "Unknown"
         val pillTime = intent?.getStringExtra("pill_time") ?: "Unknown"
         val pillId = intent?.getIntExtra("pill_id",-1)
+        val alarmId = intent?.getIntExtra("alarm_id",-1)
         Log.d("pillId_AlarmService2", "pillId: ${pillId}")
 
         val activityIntent = Intent(this, AlarmActivity::class.java).apply {
@@ -83,6 +86,7 @@ class AlarmService : Service() {
             putExtra("pill_name", pillName)
             putExtra("pill_time",pillTime)
             putExtra("pill_id",pillId)
+            putExtra("alarm_id",alarmId)
         }
         val pendingIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_MUTABLE)
         val fullscreenPendingIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)

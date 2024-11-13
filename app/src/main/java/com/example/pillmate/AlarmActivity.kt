@@ -52,6 +52,7 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
         val pillName = intent.getStringExtra("pill_name") ?: "Unknown"
         val pillTime = intent?.getStringExtra("pill_time") ?: "Unknown"
         val pillId = intent?.getIntExtra("pill_id", -1)
+        val alarmId = intent?.getIntExtra("alarm_id", -1)
         Log.d("pillId", "pillId: ${pillId}")
         //val pillImgUrl = intent.getStringExtra("pill_image_url") // String으로 받기
 
@@ -94,6 +95,7 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
                 putExtra("pill_name", pillName)
                 putExtra("pill_time", pillTime)
                 putExtra("pill_id", pillId)
+                putExtra("alarm_id", alarmId)
                 //putExtra("pill_image_url", pillImgUrl) // 이미지 URL 전달
                 putExtra("source", "alarm") //하늘 추가
             }
@@ -107,7 +109,7 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
             //stopAlarm()
 
             // null일 경우 -1을 기본값으로 전달
-            showAlarmBottomSheet(pillId ?: -1)
+            showAlarmBottomSheet(alarmId ?: -1)
         }
 
         binding.btnRealarm.setOnClickListener {
@@ -118,6 +120,7 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
                 putExtra("pill_name", pillName)
                 putExtra("pill_time", pillTime)
                 putExtra("pill_id", pillId)
+                putExtra("alarm_id", alarmId)
                 putExtra("sound", "alarm2") // 알람 사운드를 구분하기 위한 추가 데이터
             }
             val pendingIntent = PendingIntent.getBroadcast(
@@ -231,7 +234,7 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
 //        bottomSheetDialog.show()
 //    }
 
-    private fun showAlarmBottomSheet(pillId: Int) {
+    private fun showAlarmBottomSheet(alarmId: Int) {
         val bottomSheetDialog = BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme)
         val bottomSheetView = layoutInflater.inflate(R.layout.fragment_bottom_sheet, null)
 
@@ -265,8 +268,8 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
                 alarmButton.backgroundTintList = null
             }
 
-            Log.d("pillId", "showAlarm pillId, ${pillId}")
-            updateAlarmStatus(pillId,alarmCheck)
+            Log.d("alarm", "showAlarm alarmId, ${alarmId}, ${alarmCheck}")
+            updateAlarmStatus(alarmId,!alarmCheck)
         }
 
         // 배경 흐림과 색상 설정

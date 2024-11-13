@@ -250,7 +250,8 @@ data class MedicineAlarmRecordsRequest(
     val time: String,
     val category: String,
     val isEaten: Boolean,
-    val medicineId: Int
+    val medicineId: Int,
+    val alarmId: Int
 )
 
 data class RemainingMedicineRequest(
