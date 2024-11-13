@@ -285,7 +285,9 @@ class HomeFragment : Fragment() {
 
                         binding.badProgressBar.setProgress(worstPercentage)
 
-                        binding.tvWorst.text = "복용률 ${remainingAlarmCount}위"
+                        // remainingMedicineItems의 개수를 구합니다
+                        val itemCount = remainingMedicineItems.size
+                        binding.tvWorst.text = "복용률 ${itemCount}위"
 
                     }
                 } else {
