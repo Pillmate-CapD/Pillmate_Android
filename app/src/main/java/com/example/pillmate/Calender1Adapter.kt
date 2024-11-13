@@ -45,8 +45,10 @@ class Calendar1Adapter(
                 binding.dateRecy.setTextColor(if (isCurrentMonth) Color.BLACK else Color.parseColor("#D9D9D9"))
 
                 // 현재 날짜 표시
+                //val isToday = (day == currentDay && selectedMonth == currentMonth && selectedYear == currentYear)
+                //val isSelected = (day == selectedDay && selectedMonth == currentMonth && selectedYear == currentYear)
                 val isToday = (day == currentDay && selectedMonth == currentMonth && selectedYear == currentYear)
-                val isSelected = (day == selectedDay && selectedMonth == currentMonth && selectedYear == currentYear)
+                val isSelected = (day == selectedDay && selectedMonth == selectedMonth && selectedYear == selectedYear)
 
                 if (isToday) {
                     binding.dayRecy.text = "오늘"

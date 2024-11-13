@@ -71,8 +71,6 @@ class CalendarFragment : Fragment() {
         val days = generateDaysForMonth()
         adapter = Calendar1Adapter(days) { day, month, year ->
             calendar.set(Calendar.DAY_OF_MONTH, day)
-            calendar.set(Calendar.MONTH, month - 1)
-            calendar.set(Calendar.YEAR, year)
             updateDateTitle()
         }
         binding.calendarRecyclerView.layoutManager = GridLayoutManager(requireContext(), 7) // 수정함: GridLayoutManager 설정
