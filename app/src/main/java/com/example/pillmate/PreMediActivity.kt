@@ -47,7 +47,6 @@ class PreMediActivity : AppCompatActivity() {
         TimeSlotItem(generateUniqueId(), "기상 직후")
     )
 
-
     override fun onResume() {
         super.onResume()
         // 화면 갱신 시 최상단으로 스크롤

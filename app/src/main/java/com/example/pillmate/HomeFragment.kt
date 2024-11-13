@@ -32,8 +32,14 @@ class HomeFragment : Fragment() {
     private lateinit var pillListAdapter: PillListAdapter
     private lateinit var remainMediAdapter: RemainMediAdapter
     private lateinit var alarmDatabase: AlarmDatabase
+    private val sharedPrefs by lazy { requireContext().getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE) }
+
+    private val alarmLogViewModel: AlarmLogViewModel by viewModels()
 
     private var userName: String? = null
+
+    // 이전 로그 개수를 저장하는 변수
+    private var previousLogCount: Int = 0
 
     private val preferencesHelper: PreferencesHelper by lazy {
         PreferencesHelper(requireContext())
@@ -44,12 +50,36 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        alarmDatabase = AlarmDatabase.getInstance(requireContext())
+        // userId 가져오기
+        val sharedPreferences = requireContext().getSharedPreferences("userId", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getInt("userId", -1)
 
-        // 데이터 변경 감지
-        alarmDatabase.alarmLogDao().getAllLogsLiveData().observe(viewLifecycleOwner) { logs ->
-            // 데이터가 있을 경우 view_exist_alarm 보이기, 없을 경우 숨기기
-            binding.viewExistAlarm.visibility = if (logs.isNotEmpty()) View.VISIBLE else View.GONE
+        // userId가 유효한 경우에만 로그 관찰
+        if (userId != -1) {
+            alarmLogViewModel.getLogsForUser(userId).observe(viewLifecycleOwner) { logs ->
+                // SharedPreferences에 저장된 마지막 확인한 타임스탬프 가져오기
+                val lastCheckedTimestamp = sharedPrefs.getLong("lastCheckedTimestamp", 0L)
+
+                // 새로운 로그가 있는지 확인
+                val hasNewLogs = logs.any { it.timestamp.time > lastCheckedTimestamp }
+
+                // 새로운 로그가 있을 때만 view_exist_alarm을 보이게 설정
+                binding.viewExistAlarm.visibility = if (hasNewLogs) View.VISIBLE else View.GONE
+            }
+        }
+
+        // 알림 아이콘을 클릭하면 마지막 확인한 타임스탬프를 업데이트하고 뷰를 숨김
+        binding.alertImg.setOnClickListener {
+            // view_exist_alarm 비활성화
+            binding.viewExistAlarm.visibility = View.INVISIBLE
+            // 마지막 확인한 타임스탬프를 현재 시간으로 업데이트
+            if (userId != -1) {
+                val latestTimestamp = System.currentTimeMillis()
+                sharedPrefs.edit().putLong("lastCheckedTimestamp", latestTimestamp).apply()
+            }
+            // AlarmListActivity로 이동
+            val intent = Intent(context, AlarmListActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -87,7 +117,7 @@ class HomeFragment : Fragment() {
 //            binding.homePillProgressBar.setProgress(100)
 
             binding.alertImg.setOnClickListener {
-                binding.viewExistAlarm.visibility = View.INVISIBLE
+                //binding.viewExistAlarm.visibility = View.INVISIBLE
                 val intent = Intent(context, AlarmListActivity::class.java)
                 startActivity(intent)
             }

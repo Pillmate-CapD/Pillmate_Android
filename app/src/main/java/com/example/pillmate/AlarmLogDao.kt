@@ -26,9 +26,13 @@ interface AlarmLogDao {
     @Query("SELECT * FROM alarm_log ORDER BY timestamp DESC")
     suspend fun getAllLogs(): List<AlarmLog>
 
-    // 모든 로그 가져오기 (LiveData로 반환)
-    @Query("SELECT * FROM alarm_log ORDER BY timestamp DESC")
-    fun getAllLogsLiveData(): LiveData<List<AlarmLog>>
+//    // 모든 로그 가져오기 (LiveData로 반환)
+//    @Query("SELECT * FROM alarm_log ORDER BY timestamp DESC")
+//    fun getAllLogsLiveData(): LiveData<List<AlarmLog>>
+
+    // 특정 사용자에 해당하는 모든 로그 가져오기 (LiveData로 반환)
+    @Query("SELECT * FROM alarm_log WHERE userId = :userId ORDER BY timestamp DESC")
+    fun getAllLogsLiveDataForUser(userId: Int): LiveData<List<AlarmLog>>
 
     // 모든 로그 삭제
     @Query("DELETE FROM alarm_log")

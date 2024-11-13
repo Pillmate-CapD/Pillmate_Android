@@ -1,5 +1,6 @@
 package com.example.pillmate
 
+import android.app.Activity
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -45,8 +46,14 @@ class AlarmListActivity : AppCompatActivity() {
         }
 
         binding.btnBefore.setOnClickListener {
+            setResult(Activity.RESULT_OK)
             finish()
         }
+    }
+
+    override fun onBackPressed() {
+        setResult(Activity.RESULT_OK) // 확인을 마쳤음을 알림
+        super.onBackPressed()
     }
 
     private fun loadAlarmHistory(userId: Int) {
