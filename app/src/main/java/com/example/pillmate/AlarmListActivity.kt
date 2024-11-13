@@ -1,6 +1,6 @@
 package com.example.pillmate
 
-import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -34,21 +34,28 @@ class AlarmListActivity : AppCompatActivity() {
         binding.alarmList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.alarmList.adapter = alarmListAdapter
 
-        // 알림 히스토리 불러오기
-        loadAlarmHistory()
+        // SharedPreferences에서 userId를 가져옴
+        val sharedPreferences = getSharedPreferences("userId", MODE_PRIVATE)
+        val userId = sharedPreferences.getInt("userId", -1)
+
+        if (userId != -1) {
+            loadAlarmHistory(userId)
+        } else {
+            Log.e("AlarmListActivity", "userId를 찾을 수 없습니다.")
+        }
 
         binding.btnBefore.setOnClickListener {
             finish()
         }
     }
 
-    private fun loadAlarmHistory() {
+    private fun loadAlarmHistory(userId: Int) {
         val alarmDatabase = AlarmDatabase.getInstance(this)
 
         CoroutineScope(Dispatchers.IO).launch {
-            val logs = alarmDatabase.alarmLogDao().getAllLogs()
+            val logs = alarmDatabase.alarmLogDao().getAllLogsForUser(userId)
 
-            val newAlarms = logs.map { log: AlarmLog ->  // 여기에서 타입 명시
+            val newAlarms = logs.map { log ->
                 AlarmListItem(
                     type = "복약알림",
                     des = log.message,
@@ -57,18 +64,13 @@ class AlarmListActivity : AppCompatActivity() {
             }
 
             withContext(Dispatchers.Main) {
-                // 어댑터의 updateAlarmList 메서드를 사용하여 데이터 갱신
                 alarmListAdapter.updateAlarmList(newAlarms)
-
-                // "알림이 없습니다" 메시지를 처리
                 binding.tvNoAlarm.visibility = if (newAlarms.isEmpty()) View.VISIBLE else View.GONE
-
-                // tv_alarm_bottom 가시성 설정
                 binding.tvAlarmBottom.visibility = if (newAlarms.isNotEmpty()) View.VISIBLE else View.GONE
             }
-
         }
     }
+
 
 
 

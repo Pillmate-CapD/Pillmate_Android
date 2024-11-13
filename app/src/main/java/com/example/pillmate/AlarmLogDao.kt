@@ -1,5 +1,6 @@
 package com.example.pillmate
 
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
@@ -32,4 +33,12 @@ interface AlarmLogDao {
     // 모든 로그 삭제
     @Query("DELETE FROM alarm_log")
     suspend fun deleteAllLogs()
+
+    // 특정 사용자에 해당하는 모든 로그 가져오기
+    @Query("SELECT * FROM alarm_log WHERE userId = :userId ORDER BY timestamp DESC")
+    suspend fun getAllLogsForUser(userId: Int): List<AlarmLog>
+
+    // 특정 사용자에 대한 모든 로그 삭제
+    @Query("DELETE FROM alarm_log WHERE userId = :userId")
+    suspend fun deleteAllLogsForUser(userId: Int)
 }

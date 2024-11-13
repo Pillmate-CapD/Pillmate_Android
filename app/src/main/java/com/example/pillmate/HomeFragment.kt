@@ -1,6 +1,7 @@
 package com.example.pillmate
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.graphics.Color
@@ -62,8 +63,11 @@ class HomeFragment : Fragment() {
         val userName = sharedPreferences.getString("userName", "손해인")
         if (userName != null) {
 
+            val sharedPreferences = requireContext().getSharedPreferences("userId", Context.MODE_PRIVATE)
+            val userId = sharedPreferences.getInt("userId", -1)
+
             // 약 리스트 RecyclerView 설정
-            pillListAdapter = PillListAdapter(arrayListOf(), this, preferencesHelper)
+            pillListAdapter = PillListAdapter(arrayListOf(), this, preferencesHelper,userId)
             binding.pillList.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             binding.pillList.adapter = pillListAdapter

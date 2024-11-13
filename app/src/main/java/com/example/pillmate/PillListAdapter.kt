@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -30,7 +31,8 @@ import java.util.concurrent.TimeUnit
 class PillListAdapter(
     private val pillListItem: ArrayList<PillListItem>,
     private val fragment: HomeFragment,
-    private val preferencesHelper: PreferencesHelper
+    private val preferencesHelper: PreferencesHelper,
+    private val userId: Int // 추가된 userId
 ) : RecyclerView.Adapter<PillListAdapter.PillListViewHolder>() {
 
     private val REQUEST_CODE_EAT_MEDI = 1001
@@ -39,6 +41,7 @@ class PillListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PillListViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.pill_list, parent, false)
+
         return PillListViewHolder(itemView)
     }
 
@@ -204,7 +207,7 @@ class PillListAdapter(
                     .getLogsForDate(alarmMessage, currentDate) // 같은 날 저장된 로그 확인
 
                 if (existingLogs.isEmpty()) { // 같은 날짜에 중복된 로그가 없을 때만 저장
-                    saveAlarmToDatabase(context, alarmMessage, currentTimestamp)
+                    saveAlarmToDatabase(context, alarmMessage, currentTimestamp, userId)
                 } else {
                     Log.d(
                         "AlarmDatabase",
@@ -214,8 +217,8 @@ class PillListAdapter(
             }
         }
 
-        fun saveAlarmToDatabase(context: Context, message: String, timestamp: Date) {
-            val alarmLog = AlarmLog(message = message, timestamp = timestamp)
+        fun saveAlarmToDatabase(context: Context, message: String, timestamp: Date, userId: Int) {
+            val alarmLog = AlarmLog(userId = userId, message = message, timestamp = timestamp)
             val alarmDatabase = AlarmDatabase.getInstance(context)
 
             CoroutineScope(Dispatchers.IO).launch {

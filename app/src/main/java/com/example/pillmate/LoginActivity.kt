@@ -5,12 +5,15 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.pillmate.databinding.ActivityLoginBinding
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,14 +51,20 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("LoginActivity", "로그인 성공! 액세스 토큰: $accessToken")
 
                             val userName = loginResponse.tokenInfo.name
+                            val userId = loginResponse.tokenInfo.userId
                             Log.e("userName", "${userName}")
+                            Log.e("userId", "${userId}")
 
                             val preferences = getSharedPreferences("userName", MODE_PRIVATE)
+                            val id_preferences = getSharedPreferences("userId", MODE_PRIVATE)
                             val editor = preferences.edit()
+                            val id_editor = id_preferences.edit()
 
                             editor.putString("userName", userName)
+                            id_editor.putInt("userId", userId)
 
                             editor.commit()
+                            id_editor.commit()
 
                             App.prefs.token = accessToken
 
@@ -196,7 +205,10 @@ class LoginActivity : AppCompatActivity() {
                         val accessToken = "Bearer ${loginResponse.tokenInfo.accessToken}"
                         Log.d("LoginActivity", "로그인 성공! 액세스 토큰: $accessToken")
 
+                        // 토큰 복호화
+
                         val userName = loginResponse.tokenInfo.name
+                        val userId = loginResponse.tokenInfo.userId
                         Log.e("Login_Click","Login_Btn_Click: $userName",)
 
                         if (isAutoLoginChecked){
@@ -214,8 +226,15 @@ class LoginActivity : AppCompatActivity() {
                         val preferences = getSharedPreferences("userName", MODE_PRIVATE)
                         val editor = preferences.edit()
 
+                        val id_preferences = getSharedPreferences("userId", MODE_PRIVATE)
+                        val id_editor = id_preferences.edit()
+
                         editor.putString("userName", userName)
+                        id_editor.putInt("userId", userId)
+                        Log.e("userId", "${userId}")
+
                         editor.commit()
+                        id_editor.commit()
 
                         App.prefs.token = accessToken
 
@@ -259,6 +278,36 @@ class LoginActivity : AppCompatActivity() {
         binding.password.setBackgroundResource(R.drawable.login_password_btn)
         binding.tvErrorMessage.visibility = View.INVISIBLE
     }
+
+//    fun getUserIdFromToken(token: String): Int? {
+//        try {
+//            // "Bearer " 접두사를 제거하여 JWT 토큰만 남김
+//            val tokenWithoutBearer = token.replace("Bearer ", "")
+//            Log.d("TokenBearer", "${token}")
+//            // 토큰이 JWT 형식인지 확인
+//            if (tokenWithoutBearer.contains(".")) {
+//                // payload 추출
+//                val payload = tokenWithoutBearer.split(".")[1]
+//                Log.d("payload", "${payload}")
+//
+//                // Base64 URL-safe 디코딩
+//                val decodedPayload = String(Base64.decode(payload, Base64.URL_SAFE))
+//
+//                // JSON 파싱
+//                val jsonObject = Gson().fromJson(decodedPayload, JsonObject::class.java)
+//
+//                // userId 필드가 있으면 추출
+//                Log.d("userId", "${jsonObject.get("user_id")?.asInt}")
+//                return jsonObject.get("userId")?.asInt
+//            } else {
+//                Log.e("JWT", "토큰이 JWT 형식이 아닙니다.")
+//            }
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//
+//        }
+//        return null
+//    }
 
     // 유효한 이메일, 비밀번호인지 확인 (서버로 실제 요청하는 부분은 서버와 연동 시 작성)
     //private fun isValidCredentials(email: String, password: String): Boolean {

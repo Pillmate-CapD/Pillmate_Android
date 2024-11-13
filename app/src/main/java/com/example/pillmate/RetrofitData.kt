@@ -13,6 +13,7 @@ data class LoginRequest(
 )
 
 data class TokenInfo(
+    val userId: Int,
     val name: String,
     val grantType: String,
     val accessToken: String
@@ -41,6 +42,7 @@ data class SignUpRequest(
 )
 
 data class SignUpResponse(
+    val userId: Int,
     val name: String,
     val grantType: String,
     val accessToken: String
