@@ -1,5 +1,6 @@
 package com.example.pillmate
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Typeface
@@ -19,6 +20,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class EatMediAdapter(
     private val steps: List<EatMedi>,  // 단계 리스트를 저장
@@ -80,6 +85,8 @@ class EatMediAdapter(
             itemView.findViewById(R.id.step2_description)  // 2단계 설명
         val medicheckImage: ImageView? = itemView.findViewById(R.id.medicheck_image)  // 2단계 이미지 뷰
 
+        val mediImage: ImageView? = itemView.findViewById(R.id.medi_image)
+
         fun bind(step: EatMedi, position: Int) {
             // 단계 내용 가시성 설정
             stepContent.visibility = if (step.isVisible) View.VISIBLE else View.GONE
@@ -137,6 +144,12 @@ class EatMediAdapter(
             // 1단계: 약명만 표시
             if (position == 0) {
                 stepDescription?.text = step.pillName
+
+                step.pillName?.let { pillName ->
+                    mediImage?.let { imageView ->
+                        fetchMediInfo(pillName, imageView)
+                    }
+                }
             }
 
             // 2단계: 약명 + "이 맞아요" 텍스트와 색상 적용
@@ -214,5 +227,45 @@ class EatMediAdapter(
 
             paint.typeface = tf
         }
+    }
+
+    private fun fetchMediInfo(pillName: String, imageView:ImageView) {
+        val service = RetrofitApi.getRetrofitService // Retrofit 인스턴스 가져오기
+
+        // pillName을 MediInfoRequest 객체로 리스트에 담기
+        val nameList = listOf(MediInfoRequest(pillName))
+
+        // 서버로 MediInfoRequest 리스트를 POST 요청으로 전송
+        val call = service.postMediInfo(nameList) // List<MediInfoRequest>를 전송
+        call.enqueue(object : Callback<List<MediInfoResponse>> {
+            override fun onResponse(
+                call: Call<List<MediInfoResponse>>,
+                response: Response<List<MediInfoResponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val mediInfoList = response.body()
+                    mediInfoList?.forEach { mediInfo ->
+                        Log.d(
+                            "sendNameToServer",
+                            "약물 정보 수신 성공: ${mediInfo.name}, ${mediInfo.photo}, ${mediInfo.category}"
+                        )
+                        // 이미지 URL을 Glide를 사용하여 ImageView에 로드
+                        mediInfo.photo?.let { photoUrl ->
+                            Glide.with(imageView.context)
+                                .load(photoUrl)
+                                .placeholder(R.drawable.bg_zoom_null) // 로딩 중 표시할 이미지
+                                .error(R.drawable.bg_zoom_null) // 오류 시 표시할 이미지
+                                .into(imageView)
+                        }
+                    }
+                } else {
+                    Log.e("sendNameToServer", "Error: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<MediInfoResponse>>, t: Throwable) {
+                Log.e("sendNameToServer", "API 호출 실패: ${t.message}")
+            }
+        })
     }
 }

@@ -55,11 +55,11 @@ class AfterPreActivity : AppCompatActivity() {
             binding.imgMediCamera.setImageBitmap(bitmap)
         }
 
-        binding.btnX.setOnClickListener{
+        binding.btnX.setOnClickListener {
             this@AfterPreActivity.finish()
         }
 
-        binding.btnAgain.setOnClickListener{
+        binding.btnAgain.setOnClickListener {
             this@AfterPreActivity.finish()
         }
 
@@ -67,7 +67,7 @@ class AfterPreActivity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             //OCR 실행을 여기서 바로 할건지 아니면,
-            if(photoPath != null){
+            if (photoPath != null) {
                 // BitmapFactory를 사용하여 이미지 파일을 Bitmap으로 로드
                 val bitmap = BitmapFactory.decodeFile(photoPath)
 
@@ -101,7 +101,7 @@ class AfterPreActivity : AppCompatActivity() {
         if (!isNetworkAvailable()) {
             runOnUiThread {
                 Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
-               //binding.tvOcr.text = "No internet connection"
+                //binding.tvOcr.text = "No internet connection"
             }
             return
         }
@@ -251,10 +251,12 @@ class AfterPreActivity : AppCompatActivity() {
                                 dosageColumnIndex = columnIndex
                                 Log.d("OCR_PROCESSING", "1회 투약량 컬럼 인덱스 설정: $dosageColumnIndex")
                             }
+
                             "1일 투여횟수" in cellText -> {
                                 frequencyColumnIndex = columnIndex
                                 Log.d("OCR_PROCESSING", "1일 투여횟수 컬럼 인덱스 설정: $frequencyColumnIndex")
                             }
+
                             "총 투약일수" in cellText -> {
                                 durationColumnIndex = columnIndex
                                 Log.d("OCR_PROCESSING", "총 투약일수 컬럼 인덱스 설정: $durationColumnIndex")
@@ -317,12 +319,14 @@ class AfterPreActivity : AppCompatActivity() {
                 val cleanedName = cleanName2(originalName)
 
                 // 정제된 데이터를 새로운 리스트에 추가
-                updatedData.add(mapOf(
-                    "명칭" to cleanedName,
-                    "1회 투약량" to data["1회 투약량"].orEmpty(),
-                    "1일 투여횟수" to data["1일 투여횟수"].orEmpty(),
-                    "총 투약일수" to data["총 투약일수"].orEmpty()
-                ))
+                updatedData.add(
+                    mapOf(
+                        "명칭" to cleanedName,
+                        "1회 투약량" to data["1회 투약량"].orEmpty(),
+                        "1일 투여횟수" to data["1일 투여횟수"].orEmpty(),
+                        "총 투약일수" to data["총 투약일수"].orEmpty()
+                    )
+                )
 
                 // 로그 출력
                 //Log.d("ExtractedData", "정제된 명칭: ${cleanedName}, 1회 투약량: ${data["1회 투약량"]}, 1일 투여횟수: ${data["1일 투여횟수"]}, 총 투약일수: ${data["총 투약일수"]}")
@@ -331,15 +335,25 @@ class AfterPreActivity : AppCompatActivity() {
             Log.d("UpdatedData", "Update Data ${updatedData}")
 
             // 명칭 전달해서 해당 약이 있는지 확인하고 사진 받아오는 함수
-            fetchMediInfo(updatedData)
+            if (updatedData.isEmpty()) {
+                Log.e("After Scan API Error", "응답 실패")
+                val intent = Intent(this@AfterPreActivity, FailActivity::class.java).apply {
+                    putExtra("CheckActivity", "preActivity") // checkActivity 값을 전달
+                }
+                startActivity(intent)
+                overridePendingTransition(0, 0)
+                finish()
+            } else {
+                fetchMediInfo(updatedData)
 
-            // 여기서 전달하기 전에 명칭을 서버로 보내서 서버에서 해당 약이 있는지 확인하고 사진을 받아와야 함.
-            // 받아온 후에 해당 내용을 PreMediActivity로 사진이랑 같이 전달하기
-            val intent = Intent(this, PreMediActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                // 여기서 전달하기 전에 명칭을 서버로 보내서 서버에서 해당 약이 있는지 확인하고 사진을 받아와야 함.
+                // 받아온 후에 해당 내용을 PreMediActivity로 사진이랑 같이 전달하기
+                val intent = Intent(this, PreMediActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
+                startActivity(intent)
+                finish()
             }
-            startActivity(intent)
-            finish()
 
         } catch (e: Exception) {
             Log.e("OCR_PROCESSING", "Error processing OCR response: ${e.message}")
@@ -369,7 +383,6 @@ class AfterPreActivity : AppCompatActivity() {
     }
 
 
-
     private fun cleanFrequency(frequency: String): String {
         Log.d("CLEAN_FUNCTION", "1일 투여횟수 정제 중: $frequency")
         return frequency.replace(Regex("\\s+"), "").replace(Regex(" cc| gm| 개| 정"), " 번")
@@ -379,7 +392,6 @@ class AfterPreActivity : AppCompatActivity() {
         Log.d("CLEAN_FUNCTION", "총 투약일수 정제 중: $duration")
         return duration.replace(Regex("\\D"), "").ifEmpty { "1" }
     }
-
 
 
     private fun getNextCellValue(cells: JSONArray, rowIndex: Int, columnIndex: Int): String {
@@ -410,7 +422,12 @@ class AfterPreActivity : AppCompatActivity() {
 
 
     @Throws(IOException::class)
-    private fun writeMultiPart(out: OutputStream, jsonMessage: String, byteArray: ByteArray, boundary: String) {
+    private fun writeMultiPart(
+        out: OutputStream,
+        jsonMessage: String,
+        byteArray: ByteArray,
+        boundary: String
+    ) {
         val sb = StringBuilder()
         sb.append("--").append(boundary).append("\r\n")
         sb.append("Content-Disposition:form-data; name=\"message\"\r\n\r\n")
@@ -445,17 +462,25 @@ class AfterPreActivity : AppCompatActivity() {
         // 서버로 MediInfoRequest 리스트를 POST 요청으로 전송
         val call = service.postMediInfo(nameList) // List<MediInfoRequest>를 전송
         call.enqueue(object : Callback<List<MediInfoResponse>> {
-            override fun onResponse(call: Call<List<MediInfoResponse>>, response: Response<List<MediInfoResponse>>) {
+            override fun onResponse(
+                call: Call<List<MediInfoResponse>>,
+                response: Response<List<MediInfoResponse>>
+            ) {
                 if (response.isSuccessful) {
                     val mediInfoList = response.body()
                     mediInfoList?.forEach { mediInfo ->
-                        Log.d("sendNamesToServer", "약물 정보 수신 성공: ${mediInfo.name}, ${mediInfo.photo}, ${mediInfo.category}")
+                        Log.d(
+                            "sendNamesToServer",
+                            "약물 정보 수신 성공: ${mediInfo.name}, ${mediInfo.photo}, ${mediInfo.category}"
+                        )
 
                         // updatedData에서 해당 이름을 가진 항목을 찾아d 업데이트
                         updatedData.find { it["명칭"] == mediInfo.name }?.let { data ->
                             val updatedEntry = data.toMutableMap().apply {
-                                this["photo"] = mediInfo.photo ?: "이미지 없음" // 사진이 null일 경우 기본값 설정
-                                this["category"] = mediInfo.category ?: "카테고리 없음" // 카테고리가 null일 경우 기본값 설정
+                                this["photo"] =
+                                    mediInfo.photo ?: "이미지 없음" // 사진이 null일 경우 기본값 설정
+                                this["category"] =
+                                    mediInfo.category ?: "카테고리 없음" // 카테고리가 null일 경우 기본값 설정
                             }
                             // updatedData 리스트에서 기존 항목을 새로운 값으로 교체
                             val index = updatedData.indexOf(data)
@@ -469,7 +494,10 @@ class AfterPreActivity : AppCompatActivity() {
                         // 모든 데이터를 업데이트한 후 Intent로 PreMediActivity로 전환
                         val intent = Intent(this@AfterPreActivity, PreMediActivity::class.java)
                         // updatedData를 Intent에 담아서 전달 (Serializable 사용)
-                        intent.putExtra("updatedData", ArrayList(updatedData)) // ArrayList로 변환하여 전달
+                        intent.putExtra(
+                            "updatedData",
+                            ArrayList(updatedData)
+                        ) // ArrayList로 변환하여 전달
                         // 기존 백스택을 모두 지우고 새 액티비티로 이동
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 

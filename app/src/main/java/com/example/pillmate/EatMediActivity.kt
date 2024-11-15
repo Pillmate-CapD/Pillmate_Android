@@ -50,7 +50,7 @@ class EatMediActivity : AppCompatActivity() {
         // Intent에서 받아온 값 로그 출력
         Log.d("fetchNextMedicineInfo", "Intent로 받은 값 - pillName: $pillName, pillTime: $pillTime, medicineId: $medicineId")
 
-        fetchNextMedicineInfo(pillTime, medicineId)
+        //fetchNextMedicineInfo(pillTime, medicineId)
 
         // 단계 리스트 초기화
         steps.add(EatMedi(R.layout.eat_medi_item1, isVisible = true, isCompleted = false))
@@ -167,9 +167,22 @@ class EatMediActivity : AppCompatActivity() {
     private fun onStepButtonClick(position: Int) {
         if (position == 0) {
             // 첫 번째 단계에서 버튼 클릭 시 CameraActivity로 이동
-            val intent = Intent(this, CameraActivity::class.java)
+            val intent = Intent(this, MediScanActivity::class.java)
             startActivityForResult(intent, CAMERA_REQUEST_CODE)
         } else if (position < steps.size - 1) {
+
+            // Intent에서 전달된 데이터를 받아옴
+            val pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
+            val medicineId = intent.getIntExtra("pill_id", -1)
+
+            // 네 번째 단계에서 추가 동작 호출
+            if (position == 2) {
+                fetchNextMedicineInfo(pillTime, medicineId)
+                Log.d("복용단계 3단계-1", "$pillTime,$medicineId")
+            }
+
+            Log.d("복용단계 3단계-2", "$pillTime,$medicineId")
+
             steps[position].isVisible = false
             steps[position].isCompleted = true
             steps[position + 1].isVisible = true

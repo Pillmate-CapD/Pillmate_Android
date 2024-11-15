@@ -89,7 +89,9 @@ class PreMediActivity : AppCompatActivity() {
                     if (currentIndex == updatedData.size - 1) {
                         binding.tvSave.text = "등록"
                     }
-                    resetTimeSlots()
+                    // 다음으로 넘어갈 때마다 선택 초기화
+                    resetTimeSlots()        // 시간대 선택 초기화
+                    resetDiseaseSpinner()    // 질병 스피너 초기화
                 } else {
                     submitAllData()
                     finish()
@@ -490,7 +492,7 @@ class PreMediActivity : AppCompatActivity() {
         timeSlots.clear()
 
         // 초기 상태의 타임슬롯을 추가
-        timeSlots.add(TimeSlotItem(generateUniqueId(), "기상 직후", isTimeSelected = false))
+        timeSlots.add(TimeSlotItem(generateUniqueId(), "기상 직후", isTimeSelected = false, isTimeChanged= false))
 
         // 어댑터에 데이터가 변경되었음을 알림
         timeSlotAdapter.notifyDataSetChanged()
@@ -501,6 +503,12 @@ class PreMediActivity : AppCompatActivity() {
         binding.nestedScrollView.post {
             binding.nestedScrollView.scrollTo(0, 0)  // 최상단으로 이동
         }
+    }
+
+    private fun resetDiseaseSpinner() {
+        // 초기 상태로 질병 스피너를 설정합니다.
+        binding.spinnerDisease.text = null // 또는 기본값으로 설정할 경우 초기 텍스트 설정
+        binding.spinnerDisease.setBackgroundResource(R.drawable.bg_spinner) // 초기 배경색으로 변경
     }
 
 }
