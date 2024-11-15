@@ -180,6 +180,7 @@ class CalendarFragment : Fragment() {
                     response.body()?.let {
                         Log.d("CalendarFragment", "API 응답 데이터: $it")
                         updateAlarmUI(it.alarms)
+                        updateDiaryUI(it)
                     }
                 } else {
                     Log.e("CalendarFragment", "API 응답 실패: ${response.code()}")
@@ -272,7 +273,26 @@ class CalendarFragment : Fragment() {
         return (this * density).toInt()
     }
 
+    private fun updateDiaryUI(diary: DiaryResponse) {
+        binding.diaryListSection.removeAllViews()
+        if (diary.symptoms.isNullOrEmpty() && diary.score == null && diary.comment.isNullOrEmpty() && diary.record.isNullOrEmpty()) {
+            showNoDiaryMessage()
+            return
+        }
 
+        binding.noDiaryText.visibility = View.GONE
+
+        val itemView = layoutInflater.inflate(R.layout.layout_diary_entry, binding.diaryListSection, false)
+        itemView.findViewById<TextView>(R.id.painTags).text = diary.symptoms?.joinToString(" #", prefix = "#") ?: ""
+        itemView.findViewById<TextView>(R.id.painScore).text = "${diary.score ?: 0}점"
+        itemView.findViewById<TextView>(R.id.painDescription).text = diary.comment ?: ""
+        itemView.findViewById<TextView>(R.id.diaryContent).text = diary.record ?: ""
+        binding.diaryListSection.addView(itemView)
+    }
+
+    private fun showNoDiaryMessage() {
+        binding.noDiaryText.visibility = View.VISIBLE
+    }
 
 
     // "약물이 없는 경우" 메시지 표시 함수
