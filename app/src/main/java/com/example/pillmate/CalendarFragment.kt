@@ -284,9 +284,34 @@ class CalendarFragment : Fragment() {
 
         val itemView = layoutInflater.inflate(R.layout.layout_diary_entry, binding.diaryListSection, false)
         itemView.findViewById<TextView>(R.id.painTags).text = diary.symptoms?.joinToString(" #", prefix = "#") ?: ""
-        itemView.findViewById<TextView>(R.id.painScore).text = "${diary.score ?: 0}점"
+        val painScore = itemView.findViewById<TextView>(R.id.painScore)
+        painScore.text = "${diary.score ?: 0}점"
+        //itemView.findViewById<TextView>(R.id.painScore).text = "${diary.score ?: 0}점"
         itemView.findViewById<TextView>(R.id.painDescription).text = diary.comment ?: ""
         itemView.findViewById<TextView>(R.id.diaryContent).text = diary.record ?: ""
+
+        // 점수에 따른 색상 설정 (나 지금 추가했어요!)
+        val score = diary.score ?: 0
+        when (score) {
+            in 1..4 -> {
+                painScore.setTextColor(android.graphics.Color.parseColor("#06BFB6"))
+                painScore.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#D6F0EF"))
+            }
+            in 5..7 -> {
+                painScore.setTextColor(android.graphics.Color.parseColor("#FB7F02"))
+                painScore.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FFEAB1"))
+            }
+            in 8..10 -> {
+                painScore.setTextColor(android.graphics.Color.parseColor("#FF453A"))
+                painScore.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FFD1CE"))
+            }
+            else -> {
+                // 기본 색상 설정
+                painScore.setTextColor(android.graphics.Color.parseColor("#3E3E3E"))
+                painScore.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#F0F0F0"))
+            }
+        }
+
         binding.diaryListSection.addView(itemView)
     }
 
