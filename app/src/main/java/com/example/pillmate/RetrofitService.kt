@@ -56,6 +56,10 @@ interface RetrofitService {
     @POST("medicines/name")
     fun fetchMedicineDetails(@Body names: List<MedicineNameRequest>): Call<List<MedicineInfoResponse>>
 
+    //다이어리 day info
+    @GET("diaries/{date}")
+    fun getDiaryByDate(@Path("date") date: String): Call<DiaryResponse>
+
     //로그아웃
     @POST("members/logout")
     suspend fun logout(): LogoutResponse

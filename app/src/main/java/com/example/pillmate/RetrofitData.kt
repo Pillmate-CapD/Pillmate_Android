@@ -162,6 +162,22 @@ data class MedicineNameRequest(
     val name: String
 )
 
+//다이어리 day info
+// DiaryResponse.kt
+data class DiaryResponse(
+    val alarms: List<Alarm>?,
+    val symptoms: List<String>?,
+    val score: Int?,
+    val comment: String?,
+    val record: String?
+)
+
+data class Alarm(
+    val name: String,
+    val category: String,
+    val time: String
+)
+
 
 // 약 직접 추가
 data class MediAddRequest(
