@@ -178,6 +178,18 @@ data class Alarm(
     val time: String
 )
 
+//다이어리 추가
+data class DiaryaddRequest(
+    val date: String,
+    val symptom: List<String>?,
+    val score: Int?,
+    val record: String?
+)
+
+data class DiaryaddResponse(
+    val diaryId: Int
+)
+
 
 // 약 직접 추가
 data class MediAddRequest(

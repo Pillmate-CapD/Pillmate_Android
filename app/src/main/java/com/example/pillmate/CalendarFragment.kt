@@ -53,16 +53,52 @@ class CalendarFragment : Fragment() {
             showSpinnerDatePickerDialog()
         }
 
-        // editDiaryButton 클릭 시 HealthDiary1Activity로 이동
+        /*// editDiaryButton 클릭 시 HealthDiary1Activity로 이동
         binding.editDiaryButton.setOnClickListener {
             val intent = Intent(requireContext(), HealthDiary1Activity::class.java)
             startActivity(intent)
+        }*/
+        // editDiaryButton 클릭 시 데이터 체크 후 페이지 이동
+        binding.editDiaryButton.setOnClickListener {
+            fetchDiaryDataAndNavigate()
         }
+
 
         fetchDiaryData() // 추가된 기능
 
         return binding.root
     }
+    private fun fetchDiaryDataAndNavigate() {
+        val date = formatDateForApi() // 선택된 날짜 포맷 가져오기
+        Log.d("CalendarFragment", "선택된 날짜: $date")
+
+        RetrofitApi.getRetrofitService.getDiaryByDate(date).enqueue(object :
+            Callback<DiaryResponse> {
+            override fun onResponse(call: Call<DiaryResponse>, response: Response<DiaryResponse>) {
+                if (response.isSuccessful) {
+                    val diary = response.body()
+                    if (diary != null && (diary.symptoms.isNullOrEmpty() && diary.score == null && diary.comment.isNullOrEmpty() && diary.record.isNullOrEmpty())) {
+                        // 모든 값이 null 또는 비어 있는 경우, HealthDiary1Activity로 이동
+                        val intent = Intent(requireContext(), HealthDiary1Activity::class.java)
+                        intent.putExtra("date", date) // 날짜 전달
+                        startActivity(intent)
+                    } else {
+                        // 하나라도 값이 있는 경우, HDEdit1Activity로 이동
+                        //val intent = Intent(requireContext(), HDEdit1Activity::class.java)
+                        //intent.putExtra("date", date) // 날짜 전달
+                        //startActivity(intent)
+                    }
+                } else {
+                    Log.e("CalendarFragment", "API 응답 실패: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<DiaryResponse>, t: Throwable) {
+                Log.e("CalendarFragment", "API 요청 실패: ${t.message}")
+            }
+        })
+    }
+
     // 현재 년/월 텍스트 업데이트 함수
     private fun updateYearMonthText() {
         val year = calendar.get(Calendar.YEAR)
@@ -347,5 +383,10 @@ class CalendarFragment : Fragment() {
             Log.e("CalendarFragment", "시간 형식 변환 오류: ${e.message}")
             time
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        // API 호출하여 데이터를 갱신
+        fetchDiaryData()
     }
 }

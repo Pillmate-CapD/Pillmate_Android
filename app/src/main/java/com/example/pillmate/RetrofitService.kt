@@ -60,6 +60,14 @@ interface RetrofitService {
     @GET("diaries/{date}")
     fun getDiaryByDate(@Path("date") date: String): Call<DiaryResponse>
 
+    //다이어리 추가
+    @POST("diaries")
+    fun addDiary(@Body diaryaddRequest: DiaryaddRequest): Call<DiaryaddResponse>
+
+    // 날짜로 다이어리 조회 API
+    @POST("api/v1/diaries/date")
+    fun getDiaryByDate(@Body dateRequest: Map<String, String>): Call<DiaryaddResponse>
+
     //로그아웃
     @POST("members/logout")
     suspend fun logout(): LogoutResponse

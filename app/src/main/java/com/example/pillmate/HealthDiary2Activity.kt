@@ -9,21 +9,29 @@ import com.example.pillmate.databinding.ActivityHalthdiary2Binding
 class HealthDiary2Activity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHalthdiary2Binding
+    private var date: String? = null
+    private var selectedSymptoms: ArrayList<String>? = null
+    private var painScore: Int = 1 // 기본 점수는 1로 설정
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHalthdiary2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Intent로 date와 선택된 증상 리스트 받기
+        date = intent.getStringExtra("date")
+        selectedSymptoms = intent.getStringArrayListExtra("selectedSymptoms")
+
         // d_btn_f 버튼 클릭 시 HealthDiary3Activity로 이동
-        binding.dBtnF.setOnClickListener {
-            val intent = Intent(this, HealthDiary3Activity::class.java)
-            startActivity(intent)
-        }
+        //binding.dBtnF.setOnClickListener {
+          //  val intent = Intent(this, HealthDiary3Activity::class.java)
+          //  startActivity(intent)
+        //}
 
         // SeekBar 리스너 설정
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                painScore = progress // 선택된 점수 저장
                 val drawableResId: Int
                 val scoreText: String
                 val descriptionText: String
@@ -95,5 +103,13 @@ class HealthDiary2Activity : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+        // d_btn_f 버튼 클릭 시 HealthDiary3Activity로 이동
+        binding.dBtnF.setOnClickListener {
+            val intent = Intent(this, HealthDiary3Activity::class.java)
+            intent.putExtra("date", date)
+            intent.putStringArrayListExtra("selectedSymptoms", selectedSymptoms)
+            intent.putExtra("painScore", painScore)
+            startActivity(intent)
+        }
     }
 }
