@@ -84,9 +84,22 @@ class CalendarFragment : Fragment() {
                         startActivity(intent)
                     } else {
                         // 하나라도 값이 있는 경우, HDEdit1Activity로 이동
-                        //val intent = Intent(requireContext(), HDEdit1Activity::class.java)
-                        //intent.putExtra("date", date) // 날짜 전달
-                        //startActivity(intent)
+                        val intent = Intent(requireContext(), HDEdit1Activity::class.java)
+                        intent.putExtra("date", date) // 날짜 전달
+                        intent.putExtra("symptoms", diary?.symptoms?.joinToString(",") ?: "") // 증상 전달
+                        intent.putExtra("score", diary?.score ?: 0) // 점수 전달
+                        intent.putExtra("comment", diary?.comment ?: "") // 코멘트 전달
+                        intent.putExtra("record", diary?.record ?: "") // 기록 전달
+                        Log.d("CalendarFragment", """
+                        HDEdit1Activity로 이동:
+                        date=$date,
+                        symptoms=${diary?.symptoms?.joinToString(",")},
+                        score=${diary?.score ?: 0},
+                        comment=${diary?.comment ?: ""},
+                        record=${diary?.record ?: ""}
+                    """.trimIndent())
+                        startActivity(intent)
+
                     }
                 } else {
                     Log.e("CalendarFragment", "API 응답 실패: ${response.code()}")

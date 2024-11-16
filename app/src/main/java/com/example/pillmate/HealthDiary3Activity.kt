@@ -23,6 +23,11 @@ class HealthDiary3Activity : AppCompatActivity() {
         binding = ActivityHalthdiary3Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 뒤로가기 버튼 설정
+        binding.tsBack.setOnClickListener {
+            onBackPressed()
+        }
+
         // Intent로 전달받은 데이터 받기
         val date = intent.getStringExtra("date")
         val selectedSymptoms = intent.getStringArrayListExtra("selectedSymptoms")

@@ -167,6 +167,16 @@
         <activity
             android:name=".MyHealthEditD2Activity"
             android:exported="false" />
+        <activity
+            android:name=".HDEdit1Activity"
+            android:exported="false" />
+        <activity
+            android:name=".HDEdit2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".HDEdit3Activity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

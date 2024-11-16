@@ -18,6 +18,10 @@ class HealthDiary2Activity : AppCompatActivity() {
         binding = ActivityHalthdiary2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 뒤로가기 버튼 설정
+        binding.tsBack.setOnClickListener {
+            onBackPressed()
+        }
         // Intent로 date와 선택된 증상 리스트 받기
         date = intent.getStringExtra("date")
         selectedSymptoms = intent.getStringArrayListExtra("selectedSymptoms")
