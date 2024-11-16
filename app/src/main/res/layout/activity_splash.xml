@@ -2,25 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splashback"
+    android:background="@drawable/splash_bg"
     android:orientation="vertical"
     android:gravity="center">
 
     <ImageView
-        android:layout_marginTop="-120dp"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginLeft="-8dp"
-        android:src="@drawable/splash_logoimg"/>
-    <TextView
-        android:id="@+id/splash_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pill mate"
-        android:textSize="30sp"
-        android:fontFamily="@font/kimm_bold"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="-23dp"/>
+        android:layout_marginTop="-150dp"
+        android:layout_width="80dp"
+        android:layout_height="96.96dp"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/splash_logo"/>
 
 
 </LinearLayout>
