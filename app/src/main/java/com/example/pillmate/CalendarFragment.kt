@@ -111,6 +111,7 @@ class CalendarFragment : Fragment() {
         val dateFormat = SimpleDateFormat("MM월 dd일 E요일", Locale.KOREAN)
         binding.dateTitle.text = dateFormat.format(calendar.time)
         fetchDiaryData() // 추가된 기능
+        updateEditDiaryButtonState()//미래는 일기쓰기 버튼 클릭X
     }
 
     // RecyclerView 설정 함수
@@ -180,6 +181,7 @@ class CalendarFragment : Fragment() {
                     // 선택된 날짜를 업데이트하고 회색 동그라미 표시
                     adapter.updateSelectedDate(selectedDay, selectedMonth + 1, selectedYear)
                     fetchDiaryData() // 추가
+                    updateEditDiaryButtonState()//미래는 일기쓰기 버튼 클릭X
                 },
                 year,
                 month,
@@ -388,5 +390,22 @@ class CalendarFragment : Fragment() {
         super.onResume()
         // API 호출하여 데이터를 갱신
         fetchDiaryData()
+    }
+    private fun updateEditDiaryButtonState() {
+        val currentDate = LocalDate.now()
+        val selectedDate = LocalDate.of(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH) + 1,
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        // 미래 날짜 선택 시 버튼 비활성화, 현재/과거 날짜 선택 시 버튼 활성화
+        if (selectedDate.isAfter(currentDate)) {
+            binding.editDiaryButton.isEnabled = false
+            binding.editDiaryButton.alpha = 0.5f // 수정됨: 비활성화 상태 표시
+        } else {
+            binding.editDiaryButton.isEnabled = true
+            binding.editDiaryButton.alpha = 1.0f // 수정됨: 활성화 상태 표시
+        }
     }
 }
