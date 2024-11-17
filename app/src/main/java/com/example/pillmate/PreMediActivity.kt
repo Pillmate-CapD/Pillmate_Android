@@ -64,6 +64,7 @@ class PreMediActivity : AppCompatActivity() {
 
         // Intent에서 updatedData를 수신
         updatedData = intent.getSerializableExtra("updatedData") as? ArrayList<Map<String, String>> ?: arrayListOf()
+        val hospitalName = intent.getStringExtra("hospitalName") ?: ""
 
         // updatedData 사용
         updatedData?.let {
@@ -93,7 +94,7 @@ class PreMediActivity : AppCompatActivity() {
                     resetTimeSlots()        // 시간대 선택 초기화
                     resetDiseaseSpinner()    // 질병 스피너 초기화
                 } else {
-                    submitAllData()
+                    submitAllData(hospitalName)
                     finish()
                 }
             }
@@ -263,7 +264,7 @@ class PreMediActivity : AppCompatActivity() {
         }
     }
 
-    private fun submitAllData() {
+    private fun submitAllData(hospitalName:String) {
         Log.d("MedicineList", "최종 저장된 데이터: $medicineList")
 
         if (currentIndex == 10000) {
@@ -271,17 +272,21 @@ class PreMediActivity : AppCompatActivity() {
             return
         }
 
+//        // 다음 화면으로 데이터 전달
+//        val intent = Intent(this, EndPreActivity::class.java)
+//        intent.putExtra("medicineList", ArrayList(medicineList)) // ArrayList를 Serializable로 전달
+
         // 다음 화면으로 데이터 전달
-        val intent = Intent(this, EndPreActivity::class.java)
-        intent.putExtra("medicineList", ArrayList(medicineList)) // ArrayList를 Serializable로 전달
+        val intent = Intent(this, EndPreActivity::class.java).apply {
+            putExtra("medicineList", ArrayList(medicineList)) // ArrayList를 Serializable로 전달
+            putExtra("hospitalName", hospitalName)           // 병원명 전달
+        }
 
         // 기존 스택을 정리하고 새 액티비티로 이동
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()
     }
-
-
 
 
 //    // 마지막 항목인지 확인하는 함수 (임의로 정의)
@@ -334,7 +339,9 @@ class PreMediActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         intent?.let {
             // 새로운 updatedData를 받아옴
-            updatedData = it.getSerializableExtra("updatedData") as? ArrayList<Map<String, String>> ?: arrayListOf()
+            updatedData = intent.getSerializableExtra("updatedData") as? ArrayList<Map<String, String>> ?: arrayListOf()
+
+            //updatedData = it.getSerializableExtra("updatedData") as? ArrayList<Map<String, String>> ?: arrayListOf()
 
             // 데이터가 있다면 UI를 다시 업데이트
             if (updatedData.isNotEmpty()) {
@@ -343,45 +350,77 @@ class PreMediActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun displayData(index: Int) {
-        if (index >= 0 && index < updatedData.size) { // 인덱스가 리스트 크기 내에 있는지 확인
+        if (index >= 0 && index < updatedData.size) { // 인덱스가 유효한지 확인
             val data = updatedData[index]
 
             // 데이터 바인딩
-            binding.editMedi.text = data["명칭"]?.toEditable()
-            binding.spinnerDisease.text = data["고지혈증"]?.toEditable()
+            binding.editMedi.text = data["name"]?.toEditable() ?: "".toEditable()
+            binding.spinnerDisease.text = data["category"]?.toEditable() ?: "".toEditable()
+            binding.editOneEat.text = data["dosage"]?.toEditable() ?: "".toEditable()
+            binding.editOneDay.text = data["frequency"]?.toEditable() ?: "".toEditable()
+            binding.editAllDay.text = data["duration"]?.toEditable() ?: "".toEditable()
 
-//                if (data["category"] == "db에서 해당 약을 찾을 수 없습니다") {
-//                "기타".toEditable() // 카테고리 기본값 설정
-//            } else {
-//                data["고지혈증"]?.toEditable()
-//            }
-            binding.editOneEat.text = data["1회 투약량"]?.toEditable()
-            binding.editOneDay.text = data["1일 투여횟수"]?.toEditable()
-            binding.editAllDay.text = data["총 투약일수"]?.toEditable()
-
-
-            // Glide를 사용하여 이미지 로드, 기본 이미지 처리
+            // Glide를 사용하여 이미지 로드
             val imageUrl = data["photo"]
-            if (imageUrl == "db에서 해당 약을 찾을 수 없습니다") {
+            if (imageUrl.isNullOrEmpty() || imageUrl == "db에서 해당 약을 찾을 수 없습니다") {
                 Glide.with(this)
-                    .load(R.drawable.bg_zoom_null) // 기본 이미지를 설정 (default_image는 res/drawable에 있어야 함)
+                    .load(R.drawable.bg_zoom_null) // 기본 이미지
                     .into(binding.imgMedi)
             } else {
                 Glide.with(this)
                     .load(imageUrl)
-                    .placeholder(R.drawable.bg_zoom_null) // 로딩 중에 표시할 이미지
-                    .error(R.drawable.bg_zoom_null)   // 로드 실패 시 표시할 이미지
+                    .placeholder(R.drawable.bg_zoom_null) // 로딩 중 표시할 이미지
+                    .error(R.drawable.bg_zoom_null) // 로드 실패 시 표시할 이미지
                     .into(binding.imgMedi)
             }
 
-            // 로그로 현재 데이터를 출력
+            // 현재 데이터 로그 출력
             Log.d("PreMediActivity", "현재 데이터: $data")
         } else {
             Log.e("PreMediActivity", "잘못된 인덱스: $index")
         }
     }
+
+
+//    private fun displayData(index: Int) {
+//        if (index >= 0 && index < updatedData.size) { // 인덱스가 리스트 크기 내에 있는지 확인
+//            val data = updatedData[index]
+//
+//            // 데이터 바인딩
+//            binding.editMedi.text = data["명칭"]?.toEditable()
+//            binding.spinnerDisease.text = data["고지혈증"]?.toEditable()
+//
+////                if (data["category"] == "db에서 해당 약을 찾을 수 없습니다") {
+////                "기타".toEditable() // 카테고리 기본값 설정
+////            } else {
+////                data["고지혈증"]?.toEditable()
+////            }
+//            binding.editOneEat.text = data["1회 투약량"]?.toEditable()
+//            binding.editOneDay.text = data["1일 투여횟수"]?.toEditable()
+//            binding.editAllDay.text = data["총 투약일수"]?.toEditable()
+//
+//
+//            // Glide를 사용하여 이미지 로드, 기본 이미지 처리
+//            val imageUrl = data["photo"]
+//            if (imageUrl == "db에서 해당 약을 찾을 수 없습니다") {
+//                Glide.with(this)
+//                    .load(R.drawable.bg_zoom_null) // 기본 이미지를 설정 (default_image는 res/drawable에 있어야 함)
+//                    .into(binding.imgMedi)
+//            } else {
+//                Glide.with(this)
+//                    .load(imageUrl)
+//                    .placeholder(R.drawable.bg_zoom_null) // 로딩 중에 표시할 이미지
+//                    .error(R.drawable.bg_zoom_null)   // 로드 실패 시 표시할 이미지
+//                    .into(binding.imgMedi)
+//            }
+//
+//            // 로그로 현재 데이터를 출력
+//            Log.d("PreMediActivity", "현재 데이터: $data")
+//        } else {
+//            Log.e("PreMediActivity", "잘못된 인덱스: $index")
+//        }
+//    }
 
     fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 

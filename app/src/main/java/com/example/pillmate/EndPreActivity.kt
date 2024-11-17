@@ -35,6 +35,7 @@ class EndPreActivity : AppCompatActivity() {
 
         // Intent에서 리스트 데이터를 받음 (Serializable로 전달된 데이터)
         val medicineList = intent.getSerializableExtra("medicineList") as? ArrayList<MedicineInfo>
+        val hospitalName = intent.getStringExtra("hospitalName") ?: ""
 
         // 받은 데이터를 처리 및 ViewPager2에 연결
         medicineList?.let { list ->
@@ -54,6 +55,8 @@ class EndPreActivity : AppCompatActivity() {
                     sendMediAdd(mediAddRequest)
                 }
             }
+
+            binding.tvHospital.text = hospitalName
         }
     }
 

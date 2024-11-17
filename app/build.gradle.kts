@@ -26,6 +26,9 @@ android {
 
         buildConfigField("String", "OCR_SECRET_KEY", "\"${properties["ocr_secret_key"]}\"")
         buildConfigField("String", "INVOKE_URL", "\"${properties["ocr_invoke_url"]}\"")
+
+        buildConfigField("String", "TEMPLATE_SECRET_KEY", "\"${properties["template_secret_key"]}\"")
+        buildConfigField("String", "TEMPLATE_INVOKE_URL", "\"${properties["template_invoke_url"]}\"")
     }
 
     buildTypes {
