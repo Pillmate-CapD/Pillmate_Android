@@ -11,9 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pillmate.databinding.FragmentCalendarBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +32,9 @@ class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
     private lateinit var calendar: Calendar
     private lateinit var adapter: Calendar1Adapter
+    private var painsPerDayList: List<PainPerDay> = emptyList()
+    private var totalInfoList: List<TotalInfo> = emptyList()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +72,7 @@ class CalendarFragment : Fragment() {
 
 
         fetchDiaryData() // 추가된 기능
+        fetchMonthDiaryData()
 
         return binding.root
     }
@@ -126,6 +134,7 @@ class CalendarFragment : Fragment() {
         binding.dateTitle.text = dateFormat.format(calendar.time)
         fetchDiaryData() // 추가된 기능
         updateEditDiaryButtonState()//미래는 일기쓰기 버튼 클릭X
+        fetchMonthDiaryData()
     }
 
     // RecyclerView 설정 함수
@@ -196,6 +205,7 @@ class CalendarFragment : Fragment() {
                     adapter.updateSelectedDate(selectedDay, selectedMonth + 1, selectedYear)
                     fetchDiaryData() // 추가
                     updateEditDiaryButtonState()//미래는 일기쓰기 버튼 클릭X
+                    fetchMonthDiaryData()
                 },
                 year,
                 month,
@@ -420,6 +430,44 @@ class CalendarFragment : Fragment() {
         } else {
             binding.editDiaryButton.isEnabled = true
             binding.editDiaryButton.alpha = 1.0f // 수정됨: 활성화 상태 표시
+        }
+    }
+    private fun fetchMonthDiaryData() {
+        val date = formatDateForApi()
+        Log.d("CalendarFragment", "한 달 다이어리 데이터 요청 날짜: $date")
+
+        // 코루틴에서 API 호출
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                // API 호출을 IO 스레드에서 수행
+                val response = withContext(Dispatchers.IO) {
+                    RetrofitApi.getRetrofitService.getMonthDiary(date)
+                }
+
+                if (response.isSuccessful) {
+                    response.body()?.let { data ->
+                        Log.d("CalendarFragment", "한 달 다이어리 API 응답 데이터: $data")
+
+                        // 데이터 저장
+                        painsPerDayList = data.painsPerDay
+                        totalInfoList = data.totalInfo
+                        totalInfoList.forEachIndexed { index, totalInfo ->
+                            val category = totalInfo.category.toByteArray().toString(Charsets.UTF_8)
+                            Log.d(
+                                "CalendarFragment",
+                                "totalInfo[$index]: category=${totalInfo.category}, startDate=${totalInfo.startDate}, endDate=${totalInfo.endDate}"
+                            )
+                        }
+
+                        // duration 값을 eatmedi_date에 표시
+                        binding.eatmediDate.text = "${data.duration}"
+                    }
+                } else {
+                    Log.e("CalendarFragment", "한 달 다이어리 API 응답 실패: ${response.code()}")
+                }
+            } catch (e: Exception) {
+                Log.e("CalendarFragment", "API 요청 실패: ${e.message}")
+            }
         }
     }
 }

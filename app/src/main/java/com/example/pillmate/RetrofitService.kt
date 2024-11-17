@@ -70,6 +70,12 @@ interface RetrofitService {
         @Path("id") id: Int,
         @Body request: DiaryUpdateRequest): Call<Void>
 
+    // 다이어리 한 달 정보 GET
+    @GET("diaries")
+    suspend fun getMonthDiary(
+        @Query("date") date: String
+    ): Response<MonthDiaryResponse>
+
     // 날짜로 다이어리 조회 API
     @POST("api/v1/diaries/date")
     fun getDiaryByDate(@Body dateRequest: Map<String, String>): Call<DiaryaddResponse>

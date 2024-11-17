@@ -198,6 +198,42 @@ data class DiaryUpdateRequest(
     val record: String
 )
 
+//다이어리 한달 정보 get
+data class MonthDiaryResponse(
+    val painsPerDay: List<PainPerDay>,
+    val duration: Int,
+    val totalInfo: List<TotalInfo>,
+    val today: TodayInfo
+)
+
+data class PainPerDay(
+    val date: String,
+    val level: Int
+)
+
+data class TotalInfo(
+    val name: String,
+    val category: String,
+    val startDate: String,
+    val endDate: String
+)
+
+data class TodayInfo(
+    val id: String?,
+    val alarms: List<Alarm>,
+    val symptoms: String?,
+    val score: Int?,
+    val comment: String?,
+    val record: String?
+)
+
+data class DiaryAlarm(
+    val name: String,
+    val category: String,
+    val time: String
+)
+
+
 // 약 직접 추가
 data class MediAddRequest(
     @SerializedName("medicineName")
