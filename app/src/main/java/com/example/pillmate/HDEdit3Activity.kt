@@ -6,8 +6,12 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pillmate.databinding.ActivityHalthdiary3Binding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HDEdit3Activity : AppCompatActivity() {
 
@@ -25,12 +29,14 @@ class HDEdit3Activity : AppCompatActivity() {
         }
 
         // Intent로 전달받은 데이터 받기
+        var id = intent.getIntExtra("id", 0)
         val date = intent.getStringExtra("date")
-        val selectedSymptoms = intent.getStringArrayListExtra("selectedSymptoms")
+        val selectedSymptoms = intent.getStringArrayListExtra("selectedSymptoms")?.toList() ?: listOf()
         val painScore = intent.getIntExtra("painScore", 1)
         val record = intent.getStringExtra("record")
 
         // 전달받은 데이터 로그 출력
+        Log.d(logTag, "Received id: $id")
         Log.d(logTag, "Received date: $date")
         Log.d(logTag, "Received selectedSymptoms: $selectedSymptoms")
         Log.d(logTag, "Received painScore: $painScore")
@@ -54,10 +60,46 @@ class HDEdit3Activity : AppCompatActivity() {
         })
 
         // d_btn_f 버튼 클릭 시 CalendarFragment로 돌아가도록 설정
-        binding.dBtnF.setOnClickListener {
+        /*binding.dBtnF.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java) // MainActivity에서 CalendarFragment 로드
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
+        }*/
+        // d_btn_f 버튼 클릭 시 API 요청하여 다이어리 수정
+        binding.dBtnF.setOnClickListener {
+            val updatedRecord = binding.diaryInput.text.toString()
+            updateDiary(id, selectedSymptoms, painScore, updatedRecord)
         }
+    }
+    // 다이어리 수정 API 요청 함수
+    private fun updateDiary(id: Int, symptoms: List<String>, score: Int, record: String) {
+        val requestBody = DiaryUpdateRequest(
+            symptom = symptoms,
+            score = score,
+            record = record
+        )
+
+        RetrofitApi.getRetrofitService.updateDiary(id, requestBody).enqueue(object :
+            Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Log.d(logTag, "다이어리 수정 성공")
+                    Toast.makeText(this@HDEdit3Activity, "다이어리가 수정되었습니다.", Toast.LENGTH_SHORT).show()
+
+                    // CalendarFragment로 돌아가기
+                    val intent = Intent(this@HDEdit3Activity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    startActivity(intent)
+                } else {
+                    Log.e(logTag, "다이어리 수정 실패: ${response.code()}")
+                    Toast.makeText(this@HDEdit3Activity, "다이어리 수정에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e(logTag, "API 요청 실패: ${t.message}")
+                Toast.makeText(this@HDEdit3Activity, "네트워크 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

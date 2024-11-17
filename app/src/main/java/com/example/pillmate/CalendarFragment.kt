@@ -86,6 +86,7 @@ class CalendarFragment : Fragment() {
                         // 하나라도 값이 있는 경우, HDEdit1Activity로 이동
                         val intent = Intent(requireContext(), HDEdit1Activity::class.java)
                         intent.putExtra("date", date) // 날짜 전달
+                        intent.putExtra("id", diary?.id ?: 0) // ID 전달
                         intent.putExtra("symptoms", diary?.symptoms?.joinToString(",") ?: "") // 증상 전달
                         intent.putExtra("score", diary?.score ?: 0) // 점수 전달
                         intent.putExtra("comment", diary?.comment ?: "") // 코멘트 전달

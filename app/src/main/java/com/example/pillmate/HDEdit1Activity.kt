@@ -23,6 +23,7 @@ class HDEdit1Activity : AppCompatActivity() {
     private var isNoSymptomSelected = false
     private var isAnySymptomSelected = false
     private var selectedSymptoms = mutableListOf<String>()
+    private var id: Int = 0
     private var date: String? = null
     private var score: Int = 0
     private var comment: String? = null
@@ -41,11 +42,13 @@ class HDEdit1Activity : AppCompatActivity() {
 
         // Intent로 date 값 받기
         date = intent.getStringExtra("date")
+        id = intent.getIntExtra("id", 0)
         score = intent.getIntExtra("score", 0)
         comment = intent.getStringExtra("comment")
         record = intent.getStringExtra("record")
         receivedSymptoms = intent.getStringExtra("symptoms")?.split(",") ?: emptyList()
-        Log.d(logTag, "Intent 데이터 받음: date=$date, score=$score, comment=$comment, record=$record, symptoms=$receivedSymptoms")
+        Log.d(logTag, "Intent 데이터 받음: date=$date, id=$id, score=$score, comment=$comment, record=$record, symptoms=$receivedSymptoms")
+        //Log.d(logTag, "Intent 데이터 받음: date=$date, score=$score, comment=$comment, record=$record, symptoms=$receivedSymptoms")
 
         // d_btn_f 버튼 초기화 및 비활성화 설정
         binding.dBtnF.isEnabled = false
@@ -66,6 +69,7 @@ class HDEdit1Activity : AppCompatActivity() {
         binding.dBtnF.setOnClickListener {
             val intent = Intent(this, HDEdit2Activity::class.java)
             intent.putExtra("date", date)
+            intent.putExtra("id", id)
             intent.putExtra("score", score)
             intent.putExtra("comment", comment)
             intent.putExtra("record", record)

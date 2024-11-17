@@ -165,6 +165,7 @@ data class MedicineNameRequest(
 //다이어리 day info
 // DiaryResponse.kt
 data class DiaryResponse(
+    val id: Int,
     val alarms: List<Alarm>?,
     val symptoms: List<String>?,
     val score: Int?,
@@ -190,6 +191,12 @@ data class DiaryaddResponse(
     val diaryId: Int
 )
 
+//다이어리 수정
+data class DiaryUpdateRequest(
+    val symptom: List<String>,
+    val score: Int,
+    val record: String
+)
 
 // 약 직접 추가
 data class MediAddRequest(

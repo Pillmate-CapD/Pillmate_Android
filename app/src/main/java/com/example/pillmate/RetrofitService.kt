@@ -64,6 +64,12 @@ interface RetrofitService {
     @POST("diaries")
     fun addDiary(@Body diaryaddRequest: DiaryaddRequest): Call<DiaryaddResponse>
 
+    //다이어리 수정
+    @PATCH("diaries/{id}")
+    fun updateDiary(
+        @Path("id") id: Int,
+        @Body request: DiaryUpdateRequest): Call<Void>
+
     // 날짜로 다이어리 조회 API
     @POST("api/v1/diaries/date")
     fun getDiaryByDate(@Body dateRequest: Map<String, String>): Call<DiaryaddResponse>

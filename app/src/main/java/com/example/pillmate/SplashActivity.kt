@@ -60,7 +60,7 @@ class SplashActivity : AppCompatActivity() {
                 // 자동 로그인 정보가 없을 경우 로그인 화면으로 이동
                 navigateToLogin()
             }
-        }, 3000) // 3초 후 실행
+        }, 2000) // 2초 후 실행
     }
 
     // 로그인 화면으로 이동하는 함수

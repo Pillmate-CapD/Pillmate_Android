@@ -10,6 +10,7 @@ import com.example.pillmate.databinding.ActivityHalthdiary2Binding
 class HDEdit2Activity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHalthdiary2Binding
+    private var id: Int = 0
     private var date: String? = null
     private var selectedSymptoms: ArrayList<String>? = null
     private var painScore: Int = 1 // 기본 점수는 1로 설정
@@ -29,13 +30,15 @@ class HDEdit2Activity : AppCompatActivity() {
 
         // Intent로 date, score, comment, record, 선택된 증상 리스트 받기
         date = intent.getStringExtra("date")
+        id = intent.getIntExtra("id", 0)
         painScore = intent.getIntExtra("score", 1)
         comment = intent.getStringExtra("comment")
         record = intent.getStringExtra("record")
         selectedSymptoms = intent.getStringArrayListExtra("selectedSymptoms")
 
         // 받은 데이터를 로그로 확인
-        Log.d(logTag, "받은 데이터: date=$date, score=$painScore, comment=$comment, record=$record, selectedSymptoms=$selectedSymptoms")
+
+        Log.d(logTag, "받은 데이터: date=$date,id=$id, score=$painScore, comment=$comment, record=$record, selectedSymptoms=$selectedSymptoms")
 
         // SeekBar 초기값 설정
         binding.seekBar.progress = painScore
@@ -57,13 +60,14 @@ class HDEdit2Activity : AppCompatActivity() {
         binding.dBtnF.setOnClickListener {
             val intent = Intent(this, HDEdit3Activity::class.java)
             intent.putExtra("date", date)
+            intent.putExtra("id", id)
             intent.putStringArrayListExtra("selectedSymptoms", selectedSymptoms)
             intent.putExtra("painScore", painScore)
             intent.putExtra("comment", comment)
             intent.putExtra("record", record)
 
             // 전송할 데이터 로그 확인
-            Log.d(logTag, "전송할 데이터: date=$date, painScore=$painScore, comment=$comment, record=$record, selectedSymptoms=$selectedSymptoms")
+            Log.d(logTag, "전송할 데이터: date=$date,id=$id, painScore=$painScore, comment=$comment, record=$record, selectedSymptoms=$selectedSymptoms")
 
             startActivity(intent)
         }
