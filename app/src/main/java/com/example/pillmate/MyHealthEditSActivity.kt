@@ -132,8 +132,12 @@ class MyHealthEditSActivity : AppCompatActivity() {
         RetrofitApi.getRetrofitService.updateEditMyHealthInfo(requestBody).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@MyHealthEditSActivity, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    finish()
+                    //Toast.makeText(this@MyHealthEditSActivity, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    // MyHealthEditOkActivity로 이동
+                    val intent = Intent(this@MyHealthEditSActivity, MyHealthEditOkActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    startActivity(intent)
+                    finish() // 현재 Activity 종료
                 } else {
                     Log.e("MyHealthEditSActivity", "수정 실패: ${response.message()}")
                     response.errorBody()?.let { errorBody ->

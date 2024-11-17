@@ -4,31 +4,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@drawable/ok_bg">
-    <ImageView
-        android:layout_width="115dp"
-        android:layout_height="115dp"
-        android:src="@drawable/pschange_white"
-        android:layout_marginTop="179dp"/>
+    android:background="#ffffff">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
-        android:text="회원가입이 완료되었어요!"
+        android:text="환영합니다!"
         android:fontFamily="@font/notosanskrbold"
-        android:textColor="#ffffff"
-        android:textSize="28sp"
-        android:layout_marginTop="21dp"/>
+        android:textColor="#3e3e3e"
+        android:textSize="30sp"
+        android:layout_marginTop="125dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
-        android:layout_marginTop="16dp"
-        android:text="앞으로 필메이트와 함께\n약을 꾸준히 복용해 보세요!"
+        android:layout_marginTop="11dp"
+        android:text="이제부터 필메이트와 함께\n건강한 복약 습관을 만들어 보세요!"
         android:textAlignment="center"
-        android:fontFamily="@font/notosanskrlight"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+        android:fontFamily="@font/notosanskrmedium"
+        android:textColor="#1E54DF"
+        android:textSize="16sp" />
+    <ImageView
+        android:layout_width="240.6dp"
+        android:layout_height="260dp"
+        android:src="@drawable/sign_bgg"
+        android:layout_marginTop="43dp"/>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:text="로그인하기"
-            android:background="@drawable/button_stroke_white"
+            android:background="@drawable/button_blue"
             android:textColor="#ffffff"
             android:textSize="15sp"
             android:fontFamily="@font/notosanskrmedium"

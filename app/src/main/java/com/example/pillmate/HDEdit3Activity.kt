@@ -84,12 +84,17 @@ class HDEdit3Activity : AppCompatActivity() {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     Log.d(logTag, "다이어리 수정 성공")
-                    Toast.makeText(this@HDEdit3Activity, "다이어리가 수정되었습니다.", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this@HDEdit3Activity, "다이어리가 수정되었습니다.", Toast.LENGTH_SHORT).show()
 
                     // CalendarFragment로 돌아가기
-                    val intent = Intent(this@HDEdit3Activity, MainActivity::class.java)
+                    //val intent = Intent(this@HDEdit3Activity, MainActivity::class.java)
+                    //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    //startActivity(intent)
+                    // CalendarFragment로 돌아가기 대신 HDEditOkActivity로 이동
+                    val intent = Intent(this@HDEdit3Activity, HDEditOkActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                     startActivity(intent)
+                    finish() // 현재 Activity 종료
                 } else {
                     Log.e(logTag, "다이어리 수정 실패: ${response.code()}")
                     Toast.makeText(this@HDEdit3Activity, "다이어리 수정에 실패했습니다.", Toast.LENGTH_SHORT).show()

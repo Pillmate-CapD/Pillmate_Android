@@ -185,6 +185,12 @@
         <activity
             android:name=".EatMediFailActivity"
             android:exported="false" />
+        <activity
+            android:name=".MyHealthEditOkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HDEditOkActivity"
+            android:exported="false" />
 
     </application>
 

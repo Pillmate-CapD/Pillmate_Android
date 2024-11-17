@@ -178,9 +178,9 @@ class MyHealthEditD2Activity : AppCompatActivity() {
                     Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@MyHealthEditD2Activity, "건강 정보가 성공적으로 업데이트되었습니다.", Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(this@MyHealthEditD2Activity, "건강 정보가 성공적으로 업데이트되었습니다.", Toast.LENGTH_SHORT).show()
                             // MyHealthInfoActivity로 이동
-                            val intent = Intent(this@MyHealthEditD2Activity, MyHealthInfoActivity::class.java)
+                            val intent = Intent(this@MyHealthEditD2Activity, MyHealthEditOkActivity::class.java)
                             startActivity(intent)
                             finish() // 현재 액티비티 종료
                         } else {

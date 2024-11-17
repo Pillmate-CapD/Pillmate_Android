@@ -30,7 +30,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호 변경 완료"
+        android:text="건강정보 수정 완료"
         android:fontFamily="@font/notosanskrbold"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
@@ -45,7 +45,7 @@
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호가 성공적으로 변경되었어요\n안전한 이용을 위해 다시 로그인해 주세요!"
+        android:text="수정된 내용은 내 건강 정보에서 확인할 수 있어요\n필요 시, 다시 수정도 가능해요!"
         android:fontFamily="@font/notosanskrmedium"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
@@ -55,6 +55,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="62dp"/>
+    <TextView
+        android:id="@+id/tv_description2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="마이 페이지 → 내 건강 정보"
+        android:fontFamily="@font/notosanskrregular"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:includeFontPadding="false"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"/>
+    <!-- 밑줄 View -->
+    <View
+        android:layout_width="150dp"
+        android:layout_height="0.8dp"
+        android:layout_marginTop="0dp"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/tv_description2"
+        app:layout_constraintStart_toStartOf="@id/tv_description2"
+        app:layout_constraintEnd_toEndOf="@id/tv_description2"/>
 
     <!-- 확인 버튼 -->
     <Button
