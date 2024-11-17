@@ -8,76 +8,73 @@
     tools:context=".AddMediFinActivity"
     android:background="#1E54DF">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <View
+        android:layout_width="190dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="-20dp"
+        android:background="@drawable/ic_symbol"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_1" />
+
+    <ImageView
+        android:id="@+id/img_check"
+        android:layout_width="203dp"
+        android:layout_height="189dp"
+        android:src="@drawable/checkkk"
+        android:layout_marginTop="107dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 제목 텍스트 -->
+    <TextView
+        android:id="@+id/tv_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btn_confirm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="115dp"
-            android:layout_height="115dp"
-            android:background="@drawable/ic_add_fin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/tv_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            android:fontFamily="@font/notosanskrbold"
-            android:includeFontPadding="false"
-            android:text="약 추가가 완료되었어요!"
-            android:textColor="@color/white"
-            android:textSize="28sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view" />
-
-        <TextView
-            android:id="@+id/tv_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/notosanskrlight"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="추가된 약은 [약 리스트] 화면에서\n확인 가능해요"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_1" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/btn_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/bg_line_btn"
-        android:clickable="true"
-        android:elevation="3dp"
-        android:fontFamily="@font/notosanskrmedium"
-        android:gravity="center"
+        android:text="약 등록 완료"
+        android:fontFamily="@font/notosanskrbold"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
         android:includeFontPadding="false"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:text="확인"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="115dp"/>
+
+    <!-- 설명 텍스트 -->
+    <TextView
+        android:id="@+id/tv_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="추가된 약은 [약 보관함]에서 확인할 수 있어요\n언제든지 확인하고 건강을 관리해보세요!"
+        android:fontFamily="@font/notosanskrmedium"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:includeFontPadding="false"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/img_check"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="62dp"/>
+
+
+    <!-- 확인 버튼 -->
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:text="확인"
+        android:clickable="true"
+        android:background="@drawable/button_white_10"
+        android:textColor="#1E54DF"
+        android:textSize="15sp"
+        android:fontFamily="@font/notosanskrsemibold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="50dp"/>
 
 
 

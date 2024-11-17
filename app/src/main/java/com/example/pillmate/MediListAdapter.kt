@@ -229,7 +229,7 @@ class MediListAdapter(
         call.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful) {
-                    Log.d("deleteMedicine", "delete, 약물 삭제 성공")
+                    Log.d("deleteMedicine", "delete, 약물 삭제 완료")
                     //showPerfectToast("해당 약이 삭제됐어요.")
 
                     // 약물 삭제 후 ViewModel을 통해 데이터 갱신
@@ -240,7 +240,7 @@ class MediListAdapter(
 
                     // context를 사용하여 Intent 생성
                     val intent = Intent(context, AddMediFinActivity::class.java)
-                    intent.putExtra("editMessage", "약 삭제가 완료되었어요!")
+                    intent.putExtra("editMessage", "약 삭제 완료")
                     context.startActivity(intent)
                 }
             }

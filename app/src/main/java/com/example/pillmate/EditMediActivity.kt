@@ -284,7 +284,7 @@ class EditMediActivity : AppCompatActivity() {
                         //showPerfectToast("약 리스트 수정이 완료되었습니다") // 서버에서 보낸 메시지를 토스트로 표시
 
                         val intent = Intent(this@EditMediActivity, AddMediFinActivity::class.java)
-                        intent.putExtra("successMessage", "약 수정이 완료되었어요!")
+                        intent.putExtra("successMessage", "약 수정 완료")
                         startActivity(intent)
                         finish() // 액티비티 종료
                     }
