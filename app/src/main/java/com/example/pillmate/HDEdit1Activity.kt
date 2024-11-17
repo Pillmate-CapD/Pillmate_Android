@@ -121,7 +121,7 @@ class HDEdit1Activity : AppCompatActivity() {
 
         if (currentColor == Color.parseColor("#FFFFFF")) {
             drawable.setColor(Color.parseColor("#E6EBFA"))
-            drawable.setStroke(1, Color.parseColor("#1E54DF"))
+            drawable.setStroke(2, Color.parseColor("#1E54DF"))
             isNoSymptomSelected = true
             selectedSymptoms.clear()
             selectedSymptoms.add("증상 없음")
@@ -156,7 +156,7 @@ class HDEdit1Activity : AppCompatActivity() {
 
         if (currentColor == Color.parseColor("#F5F6F8")) {
             drawable.setColor(Color.parseColor("#B1EDEA"))
-            drawable.setStroke(1, Color.parseColor("#08D2C8"))
+            drawable.setStroke(2, Color.parseColor("#08D2C8"))
             checkImageView?.setImageResource(R.drawable.symptom_ycheck)
         } else {
             drawable.setColor(Color.parseColor("#F5F6F8"))

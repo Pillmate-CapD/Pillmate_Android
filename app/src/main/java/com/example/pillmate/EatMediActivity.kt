@@ -167,7 +167,9 @@ class EatMediActivity : AppCompatActivity() {
     private fun onStepButtonClick(position: Int) {
         if (position == 0) {
             // 첫 번째 단계에서 버튼 클릭 시 CameraActivity로 이동
-            val intent = Intent(this, MediScanActivity::class.java)
+            val pillName = intent.getStringExtra("pill_name") ?: "Unknown" // Intent에서 pillName을 가져옴
+            val intent = Intent(this, EatMediScanActivity::class.java)
+            intent.putExtra("pill_name", pillName) // pillName을 Intent에 추가
             startActivityForResult(intent, CAMERA_REQUEST_CODE)
         } else if (position < steps.size - 1) {
 

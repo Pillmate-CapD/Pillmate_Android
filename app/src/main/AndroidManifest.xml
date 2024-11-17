@@ -176,6 +176,15 @@
         <activity
             android:name=".HDEdit3Activity"
             android:exported="false" />
+        <activity
+            android:name=".EatMediScanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AfterEatMediScanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EatMediFailActivity"
+            android:exported="false" />
 
     </application>
 
