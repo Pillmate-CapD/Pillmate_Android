@@ -126,7 +126,7 @@ class AfterScanActivity : AppCompatActivity() {
 
         Log.d("mediScanWithBitmap", "API 호출 시작")
 
-        call.enqueue(object : Callback<List<MediScanResponse>> {  // List 형태로 수정
+        call.enqueue(object : Callback<List<MediScanResponse>> {
             override fun onResponse(
                 call: Call<List<MediScanResponse>>,
                 response: Response<List<MediScanResponse>>
@@ -148,21 +148,32 @@ class AfterScanActivity : AppCompatActivity() {
                             }
                         startActivity(intent)
                         finish()
+                    } else {
+                        Log.e("After Scan API Error", "응답 실패: 데이터가 비어 있음")
+                        navigateToFailActivity("알약 인식 실패: 데이터가 비어 있음")
                     }
                 } else {
-                    Log.e("After Scan API Error", "응답 실패")
-                    val intent =
-                        Intent(this@AfterScanActivity, FailActivity::class.java).apply {
-                        }
-                    startActivity(intent)
-                    overridePendingTransition(0, 0)
-                    finish()
+                    Log.e("After Scan API Error", "응답 실패: 코드 ${response.code()}")
+                    navigateToFailActivity("알약 인식 실패: 응답 코드 ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<List<MediScanResponse>>, t: Throwable) {
-                Log.e("API Error", "에러: ${t.message}")
+                Log.e("API Error", "네트워크 오류: ${t.message}")
+                navigateToFailActivity("네트워크 오류: ${t.message}")
             }
         })
     }
+
+
+    private fun navigateToFailActivity(reason: String) {
+        Log.e("FailActivity", "이동 사유: $reason")
+        val intent = Intent(this@AfterScanActivity, FailActivity::class.java).apply {
+
+        }
+        startActivity(intent)
+        overridePendingTransition(0, 0) // 애니메이션 없음
+        finish()
+    }
+
 }

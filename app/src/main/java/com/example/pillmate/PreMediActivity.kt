@@ -356,7 +356,9 @@ class PreMediActivity : AppCompatActivity() {
 
             // 데이터 바인딩
             binding.editMedi.text = data["name"]?.toEditable() ?: "".toEditable()
-            binding.spinnerDisease.text = data["category"]?.toEditable() ?: "".toEditable()
+            // 카테고리가 비어있으면 "고지혈증"으로 기본값 설정
+            val category = data["category"]?.ifEmpty { "고지혈증" } ?: "고지혈증"
+            binding.spinnerDisease.text = category.toEditable()
             binding.editOneEat.text = data["dosage"]?.toEditable() ?: "".toEditable()
             binding.editOneDay.text = data["frequency"]?.toEditable() ?: "".toEditable()
             binding.editAllDay.text = data["duration"]?.toEditable() ?: "".toEditable()
@@ -545,9 +547,16 @@ class PreMediActivity : AppCompatActivity() {
     }
 
     private fun resetDiseaseSpinner() {
-        // 초기 상태로 질병 스피너를 설정합니다.
-        binding.spinnerDisease.text = null // 또는 기본값으로 설정할 경우 초기 텍스트 설정
-        binding.spinnerDisease.setBackgroundResource(R.drawable.bg_spinner) // 초기 배경색으로 변경
+        // 현재 표시된 카테고리 값을 유지
+        val currentCategory = binding.spinnerDisease.text.toString()
+        if (currentCategory.isEmpty()) {
+            binding.spinnerDisease.text = "고지혈증".toEditable()
+        } else {
+            binding.spinnerDisease.text = currentCategory.toEditable()
+        }
+
+        // 배경 리셋
+        binding.spinnerDisease.setBackgroundResource(R.drawable.bg_spinner)
     }
 
 }

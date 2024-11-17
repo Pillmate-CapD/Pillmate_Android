@@ -214,10 +214,17 @@ class AfterPreActivity : AppCompatActivity() {
                 // 'fields' 키 확인
                 if (!firstImage.has("fields")) {
                     Log.e("TemplateOCR", "JSON 응답에 'fields' 키가 없습니다: $response")
+                    navigateToFailActivity()
                     return
                 }
 
                 val fields = firstImage.getJSONArray("fields")
+
+                if (fields.length() == 0) {
+                    Log.e("TemplateOCR", "필드가 비어 있습니다.")
+                    navigateToFailActivity()
+                    return
+                }
 
                 // 추출된 데이터 저장
                 val extractedData = mutableListOf<Map<String, String>>()
@@ -263,9 +270,11 @@ class AfterPreActivity : AppCompatActivity() {
                 fetchMediInfo(medicines, hospitalName)
             } else {
                 Log.e("TemplateOCR", "JSON 응답에 'images' 배열이 비어 있습니다.")
+                navigateToFailActivity()
             }
         } catch (e: Exception) {
             Log.e("TemplateOCR", "OCR 응답 처리 중 오류 발생: ${e.message}", e)
+            navigateToFailActivity()
         }
     }
 
@@ -288,8 +297,9 @@ class AfterPreActivity : AppCompatActivity() {
                 response: Response<List<MediInfoResponse>>
             ) {
                 if (response.isSuccessful) {
-                    val mediInfoList = response.body()
-                    mediInfoList?.forEach { mediInfo ->
+                    val mediInfoList = response.body() ?: emptyList()
+
+                    mediInfoList.forEach { mediInfo ->
                         Log.d(
                             "sendNamesToServer",
                             "약물 정보 수신 성공: ${mediInfo.name}, ${mediInfo.photo}, ${mediInfo.category}"
@@ -313,12 +323,15 @@ class AfterPreActivity : AppCompatActivity() {
                         }
                     }
 
+                    // **응답받은 데이터 수만큼만 처리**
+                    val filteredUpdatedData = updatedData.filter { it["name"]?.isNotEmpty() == true }
+
                     // 업데이트된 데이터를 로그로 출력
-                    Log.d("UpdatedData", "updateData 출력: $updatedData")
+                    Log.d("FilteredUpdatedData", "최종 전달할 데이터: $filteredUpdatedData")
 
                     // 모든 데이터를 업데이트한 후 Intent로 PreMediActivity로 전환
                     val intent = Intent(this@AfterPreActivity, PreMediActivity::class.java).apply {
-                        putExtra("updatedData", ArrayList(updatedData)) // ArrayList로 변환하여 전달
+                        putExtra("updatedData", ArrayList(filteredUpdatedData)) // ArrayList로 변환하여 전달
                         putExtra("hospitalName", hospitalName) // 병원명도 함께 전달
                     }
                     startActivity(intent)
@@ -336,4 +349,12 @@ class AfterPreActivity : AppCompatActivity() {
         })
     }
 
+    private fun navigateToFailActivity() {
+        val intent = Intent(this@AfterPreActivity, FailActivity::class.java).apply {
+            putExtra("CheckActivity", "preActivity") // 실패의 원인을 표시하거나 다음 액션을 위해 데이터를 전달
+        }
+        startActivity(intent)
+        overridePendingTransition(0, 0) // 애니메이션 없음
+        finish()
+    }
 }
