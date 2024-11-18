@@ -89,10 +89,11 @@
         <ImageView
             android:id="@+id/medieat_image"
             android:layout_width="match_parent"
-            android:layout_height="260dp"
+            android:layout_height="288dp"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:scaleType="fitXY"
             android:background="@drawable/eatmedi_sample_d2" />
 
         <TextView

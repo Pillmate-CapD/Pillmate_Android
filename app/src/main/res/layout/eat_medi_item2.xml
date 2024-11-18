@@ -89,9 +89,10 @@
             <ImageView
                 android:id="@+id/medicheck_image"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="288dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
+                android:scaleType="fitXY"
                 android:layout_gravity="center"
                 android:src="@drawable/eatmedi_sample_d2"/>
 
