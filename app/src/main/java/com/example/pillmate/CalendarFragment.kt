@@ -145,7 +145,7 @@ class CalendarFragment : Fragment() {
     // RecyclerView 설정 함수
     private fun setupRecyclerView() {
         days = generateDaysForMonth()
-        adapter = Calendar1Adapter(days,painsPerDayList) { day, month, year ->
+        adapter = Calendar1Adapter(days,painsPerDayList,totalInfoList) { day, month, year ->
             calendar.set(Calendar.DAY_OF_MONTH, day)
             updateDateTitle()
         }

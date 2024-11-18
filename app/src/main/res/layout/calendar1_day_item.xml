@@ -65,11 +65,12 @@
         android:id="@+id/statusDotsContainer"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:layout_marginTop="0dp"
-        app:layout_constraintTop_toBottomOf="@id/pill_progressBar"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/pill_progressBar"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <!-- 위쪽 줄 -->
@@ -78,30 +79,30 @@
             android:id="@+id/statusDot1"
             android:layout_width="5.5dp"
             android:layout_height="5.5dp"
+            android:layout_marginEnd="2dp"
             android:background="@drawable/small_circle_dot1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/statusDot2"
-            android:layout_marginEnd="2dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/statusDot2"
             android:layout_width="5.5dp"
             android:layout_height="5.5dp"
+            android:layout_marginEnd="2dp"
             android:background="@drawable/small_circle_dot2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/statusDot1"
             app:layout_constraintEnd_toStartOf="@id/statusDot3"
-            android:layout_marginEnd="2dp" />
+            app:layout_constraintStart_toEndOf="@id/statusDot1"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/statusDot3"
             android:layout_width="5.5dp"
             android:layout_height="5.5dp"
             android:background="@drawable/small_circle_dot3"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/statusDot2"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <!-- 아래쪽 줄 -->
@@ -110,26 +111,36 @@
             android:id="@+id/statusDot4"
             android:layout_width="5.5dp"
             android:layout_height="5.5dp"
-            android:background="@drawable/small_circle_dot4"
-            app:layout_constraintTop_toBottomOf="@id/statusDot2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/statusDot5"
-            android:layout_marginTop="2dp"/>
+            android:layout_marginEnd="2dp"
+            android:layout_marginTop="2dp"
+        android:background="@drawable/small_circle_dot4"
+        app:layout_constraintEnd_toStartOf="@id/statusDot5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statusDot1" />
 
         <View
             android:id="@+id/statusDot5"
             android:layout_width="5.5dp"
             android:layout_height="5.5dp"
-            android:background="@drawable/small_circle_dot5"
-            app:layout_constraintTop_toBottomOf="@id/statusDot2"
-            app:layout_constraintStart_toEndOf="@id/statusDot4"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="2dp"
             android:layout_marginTop="2dp"
-            android:layout_marginStart="0dp"
-            />
+        android:background="@drawable/small_circle_dot5"
+        app:layout_constraintEnd_toStartOf="@id/statusDot6"
+        app:layout_constraintStart_toEndOf="@id/statusDot4"
+        app:layout_constraintTop_toBottomOf="@id/statusDot2" />
+
+        <View
+            android:id="@+id/statusDot6"
+            android:layout_width="5.5dp"
+            android:layout_height="5.5dp"
+            android:layout_marginTop="2dp"
+        android:background="@drawable/small_circle_dot6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/statusDot5"
+        app:layout_constraintTop_toBottomOf="@id/statusDot3" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

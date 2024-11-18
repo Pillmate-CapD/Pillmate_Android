@@ -13,6 +13,7 @@ import java.util.Calendar
 class Calendar1Adapter(
     private var days: List<Pair<Int?, Boolean>>,
     private var painsPerDayList: List<PainPerDay>,
+    private val totalInfoList: List<TotalInfo>,
     private val onDayClickListener: (Int, Int, Int) -> Unit // month, year도 포함
 ) : RecyclerView.Adapter<Calendar1Adapter.ViewHolder>() {
 
@@ -89,6 +90,14 @@ class Calendar1Adapter(
                     binding.dayRecy.text = ""
                     binding.dayRecy.visibility = View.INVISIBLE
                 }
+                // 날짜에 해당하는 카테고리 리스트 가져오기-추가
+                val selectedDate = String.format("%04d-%02d-%02d", selectedYear, selectedMonth, day)
+                val categoriesForDate = totalInfoList.filter {
+                    it.startDate <= selectedDate && it.endDate >= selectedDate
+                }.map { it.category }.distinct() // 중복 카테고리 제거
+
+                // 작은 원 업데이트-추가
+                //updateStatusDots(categoriesForDate)
 
                 // painsPerDay 데이터를 사용한 today_view 배경 설정
                 val matchingPain = painsPerDayList.find { pain ->
@@ -199,6 +208,7 @@ class Calendar1Adapter(
         }
     }
 
+
     // 날짜 변경 시 호출되는 함수
     fun updateSelectedDate(day: Int, month: Int, year: Int) {
         selectedDay = day
@@ -206,4 +216,5 @@ class Calendar1Adapter(
         selectedYear = year
         notifyDataSetChanged()
     }
+
 }
