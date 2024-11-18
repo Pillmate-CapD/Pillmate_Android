@@ -1,6 +1,7 @@
 package com.example.pillmate
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,8 @@ import com.example.pillmate.databinding.Calendar1DayItemBinding
 import java.util.Calendar
 
 class Calendar1Adapter(
-    private val days: List<Pair<Int?, Boolean>>,
+    private var days: List<Pair<Int?, Boolean>>,
+    private var painsPerDayList: List<PainPerDay>,
     private val onDayClickListener: (Int, Int, Int) -> Unit // month, year도 포함
 ) : RecyclerView.Adapter<Calendar1Adapter.ViewHolder>() {
 
@@ -21,6 +23,17 @@ class Calendar1Adapter(
     private val currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
     private val currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
     private val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+    // 데이터를 업데이트하는 메서드 (선택된 날짜 초기화하지 않음)
+    fun updateData(newDays: List<Pair<Int?, Boolean>>, newPainsPerDayList: List<PainPerDay>) {
+        days = newDays
+        painsPerDayList = newPainsPerDayList
+        notifyDataSetChanged()
+    }
+
+    init {
+        // 어댑터 초기화 시 painsPerDayList 로그 출력
+        Log.d("Calendar1Adapter", "painsPerDayList 데이터: $painsPerDayList")
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = Calendar1DayItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,6 +46,19 @@ class Calendar1Adapter(
 
     override fun getItemCount() = days.size
 
+    // 선택된 날짜 업데이트 메서드
+    fun setSelectedDate(day: Int, month: Int, year: Int) {
+        selectedDay = day
+        selectedMonth = month
+        selectedYear = year
+        notifyDataSetChanged()
+    }
+
+    // 선택된 날짜 가져오는 메서드
+    fun getSelectedDate(): Triple<Int?, Int, Int> {
+        return Triple(selectedDay, selectedMonth, selectedYear)
+    }
+
     inner class ViewHolder(private val binding: Calendar1DayItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -43,6 +69,10 @@ class Calendar1Adapter(
                 binding.dateRecy.text = day.toString()
                 binding.dateRecy.visibility = View.VISIBLE
                 binding.dateRecy.setTextColor(if (isCurrentMonth) Color.BLACK else Color.parseColor("#D9D9D9"))
+                // painsPerDayList의 내용 출력
+                painsPerDayList.forEach { pain ->
+                    Log.d("Calendar1Adapter", "PainPerDay - date: ${pain.date}, level: ${pain.level}")
+                }
 
                 // 현재 날짜 표시
                 //val isToday = (day == currentDay && selectedMonth == currentMonth && selectedYear == currentYear)
@@ -59,24 +89,86 @@ class Calendar1Adapter(
                     binding.dayRecy.visibility = View.INVISIBLE
                 }
 
-                // 회색 동그라미 처리
-                if (isToday && selectedDay == null) {
-                    binding.todayView.setBackgroundResource(R.drawable.circle_today)
-                } else if (isSelected && isCurrentMonth) {
-                    binding.todayView.setBackgroundResource(R.drawable.circle_today)
+                // painsPerDay 데이터를 사용한 today_view 배경 설정
+                val matchingPain = painsPerDayList.find { pain ->
+                    // "yyyy-MM-dd" 형식의 date 필드 파싱
+                    val parts = pain.date.split("-")
+                    val year = parts[0].toInt()
+                    val month = parts[1].toInt()
+                    val day = parts[2].toInt()
+                    // 비교 전 로그 출력
+                    Log.d("Calendar1Adapter", "비교 중 - pain day: $day, pain month: $month, pain year: $year")
+
+                    // 현재 바인딩 중인 날짜와 비교
+                    day == this@ViewHolder.binding.dateRecy.text.toString().toInt() &&
+                            month == selectedMonth &&
+                            year == selectedYear
+                }
+
+                if (matchingPain != null) {
+                    // level 값에 따라 배경 설정 (1 ~ 10)
+                    Log.d("Calendar1Adapter", "matchingPain 찾음 - level: ${matchingPain.level}")
+                    val levelDrawable = when (matchingPain.level) {
+                        1 -> R.drawable.level1
+                        2 -> R.drawable.level2
+                        3 -> R.drawable.level3
+                        4 -> R.drawable.level4
+                        5 -> R.drawable.level5
+                        6 -> R.drawable.level6
+                        7 -> R.drawable.level7
+                        8 -> R.drawable.level8
+                        9 -> R.drawable.level9
+                        10 -> R.drawable.level10
+                        else -> R.drawable.circle_white
+                    }
+                    binding.todayView.setBackgroundResource(levelDrawable)
                 } else {
-                    binding.todayView.setBackgroundResource(R.drawable.circle_white)
+                    Log.d("Calendar1Adapter", "matchingPain 찾지 못함")
+                    // 데이터가 없는 날짜 처리
+                    val currentDate = Calendar.getInstance()
+                    val selectedDate = Calendar.getInstance().apply {
+                        set(selectedYear, selectedMonth - 1, day)
+                    }
+
+                    when {
+                        selectedDate.before(currentDate) -> {
+                            binding.todayView.setBackgroundResource(R.drawable.circle_nod)
+                        }
+                        isToday -> {
+                            binding.todayView.setBackgroundResource(R.drawable.circle_white)
+                        }
+                        else -> {
+                            binding.todayView.setBackgroundResource(R.drawable.circle_white)
+                        }
+                    }
+                }
+                // 회색 stroke 처리
+                if (isToday && selectedDay == null) {
+                    binding.pillProgressBar.setIndicatorColor(Color.parseColor("#898989"))
+                } else if (isSelected && isCurrentMonth) {
+                    binding.pillProgressBar.setIndicatorColor(Color.parseColor("#898989"))
+                } else {
+                    binding.pillProgressBar.setIndicatorColor(Color.parseColor("#ffffff"))
                 }
 
                 // 클릭 이벤트 처리
                 itemView.setOnClickListener {
                     if (isCurrentMonth) {
                         selectedDay = day
+                        selectedMonth = this@Calendar1Adapter.selectedMonth
+                        selectedYear = this@Calendar1Adapter.selectedYear
+                        notifyDataSetChanged()
+                        onDayClickListener(day, selectedMonth, selectedYear)
+                    }
+                }
+                /*itemView.setOnClickListener {
+                    if (isCurrentMonth) {
+                        selectedDay = day
                         notifyDataSetChanged()
                         // month, year도 함께 넘기기
                         onDayClickListener(day, selectedMonth, selectedYear)
                     }
-                }
+                }*/
             } else {
                 binding.dateRecy.text = ""
                 binding.dateRecy.visibility = View.INVISIBLE

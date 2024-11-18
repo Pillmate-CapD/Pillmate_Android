@@ -32,6 +32,7 @@ class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
     private lateinit var calendar: Calendar
     private lateinit var adapter: Calendar1Adapter
+    private lateinit var days: List<Pair<Int?, Boolean>>
     private var painsPerDayList: List<PainPerDay> = emptyList()
     private var totalInfoList: List<TotalInfo> = emptyList()
 
@@ -139,8 +140,8 @@ class CalendarFragment : Fragment() {
 
     // RecyclerView 설정 함수
     private fun setupRecyclerView() {
-        val days = generateDaysForMonth()
-        adapter = Calendar1Adapter(days) { day, month, year ->
+        days = generateDaysForMonth()
+        adapter = Calendar1Adapter(days,painsPerDayList) { day, month, year ->
             calendar.set(Calendar.DAY_OF_MONTH, day)
             updateDateTitle()
         }
@@ -450,6 +451,9 @@ class CalendarFragment : Fragment() {
 
                         // 데이터 저장
                         painsPerDayList = data.painsPerDay
+                        // painsPerDayList의 내용 로그 출력
+                        Log.d("CalendarFragment", "업데이트된 painsPerDayList 데이터: $painsPerDayList")
+
                         totalInfoList = data.totalInfo
                         totalInfoList.forEachIndexed { index, totalInfo ->
                             val category = totalInfo.category.toByteArray().toString(Charsets.UTF_8)
@@ -459,8 +463,11 @@ class CalendarFragment : Fragment() {
                             )
                         }
 
+                        adapter.updateData(days, painsPerDayList)
+
                         // duration 값을 eatmedi_date에 표시
                         binding.eatmediDate.text = "${data.duration}"
+                        //adapter.updateData(days, painsPerDayList)
                     }
                 } else {
                     Log.e("CalendarFragment", "한 달 다이어리 API 응답 실패: ${response.code()}")
