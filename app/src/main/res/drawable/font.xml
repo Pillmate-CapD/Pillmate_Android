@@ -10,4 +10,5 @@
     <font android:font = "@font/sfprodisplaysemibold" />
     <font android:font = "@font/sfprodisplayheavy" />
     <font android:font = "@font/gapyeongwave" />
+    <font android:font = "@font/leanthewall" />
 </font-family>

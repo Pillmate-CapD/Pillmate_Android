@@ -1,12 +1,17 @@
 package com.example.pillmate
 
 import AllFragment
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ImageSpan
 import android.util.Log
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +22,13 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.capdi_eat_test.MyPillListFragment
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,7 +50,10 @@ class MediListAdapter(
     inner class MediViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val picture: ImageView = itemView.findViewById(R.id.image_view)
         val title: TextView = itemView.findViewById(R.id.medication_title)
-        val info: TextView = itemView.findViewById(R.id.medication_info)
+        val amount: TextView = itemView.findViewById(R.id.medication_amount)
+        val frequency: TextView = itemView.findViewById(R.id.medication_frequency)
+        val duration: TextView = itemView.findViewById(R.id.medication_duration)
+        //val info: TextView = itemView.findViewById(R.id.medication_info)
         val time: TextView = itemView.findViewById(R.id.medication_time)
         val realTime: TextView = itemView.findViewById(R.id.medication_realTime)
         val zoom: View = itemView.findViewById(R.id.btn_img_zoom)
@@ -60,8 +70,11 @@ class MediListAdapter(
         val medi = medicines[position]
 
         holder.title.text = medi.name
-        val formattedInfo = "${medi.amount}정 | 매일 ${medi.timesPerDay}회 | ${medi.day}일"
-        holder.info.text = formattedInfo
+//        val formattedInfo = "${medi.amount}정 | 매일 ${medi.timesPerDay}회 | ${medi.day}일"
+//        holder.info.text = formattedInfo
+        holder.amount.text = "${medi.amount}정"
+        holder.frequency.text = "매일 ${medi.timesPerDay}회"
+        holder.duration.text = "${medi.day}일"
 
         if (medi.timeSlotList.isNotEmpty()) {
             val timeSlot = medi.timeSlotList[0]

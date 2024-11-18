@@ -33,32 +33,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="16dp"
-                    android:paddingTop="30dp"
                     android:paddingRight="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <View
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:id="@+id/ic_logo_main"
-                        android:layout_width="20dp"
-                        android:layout_height="24.24dp"
-                        android:background="@drawable/ic_logo_main"/>
+<!--                    <View-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        android:id="@+id/ic_logo_main"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="24.24dp"-->
+<!--                        android:background="@drawable/ic_logo_main"/>-->
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
                         android:fontFamily="@font/gapyeongwave"
                         android:includeFontPadding="false"
                         android:text="Pill mate"
                         android:textColor="@color/white"
                         android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ic_logo_main" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="30dp"
+                        app:layout_constraintStart_toStartOf="parent" />
 
 <!--                    <View-->
 <!--                        android:layout_width="118.63dp"-->
@@ -67,9 +66,10 @@
 
 
                     <ImageView
+                        android:layout_marginTop="35dp"
                         android:id="@+id/alert_img"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="26.19dp"
+                        android:layout_height="28.45dp"
                         android:clickable="true"
                         android:src="@drawable/alert"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -80,14 +80,14 @@
                         android:id="@+id/view_exist_alarm"
                         android:layout_width="6dp"
                         android:layout_height="6dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="4dp"
                         android:background="@drawable/circle_view"
-                        android:visibility="invisible"
-                        app:layout_constraintEnd_toEndOf="@id/alert_img"
-                        app:layout_constraintTop_toTopOf="@id/alert_img" />
+                        android:visibility="visible"
+                        android:layout_marginBottom="-1dp"
+                        app:layout_constraintBottom_toTopOf="@id/alert_img"
+                        app:layout_constraintEnd_toEndOf="@+id/alert_img" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <!--                <androidx.recyclerview.widget.RecyclerView-->
                 <!--                    app:layout_constraintTop_toBottomOf="@id/top_layout"-->
@@ -1299,7 +1299,7 @@
                         android:layout_marginTop="11dp"
                         android:fontFamily="@font/notosanskrregular"
                         android:includeFontPadding="false"
-                        android:text="70정으로 조금 더 열심히 복용해보세요!"
+                        android:text="70정으로 조금 더 열심히 복용해 보세요!"
                         android:textColor="#898989"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"

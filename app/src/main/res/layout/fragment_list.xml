@@ -178,13 +178,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/fab"
         app:fabCustomSize="60dp"
+        app:maxImageSize="36dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="11dp"
         android:layout_marginBottom="11dp"
-        android:backgroundTint="#1154FD"
+        android:backgroundTint="#1E54DF"
         android:src="@drawable/plus"/>
 
 

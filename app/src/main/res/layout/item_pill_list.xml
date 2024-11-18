@@ -93,20 +93,93 @@
             app:layout_constraintTop_toBottomOf="@id/medication_title"
             android:background="@drawable/ic_mini_alert"/>
 
-        <TextView
-            android:id="@+id/medication_info"
+<!--        <TextView-->
+<!--            android:id="@+id/medication_info"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/notosanskrmedium"-->
+<!--            android:includeFontPadding="false"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            android:layout_marginTop="-3dp"-->
+<!--            android:text="1정 | 매 1회 | 90일"-->
+<!--            android:textColor="#898989"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/ic_mini_alert"-->
+<!--            app:layout_constraintStart_toEndOf="@id/ic_mini_alert"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/ic_mini_alert" />-->
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanskrmedium"
-            android:includeFontPadding="false"
-            android:layout_marginLeft="5dp"
+            android:orientation="horizontal"
             android:layout_marginTop="-3dp"
-            android:text="1정 | 매 1회 | 90일"
-            android:textColor="#898989"
-            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/ic_mini_alert"
             app:layout_constraintStart_toEndOf="@id/ic_mini_alert"
-            app:layout_constraintTop_toTopOf="@+id/ic_mini_alert" />
+            app:layout_constraintTop_toTopOf="@+id/ic_mini_alert">
+
+            <!-- 첫 번째 데이터 -->
+            <TextView
+                android:id="@+id/medication_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskrmedium"
+                android:includeFontPadding="false"
+                android:text="1정"
+                android:textColor="#898989"
+                android:textSize="12sp" />
+
+            <!-- 첫 번째 구분자 (|) -->
+            <TextView
+                android:id="@+id/first_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/leanthewall"
+                android:includeFontPadding="false"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="|"
+                android:gravity="center"
+                android:textColor="#898989"
+                android:textSize="11sp" />
+
+            <!-- 두 번째 데이터 -->
+            <TextView
+                android:id="@+id/medication_frequency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskrmedium"
+                android:includeFontPadding="false"
+                android:text="매 1회"
+                android:textColor="#898989"
+                android:textSize="12sp" />
+
+            <!-- 두 번째 구분자 (|) -->
+            <TextView
+                android:id="@+id/second_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/leanthewall"
+                android:includeFontPadding="false"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="|"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="#898989" />
+
+            <!-- 세 번째 데이터 -->
+            <TextView
+                android:id="@+id/medication_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskrmedium"
+                android:includeFontPadding="false"
+                android:text="90일"
+                android:textColor="#898989"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
         <View
             android:id="@+id/ic_mini_clock"

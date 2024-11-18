@@ -13,7 +13,7 @@
         <scale android:scaleWidth="100%">
             <shape>
                 <corners android:radius="5dp"/>
-                <solid android:color="#B0C4DE"/>
+                <solid android:color="#DAF8F7"/>
             </shape>
         </scale>
     </item>
@@ -25,7 +25,7 @@
                 <corners android:radius="5dp"/>
                 <gradient
                     android:startColor="#1E54DF"
-                    android:endColor="#B1EDEA"
+                    android:endColor="#DAF8F7"
                     android:angle="0"/>
             </shape>
         </scale>
