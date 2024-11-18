@@ -28,6 +28,7 @@ class Calendar1Adapter(
         days = newDays
         painsPerDayList = newPainsPerDayList
         notifyDataSetChanged()
+
     }
 
     init {
@@ -144,10 +145,30 @@ class Calendar1Adapter(
                 }
                 // 회색 stroke 처리
                 if (isToday && selectedDay == null) {
-                    binding.pillProgressBar.setIndicatorColor(Color.parseColor("#898989"))
+                    if (matchingPain == null) {
+                        // 오늘 날짜인데 API 데이터가 없는 경우
+                        binding.todayView.setBackgroundResource(R.drawable.circle_today)
+                        binding.pillProgressBar.setIndicatorColor(Color.parseColor("#ffffff"))
+                    } else {
+                        // 오늘 날짜이고 API 데이터가 있는 경우
+                        binding.pillProgressBar.setIndicatorColor(Color.parseColor("#898989"))
+                    }
                 } else if (isSelected && isCurrentMonth) {
-                    binding.pillProgressBar.setIndicatorColor(Color.parseColor("#898989"))
+                    // 선택된 날짜이고 현재 달인 경우
+                    if (isToday) {
+                        // 오늘 날짜가 선택된 경우
+                        if (matchingPain == null) {
+                            binding.todayView.setBackgroundResource(R.drawable.circle_today)
+                            binding.pillProgressBar.setIndicatorColor(Color.parseColor("#ffffff"))
+                        } else {
+                            binding.pillProgressBar.setIndicatorColor(Color.parseColor("#898989"))
+                        }
+                    } else {
+                        // 오늘 날짜가 아닌 다른 날짜가 선택된 경우
+                        binding.pillProgressBar.setIndicatorColor(Color.parseColor("#898989"))
+                    }
                 } else {
+                    // 기본 색상
                     binding.pillProgressBar.setIndicatorColor(Color.parseColor("#ffffff"))
                 }
 

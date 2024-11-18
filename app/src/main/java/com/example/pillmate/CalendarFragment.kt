@@ -55,6 +55,10 @@ class CalendarFragment : Fragment() {
         // RecyclerView 설정
         setupRecyclerView()
 
+        // 데이터 불러오기
+        fetchDiaryData()  // 초기 화면 로드 시 데이터 불러오기
+        fetchMonthDiaryData()  // 월별 데이터 불러오기
+
 
         // 드롭다운 버튼 클릭 시 DatePickerDialog 표시
         binding.dropdownButton.setOnClickListener {
@@ -464,6 +468,7 @@ class CalendarFragment : Fragment() {
                         }
 
                         adapter.updateData(days, painsPerDayList)
+                        adapter.notifyDataSetChanged()
 
                         // duration 값을 eatmedi_date에 표시
                         binding.eatmediDate.text = "${data.duration}"
