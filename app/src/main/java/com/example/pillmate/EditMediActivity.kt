@@ -3,6 +3,7 @@ package com.example.pillmate
 import AllFragment
 import TimeSlotAdapter
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -15,6 +16,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.pillmate.databinding.ActivityEditMediBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
@@ -284,21 +288,32 @@ class EditMediActivity : AppCompatActivity() {
                         //showPerfectToast("약 리스트 수정이 완료되었습니다") // 서버에서 보낸 메시지를 토스트로 표시
 
                         val intent = Intent(this@EditMediActivity, AddMediFinActivity::class.java)
-                        intent.putExtra("successMessage", "약 수정 완료")
+                        triggerPillAlarmWorker(this@EditMediActivity)
+                        //intent.putExtra("successMessage", "약 수정 완료")
                         startActivity(intent)
                         finish() // 액티비티 종료
                     }
                 } else {
                     Log.d("EditMediActivity", "약 추가 실패: ${response.code()}, ${response.errorBody()?.string()}")
-                    showCustomToast("약 수정에 실패했습니다: ${response.code()}")
+                    //showCustomToast("약 수정에 실패했습니다: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.e("EditMediActivity", "API 호출 실패", t)
-                showCustomToast("API 호출 실패: ${t.message}")
+                //showCustomToast("API 호출 실패: ${t.message}")
             }
         })
+    }
+
+    // PillAlarmWorker를 트리거하는 함수
+    private fun triggerPillAlarmWorker(context: Context) {
+        val workRequest = OneTimeWorkRequestBuilder<PillAlarmWorker>().build()
+        WorkManager.getInstance(context).enqueueUniqueWork(
+            "PillAlarmWorker",
+            ExistingWorkPolicy.REPLACE,
+            workRequest
+        )
     }
 
     // 커스텀 토스트 메시지를 띄우는 함수

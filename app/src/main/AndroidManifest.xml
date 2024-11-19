@@ -34,45 +34,58 @@
         android:theme="@style/AppTheme"
         tools:targetApi="33">
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".FailActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".ScanFinActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".MediCheckActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".AfterScanActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".MediScanActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".AddMediFinActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".EndPreActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".EditMediActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".PreMediActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".AfterPreActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".WriteMediActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".PrescriptActivity"
             android:exported="false" />
 
         <service
+            android:theme="@style/FullStatusTheme"
             android:name=".AlarmService"
             android:enabled="true"
             android:exported="false"
@@ -83,18 +96,23 @@
         <receiver android:name=".AlarmReceiver" />
 
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".EatMediActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".CameraActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -104,12 +122,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".Onboard2Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".Onboard3Activity"
             android:exported="false" />
         <activity
@@ -120,75 +141,99 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:turnScreenOn="true" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".AlarmListActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".RecognizeIngActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".Onboard1Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".Onboard0Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".SignupFinishActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".PwChangeActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".PwChange1Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".PwChangeOkActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".QnaActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".HealthDiary1Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".HealthDiary2Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".HealthDiary3Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".MyHealthInfoActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".MyHealthEditSActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".MyHealthEditDActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".MyHealthEditD2Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".HDEdit1Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".HDEdit2Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".HDEdit3Activity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".EatMediScanActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".AfterEatMediScanActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".EatMediFailActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".MyHealthEditOkActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/FullStatusTheme"
             android:name=".HDEditOkActivity"
             android:exported="false" />
 

@@ -29,8 +29,11 @@ class ViewPagerAdapter(
             binding.vpMediAmount.text = "${medicineInfo.oneEat}회"
             binding.vpMediPerday.text = "${medicineInfo.oneDay}정"
             binding.vpMediDay.text = "${medicineInfo.allDay}일"
+//            binding.vpMediSlot.text = medicineInfo.timeSlotList.joinToString(separator = "\n") {
+//                "${it.spinnerTime} | ${it.pickerTime}"
+//            }
             binding.vpMediSlot.text = medicineInfo.timeSlotList.joinToString(separator = "\n") {
-                "${it.spinnerTime} | ${it.pickerTime}"
+                "${it.spinnerTime} | ${formatPickerTime(it.pickerTime)}"
             }
 
             // 카테고리에 따라 텍스트와 배경색 설정
@@ -65,6 +68,22 @@ class ViewPagerAdapter(
                     binding.tvCategory.setTextColor(Color.parseColor("#951FC0"))
                 }
             }
+        }
+    }
+
+    private fun formatPickerTime(pickerTime: String): String {
+        return try {
+            // 시간을 파싱하여 12시간제 오전/오후 형식으로 변환
+            val hour = pickerTime.split(":")[0].toInt()
+            val minute = pickerTime.split(":")[1]
+
+            val amPm = if (hour < 12) "오전" else "오후"
+            val hour12 = if (hour % 12 == 0) 12 else hour % 12
+
+            "$amPm ${String.format("%02d:%02d", hour12, minute.toInt())}"
+        } catch (e: Exception) {
+            // 변환 실패 시 원본 pickerTime 반환
+            pickerTime
         }
     }
 }

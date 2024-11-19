@@ -50,8 +50,10 @@ class MediCheckActivity : AppCompatActivity() {
         binding.vpMediAmount.text = "${oneEat}회"
         binding.vpMediPerday.text = "${oneDay}정"
         binding.vpMediDay.text = "${allDay}일"
+//        binding.vpMediSlot.text =
+//            timeSlotList.joinToString(separator = "\n") { "${it.spinnerTime} | ${it.pickerTime}" }
         binding.vpMediSlot.text =
-            timeSlotList.joinToString(separator = "\n") { "${it.spinnerTime} | ${it.pickerTime}" }
+            timeSlotList.joinToString(separator = "\n") { formatPickerTime(it.spinnerTime, it.pickerTime) }
 
 
         binding.btnPreAddMedi.setOnClickListener {
@@ -153,5 +155,23 @@ class MediCheckActivity : AppCompatActivity() {
             ExistingWorkPolicy.REPLACE,
             workRequest
         )
+    }
+
+    private fun formatPickerTime(spinnerTime: String, pickerTime: String): String {
+        // pickerTime 포맷 변환 (예: "18:00:00" -> "오후 06:00")
+        val formattedPickerTime = try {
+            val hour = pickerTime.split(":")[0].toInt()
+            val minute = pickerTime.split(":")[1]
+
+            val amPm = if (hour < 12) "오전" else "오후"
+            val hour12 = if (hour % 12 == 0) 12 else hour % 12
+
+            "$amPm ${String.format("%02d:%02d", hour12, minute.toInt())}"
+        } catch (e: Exception) {
+            // 포맷 변환 실패 시 원본 반환
+            pickerTime
+        }
+
+        return "$spinnerTime | $formattedPickerTime"
     }
 }

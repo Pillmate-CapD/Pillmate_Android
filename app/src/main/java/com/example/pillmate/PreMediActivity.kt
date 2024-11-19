@@ -87,6 +87,7 @@ class PreMediActivity : AppCompatActivity() {
                 if (currentIndex < updatedData.size - 1) {
                     currentIndex++
                     displayData(currentIndex)
+                    scrollToTop()
                     if (currentIndex == updatedData.size - 1) {
                         binding.tvSave.text = "등록"
                     }

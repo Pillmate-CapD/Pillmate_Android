@@ -53,4 +53,10 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="FullStatusTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
 </resources>

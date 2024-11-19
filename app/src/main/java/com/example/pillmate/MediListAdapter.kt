@@ -26,6 +26,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.bumptech.glide.Glide
 import com.example.capdi_eat_test.MyPillListFragment
 import org.w3c.dom.Text
@@ -253,6 +256,7 @@ class MediListAdapter(
 
                     // context를 사용하여 Intent 생성
                     val intent = Intent(context, AddMediFinActivity::class.java)
+                    triggerPillAlarmWorker(context)
                     intent.putExtra("editMessage", "약 삭제 완료")
                     context.startActivity(intent)
                 }
@@ -263,6 +267,15 @@ class MediListAdapter(
                 Log.d("deleteMedicine", "delete, 약물 삭제 실패")
             }
         })
+    }
+    // PillAlarmWorker를 트리거하는 함수
+    private fun triggerPillAlarmWorker(context: Context) {
+        val workRequest = OneTimeWorkRequestBuilder<PillAlarmWorker>().build()
+        WorkManager.getInstance(context).enqueueUniqueWork(
+            "PillAlarmWorker",
+            ExistingWorkPolicy.REPLACE,
+            workRequest
+        )
     }
 
     private fun showPerfectToast(message: String) {

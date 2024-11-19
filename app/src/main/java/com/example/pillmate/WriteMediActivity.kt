@@ -304,13 +304,13 @@ class WriteMediActivity : AppCompatActivity() {
                     }
                 } else {
                     Log.d("WriteMediActivity", "약 추가 실패: ${response.code()}, ${response.errorBody()?.string()}")
-                    showCustomToast("약 추가에 실패했습니다: ${response.code()}")
+                    //showCustomToast("약 추가에 실패했습니다: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.e("WriteMediActivity", "API 호출 실패", t)
-                showCustomToast("API 호출 실패: ${t.message}")
+                //showCustomToast("API 호출 실패: ${t.message}")
             }
         })
     }
