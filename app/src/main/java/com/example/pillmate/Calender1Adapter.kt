@@ -80,8 +80,6 @@ class Calendar1Adapter(
                 }
 
                 // 현재 날짜 표시
-                //val isToday = (day == currentDay && selectedMonth == currentMonth && selectedYear == currentYear)
-                //val isSelected = (day == selectedDay && selectedMonth == currentMonth && selectedYear == currentYear)
                 val isToday = (day == currentDay && selectedMonth == currentMonth && selectedYear == currentYear)
                 val isSelected = (day == selectedDay && selectedMonth == selectedMonth && selectedYear == selectedYear)
 
@@ -102,7 +100,6 @@ class Calendar1Adapter(
                 // 작은 원 업데이트-추가
                 //binding.statusDotsContainer.removeAllViews() // 이전 상태 초기화
                 updateStatusDots(categoriesForDate)
-                //updateStatusDots(categoriesForDate)
 
                 // painsPerDay 데이터를 사용한 today_view 배경 설정
                 val matchingPain = painsPerDayList.find { pain ->

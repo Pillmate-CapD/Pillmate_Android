@@ -64,7 +64,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/statusDotsContainer"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.517"

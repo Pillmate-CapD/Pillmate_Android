@@ -152,7 +152,7 @@ class AfterEatMediScanActivity : AppCompatActivity() {
                             // 알약 이름이 같으면 ScanFinActivity로 이동
                             val dataList = arrayListOf(pillCategory, pillNameFromServer, pillPhoto)
                             val intent = Intent(this@AfterEatMediScanActivity, EatMediActivity::class.java).apply {
-                                putStringArrayListExtra("dataList", dataList)
+                                //putStringArrayListExtra("dataList", dataList)
                                 putExtra("photoPath", photoPath)
                             }
                             startActivity(intent)
