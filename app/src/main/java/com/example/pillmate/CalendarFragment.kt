@@ -419,6 +419,7 @@ class CalendarFragment : Fragment() {
         super.onResume()
         // API 호출하여 데이터를 갱신
         fetchDiaryData()
+        fetchMonthDiaryData()
     }
     private fun updateEditDiaryButtonState() {
         val currentDate = LocalDate.now()
@@ -467,7 +468,7 @@ class CalendarFragment : Fragment() {
                             )
                         }
 
-                        adapter.updateData(days, painsPerDayList)
+                        adapter.updateData(days, painsPerDayList, totalInfoList)
                         adapter.notifyDataSetChanged()
 
                         // duration 값을 eatmedi_date에 표시

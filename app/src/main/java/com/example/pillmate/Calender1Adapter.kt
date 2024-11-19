@@ -1,10 +1,12 @@
 package com.example.pillmate
 
+import android.content.Context
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pillmate.R
 import com.example.pillmate.databinding.Calendar1DayItemBinding
@@ -13,7 +15,7 @@ import java.util.Calendar
 class Calendar1Adapter(
     private var days: List<Pair<Int?, Boolean>>,
     private var painsPerDayList: List<PainPerDay>,
-    private val totalInfoList: List<TotalInfo>,
+    private var totalInfoList: List<TotalInfo>,
     private val onDayClickListener: (Int, Int, Int) -> Unit // month, year도 포함
 ) : RecyclerView.Adapter<Calendar1Adapter.ViewHolder>() {
 
@@ -25,9 +27,10 @@ class Calendar1Adapter(
     private val currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
     private val currentYear = Calendar.getInstance().get(Calendar.YEAR)
     // 데이터를 업데이트하는 메서드 (선택된 날짜 초기화하지 않음)
-    fun updateData(newDays: List<Pair<Int?, Boolean>>, newPainsPerDayList: List<PainPerDay>) {
+    fun updateData(newDays: List<Pair<Int?, Boolean>>, newPainsPerDayList: List<PainPerDay>, newTotalInfoList: List<TotalInfo>) {
         days = newDays
         painsPerDayList = newPainsPerDayList
+        totalInfoList = newTotalInfoList
         notifyDataSetChanged()
 
     }
@@ -97,6 +100,8 @@ class Calendar1Adapter(
                 }.map { it.category }.distinct() // 중복 카테고리 제거
 
                 // 작은 원 업데이트-추가
+                //binding.statusDotsContainer.removeAllViews() // 이전 상태 초기화
+                updateStatusDots(categoriesForDate)
                 //updateStatusDots(categoriesForDate)
 
                 // painsPerDay 데이터를 사용한 today_view 배경 설정
@@ -132,6 +137,7 @@ class Calendar1Adapter(
                         else -> R.drawable.circle_white
                     }
                     binding.todayView.setBackgroundResource(levelDrawable)
+                    binding.dateRecy.setTextColor(Color.WHITE)
                 } else {
                     Log.d("Calendar1Adapter", "matchingPain 찾지 못함")
                     // 데이터가 없는 날짜 처리
@@ -206,7 +212,46 @@ class Calendar1Adapter(
                 binding.todayView.visibility = View.INVISIBLE
             }
         }
+        private fun updateStatusDots(categories: List<String>) {
+            // 6개의 Dot View 리스트
+            val dotViews = listOf(
+                binding.statusDot1,
+                binding.statusDot2,
+                binding.statusDot3,
+                binding.statusDot4,
+                binding.statusDot5,
+                binding.statusDot6
+            )
+
+            // 카테고리 수와 Dot View 수 중 작은 값까지만 표시
+            val maxDots = minOf(categories.size, dotViews.size)
+
+            // Dot 표시 및 설정
+            for (i in dotViews.indices) {
+                if (i < maxDots) {
+                    dotViews[i].visibility = View.VISIBLE // Dot 표시
+                    dotViews[i].setBackgroundResource(getDotDrawableByCategory(categories[i])) // 카테고리별 Drawable 설정
+                } else {
+                    dotViews[i].visibility = View.GONE // 초과 Dot 숨기기
+                }
+            }
+        }
+
+
+        private fun getDotDrawableByCategory(category: String): Int {
+            return when (category) {
+                "고지혈증" -> R.drawable.small_circle_dot1
+                "고혈압" -> R.drawable.small_circle_dot2
+                "호흡기질환" -> R.drawable.small_circle_dot3
+                "당뇨" -> R.drawable.small_circle_dot4
+                "심혈관질환" -> R.drawable.small_circle_dot5
+                "기타" -> R.drawable.small_circle_dot6
+                else -> R.drawable.small_circle_dot6
+            }
+        }
+
     }
+
 
 
     // 날짜 변경 시 호출되는 함수
@@ -216,5 +261,11 @@ class Calendar1Adapter(
         selectedYear = year
         notifyDataSetChanged()
     }
+    // dp를 px로 변환하는 확장 함수
+    private fun Int.dpToPx(context: Context): Int {
+        val density = context.resources.displayMetrics.density
+        return (this * density).toInt()
+    }
+
 
 }
