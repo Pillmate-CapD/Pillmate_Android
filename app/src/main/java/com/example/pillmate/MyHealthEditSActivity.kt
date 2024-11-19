@@ -21,12 +21,19 @@ class MyHealthEditSActivity : AppCompatActivity() {
     private lateinit var savedDiseases: List<EditGMyHealthInfo>
     private lateinit var savedSymptoms: List<EditGMySymptom>
 
-    private val symptomMap = mapOf(
+    /*private val symptomMap = mapOf(
         1 to "피로감", 2 to "몸살", 3 to "근육통", 4 to "관절통",
         5 to "두통", 6 to "건망증", 7 to "인후통", 8 to "기침∙가래",
         9 to "호흡곤란", 10 to "두근거림", 11 to "복통", 12 to "소화불량",
         13 to "구토", 14 to "변비", 15 to "불면증", 16 to "수면장애",
         17 to "우울", 18 to "기타"
+    )*/
+    private val symptomMap = mapOf(
+        1 to "피로감", 2 to "몸살", 3 to "근육통", 4 to "관절통",
+        5 to "두통", 7 to "인후통", 8 to "기침∙가래",
+        9 to "호흡곤란", 10 to "두근거림", 11 to "복통", 12 to "소화불량",
+        13 to "구토", 14 to "변비", 16 to "수면장애",
+        18 to "기타"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +84,8 @@ class MyHealthEditSActivity : AppCompatActivity() {
     }
 
     private fun initializeSymptomButtons() {
-        (1..18).forEach { id ->
+        val validIds = listOf(1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 16, 18) // 유효한 ID만 포함
+        validIds.forEach { id ->
             val overlay = findViewById<View>(resources.getIdentifier("overlay$id", "id", packageName))
             val checkIcon = findViewById<View>(resources.getIdentifier("check_icon$id", "id", packageName))
 
@@ -90,7 +98,8 @@ class MyHealthEditSActivity : AppCompatActivity() {
     }
 
     private fun setupButtons() {
-        (1..18).forEach { id ->
+        val validIds = listOf(1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 16, 18) // 유효한 ID만 포함
+        validIds.forEach { id ->
             val button = findViewById<View>(resources.getIdentifier("btn$id", "id", packageName))
 
             button?.setOnClickListener {

@@ -218,14 +218,16 @@ data class TotalInfo(
     val endDate: String
 )
 
+
 data class TodayInfo(
     val id: String?,
     val alarms: List<Alarm>,
-    val symptoms: String?,
+    val symptoms: List<String>,
     val score: Int?,
     val comment: String?,
     val record: String?
 )
+
 
 data class DiaryAlarm(
     val name: String,

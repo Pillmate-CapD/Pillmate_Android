@@ -30,8 +30,8 @@ class HDEdit1Activity : AppCompatActivity() {
     private var record: String? = null
     private var receivedSymptoms = listOf<String>()
     private val symptomNames = listOf(
-        "피로감", "몸살", "근육통", "관절통", "두통", "건망증", "인후통", "기침∙가래", "호흡곤란",
-        "두근거림", "복통", "소화불량", "구토", "변비", "불면증", "수면장애", "우울"
+        "피로감", "몸살", "근육통", "관절통", "두통", "인후통", "기침∙가래", "호흡곤란",
+        "두근거림", "복통", "소화불량", "구토", "변비", "수면장애"
     )
     private val logTag = "HDEdit1ActivityLog"
 
@@ -294,7 +294,6 @@ class HDEdit1Activity : AppCompatActivity() {
             "근육통" -> "onboard3btn3"
             "관절통" -> "onboard3btn4"
             "두통" -> "onboard3btn5"
-            "건망증" -> "onboard3btn6"
             "인후통" -> "onboard3btn7"
             "기침∙가래" -> "onboard3btn8"
             "호흡곤란" -> "onboard3btn9"
@@ -303,9 +302,7 @@ class HDEdit1Activity : AppCompatActivity() {
             "소화불량" -> "onboard3btn12"
             "구토" -> "onboard3btn13"
             "변비" -> "onboard3btn14"
-            "불면증" -> "onboard3btn15"
             "수면장애" -> "onboard3btn20"
-            "우울" -> "onboard3btn17"
             else -> "default_image"
         }
     }

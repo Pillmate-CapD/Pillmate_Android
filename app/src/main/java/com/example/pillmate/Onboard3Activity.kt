@@ -168,7 +168,7 @@ class Onboard3Activity : AppCompatActivity() {
         setupButton(binding.btn3, binding.overlay3, binding.checkIcon3, 3)
         setupButton(binding.btn4, binding.overlay4, binding.checkIcon4, 4)
         setupButton(binding.btn5, binding.overlay5, binding.checkIcon5, 5)
-        setupButton(binding.btn6, binding.overlay6, binding.checkIcon6, 6)
+        //setupButton(binding.btn6, binding.overlay6, binding.checkIcon6, 6)
         setupButton(binding.btn7, binding.overlay7, binding.checkIcon7, 7)
         setupButton(binding.btn8, binding.overlay8, binding.checkIcon8, 8)
         setupButton(binding.btn9, binding.overlay9, binding.checkIcon9, 9)
@@ -177,9 +177,9 @@ class Onboard3Activity : AppCompatActivity() {
         setupButton(binding.btn12, binding.overlay12, binding.checkIcon12, 12)
         setupButton(binding.btn13, binding.overlay13, binding.checkIcon13, 13)
         setupButton(binding.btn14, binding.overlay14, binding.checkIcon14, 14)
-        setupButton(binding.btn15, binding.overlay15, binding.checkIcon15, 15)
+        //setupButton(binding.btn15, binding.overlay15, binding.checkIcon15, 15)
         setupButton(binding.btn16, binding.overlay16, binding.checkIcon16, 16)
-        setupButton(binding.btn17, binding.overlay17, binding.checkIcon17, 17)
+        //setupButton(binding.btn17, binding.overlay17, binding.checkIcon17, 17)
         setupButton(binding.btn18, binding.overlay18, binding.checkIcon18, 18)
     }
 

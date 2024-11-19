@@ -419,6 +419,7 @@ class CalendarFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+        Log.d("CalendarFragment", "onResume 호출됨")
         // API 호출하여 데이터를 갱신
         fetchDiaryData()
         fetchMonthDiaryData()
