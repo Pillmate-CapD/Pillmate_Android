@@ -5,7 +5,9 @@ data class ListAlarmItem(
     val amPm: String,
     val time: String,
     val medicationTitle: String,
-    val medicationInfo: String,
+    val medicationAmount: String,
+    val medicationDuration: String,
+    val medicationFrequency: String,
     val medicationTime: String,
     var isAlarmOn: Boolean
 )

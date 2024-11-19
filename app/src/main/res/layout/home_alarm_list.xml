@@ -31,13 +31,13 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="복약알림"
+            android:text="복약 알림"
             android:textColor="#898989"
             android:textSize="11sp"
             android:fontFamily="@font/notosanskrmedium"/>
 
         <TextView
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:includeFontPadding="false"
             android:id="@+id/alarm_des"
             app:layout_constraintTop_toBottomOf="@id/alarm_type"
@@ -47,11 +47,11 @@
             android:text="'파스틱정'을 먹을 시간이에요."
             android:textColor="#3E3E3E"
             android:textSize="15sp"
-            android:fontFamily="@font/notosanskrmedium"/>
+            android:fontFamily="@font/notosanskrsemibold"/>
 
         <TextView
             android:includeFontPadding="false"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:id="@+id/alarm_des_time"
             app:layout_constraintTop_toBottomOf="@id/alarm_des"
             app:layout_constraintStart_toStartOf="parent"

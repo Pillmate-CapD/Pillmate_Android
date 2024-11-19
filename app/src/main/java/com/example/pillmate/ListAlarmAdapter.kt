@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,8 +33,11 @@ class ListAlarmAdapter(
         holder.tvAmPm.text = item.amPm
         holder.tvTime.text = item.time
         holder.medicationTitle.text = item.medicationTitle
-        holder.medicationInfo.text = item.medicationInfo
         holder.medicationTime.text = item.medicationTime
+
+        holder.medication_amount.text = item.medicationAmount
+        holder.medication_frequency.text = item.medicationFrequency
+        holder.medication_duration.text = item.medicationDuration
 
         // 스위치 상태 설정 전에 리스너를 제거하여 리사이클링 시 발생하는 문제 방지
         holder.switchAlarm.setOnCheckedChangeListener(null)
@@ -65,9 +69,13 @@ class ListAlarmAdapter(
         val tvAmPm: TextView = itemView.findViewById(R.id.tv_am_pm)
         val tvTime: TextView = itemView.findViewById(R.id.tv_time)
         val medicationTitle: TextView = itemView.findViewById(R.id.medication_title)
-        val medicationInfo: TextView = itemView.findViewById(R.id.medication_info)
+        //val medicationInfo: TextView = itemView.findViewById(R.id.medication_info)
         val medicationTime: TextView = itemView.findViewById(R.id.medication_time)
         val switchAlarm: SwitchCompat = itemView.findViewById(R.id.switch_alarm)
+
+        val medication_amount:TextView = itemView.findViewById(R.id.medication_amount)
+        val medication_frequency:TextView = itemView.findViewById(R.id.medication_frequency)
+        val medication_duration:TextView = itemView.findViewById(R.id.medication_duration)
     }
 
     // 텍스트 색상 설정 메서드
@@ -82,7 +90,9 @@ class ListAlarmAdapter(
             holder.tvAmPm.setTextColor(activeColor)
             holder.tvTime.setTextColor(activeColor)
             holder.medicationTitle.setTextColor(activeColor)
-            holder.medicationInfo.setTextColor(activeColor)
+            holder.medication_duration.setTextColor(activeColor)
+            holder.medication_amount.setTextColor(activeColor)
+            holder.medication_frequency.setTextColor(activeColor)
             holder.medicationTime.setTextColor(activeColor)
         } else {
             // 기본 색상으로 설정 (예: 검정색)
@@ -91,7 +101,9 @@ class ListAlarmAdapter(
             holder.tvAmPm.setTextColor(defaultColor)
             holder.tvTime.setTextColor(defaultColor)
             holder.medicationTitle.setTextColor(defaultColor)
-            holder.medicationInfo.setTextColor(defaultColor)
+            holder.medication_duration.setTextColor(defaultColor)
+            holder.medication_amount.setTextColor(defaultColor)
+            holder.medication_frequency.setTextColor(defaultColor)
             holder.medicationTime.setTextColor(defaultColor)
         }
     }

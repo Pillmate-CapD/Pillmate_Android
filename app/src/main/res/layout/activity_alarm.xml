@@ -80,7 +80,7 @@
                     android:text="파스틱정 (제2형당뇨)"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 

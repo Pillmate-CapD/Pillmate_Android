@@ -53,18 +53,90 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/medication_info"
+<!--        <TextView-->
+<!--            android:id="@+id/medication_info"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:fontFamily="@font/notosanskrmedium"-->
+<!--            android:includeFontPadding="false"-->
+<!--            android:text="1정 | 매 1회 | 90일"-->
+<!--            android:textColor="#898989"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/medication_title" />-->
+
+        <LinearLayout
+            android:id="@+id/info_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/notosanskrmedium"
-            android:includeFontPadding="false"
-            android:text="1정 | 매 1회 | 90일"
-            android:textColor="#898989"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/medication_title" />
+            app:layout_constraintTop_toBottomOf="@+id/medication_title"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!-- 첫 번째 데이터 -->
+            <TextView
+                android:id="@+id/medication_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskrmedium"
+                android:includeFontPadding="false"
+                android:text="1정"
+                android:textColor="#898989"
+                android:textSize="12sp" />
+
+            <!-- 첫 번째 구분자 (|) -->
+            <TextView
+                android:id="@+id/first_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/leanthewall"
+                android:includeFontPadding="false"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="|"
+                android:gravity="center"
+                android:textColor="#898989"
+                android:textSize="11sp" />
+
+            <!-- 두 번째 데이터 -->
+            <TextView
+                android:id="@+id/medication_frequency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskrmedium"
+                android:includeFontPadding="false"
+                android:text="매 1회"
+                android:textColor="#898989"
+                android:textSize="12sp" />
+
+            <!-- 두 번째 구분자 (|) -->
+            <TextView
+                android:id="@+id/second_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/leanthewall"
+                android:includeFontPadding="false"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="|"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="#898989" />
+
+            <!-- 세 번째 데이터 -->
+            <TextView
+                android:id="@+id/medication_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskrmedium"
+                android:includeFontPadding="false"
+                android:text="90일"
+                android:textColor="#898989"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/medication_time"
@@ -77,7 +149,7 @@
             android:textColor="#898989"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/medication_info" />
+            app:layout_constraintTop_toBottomOf="@id/info_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -85,7 +157,7 @@
         android:background="@null"
         app:elevation="4dp"
         app:showText="false"
-        app:switchMinWidth="52dp"
+        app:switchMinWidth="51dp"
         android:id="@+id/switch_alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

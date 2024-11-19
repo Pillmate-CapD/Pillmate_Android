@@ -96,7 +96,9 @@ class AlarmSetFragment : Fragment() {
                                 if (alarm.timeSlot.pickerTime.split(":")[0].toInt() < 12) "오전" else "오후", // 오전/오후 구분
                                 formattedTime, // 포맷팅된 시간
                                 alarm.name, // 약품명
-                                "${alarm.amount}정 | 매일 ${alarm.timesPerDay}회 | ${alarm.day}일", // 약 복용 정보
+                                "${alarm.amount}정",
+                                "매일 ${alarm.day}회",
+                            "${alarm.timesPerDay}일",
                                 alarm.timeSlot.spinnerTime, // 시간대 설명
                                 alarm.isAvailable // 사용 가능 여부
                             )

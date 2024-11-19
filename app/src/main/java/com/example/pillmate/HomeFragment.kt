@@ -244,7 +244,7 @@ class HomeFragment : Fragment() {
                         val remainingAlarmCount = remainingMedicine.size
 
                         // 복용 안한 약 개수 텍스트 설정
-                        binding.tvLastMediGuide.text = "복용 안한 약 일정이 ${remainingAlarmCount}개 있어!"
+                        binding.tvLastMediGuide.text = "복용 안한 약 일정이 ${remainingAlarmCount}개 있어요!"
 
                         // 복용 안한 약 이름 리스트 생성
                         val remainingMedicineNames = if (remainingAlarmCount > 1) {

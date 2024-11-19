@@ -24,7 +24,7 @@ class CustomCircularProgressBar @JvmOverloads constructor(
     private val paint = Paint().apply {
         isAntiAlias = true
         style = Paint.Style.STROKE
-        strokeWidth = dpToPx(11f) // 두께를 11dp로 설정
+        strokeWidth = dpToPx(8f) // 두께를 11dp로 설정
         strokeCap = Paint.Cap.ROUND // 라운드 처리
     }
     private val rectF = RectF()

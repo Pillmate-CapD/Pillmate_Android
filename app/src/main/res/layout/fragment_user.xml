@@ -229,8 +229,8 @@
                     app:layout_constraintEnd_toEndOf="parent" />
                 <ImageView
                     android:id="@+id/background_circle"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
+                    android:layout_width="78dp"
+                    android:layout_height="78dp"
                     android:src="@drawable/mypage_score_bg"
                     app:layout_constraintTop_toTopOf="@id/home_pill_progressBar"
                     app:layout_constraintBottom_toBottomOf="@id/home_pill_progressBar"

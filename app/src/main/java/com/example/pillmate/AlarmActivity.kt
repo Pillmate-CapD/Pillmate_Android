@@ -62,7 +62,7 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
         fetchMediInfo(pillName)
 
         // xml에서 텍스트 밑줄
-        binding.btnTodayNone.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG)
+        //binding.btnTodayNone.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG)
 
         calendar = Calendar.getInstance()
 

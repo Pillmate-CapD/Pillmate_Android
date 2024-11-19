@@ -23,7 +23,7 @@
     <com.google.android.material.imageview.ShapeableImageView
         app:shapeAppearanceOverlay="@style/DialogRoundedImageStyle"
         android:scaleType="centerCrop"
-        android:background="@drawable/bg_null_medi"
+        android:background="@drawable/bg_zoom_null"
         android:layout_marginTop="15dp"
         android:id="@+id/dia_pic_zoom"
         app:layout_constraintStart_toStartOf="parent"
