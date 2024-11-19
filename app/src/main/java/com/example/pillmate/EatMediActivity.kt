@@ -176,6 +176,9 @@ class EatMediActivity : AppCompatActivity() {
             // Intent에서 전달된 데이터를 받아옴
             val pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
             val medicineId = intent.getIntExtra("pill_id", -1)
+            steps[position].isVisible = false
+            steps[position].isCompleted = true
+            steps[position + 1].isVisible = true
 
             // 네 번째 단계에서 추가 동작 호출
             if (position == 2) {

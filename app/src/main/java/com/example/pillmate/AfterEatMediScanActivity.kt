@@ -153,6 +153,7 @@ class AfterEatMediScanActivity : AppCompatActivity() {
                             val dataList = arrayListOf(pillCategory, pillNameFromServer, pillPhoto)
                             val intent = Intent(this@AfterEatMediScanActivity, EatMediActivity::class.java).apply {
                                 //putStringArrayListExtra("dataList", dataList)
+                                putExtra("pill_name", pillNameFromServer)
                                 putExtra("photoPath", photoPath)
                             }
                             startActivity(intent)
