@@ -223,6 +223,8 @@ class CalendarFragment : Fragment() {
         // Spinner 모드 강제 설정
         datePickerDialog.datePicker.calendarViewShown = false
         datePickerDialog.datePicker.spinnersShown = true
+        // DatePickerDialog의 배경을 투명으로 설정
+        datePickerDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         // DatePickerDialog 표시
         datePickerDialog.show()
