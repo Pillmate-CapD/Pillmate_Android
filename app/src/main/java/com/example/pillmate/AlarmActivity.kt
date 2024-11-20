@@ -358,4 +358,9 @@ class AlarmActivity : AppCompatActivity(), BottomSheetFragment.BottomSheetListen
             }
         })
     }
+
+    override fun onBackPressed() {
+        //Toast.makeText(this, "뒤로가기는 비활성화되어 있습니다.", Toast.LENGTH_SHORT).show()
+        super.onBackPressed()
+    }
 }
