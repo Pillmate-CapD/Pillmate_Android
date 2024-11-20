@@ -214,9 +214,10 @@ class EatMediActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d("onActivityResult", "Called with requestCode: $requestCode, resultCode: $resultCode")
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
-            // CameraActivity에서 사진을 찍고 돌아왔을 때
+            // AfterEatMediScanActivity에서 사진을 찍고 돌아왔을 때
             val photoPath = data?.getStringExtra("photoPath")
             if (photoPath != null) {
                 // 사진을 Bitmap으로 변환하여 2단계 이미지 뷰에 설정
@@ -225,7 +226,12 @@ class EatMediActivity : AppCompatActivity() {
                 steps[0].isCompleted = true
                 steps[1].isVisible = true
                 steps[1].photoPath = photoPath  // 2단계에 사진 경로 저장
-                adapter.notifyDataSetChanged()
+                // 로그 추가
+                Log.d("StepVisibility", "Step 0 Visible: ${steps[0].isVisible}, Completed: ${steps[0].isCompleted}")
+                Log.d("StepVisibility", "Step 1 Visible: ${steps[1].isVisible}, PhotoPath: ${steps[1].photoPath}")
+                // RecyclerView 갱신
+                adapter.notifyItemRangeChanged(0, 2) // 1단계와 2단계만 갱신
+                //adapter.notifyDataSetChanged()
             }
         }
     }

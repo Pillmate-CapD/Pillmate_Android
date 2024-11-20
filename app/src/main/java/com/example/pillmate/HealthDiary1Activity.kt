@@ -178,7 +178,7 @@ class HealthDiary1Activity : AppCompatActivity() {
             val childView = binding.anotherSumptom.getChildAt(i)
             val cardView = childView.findViewById<CardView>(R.id.a_symptom_card)
             val checkImageView = childView.findViewById<ImageView>(R.id.symptom_check)
-            setCardToDeselectedState(cardView, checkImageView)
+            setCardToDeselectedState2(cardView, checkImageView)
             cardView.isClickable = false
         }
     }
@@ -207,7 +207,10 @@ class HealthDiary1Activity : AppCompatActivity() {
 
             symptomName.text = symptom.name
             symptomImg.setImageResource(resources.getIdentifier(getImageResourceName(symptom.name), "drawable", packageName))
-
+            cardView.background = GradientDrawable().apply {
+                cornerRadius = 20 * resources.displayMetrics.density // Radius를 20dp로 설정
+                setColor(Color.parseColor("#F5F6F8")) // 초기 색상 설정
+            }
             cardView.setOnClickListener {
                 toggleSymptomCardSelection(cardView, symptomCheck, symptom.name)
             }
@@ -230,6 +233,11 @@ class HealthDiary1Activity : AppCompatActivity() {
             symptomNameTextView.text = symptomName
             symptomImg.setImageResource(resources.getIdentifier(getImageResourceName(symptomName), "drawable", packageName))
 
+            // 초기 CardView 배경 설정
+            cardView.background = GradientDrawable().apply {
+                cornerRadius = 35 * resources.displayMetrics.density // Radius를 35dp로 설정
+                setColor(Color.parseColor("#F5F6F8")) // 초기 색상 설정
+            }
             // 여기에 symptomName 전달
             cardView.setOnClickListener {
                 toggleSymptomCardSelection(cardView, symptomCheck, symptomName)
@@ -240,7 +248,16 @@ class HealthDiary1Activity : AppCompatActivity() {
     }
     private fun setCardToDeselectedState(cardView: CardView, checkImageView: ImageView) {
         val drawable = GradientDrawable().apply {
-            cornerRadius = 23 * resources.displayMetrics.density
+            cornerRadius = 20 * resources.displayMetrics.density
+        }
+        drawable.setColor(Color.parseColor("#F5F6F8"))
+        drawable.setStroke(0, ContextCompat.getColor(this, android.R.color.transparent))
+        checkImageView.setImageResource(R.drawable.symptom_ncheck)
+        cardView.background = drawable
+    }
+    private fun setCardToDeselectedState2(cardView: CardView, checkImageView: ImageView) {
+        val drawable = GradientDrawable().apply {
+            cornerRadius = 35 * resources.displayMetrics.density
         }
         drawable.setColor(Color.parseColor("#F5F6F8"))
         drawable.setStroke(0, ContextCompat.getColor(this, android.R.color.transparent))
@@ -263,7 +280,7 @@ class HealthDiary1Activity : AppCompatActivity() {
             "소화불량" -> "onboard3btn12"
             "구토" -> "onboard3btn13"
             "변비" -> "onboard3btn14"
-            "수면장애" -> "onboard3btn20"
+            "수면장애" -> "onboard3btn16"
             else -> "default_image"
         }
     }

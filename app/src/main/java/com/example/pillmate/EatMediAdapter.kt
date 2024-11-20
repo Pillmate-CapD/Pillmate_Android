@@ -44,6 +44,8 @@ class EatMediAdapter(
         if (position == 1 && !step.photoPath.isNullOrEmpty()) {
             val bitmap = BitmapFactory.decodeFile(step.photoPath)
             holder.medicheckImage?.setImageBitmap(bitmap)
+            steps[0].isVisible = false
+            steps[0].isCompleted = true
         }
     }
 
