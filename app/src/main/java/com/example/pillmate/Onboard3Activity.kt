@@ -169,6 +169,7 @@ class Onboard3Activity : AppCompatActivity() {
         setupButton(binding.btn4, binding.overlay4, binding.checkIcon4, 4)
         setupButton(binding.btn5, binding.overlay5, binding.checkIcon5, 5)
         //setupButton(binding.btn6, binding.overlay6, binding.checkIcon6, 6)
+        setupButton(binding.btn9, binding.overlay9, binding.checkIcon9, 9)
         setupButton(binding.btn7, binding.overlay7, binding.checkIcon7, 7)
         setupButton(binding.btn8, binding.overlay8, binding.checkIcon8, 8)
         setupButton(binding.btn9, binding.overlay9, binding.checkIcon9, 9)

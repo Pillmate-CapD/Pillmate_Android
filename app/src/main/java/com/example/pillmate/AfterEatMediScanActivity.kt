@@ -161,24 +161,15 @@ class AfterEatMediScanActivity : AppCompatActivity() {
                         } else {
                             // 알약 이름이 다르면 FailActivity로 이동
                             Log.e("AfterEatMediScanActivity", "알약 이름이 다릅니다. FailActivity로 이동합니다.")
-                            //val intent = Intent(this@AfterEatMediScanActivity, EatMediFailActivity::class.java)
-                            val intent = Intent(this@AfterEatMediScanActivity, EatMediFailActivity::class.java).apply {
-                                putExtra("photoPath", photoPath) // 전역 변수 사용
-                            }
-                            startActivity(intent)
-                            overridePendingTransition(0, 0)
-                            finish()
+                            navigateToFailActivity()
                         }
+                    } else {
+                        Log.e("AfterEatMediScanActivity", "응답 데이터가 비어 있습니다.")
+                        navigateToFailActivity()
                     }
                 } else {
                     Log.e("After Scan API Error", "응답 실패")
-                    val intent = Intent(this@AfterEatMediScanActivity, EatMediFailActivity::class.java).apply {
-                        putExtra("photoPath", photoPath) // 전역 변수 사용
-                        //putExtra("pillname", pillName)
-                    }
-                    startActivity(intent)
-                    overridePendingTransition(0, 0)
-                    finish()
+                    navigateToFailActivity()
                 }
             }
 
@@ -186,5 +177,13 @@ class AfterEatMediScanActivity : AppCompatActivity() {
                 Log.e("API Error", "에러: ${t.message}")
             }
         })
+    }
+    private fun navigateToFailActivity() {
+        val intent = Intent(this@AfterEatMediScanActivity, EatMediFailActivity::class.java).apply {
+            putExtra("photoPath", photoPath) // 전역 변수 사용
+        }
+        startActivity(intent)
+        overridePendingTransition(0, 0)
+        finish()
     }
 }

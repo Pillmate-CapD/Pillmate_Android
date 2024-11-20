@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.Gravity
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
 class Onboard2Activity : AppCompatActivity() {
@@ -68,7 +70,12 @@ class Onboard2Activity : AppCompatActivity() {
 
             // 날짜를 선택하는 에디트텍스트 생성
             val dateEditText = EditText(this).apply {
-                hint = "2024년 4월"
+                // 로컬 날짜의 현재 년도와 월 가져오기
+                val currentDate = LocalDate.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월")
+                val formattedDate = currentDate.format(formatter)
+                hint = formattedDate
+                //hint = "2024년 11월"
                 isFocusable = false
                 setBackgroundResource(R.drawable.onboard_et_gray)
                 layoutParams = LinearLayout.LayoutParams(
