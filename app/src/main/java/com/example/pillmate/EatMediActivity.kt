@@ -70,6 +70,9 @@ class EatMediActivity : AppCompatActivity() {
 
         // 사진 경로가 있다면 두 번째 단계에 해당 사진을 설정
         if (!photoPath.isNullOrEmpty()) {
+            // 1단계 접힘 설정
+            steps[0].isVisible = false
+            steps[0].isCompleted = true
             steps[1].isVisible = true
             steps[1].photoPath = photoPath
         }
@@ -259,4 +262,5 @@ class EatMediActivity : AppCompatActivity() {
 
         dialog.show()
     }
+
 }
