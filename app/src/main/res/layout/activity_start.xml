@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    tools:context=".StartActivity">
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="328dp"
+        android:layout_height="265.27dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <View
+        android:id="@+id/ic_logo_start"
+        android:layout_width="31dp"
+        android:layout_height="37.57dp"
+        android:background="@drawable/ic_start"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_start" />
+
+    <TextView
+        android:id="@+id/tv_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
+        android:text="만나서 반갑습니다\n필메이트와 함께\n건강한 일상을 관리해 보세요"
+        android:textColor="#3E3E3E"
+        android:textSize="20sp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signup"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- 하단 "시작하기" 버튼 -->
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="11dp"
+        android:text="회원가입"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_blue"
+        android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/btn_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 하단 "시작하기" 버튼 -->
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="30dp"
+        android:text="로그인"
+        android:textSize="16sp"
+        android:textColor="#3E3E3E"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/button_blue"
+        android:fontFamily="@font/notosanskrmedium"
+        android:includeFontPadding="false"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
