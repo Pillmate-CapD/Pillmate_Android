@@ -178,11 +178,61 @@ class EatMediAdapter(
             }
             // 4단계: 다음에 먹을 약 텍스트 표시
             if (position == 3) {
-                //stepDescription?.text = step.pillName // 4단계 텍스트 설정
-                Log.d("StepViewHolder", "4단계 텍스트 설정 시작 - pillName: ${step.pillName}")
-                step4Description?.text = step.pillName // 4단계 텍스트 설정
-                step4Description?.invalidate() // 강제 UI 업데이트
+                val pillName = step.pillName ?: "오늘 오후 7시 30분\n파스타정 입니다"
+                val spannable = SpannableStringBuilder(pillName)
+
+                // 폰트 리소스 가져오기
+                val context = itemView.context
+                val boldTypeface = ResourcesCompat.getFont(context, R.font.notosanskrbold)
+                val mediumTypeface = ResourcesCompat.getFont(context, R.font.notosanskrmedium)
+
+                // 약물 이름(${it.medicineName}) 부분의 인덱스 찾기
+                val medicineName = pillName.split("\n").getOrNull(1)?.split(" ")?.get(0) ?: ""
+                val start = pillName.indexOf(medicineName)
+                val end = start + medicineName.length
+
+                // 약물 이름에 스타일 적용
+                boldTypeface?.let {
+                    spannable.setSpan(
+                        CustomTypefaceSpan(it),
+                        start, end,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+                spannable.setSpan(
+                    ForegroundColorSpan(Color.parseColor("#1E54DF")),
+                    start, end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+
+                // 나머지 텍스트 스타일 적용
+                mediumTypeface?.let {
+                    spannable.setSpan(
+                        CustomTypefaceSpan(it),
+                        0, start,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    spannable.setSpan(
+                        CustomTypefaceSpan(it),
+                        end, spannable.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+                spannable.setSpan(
+                    ForegroundColorSpan(Color.parseColor("#3E3E3E")),
+                    0, start,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                spannable.setSpan(
+                    ForegroundColorSpan(Color.parseColor("#3E3E3E")),
+                    end, spannable.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+
+                // TextView에 적용
+                step4Description?.text = spannable
             }
+
             // stepTitle 폰트 크기 설정
             if (step.isVisible) {
                 stepTitle?.textSize = 16f

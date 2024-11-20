@@ -99,7 +99,8 @@ class EatMediActivity : AppCompatActivity() {
                     medicineInfo?.let {
                         val formattedTimeText = formatTimeTo12Hour(it.time)
                         //val nextMedicineText = "다음에 먹을 약은\n오늘 $formattedTimeText ${it.medicineName}\n이에요"
-                        val nextMedicineText = "다음에 먹을 약은\n오늘 $formattedTimeText ${it.category}약 ‘${it.medicineName}’\n이에요"
+                        val nextMedicineText = "오늘 $formattedTimeText\n${it.medicineName} 입니다"
+
 
                         steps[3].pillName = nextMedicineText
                         Log.d("fetchNextMedicineInfo", "4단계 텍스트 설정: $nextMedicineText")
@@ -151,7 +152,7 @@ class EatMediActivity : AppCompatActivity() {
     private fun formatTimeTo12Hour(time: String): String {
         return try {
             val inputFormat = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.getDefault())
-            val outputFormat = DateTimeFormatter.ofPattern("a h시 mm분", Locale.getDefault())
+            val outputFormat = DateTimeFormatter.ofPattern("a h시 mm분", Locale.KOREA)
             val localTime = LocalTime.parse(time, inputFormat)
             localTime.format(outputFormat)
         } catch (e: Exception) {

@@ -126,38 +126,12 @@
                 android:layout_marginTop="10sp"
                 android:fontFamily="@font/notosanskrmedium"
                 android:includeFontPadding="false"
-                android:text="오늘 오후 7시 30분"
+                android:text="오늘 오후 7시 30분\n파스타정 입니다"
                 android:textColor="#3e3e3e"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_des"
                 app:layout_goneMarginLeft="20dp" />
-
-            <TextView
-                android:id="@+id/step4_description2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/notosanskrbold"
-                android:includeFontPadding="false"
-                android:text="파스타정"
-                android:textColor="#1E54DF"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/step4_description"
-                app:layout_goneMarginLeft="20dp" />
-
-            <TextView
-                android:id="@+id/step4_description3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanskrmedium"
-                android:includeFontPadding="false"
-                android:text=" 입니다"
-                android:textColor="#3e3e3e"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@id/step4_description2"
-                app:layout_constraintTop_toTopOf="@id/step4_description2" />
 
             <TextView
                 android:id="@+id/tv_sub"
@@ -171,7 +145,7 @@
                 android:textColor="#858585"
                 android:textSize="11sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/step4_description2" />
+                app:layout_constraintTop_toBottomOf="@id/step4_description" />
 
             <Button
                 android:id="@+id/step_button4"
