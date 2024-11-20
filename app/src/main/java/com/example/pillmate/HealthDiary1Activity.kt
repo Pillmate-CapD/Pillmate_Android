@@ -127,7 +127,7 @@ class HealthDiary1Activity : AppCompatActivity() {
         val currentColor = drawable.color?.defaultColor ?: Color.parseColor("#F5F6F8")
 
         if (currentColor == Color.parseColor("#F5F6F8")) {
-            drawable.setColor(Color.parseColor("#B1EDEA"))
+            drawable.setColor(Color.parseColor("#61B1EDEA"))
             drawable.setStroke(2, Color.parseColor("#08D2C8"))
             checkImageView?.setImageResource(R.drawable.symptom_ycheck)
         } else {
