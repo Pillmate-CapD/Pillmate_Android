@@ -93,6 +93,9 @@ class AfterPreActivity : AppCompatActivity() {
                 binding.loadingLayout.visibility = View.VISIBLE
             } ?: Log.e("TemplateOCR", "이미지 파일을 찾을 수 없습니다.")
         }
+
+        Glide.with(this).load(R.raw.loading).into(binding.recogIngImage)
+
     }
 
     private fun getBitmapFromLocalFile(): Bitmap {
