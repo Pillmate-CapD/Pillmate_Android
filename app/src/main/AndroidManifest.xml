@@ -35,18 +35,23 @@
         tools:targetApi="33">
         <activity
             android:name=".StartActivity"
+            android:theme="@style/FullStatusTheme"
             android:exported="false" />
         <activity
             android:name=".OnOn4Activity"
+            android:theme="@style/FullStatusTheme"
             android:exported="false" />
         <activity
             android:name=".OnOn3Activity"
+            android:theme="@style/FullStatusTheme"
             android:exported="false" />
         <activity
             android:name=".OnOn2Activity"
+            android:theme="@style/FullStatusTheme"
             android:exported="false" />
         <activity
             android:name=".OnOn1Activity"
+            android:theme="@style/FullStatusTheme"
             android:exported="false" />
         <activity
             android:name=".FailActivity"

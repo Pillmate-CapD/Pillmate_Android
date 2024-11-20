@@ -26,6 +26,7 @@ import android.view.TextureView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.pillmate.PrescriptActivity.Companion
 import com.example.pillmate.databinding.ActivityCameraBinding
 import java.io.File
 import java.io.FileOutputStream
@@ -77,12 +78,15 @@ class CameraActivity : AppCompatActivity() {
     private fun openCamera() {
         val manager = getSystemService(CAMERA_SERVICE) as CameraManager
         try {
-            val cameraId = manager.cameraIdList[0]
+            val cameraId = getDefaultCameraId(manager) ?: manager.cameraIdList[0] // 기본 카메라 선택
             val characteristics = manager.getCameraCharacteristics(cameraId)
             val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
             val imageDimension = map?.getOutputSizes(SurfaceTexture::class.java)?.get(0)
+
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), REQUEST_CAMERA_PERMISSION)
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),
+                    CameraActivity.REQUEST_CAMERA_PERMISSION
+                )
                 return
             }
             manager.openCamera(cameraId, stateCallback, null)
@@ -90,6 +94,34 @@ class CameraActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
+    private fun getDefaultCameraId(manager: CameraManager): String? {
+        try {
+            for (cameraId in manager.cameraIdList) {
+                val characteristics = manager.getCameraCharacteristics(cameraId)
+
+                // 후면 카메라인지 확인
+                val lensFacing = characteristics.get(CameraCharacteristics.LENS_FACING)
+                if (lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
+                    // 초점 거리 확인하여 기본 카메라 선택
+                    val focalLengths = characteristics.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)
+                    if (focalLengths != null && isDefaultFocalLength(focalLengths)) {
+                        return cameraId
+                    }
+                }
+            }
+        } catch (e: CameraAccessException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+    private fun isDefaultFocalLength(focalLengths: FloatArray): Boolean {
+        // 기본 초점 거리 범위 (예: 24~26mm)
+        val defaultFocalRange = 24.0f..26.0f
+        return focalLengths.any { it in defaultFocalRange }
+    }
+
 
     private val stateCallback = object : CameraDevice.StateCallback() {
         override fun onOpened(camera: CameraDevice) {
