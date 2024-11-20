@@ -26,7 +26,13 @@
     </style>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowSplashScreenBackground">@android:color/transparent</item> <!-- 배경 투명 -->
+        <item name="android:windowSplashScreenAnimatedIcon">@null</item> <!-- 애니메이션 아이콘 제거 -->
+        <item name="postSplashScreenTheme">@style/AppTheme</item> <!-- 기본 테마와 동일하게 설정 -->
+
+        <!-- 기존 테마 속성 유지 -->
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog">
@@ -59,4 +65,11 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+<!--    <style name="Theme.App.Starting" parent="Theme.SplashScreen">-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+<!--        <item name="postSplashScreenTheme">@style/AppTheme</item>-->
+<!--        <item name="android:windowSplashScreenBackground">@android:color/transparent</item>-->
+<!--        <item name="android:windowSplashScreenAnimatedIcon">@null</item>-->
+
+<!--    </style>-->
 </resources>
