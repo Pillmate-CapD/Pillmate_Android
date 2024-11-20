@@ -150,12 +150,12 @@
                         android:text="매우 우수"
                         android:includeFontPadding="false"
                         android:textColor="@color/selected_icon_color"
-                        android:textSize="25sp"
+                        android:textSize="18sp"
                         android:fontFamily="@font/notosanskrextrabold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt1"
-                        android:layout_marginTop="11dp" />
+                        android:layout_marginTop="18dp" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 
                 <View
@@ -199,7 +199,7 @@
                         android:includeFontPadding="false"
                         android:text="0일"
                         android:textColor="@color/selected_icon_color"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt2" />
@@ -212,7 +212,7 @@
                         android:includeFontPadding="false"
                         android:text="/0일"
                         android:textColor="#C0C0C0"
-                        android:textSize="17sp"
+                        android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/home_pill_user"
                         app:layout_constraintTop_toBottomOf="@id/home_pill_user" />
@@ -244,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:text="0점"
                     android:textColor="#3E3E3E"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/notosanskrextrabold"
                     app:layout_constraintTop_toTopOf="@id/background_circle"
                     app:layout_constraintBottom_toBottomOf="@id/background_circle"

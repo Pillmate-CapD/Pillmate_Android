@@ -73,7 +73,7 @@ class MediCheckActivity : AppCompatActivity() {
             SimpleDateFormat("yy.MM.dd", Locale.getDefault()).format(Date())
 
         binding.tvCancel.setOnClickListener {
-        finish()
+            finish()
         }
 
         // 카테고리에 따라 텍스트와 배경색 설정

@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
 
         // SharedPreferences에서 앱의 첫 실행 여부 확인
         val preferences = getSharedPreferences("AppPreferences", MODE_PRIVATE)
-        preferences.edit().putBoolean("isFirstLaunch", true).apply()
+//        preferences.edit().putBoolean("isFirstLaunch", true).apply()
 
         val isFirstLaunch = preferences.getBoolean("isFirstLaunch", true)
 

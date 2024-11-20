@@ -287,38 +287,86 @@ class HomeFragment : Fragment() {
                             binding.homeNonDataLayout.visibility = View.GONE
                         }
 
-                        binding.homeGoodPillName.text = response.bestRecord.name
-                        binding.homePillGoodUser.text = "${response.bestRecord.taken}정 "
-                        binding.homePillGoodNum.text = "/ ${response.bestRecord.scheduled}정 "
 
-                        // bestRecord의 taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
-                        val bestTaken = response.bestRecord.taken
-                        val bestScheduled = response.bestRecord.scheduled
-                        val bestPercentage =
-                            if (bestScheduled != 0) (bestTaken * 100) / bestScheduled else 0
+//                        if ()
+//                        binding.homeGoodPillName.text = response.bestRecord.name
+//                        binding.homePillGoodUser.text = "${response.bestRecord.taken}정 "
+//                        binding.homePillGoodNum.text = "/ ${response.bestRecord.scheduled}정 "
+//
+//                        // bestRecord의 taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
+//                        val bestTaken = response.bestRecord.taken
+//                        val bestScheduled = response.bestRecord.scheduled
+//                        val bestPercentage =
+//                            if (bestScheduled != 0) (bestTaken * 100) / bestScheduled else 0
+//
+//// worstRecord의 taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
+//                        val worstTaken = response.worstRecord.taken
+//                        val worstScheduled = response.worstRecord.scheduled
+//                        val worstPercentage =
+//                            if (worstScheduled != 0) (worstTaken * 100) / worstScheduled else 0
+//
+//
+//                        binding.goodProgressBar.setProgress(bestPercentage)
+//
+//                        binding.homeBadPillName.text = response.worstRecord.name
+//                        binding.homePillBadUser.text = "${response.worstRecord.taken}정 "
+//                        binding.homePillBadNum.text = "/ ${response.worstRecord.scheduled}정 "
+//
+//
+//                        binding.tvInfo.text = "${response.bestRecord.taken}정으로 제일 잘 챙겨 먹었어요!"
+//                        binding.tvBadInfo.text = "${response.worstRecord.taken}정으로 조금 더 열심히 복용해보세요!"
+//
+//                        binding.badProgressBar.setProgress(worstPercentage)
 
-// worstRecord의 taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
-                        val worstTaken = response.worstRecord.taken
-                        val worstScheduled = response.worstRecord.scheduled
-                        val worstPercentage =
-                            if (worstScheduled != 0) (worstTaken * 100) / worstScheduled else 0
+                        if (response.bestRecord.name == null || response.bestRecord.taken == null || response.bestRecord.scheduled == null) {
+                            // bestRecord가 null이거나 값이 없으면 layout_good과 dot들을 숨김
+                            binding.layoutGood.visibility = View.GONE
+                            binding.dot1.visibility = View.GONE
+                            binding.dot2.visibility = View.GONE
+                            binding.dot3.visibility = View.GONE
+                        } else {
+                            // bestRecord가 올바른 값이 있으면 UI에 값을 설정
+                            binding.layoutGood.visibility = View.VISIBLE
+                            binding.dot1.visibility = View.VISIBLE
+                            binding.dot2.visibility = View.VISIBLE
+                            binding.dot3.visibility = View.VISIBLE
 
+                            binding.homeGoodPillName.text = response.bestRecord.name
+                            binding.homePillGoodUser.text = "${response.bestRecord.taken}정 "
+                            binding.homePillGoodNum.text = "/ ${response.bestRecord.scheduled}정 "
 
-                        binding.goodProgressBar.setProgress(bestPercentage)
+                            // bestRecord의 taken과 scheduled 값을 기반으로 퍼센트 계산 (정수형)
+                            val bestTaken = response.bestRecord.taken
+                            val bestScheduled = response.bestRecord.scheduled
+                            val bestPercentage = if (bestScheduled != 0) (bestTaken * 100) / bestScheduled else 0
+                            binding.goodProgressBar.setProgress(bestPercentage)
 
-                        binding.homeBadPillName.text = response.worstRecord.name
-                        binding.homePillBadUser.text = "${response.worstRecord.taken}정 "
-                        binding.homePillBadNum.text = "/ ${response.worstRecord.scheduled}정 "
+                            binding.tvInfo.text = "${response.bestRecord.taken}정으로 제일 잘 챙겨 먹었어요!"
+                        }
 
+// worstRecord 처리
+                        val worstTaken = response.worstRecord.taken ?: 0
+                        val worstScheduled = response.worstRecord.scheduled ?: 0
+                        val worstPercentage = if (worstScheduled != 0) (worstTaken * 100) / worstScheduled else 0
 
-                        binding.tvInfo.text = "${response.bestRecord.taken}정으로 제일 잘 챙겨 먹었어요!"
-                        binding.tvBadInfo.text = "${response.worstRecord.taken}정으로 조금 더 열심히 복용해보세요!"
-
+                        binding.homeBadPillName.text = response.worstRecord.name ?: "정보 없음"
+                        binding.homePillBadUser.text = "${worstTaken}정 "
+                        binding.homePillBadNum.text = "/ ${worstScheduled}정 "
                         binding.badProgressBar.setProgress(worstPercentage)
+
+                        binding.tvBadInfo.text = "${response.worstRecord.taken ?: 0}정으로 조금 더 열심히 복용해 보세요!"
+
 
                         // remainingMedicineItems의 개수를 구합니다
                         val itemCount = remainingMedicineItems.size
-                        binding.tvWorst.text = "복용률 ${itemCount}위"
+
+                        if(response.bestRecord.name == null){
+                            binding.tvWorst.text = "복용률 0위"
+                        }
+                        else{
+                            binding.tvWorst.text = "복용률 ${itemCount}위"
+                        }
+
 
                     }
                 } else {

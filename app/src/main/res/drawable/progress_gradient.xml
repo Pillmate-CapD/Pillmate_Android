@@ -4,7 +4,7 @@
     <item android:id="@android:id/background">
         <shape>
             <corners android:radius="5dp"/>
-            <solid android:color="#D3D3D3"/>
+            <solid android:color="#F5F6F8"/>
         </shape>
     </item>
 
@@ -25,6 +25,7 @@
                 <corners android:radius="5dp"/>
                 <gradient
                     android:startColor="#FA1E54DF"
+                    android:centerColor="#7ADAF8F7"
                     android:endColor="#7ADAF8F7"
                     android:angle="0"/>
             </shape>

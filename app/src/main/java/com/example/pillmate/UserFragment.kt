@@ -33,6 +33,10 @@ class UserFragment : Fragment() {
         // Retrofit 서비스 초기화 (여기 수정함)
         retrofitService = RetrofitApi.getRetrofitService
 
+//        // ProgressBar 값 테스트용으로 설정
+//        binding.homePillProgressBar.setProgress(75) // ProgressBar를 75%로 설정
+//        binding.homePercent.text = "75점" // 점수 텍스트도 동일하게 설정
+
         return binding.root
     }
 

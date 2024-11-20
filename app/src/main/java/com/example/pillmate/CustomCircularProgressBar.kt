@@ -24,8 +24,8 @@ class CustomCircularProgressBar @JvmOverloads constructor(
     private val paint = Paint().apply {
         isAntiAlias = true
         style = Paint.Style.STROKE
-        strokeWidth = dpToPx(8f) // 두께를 11dp로 설정
-        strokeCap = Paint.Cap.ROUND // 라운드 처리
+        strokeWidth = dpToPx(8f) // 두께를 8dp로 설정
+        strokeCap = Paint.Cap.BUTT // 끝부분 라운드 제거
     }
     private val rectF = RectF()
 
@@ -48,7 +48,7 @@ class CustomCircularProgressBar @JvmOverloads constructor(
 
         // Draw background circle
         paint.shader = null
-        paint.color = Color.LTGRAY
+        paint.color = Color.parseColor("#E6EBFA")
         canvas.drawArc(rectF, 0f, 360f, false, paint)
 
         // Draw gradient progress arc

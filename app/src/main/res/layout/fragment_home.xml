@@ -113,8 +113,8 @@
                     app:layout_constraintTop_toBottomOf="@id/top_layout">
 
                     <View
-                        android:layout_width="184.39dp"
-                        android:layout_height="168dp"
+                        android:layout_width="169dp"
+                        android:layout_height="169dp"
                         android:layout_marginTop="63dp"
                         android:background="@drawable/main_icon"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -931,6 +931,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txt3">
 
+                    <View
+                        android:layout_width="27.49dp"
+                        android:layout_height="27.49dp"
+                        android:background="@drawable/ic_thumbsup"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
                     <TextView
                         android:id="@+id/tv_win"
                         android:layout_width="wrap_content"
@@ -1266,6 +1274,14 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/dot3">
+
+                    <View
+                        android:layout_width="27.49dp"
+                        android:layout_height="27.49dp"
+                        android:background="@drawable/ic_thumbsdown"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
 
                     <TextView
                         android:id="@+id/tv_worst"

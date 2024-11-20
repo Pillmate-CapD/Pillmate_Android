@@ -64,7 +64,7 @@ class AlarmListActivity : AppCompatActivity() {
 
             val newAlarms = logs.map { log ->
                 AlarmListItem(
-                    type = "복약알림",
+                    type = "복약 알림",
                     des = log.message,
                     time = getTimeAgo(log.timestamp)
                 )

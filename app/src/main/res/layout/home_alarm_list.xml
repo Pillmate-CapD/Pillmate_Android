@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:text="'파스틱정'을 먹을 시간이에요."
             android:textColor="#3E3E3E"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:fontFamily="@font/notosanskrsemibold"/>
 
         <TextView
