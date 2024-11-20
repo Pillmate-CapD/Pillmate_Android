@@ -1,50 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/onboard0bg"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/onboard0bg">
 
     <ImageView
-        android:layout_width="match_parent"
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
         android:layout_height="445dp"
-        android:background="@drawable/onboard_start_bgbg"/>
+        android:background="@drawable/onboard_start_bgbg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
+        android:id="@+id/logoImage"
         android:layout_width="153dp"
         android:layout_height="59dp"
-        android:layout_marginTop="67dp"
-        android:layout_marginLeft="9dp"
-        android:src="@drawable/onboardlogo"/>
+        android:layout_marginTop="41dp"
+        android:layout_marginStart="9dp"
+        android:src="@drawable/onboardlogo"
+        app:layout_constraintTop_toBottomOf="@id/backgroundImage"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
+        android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="반갑습니다!\n본격 앱을 시작하기 전,\n몇 가지 질문이 있어요!"
-        android:layout_marginLeft="22dp"
+        android:text="본격 앱을 시작하기 전,\n몇 가지 질문이 있어요!"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/notosanskrmedium"
         android:includeFontPadding="false"
         android:textSize="20dp"
-        android:textColor="@color/white"/>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/logoImage"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/startbt"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/button_stroke_white"
-            android:fontFamily="@font/notosanskrmedium"
-            android:text="시작하기"
-            android:textColor="@color/white"
-            android:textSize="15dp" />
-    </FrameLayout>
+    <Button
+        android:id="@+id/startbt"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/button_stroke_white"
+        android:fontFamily="@font/notosanskrmedium"
+        android:text="시작하기"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
