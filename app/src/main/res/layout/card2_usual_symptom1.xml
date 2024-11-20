@@ -1,50 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- card_symptom_emoji.xml -->
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!-- card_symptom_emoji.xml -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/symptom_card"
     android:layout_width="wrap_content"
     android:layout_height="60dp"
+    android:background="#F5F6F8"
     app:cardCornerRadius="20dp"
-    app:cardElevation="2dp"
-    android:id="@+id/symptom_card"
-    android:background="#F5F6F8">
-    <LinearLayout
-        android:layout_width="161dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:minWidth="155dp"
+        android:layout_width="155dp"
         android:layout_height="60dp"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginLeft="19dp">
+        android:orientation="horizontal"
+        android:paddingStart="19dp"
+        android:paddingTop="15dp"
+        android:paddingRight="19dp"
+        android:paddingBottom="15dp">
 
-<!-- 이모지 (왼쪽) -->
-<ImageView
-    android:id="@+id/symptom_img"
-    android:layout_width="30dp"
-    android:layout_height="30dp"
-    android:src="@drawable/onboard3btn1"
-    android:layout_marginEnd="7dp"
-    android:contentDescription="질병 이모지" />
+        <!-- 이모지 (왼쪽) -->
+        <ImageView
+            android:id="@+id/symptom_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="7dp"
+            android:contentDescription="질병 이모지"
+            android:src="@drawable/onboard3btn1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-<!-- 텍스트 (중앙) -->
-<TextView
-    android:id="@+id/symptom_name"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:text="피로감"
-    android:fontFamily="@font/notosanskrsemibold"
-    android:includeFontPadding="false"
-    android:textSize="14sp"
-    android:textColor="#3E3E3E" />
+        <!-- 텍스트 (중앙) -->
+        <TextView
+            android:id="@+id/symptom_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:includeFontPadding="false"
+            android:text="피로감"
+            android:textColor="#3E3E3E"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/symptom_check"
+            app:layout_constraintStart_toEndOf="@id/symptom_img"
+            app:layout_constraintTop_toTopOf="parent" />
 
-<!-- 체크박스 (오른쪽) -->
+        <!-- 체크박스 (오른쪽) -->
         <ImageView
             android:id="@+id/symptom_check"
             android:layout_width="21dp"
             android:layout_height="21dp"
+            android:contentDescription="질병 이모지"
             android:src="@drawable/symptom_ncheck"
-            android:layout_marginEnd="19dp"
-            android:contentDescription="질병 이모지" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
