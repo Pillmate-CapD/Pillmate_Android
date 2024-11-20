@@ -1,23 +1,26 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/step4"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_gravity="center_vertical"
-            android:text="4"
-            android:textSize="15sp"
             android:background="@drawable/eatmedi_open"
-            android:textColor="#1E54DF"
             android:gravity="center"
-            android:visibility="visible"/>
+            android:text="4"
+            android:textColor="#1E54DF"
+            android:textSize="15sp"
+            android:visibility="visible" />
+
         <TextView
             android:id="@+id/b_step_title4"
             android:layout_width="wrap_content"
@@ -28,102 +31,174 @@
             android:text="다음 약 일정 확인하기"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:visibility="visible"/>
+            android:visibility="visible" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="15dp"
-        android:background="@drawable/eatmedi_button1">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/step_check"
-            android:layout_width="25sp"
-            android:layout_height="25sp"
-            android:src="@drawable/eatmedi_checkcheck"
-            android:visibility="gone"
-            android:layout_marginTop="17dp"
-            android:layout_marginBottom="17dp"
-            android:layout_marginLeft="20dp"/>
-        <TextView
-            android:id="@+id/step4_"
+        android:background="@drawable/eatmedi_button1"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4"
-            android:textSize="15sp"
-            android:layout_marginLeft="20dp"
-            android:textStyle="bold"
-            android:layout_marginTop="17dp"
-            android:layout_marginBottom="17dp"
-            android:background="@drawable/eatmedi_open"
-            android:textColor="#1E54DF"
-            android:gravity="center"
-            android:visibility="gone"/>
-        <TextView
-            android:id="@+id/step_title4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="다음 약 일정 확인하기"
-            android:textColor="#1C1C1C"
-            android:visibility="gone"
-            android:layout_gravity="center_vertical"
-            android:textSize="15sp"
-            android:fontFamily="@font/notosanskrsemibold"
-            android:layout_marginLeft="10sp"/>
-    </LinearLayout>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/step_check"
+                android:layout_width="25sp"
+                android:layout_height="25sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="17dp"
+                android:src="@drawable/eatmedi_checkcheck"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/step4_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="17dp"
+                android:background="@drawable/eatmedi_open"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="#1E54DF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/step_title4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10sp"
+                android:fontFamily="@font/notosanskrsemibold"
+                android:text="다음 약 일정 확인하기"
+                android:textColor="#1C1C1C"
+                android:textSize="15sp"
+                android:visibility="gone" />
+        </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/step_content4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible"
-        android:layout_marginTop="20dp">
-
-        <ImageView
-            android:id="@+id/timecheck"
-            android:layout_width="124dp"
-            android:layout_height="121dp"
-            android:layout_gravity="center"
-            android:src="@drawable/eatmedi_calendersample"/>
-
-        <TextView
-            android:id="@+id/step4_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
-            android:fontFamily="@font/notosanskrmedium"
-            android:layout_marginLeft="20dp"
-            android:includeFontPadding="false"
-            android:text="다음에 먹을 약은\n오늘 오후 7시 30분 당뇨약 ‘파스타정'\n이에요"
-            android:textColor="#3e3e3e"
-            android:textSize="15sp" />
-        <Button
-            android:id="@+id/step_button4"
-            android:background="@drawable/button_blue"
-            android:text="확인했어요"
-            android:fontFamily="@font/notosanskrbold"
-            android:textSize="14sp"
-            android:textColor="@color/white"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/step_content4"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginRight="19dp"
-            android:layout_marginLeft="19dp"
-            android:includeFontPadding="false"
-            android:layout_marginTop="16sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:visibility="visible">
 
+            <ImageView
+                android:id="@+id/timecheck"
+                android:layout_width="124dp"
+                android:layout_height="121dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/eatmedi_calendarsample"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+
+                android:fontFamily="@font/notosanskrmedium"
+                android:includeFontPadding="false"
+                android:text="다음에 복용할 약은.."
+                android:textColor="#3E3E3E"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/step4_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10sp"
+                android:fontFamily="@font/notosanskrmedium"
+                android:includeFontPadding="false"
+                android:text="오늘 오후 7시 30분"
+                android:textColor="#3e3e3e"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_des"
+                app:layout_goneMarginLeft="20dp" />
+
+            <TextView
+                android:id="@+id/step4_description2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/notosanskrbold"
+                android:includeFontPadding="false"
+                android:text="파스타정"
+                android:textColor="#1E54DF"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/step4_description"
+                app:layout_goneMarginLeft="20dp" />
+
+            <TextView
+                android:id="@+id/step4_description3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskrmedium"
+                android:includeFontPadding="false"
+                android:text=" 입니다"
+                android:textColor="#3e3e3e"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@id/step4_description2"
+                app:layout_constraintTop_toTopOf="@id/step4_description2" />
+
+            <TextView
+                android:id="@+id/tv_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/notosanskrregular"
+                android:includeFontPadding="false"
+                android:text="알람이 울리면 잊지 말고 복용해 주세요!"
+                android:textColor="#858585"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/step4_description2" />
+
+            <Button
+                android:id="@+id/step_button4"
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="11sp"
+                android:layout_marginRight="19dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_blue"
+                android:fontFamily="@font/notosanskrbold"
+                android:includeFontPadding="false"
+                android:text="확인했어요"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sub" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-    </LinearLayout>
+
     <ImageView
         android:id="@+id/line"
         android:layout_width="12sp"
-        android:layout_height="0sp"/>
+        android:layout_height="0sp" />
 </LinearLayout>

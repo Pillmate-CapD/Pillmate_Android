@@ -7,28 +7,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <TextView
-        android:id="@+id/step3"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_gravity="center_vertical"
-        android:text="3"
-        android:textSize="15sp"
-        android:background="@drawable/eatmedi_open"
-        android:textColor="#1E54DF"
-        android:gravity="center"
-        android:visibility="visible"/>
-    <TextView
-        android:id="@+id/b_step_title3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="13sp"
-        android:fontFamily="@font/notosanskrsemibold"
-        android:includeFontPadding="false"
-        android:text="약 복용하기"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"/>
+        <TextView
+            android:id="@+id/step3"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center_vertical"
+            android:text="3"
+            android:textSize="15sp"
+            android:background="@drawable/eatmedi_open"
+            android:textColor="#1E54DF"
+            android:gravity="center"
+            android:visibility="visible"/>
+        <TextView
+            android:id="@+id/b_step_title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13sp"
+            android:fontFamily="@font/notosanskrsemibold"
+            android:includeFontPadding="false"
+            android:text="약 복용하기"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:visibility="visible"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/root_layout"
@@ -37,91 +37,91 @@
         android:orientation="vertical"
         android:layout_marginTop="15dp"
         android:background="@drawable/eatmedi_button1">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/step_check"
-            android:layout_width="26sp"
-            android:layout_height="26sp"
-            android:src="@drawable/eatmedi_checkcheck"
-            android:visibility="gone"
-            android:layout_marginTop="17dp"
-            android:layout_marginBottom="17dp"
-            android:layout_marginLeft="20dp"/>
-        <TextView
-            android:id="@+id/step3_"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3"
-            android:textSize="15sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginBottom="17dp"
-            android:textStyle="bold"
-            android:background="@drawable/eatmedi_open"
-            android:textColor="#1E54DF"
-            android:gravity="center"
-            android:visibility="gone"/>
-        <TextView
-            android:id="@+id/step_title3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="약 복용하기"
-            android:textColor="#1C1C1C"
-            android:visibility="gone"
-            android:layout_gravity="center_vertical"
-            android:textSize="15sp"
-            android:fontFamily="@font/notosanskrsemibold"
-            android:layout_marginLeft="10sp"/>
-    </LinearLayout>
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/step_check"
+                android:layout_width="26sp"
+                android:layout_height="26sp"
+                android:src="@drawable/eatmedi_checkcheck"
+                android:visibility="gone"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="17dp"
+                android:layout_marginLeft="20dp"/>
+            <TextView
+                android:id="@+id/step3_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:textSize="15sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="17dp"
+                android:textStyle="bold"
+                android:background="@drawable/eatmedi_open"
+                android:textColor="#1E54DF"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/step_title3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="약 복용하기"
+                android:textColor="#1C1C1C"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:textSize="15sp"
+                android:fontFamily="@font/notosanskrsemibold"
+                android:layout_marginLeft="10sp"/>
+        </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/step_content3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible"
-        android:layout_marginTop="20dp">
-
-        <ImageView
-            android:id="@+id/medieat_image"
+        <LinearLayout
+            android:id="@+id/step_content3"
             android:layout_width="match_parent"
-            android:layout_height="288dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:scaleType="fitXY"
-            android:background="@drawable/eatmedi_sample_d2" />
-
-        <TextView
-            android:id="@+id/step3_description"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="물과 함께 복용해 주세요!"
-            android:textColor="#3e3e3e"
-            android:fontFamily="@font/notosanskrmedium"
-            android:layout_marginLeft="20dp"
-            android:includeFontPadding="false"
-            android:layout_marginTop="16sp"
-            android:textSize="15sp"/>
-        <Button
-            android:id="@+id/step_button3"
-            android:background="@drawable/button_blue"
-            android:text="복용을 완료했어요"
-            android:fontFamily="@font/notosanskrmedium"
-            android:layout_marginRight="19dp"
-            android:layout_marginLeft="19dp"
-            android:textSize="15sp"
-            android:textColor="#ffffff"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="16sp"
-            android:includeFontPadding="false"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/medieat_image"
+                android:layout_width="match_parent"
+                android:layout_height="288dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/eatmedi_sample_d2" />
+
+            <TextView
+                android:id="@+id/step3_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="물과 함께 복용해 주세요!"
+                android:textColor="#3e3e3e"
+                android:fontFamily="@font/notosanskrmedium"
+                android:layout_marginLeft="20dp"
+                android:includeFontPadding="false"
+                android:layout_marginTop="16sp"
+                android:textSize="15sp"/>
+            <Button
+                android:id="@+id/step_button3"
+                android:background="@drawable/button_blue"
+                android:text="복용을 완료했어요"
+                android:fontFamily="@font/notosanskrmedium"
+                android:layout_marginRight="19dp"
+                android:layout_marginLeft="19dp"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16sp"
+                android:includeFontPadding="false"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
     </LinearLayout>

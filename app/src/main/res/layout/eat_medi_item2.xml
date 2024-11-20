@@ -107,21 +107,21 @@
                 android:textColor="#3e3e3e"
                 android:includeFontPadding="false"
                 android:textSize="15sp" />
-                <Button
-                    android:id="@+id/step_button2"
-                    android:background="@drawable/button_blue"
-                    android:text="다음으로"
-                    android:fontFamily="@font/notosanskrmedium"
-                    android:layout_marginRight="19dp"
-                    android:layout_marginLeft="19dp"
-                    android:textSize="15sp"
-                    android:textColor="#ffffff"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16sp"
-                    android:includeFontPadding="false"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"/>
+            <Button
+                android:id="@+id/step_button2"
+                android:background="@drawable/button_blue"
+                android:text="다음으로"
+                android:fontFamily="@font/notosanskrmedium"
+                android:layout_marginRight="19dp"
+                android:layout_marginLeft="19dp"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16sp"
+                android:includeFontPadding="false"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"/>
 
 
         </LinearLayout>
