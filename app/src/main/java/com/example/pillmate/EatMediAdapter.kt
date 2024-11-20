@@ -95,6 +95,26 @@ class EatMediAdapter(
             // root 레이아웃 배경 설정
             rootLayout.setBackgroundResource(if (step.isVisible || step.isCompleted) R.drawable.eatmedi_button1 else R.drawable.eatmedi_button1)
 
+            // 열린 상태와 닫힌 상태에 따라 마진 설정
+            val allLayout = itemView.findViewById<LinearLayout>(R.id.all_layout)
+            val layoutParams = allLayout.layoutParams as ViewGroup.MarginLayoutParams
+            if (step.isVisible) {
+                // 열린 상태 - 여백 설정
+                if (position == 0) {
+                    // 1번 단계일 경우
+                    layoutParams.topMargin = 0.dpToPx()
+                    layoutParams.bottomMargin = 16.dpToPx() // 하단 여백은 그대로 유지
+                }else
+                {layoutParams.topMargin = 20.dpToPx()
+                layoutParams.bottomMargin = 20.dpToPx()}
+            } else {
+                // 닫힌 상태 - 여백 설정
+                layoutParams.topMargin = (-2).dpToPx() // 음수 마진 적용
+                layoutParams.bottomMargin = (-2).dpToPx()
+            }
+            allLayout.layoutParams = layoutParams
+
+
             // 단계 버튼 클릭 리스너 설정
             stepButton.setOnClickListener {
                 buttonClickListener(position)
@@ -243,7 +263,10 @@ class EatMediAdapter(
 
 
         }
-
+        fun Int.dpToPx(): Int {
+            val density = itemView.context.resources.displayMetrics.density
+            return (this * density).toInt()
+        }
         private fun getCurrentStepPosition(): Int {
             for (i in steps.indices) {
                 if (!steps[i].isCompleted) return i
