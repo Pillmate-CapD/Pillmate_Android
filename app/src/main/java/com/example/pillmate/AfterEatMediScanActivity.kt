@@ -41,7 +41,7 @@ class AfterEatMediScanActivity : AppCompatActivity() {
         binding.titleT.text = "먹을 약 촬영"
         pillName = intent.getStringExtra("pill_name") ?: "Unknown"
         pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
-        medicineId = intent.getIntExtra("medicine_id", -1)
+        medicineId = intent.getIntExtra("pill_id", -1)
         Log.d("AfterEatMediScanActivity", "get: $pillName,pillTime: $pillTime, medicineId: $medicineId")
 
 
@@ -159,8 +159,9 @@ class AfterEatMediScanActivity : AppCompatActivity() {
                                 //putStringArrayListExtra("dataList", dataList)
                                 putExtra("pill_name", pillNameFromServer)
                                 putExtra("pill_time", pillTime)
-                                putExtra("medicine_id", medicineId)
+                                putExtra("pill_id", medicineId)
                                 putExtra("photoPath", photoPath)
+                                Log.d("After", "setResult로 반환하는 값 - pillName: $pillNameFromServer, pillTime: $pillTime, medicineId: $medicineId")
                             }
                             startActivity(intent)
                             finish()

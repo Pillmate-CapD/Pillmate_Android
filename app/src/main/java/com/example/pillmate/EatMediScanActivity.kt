@@ -72,7 +72,7 @@ class EatMediScanActivity : AppCompatActivity() {
         pillName = intent.getStringExtra("pill_name") ?: "Unknown"
         //pillName = intent.getStringExtra("pill_name") ?: "Unknown"
         pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
-        medicineId = intent.getIntExtra("medicine_id", -1)
+        medicineId = intent.getIntExtra("pill_id", -1)
 
         binding.cameraPreview.surfaceTextureListener = textureListener
 
@@ -224,7 +224,7 @@ class EatMediScanActivity : AppCompatActivity() {
                 intent.putExtra("photoPath", file?.absolutePath)
                 intent.putExtra("pill_name", pillName)
                 intent.putExtra("pill_time", pillTime)
-                intent.putExtra("medicine_id", medicineId)
+                intent.putExtra("pill_id", medicineId)
 
                 startActivity(intent)  // AfterPreActivity 실행
                 this@EatMediScanActivity.finish()

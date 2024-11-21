@@ -44,10 +44,7 @@ class EatMediActivity : AppCompatActivity() {
 
         // Intent에서 전달된 데이터를 받아옴
         pillName = intent.getStringExtra("pill_name") ?: "Unknown"
-        //val photourl = intent.getStringExtra("pill_image_url")
         val source = intent.getStringExtra("source") ?: "default"
-        //val pillTime = intent.getStringExtra("pill_time") ?: "14:00:00"
-        //val medicineId = intent.getIntExtra("medicineId", 0)
         // 복약 과정 다음 알람 정보를 API로 받아옴
         pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
         medicineId = intent.getIntExtra("pill_id", -1)
@@ -180,7 +177,7 @@ class EatMediActivity : AppCompatActivity() {
             intent.putExtra("pill_name", pillName) // pillName을 Intent에 추가
             //intent.putExtra("pill_name", pillName) // pillName 전달
             intent.putExtra("pill_time", pillTime) // pillTime 전달
-            intent.putExtra("medicine_id", medicineId) // medicineId 전달
+            intent.putExtra("pill_id", medicineId) // medicineId 전달
             startActivityForResult(intent, CAMERA_REQUEST_CODE)
         } else if (position < steps.size - 1) {
 
@@ -230,6 +227,9 @@ class EatMediActivity : AppCompatActivity() {
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
             // AfterEatMediScanActivity에서 사진을 찍고 돌아왔을 때
             val photoPath = data?.getStringExtra("photoPath")
+            pillTime = data?.getStringExtra("pill_time") ?: pillTime
+            medicineId = data?.getIntExtra("pill_id", medicineId) ?: medicineId
+            Log.d("EatMediActivity123", "onActivityResult로 받은 값 - pillName: $pillName, pillTime: $pillTime, medicineId: $medicineId")
             if (photoPath != null) {
                 // 사진을 Bitmap으로 변환하여 2단계 이미지 뷰에 설정
                 val bitmap = BitmapFactory.decodeFile(photoPath)
