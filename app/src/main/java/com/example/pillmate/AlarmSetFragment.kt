@@ -97,8 +97,8 @@ class AlarmSetFragment : Fragment() {
                                 formattedTime, // 포맷팅된 시간
                                 alarm.name, // 약품명
                                 "${alarm.amount}정",
-                                "매일 ${alarm.day}회",
-                            "${alarm.timesPerDay}일",
+                                "${alarm.day}일",
+                            "매일 ${alarm.timesPerDay}회",
                                 alarm.timeSlot.spinnerTime, // 시간대 설명
                                 alarm.isAvailable // 사용 가능 여부
                             )
