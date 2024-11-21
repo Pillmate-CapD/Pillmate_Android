@@ -24,6 +24,10 @@ class EatMediActivity : AppCompatActivity() {
     private lateinit var adapter: EatMediAdapter
     private val steps = mutableListOf<EatMedi>()  // 단계 리스트를 저장하는 MutableList
     private val CAMERA_REQUEST_CODE = 1001
+    // Activity 내 전역 변수
+    private var pillName: String = "Unknown"
+    private var pillTime: String = "Unknown"
+    private var medicineId: Int = -1
 
     private var itemPosition: Int = -1
 
@@ -39,14 +43,14 @@ class EatMediActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Intent에서 전달된 데이터를 받아옴
-        val pillName = intent.getStringExtra("pill_name") ?: "Unknown"
+        pillName = intent.getStringExtra("pill_name") ?: "Unknown"
         //val photourl = intent.getStringExtra("pill_image_url")
         val source = intent.getStringExtra("source") ?: "default"
         //val pillTime = intent.getStringExtra("pill_time") ?: "14:00:00"
         //val medicineId = intent.getIntExtra("medicineId", 0)
         // 복약 과정 다음 알람 정보를 API로 받아옴
-        val pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
-        val medicineId = intent.getIntExtra("pill_id", -1)
+        pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
+        medicineId = intent.getIntExtra("pill_id", -1)
         // Intent에서 받아온 값 로그 출력
         Log.d("fetchNextMedicineInfo", "Intent로 받은 값 - pillName: $pillName, pillTime: $pillTime, medicineId: $medicineId")
 
@@ -174,12 +178,15 @@ class EatMediActivity : AppCompatActivity() {
             val pillName = intent.getStringExtra("pill_name") ?: "Unknown" // Intent에서 pillName을 가져옴
             val intent = Intent(this, EatMediScanActivity::class.java)
             intent.putExtra("pill_name", pillName) // pillName을 Intent에 추가
+            //intent.putExtra("pill_name", pillName) // pillName 전달
+            intent.putExtra("pill_time", pillTime) // pillTime 전달
+            intent.putExtra("medicine_id", medicineId) // medicineId 전달
             startActivityForResult(intent, CAMERA_REQUEST_CODE)
         } else if (position < steps.size - 1) {
 
             // Intent에서 전달된 데이터를 받아옴
-            val pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
-            val medicineId = intent.getIntExtra("pill_id", -1)
+            pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
+            medicineId = intent.getIntExtra("pill_id", -1)
             steps[position].isVisible = false
             steps[position].isCompleted = true
             steps[position + 1].isVisible = true

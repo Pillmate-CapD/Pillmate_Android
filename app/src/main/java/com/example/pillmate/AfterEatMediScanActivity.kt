@@ -28,6 +28,8 @@ class AfterEatMediScanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAfterScanBinding
     private var pillName: String = "Unknown"
     private var photoPath: String? = null
+    private var pillTime: String = "Unknown"
+    private var medicineId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,9 @@ class AfterEatMediScanActivity : AppCompatActivity() {
         //Glide.with(this).load(R.raw.loading).override(560, 560).into(binding.scanImgImage)
         binding.titleT.text = "먹을 약 촬영"
         pillName = intent.getStringExtra("pill_name") ?: "Unknown"
-        Log.d("AfterEatMediScanActivity", "get: $pillName")
+        pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
+        medicineId = intent.getIntExtra("medicine_id", -1)
+        Log.d("AfterEatMediScanActivity", "get: $pillName,pillTime: $pillTime, medicineId: $medicineId")
 
 
         // Intent로부터 이미지 파일 경로를 받음
@@ -154,6 +158,8 @@ class AfterEatMediScanActivity : AppCompatActivity() {
                             val intent = Intent(this@AfterEatMediScanActivity, EatMediActivity::class.java).apply {
                                 //putStringArrayListExtra("dataList", dataList)
                                 putExtra("pill_name", pillNameFromServer)
+                                putExtra("pill_time", pillTime)
+                                putExtra("medicine_id", medicineId)
                                 putExtra("photoPath", photoPath)
                             }
                             startActivity(intent)

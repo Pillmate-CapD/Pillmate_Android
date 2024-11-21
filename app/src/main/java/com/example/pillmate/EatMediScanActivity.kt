@@ -43,6 +43,9 @@ class EatMediScanActivity : AppCompatActivity() {
     private lateinit var backgroundHandler: Handler
     private lateinit var backgroundThread: HandlerThread
     private var pillName: String = "Unknown"
+    //private var pillName: String = "Unknown"
+    private var pillTime: String = "Unknown"
+    private var medicineId: Int = -1
 
 
     private var isFlashOn = false
@@ -67,6 +70,9 @@ class EatMediScanActivity : AppCompatActivity() {
         binding.titleTxt.text = "먹을 약 촬영"
         // Intent로부터 pillName을 받음
         pillName = intent.getStringExtra("pill_name") ?: "Unknown"
+        //pillName = intent.getStringExtra("pill_name") ?: "Unknown"
+        pillTime = intent.getStringExtra("pill_time") ?: "Unknown"
+        medicineId = intent.getIntExtra("medicine_id", -1)
 
         binding.cameraPreview.surfaceTextureListener = textureListener
 
@@ -217,6 +223,9 @@ class EatMediScanActivity : AppCompatActivity() {
                 val intent = Intent(this, AfterEatMediScanActivity::class.java)
                 intent.putExtra("photoPath", file?.absolutePath)
                 intent.putExtra("pill_name", pillName)
+                intent.putExtra("pill_time", pillTime)
+                intent.putExtra("medicine_id", medicineId)
+
                 startActivity(intent)  // AfterPreActivity 실행
                 this@EatMediScanActivity.finish()
             }
