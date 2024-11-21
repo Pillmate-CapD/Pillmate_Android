@@ -54,7 +54,7 @@ class HealthDiary2Activity : AppCompatActivity() {
                     3 -> {
                         drawableResId = R.drawable.outer_circle3_drawable
                         scoreText = "3점"
-                        descriptionText = "\"통증이 상당한 편이에요\""
+                        descriptionText = "\"통증이 어느정도 있어요\""
                     }
                     4 -> {
                         drawableResId = R.drawable.outer_circle4_drawable
