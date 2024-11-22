@@ -20,7 +20,7 @@ object RetrofitApi {
     private val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
 
     private const val BASE_URL = "https://www.pillmate.shop/api/v1/"
-    private const val BASE_URL_MEDI = "https://b545-34-19-12-255.ngrok-free.app/"
+    private const val BASE_URL_MEDI = "https://c613-34-16-171-159.ngrok-free.app/"
     // LocalTime TypeAdapter 정의
     class LocalTimeAdapter : JsonSerializer<LocalTime>, JsonDeserializer<LocalTime> {
         private val formatter = DateTimeFormatter.ofPattern("HH:mm:ss")

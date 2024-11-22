@@ -192,6 +192,9 @@ class EatMediActivity : AppCompatActivity() {
             if (position == 2) {
                 fetchNextMedicineInfo(pillTime, medicineId)
                 Log.d("복용단계 3단계-1", "$pillTime,$medicineId")
+                // steps 상태 확인
+                logStepStatus()
+
             }
 
             Log.d("복용단계 3단계-2", "$pillTime,$medicineId")
@@ -205,6 +208,14 @@ class EatMediActivity : AppCompatActivity() {
             resultIntent.putExtra("completed", true)
             resultIntent.putExtra("position", itemPosition) // position 값도 전달
             setResult(RESULT_OK, resultIntent)
+            // 로그로 확인
+            logStepStatus()
+            Log.d("StepStatus", "finish() 호출")
+            // HomeFragment로 이동하는 Intent 플래그 설정
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            intent.putExtra("navigate_to", "HomeFragment")
+            startActivity(intent)
             finish()
         }
         adapter.notifyDataSetChanged()
@@ -241,8 +252,19 @@ class EatMediActivity : AppCompatActivity() {
                 Log.d("StepVisibility", "Step 0 Visible: ${steps[0].isVisible}, Completed: ${steps[0].isCompleted}")
                 Log.d("StepVisibility", "Step 1 Visible: ${steps[1].isVisible}, PhotoPath: ${steps[1].photoPath}")
                 // RecyclerView 갱신
-                adapter.notifyItemRangeChanged(0, 2) // 1단계와 2단계만 갱신
-                //adapter.notifyDataSetChanged()
+                //adapter.notifyItemRangeChanged(0, 2) // 1단계와 2단계만 갱신
+                adapter.notifyDataSetChanged()
+                // steps 상태 확인
+                logStepStatus()
+
+                // 모든 단계를 완료한 상태라면 메인 페이지로 이동
+                if (steps.all { it.isCompleted }) {
+                    val resultIntent = Intent()
+                    resultIntent.putExtra("completed", true)
+                    resultIntent.putExtra("position", itemPosition)
+                    setResult(RESULT_OK, resultIntent)
+                    finish()
+                }
             }
         }
     }
@@ -268,6 +290,12 @@ class EatMediActivity : AppCompatActivity() {
         }
 
         dialog.show()
+    }
+    // 단계 상태를 로그로 출력하는 함수
+    private fun logStepStatus() {
+        steps.forEachIndexed { index, step ->
+            Log.d("StepStatus", "Step $index - isVisible: ${step.isVisible}, isCompleted: ${step.isCompleted}")
+        }
     }
 
 }
