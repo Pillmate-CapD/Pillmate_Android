@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="503dp"
+    android:layout_height="555dp"
     android:background="@drawable/bg_white_round15_shadow"
     android:elevation="0dp"
-    android:paddingTop="25dp"
+    android:paddingTop="30dp"
     android:paddingBottom="25dp"
     android:paddingStart="16dp"
     android:paddingEnd="16dp">
@@ -42,11 +42,11 @@
         android:fontFamily="@font/notosanskrmedium"
         android:includeFontPadding="false"
         android:text="#두통 #어지럼증"
-        android:textColor="#1E54DF"
+        android:textColor="#3e3e3e"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@id/todayPainIcon"
         app:layout_constraintTop_toBottomOf="@id/todayPainHeader"
-        android:layout_marginTop="11dp" />
+        android:layout_marginTop="21dp" />
 
     <!-- 구분선 1 -->
     <View
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@id/painTags"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="21dp" />
 
     <!-- 통증 정도 섹션 -->
     <ImageView
@@ -69,7 +69,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider1"
         app:layout_constraintBottom_toBottomOf="@id/painLevelHeader"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="21dp" />
 
     <TextView
         android:id="@+id/painLevelHeader"
@@ -99,7 +99,7 @@
         android:background="@drawable/bg_white_round4"
         app:layout_constraintStart_toStartOf="@id/painLevelIcon"
         app:layout_constraintTop_toBottomOf="@id/painLevelIcon"
-        android:layout_marginTop="11dp" />
+        android:layout_marginTop="21dp" />
 
     <TextView
         android:id="@+id/painDescription"
@@ -124,7 +124,7 @@
         app:layout_constraintTop_toBottomOf="@id/painScore"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="21dp" />
 
     <!-- 한 줄 일기 섹션 -->
     <ImageView
@@ -136,7 +136,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider2"
         app:layout_constraintBottom_toBottomOf="@id/diaryHeader"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="21dp" />
 
     <TextView
         android:id="@+id/diaryHeader"
@@ -160,7 +160,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/diaryHeader"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="11dp">
+        android:layout_marginTop="21dp">
 
         <!-- 텍스트 내용 -->
         <TextView

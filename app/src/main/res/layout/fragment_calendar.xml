@@ -44,7 +44,10 @@
             android:background="@drawable/bg_lightblue_round12"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:padding="12dp"
+            android:paddingRight="12dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp">
 
@@ -54,7 +57,7 @@
                 android:layout_width="34dp"
                 android:layout_height="33dp"
                 android:layout_marginLeft="4dp"
-                android:src="@drawable/diary_date_ic"
+                android:src="@drawable/check_ic_new"
                 android:contentDescription="Medicine icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>

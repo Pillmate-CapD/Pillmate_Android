@@ -14,7 +14,9 @@
             android:layout_height="22dp"
             android:layout_gravity="center_vertical"
             android:text="2"
+            android:fontFamily="@font/sfprodisplaysemibold"
             android:textSize="15sp"
+            android:includeFontPadding="false"
             android:background="@drawable/eatmedi_open"
             android:textColor="#1E54DF"
             android:gravity="center"
@@ -27,7 +29,7 @@
             android:fontFamily="@font/notosanskrsemibold"
             android:includeFontPadding="false"
             android:text="약 확인하기"
-            android:textColor="#000000"
+            android:textColor="#3e3e3e"
             android:textSize="18sp"
             android:visibility="visible"/>
 

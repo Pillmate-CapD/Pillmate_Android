@@ -367,12 +367,12 @@ class CalendarFragment : Fragment() {
                 painScore.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#D6F0EF"))
             }
             in 5..7 -> {
-                painScore.setTextColor(android.graphics.Color.parseColor("#FB7F02"))
-                painScore.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FFEAB1"))
+                painScore.setTextColor(android.graphics.Color.parseColor("#1E54DF"))
+                painScore.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#E6EBFA"))
             }
             in 8..10 -> {
                 painScore.setTextColor(android.graphics.Color.parseColor("#FF453A"))
-                painScore.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FFD1CE"))
+                painScore.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FBCDCA"))
             }
             else -> {
                 // 기본 색상 설정

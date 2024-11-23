@@ -19,7 +19,9 @@
             android:gravity="center"
             android:text="4"
             android:textColor="#1E54DF"
+            android:fontFamily="@font/sfprodisplaysemibold"
             android:textSize="15sp"
+            android:includeFontPadding="false"
             android:visibility="visible" />
 
         <TextView
@@ -30,7 +32,7 @@
             android:fontFamily="@font/notosanskrsemibold"
             android:includeFontPadding="false"
             android:text="다음 약 일정 확인하기"
-            android:textColor="#000000"
+            android:textColor="#3e3e3e"
             android:textSize="18sp"
             android:visibility="visible" />
     </LinearLayout>
