@@ -78,7 +78,7 @@
             android:fontFamily="@font/notosanskrsemibold"
             android:text="먹을 약 인증하기"
             android:layout_gravity="center_vertical"
-            android:textColor="#1C1C1C"
+            android:textColor="#3E3E3E"
             android:visibility="gone"
             android:textSize="15sp"/>
 

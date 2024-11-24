@@ -83,7 +83,7 @@
                 android:layout_marginLeft="10sp"
                 android:fontFamily="@font/notosanskrsemibold"
                 android:text="다음 약 일정 확인하기"
-                android:textColor="#1C1C1C"
+                android:textColor="#3E3E3E"
                 android:textSize="15sp"
                 android:visibility="gone" />
         </LinearLayout>
@@ -99,8 +99,8 @@
 
             <ImageView
                 android:id="@+id/timecheck"
-                android:layout_width="124dp"
-                android:layout_height="121dp"
+                android:layout_width="113dp"
+                android:layout_height="109.52dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="20dp"
                 android:src="@drawable/eatmedi_calendarsample"
