@@ -130,7 +130,7 @@
             android:layout_width="196dp"
             android:layout_height="196dp"
             android:layout_centerInParent="true"
-            android:background="@drawable/outer_circle_drawable3" />
+            android:background="@drawable/outer_circle_drawable33" />
 
         <!-- 통증 점수 텍스트 -->
         <TextView
@@ -142,7 +142,7 @@
             android:text="1점"
             android:textSize="45sp"
             android:textColor="#3e3e3e"
-            android:fontFamily="@font/notosanskrbold"
+            android:fontFamily="@font/notosanskrextrabold"
             android:includeFontPadding="false" />
 
         <!-- "오늘의 통증 점수" 텍스트 -->

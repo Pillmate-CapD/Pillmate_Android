@@ -185,16 +185,33 @@
             <!-- 증상 선택 버튼 영역 -->
 
             <!-- 증상 선택 버튼들 -->
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="41dp"
-                android:fontFamily="@font/notosanskrsemibold"
-                android:includeFontPadding="false"
-                android:text="✅ 손해인 님이 평소에 느끼는 증상이에요"
-                android:textColor="#3E3E3E"
-                android:textSize="16sp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- 체크 아이콘 -->
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/d_checkk"
+                android:contentDescription="Check Icon"
+                    android:layout_marginTop="1dp"
+                android:layout_marginEnd="5dp" />
+
+                <!-- 텍스트 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanskrsemibold"
+                    android:includeFontPadding="false"
+                    android:text="손해인 님이 평소에 느끼는 증상이에요"
+                    android:textColor="#3E3E3E"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <GridLayout
                 android:id="@+id/symptom_grid"
@@ -222,16 +239,33 @@
 
             </GridLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="41dp"
-                android:text="🫵 다른 증상도 있어요"
-                android:includeFontPadding="false"
-                android:fontFamily="@font/notosanskrsemibold"
-                android:textSize="16sp"
-                android:textColor="#3E3E3E"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- 손가락 아이콘 -->
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/d_youu"
+                android:contentDescription="Point Icon"
+                android:layout_marginEnd="5dp" />
+
+                <!-- 텍스트 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanskrsemibold"
+                    android:includeFontPadding="false"
+                    android:text="다른 증상도 있어요"
+                    android:textColor="#3E3E3E"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
             <GridLayout
                 android:id="@+id/another_sumptom"
                 android:layout_width="match_parent"
