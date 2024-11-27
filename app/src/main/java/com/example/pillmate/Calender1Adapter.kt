@@ -80,7 +80,7 @@ class Calendar1Adapter(
                 }
 
                 // 현재 날짜 표시
-                val isToday = (day == currentDay && selectedMonth == currentMonth && selectedYear == currentYear)
+                val isToday = (day == currentDay && selectedMonth == currentMonth && selectedYear == currentYear && isCurrentMonth)
                 val isSelected = (day == selectedDay && selectedMonth == selectedMonth && selectedYear == selectedYear)
 
                 if (isToday) {
@@ -99,22 +99,21 @@ class Calendar1Adapter(
 
                 // 작은 원 업데이트-추가
                 //binding.statusDotsContainer.removeAllViews() // 이전 상태 초기화
-                updateStatusDots(categoriesForDate)
+                updateStatusDots(categoriesForDate, isCurrentMonth)
 
                 // painsPerDay 데이터를 사용한 today_view 배경 설정
-                val matchingPain = painsPerDayList.find { pain ->
-                    // "yyyy-MM-dd" 형식의 date 필드 파싱
-                    val parts = pain.date.split("-")
-                    val year = parts[0].toInt()
-                    val month = parts[1].toInt()
-                    val day = parts[2].toInt()
-                    // 비교 전 로그 출력
-                    Log.d("Calendar1Adapter", "비교 중 - pain day: $day, pain month: $month, pain year: $year")
-
-                    // 현재 바인딩 중인 날짜와 비교
-                    day == this@ViewHolder.binding.dateRecy.text.toString().toInt() &&
-                            month == selectedMonth &&
-                            year == selectedYear
+                val matchingPain = if (isCurrentMonth) { // 현재 달일 경우만 통증 데이터 확인
+                    painsPerDayList.find { pain ->
+                        val parts = pain.date.split("-")
+                        val year = parts[0].toInt()
+                        val month = parts[1].toInt()
+                        val day = parts[2].toInt()
+                        day == this@ViewHolder.binding.dateRecy.text.toString().toInt() &&
+                                month == selectedMonth &&
+                                year == selectedYear
+                    }
+                } else {
+                    null // 이전/다음 달은 통증 데이터 확인 안 함
                 }
 
                 if (matchingPain != null) {
@@ -209,7 +208,8 @@ class Calendar1Adapter(
                 binding.todayView.visibility = View.INVISIBLE
             }
         }
-        private fun updateStatusDots(categories: List<String>) {
+        private fun updateStatusDots(categories: List<String>, isCurrentMonth: Boolean) {
+
             // 6개의 Dot View 리스트
             val dotViews = listOf(
                 binding.statusDot1,
@@ -219,6 +219,12 @@ class Calendar1Adapter(
                 binding.statusDot5,
                 binding.statusDot6
             )
+
+            if (!isCurrentMonth) {
+                // 이전/다음 달인 경우 모든 Dot 숨기기
+                dotViews.forEach { it.visibility = View.GONE }
+                return
+            }
 
             // 카테고리 수와 Dot View 수 중 작은 값까지만 표시
             val maxDots = minOf(categories.size, dotViews.size)
