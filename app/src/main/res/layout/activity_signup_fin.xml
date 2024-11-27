@@ -40,7 +40,7 @@
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:text="로그인하기"
+            android:text="로그인 하기"
             android:background="@drawable/button_blue"
             android:textColor="#ffffff"
             android:textSize="15sp"
