@@ -16,19 +16,22 @@ class Help9Activity : AppCompatActivity() {
 
         // X 아이콘 클릭 이벤트: UserFragment로 이동
         binding.closeIcon.setOnClickListener {
-            navigateToUserFragment()
+//            navigateToUserFragment()
+            finish()
         }
 
         // 다음 아이콘 클릭 이벤트: Help3Activity로 이동
         binding.nextIcon.setOnClickListener {
             val intent = Intent(this, Help10Activity::class.java)
             startActivity(intent)
+            finish()
         }
 
         // 이전 아이콘 클릭 이벤트: Help1Activity로 이동
         binding.prevIcon.setOnClickListener {
-            val intent = Intent(this, Help1Activity::class.java)
+            val intent = Intent(this, Help8Activity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 

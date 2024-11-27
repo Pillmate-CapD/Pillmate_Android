@@ -79,7 +79,7 @@
                 android:fontFamily="@font/notosanskrsemibold"
                 android:gravity="center"
                 android:text="만성질환"
-                android:layout_marginLeft="60dp"
+                android:layout_marginLeft="35dp"
                 android:textColor="#1E54DF"
                 android:textSize="11sp" />
 

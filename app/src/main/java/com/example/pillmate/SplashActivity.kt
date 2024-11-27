@@ -16,16 +16,16 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // SharedPreferences에서 앱의 첫 실행 여부 확인
+        // SharedPreferences에서 온보딩 실행 횟수 확인
         val preferences = getSharedPreferences("AppPreferences", MODE_PRIVATE)
-        preferences.edit().putBoolean("isFirstLaunch", true).apply()
+        val onboardingCount = preferences.getInt("onboardingCount", 0)
 
-        val isFirstLaunch = preferences.getBoolean("isFirstLaunch", true)
+        //val isFirstLaunch = preferences.getBoolean("isFirstLaunch", true)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            if (isFirstLaunch) {
+            if (onboardingCount < 2) {
                 // 첫 실행 플래그 업데이트
-                preferences.edit().putBoolean("isFirstLaunch", false).apply()
+                preferences.edit().putInt("onboardingCount", onboardingCount + 1).apply()
 
                 // 온보딩 화면으로 이동
                 navigateToOnon()

@@ -18,13 +18,15 @@ class Help1Activity : AppCompatActivity() {
 
         // X 아이콘 클릭 이벤트: UserFragment로 이동
         binding.closeIcon.setOnClickListener {
-            navigateToUserFragment()
+            //navigateToUserFragment()
+            finish()
         }
 
         // 다음 아이콘 클릭 이벤트: Help2Activity로 이동
         binding.nextIcon.setOnClickListener {
             val intent = Intent(this, Help2Activity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
