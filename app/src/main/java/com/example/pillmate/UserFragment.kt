@@ -72,6 +72,12 @@ class UserFragment : Fragment() {
                 Log.e("UserFragment", "Failed to fetch user status: ${e.message}")
             }
         }
+        //도움말
+        val help: View = view.findViewById(R.id.btn_help)
+        help.setOnClickListener {
+            val intent = Intent(activity, Help1Activity::class.java)
+            startActivity(intent)
+        }
 
         // 로그아웃 버튼 처리
         val logoutTextView: TextView = view.findViewById(R.id.tv_logout)
