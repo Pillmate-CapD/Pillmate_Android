@@ -1,0 +1,86 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/help7">
+
+    <!-- X 아이콘 -->
+    <ImageView
+        android:id="@+id/close_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/closee"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="16dp"/>
+
+    <!-- 이전 아이콘 -->
+    <ImageView
+        android:id="@+id/prev_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/leftt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="69dp"
+        android:layout_marginLeft="20dp"/>
+
+    <!-- 이전 텍스트 -->
+    <TextView
+        android:id="@+id/prev_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이전"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:includeFontPadding="false"
+        android:textSize="16sp"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="71dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/prev_icon"/>
+
+    <!-- 2/10 텍스트 -->
+    <TextView
+        android:id="@+id/progress_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7/10"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/sfprodisplaysemibold"
+        android:includeFontPadding="false"
+        android:layout_marginBottom="73dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 다음 버튼 -->
+    <TextView
+        android:id="@+id/next_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="다음"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/notosanskrsemibold"
+        android:includeFontPadding="false"
+        android:textSize="16sp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/next_icon"
+        android:layout_marginBottom="71dp"/>
+
+    <!-- 다음 아이콘 -->
+    <ImageView
+        android:id="@+id/next_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/rightt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="69dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
