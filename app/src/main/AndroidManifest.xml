@@ -296,6 +296,10 @@
             android:name=".Help10Activity"
             android:exported="false"
             android:theme="@style/FullStatusTheme" />
+        <activity
+            android:name=".OnOnActivity"
+            android:exported="false"
+            android:theme="@style/FullStatusTheme" />
     </application>
 
 </manifest>
