@@ -77,7 +77,7 @@ class SplashActivity : AppCompatActivity() {
 
     // 온보딩 화면으로 이동하는 함수
     private fun navigateToOnon() {
-        val intent = Intent(this, OnOn1Activity::class.java)
+        val intent = Intent(this, OnOnActivity::class.java)
         startActivity(intent)
         overridePendingTransition(0, 0)
         finish()

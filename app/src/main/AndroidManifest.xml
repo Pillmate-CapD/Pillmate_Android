@@ -259,43 +259,43 @@
         <activity
             android:name=".Help1Activity"
             android:exported="false"
-            />
+            android:theme="@style/FullStatusTheme" />
         <activity
             android:name=".Help2Activity"
             android:exported="false"
-             />
+            android:theme="@style/FullStatusTheme" />
         <activity
             android:name=".Help3Activity"
             android:exported="false"
-           />
+            android:theme="@style/FullStatusTheme" />
         <activity
             android:name=".Help4Activity"
             android:exported="false"
-            />
+            android:theme="@style/FullStatusTheme" />
         <activity
             android:name=".Help5Activity"
             android:exported="false"
-            />
+            android:theme="@style/FullStatusTheme" />
         <activity
             android:name=".Help6Activity"
             android:exported="false"
-            />
+            android:theme="@style/FullStatusTheme" />
         <activity
             android:name=".Help7Activity"
             android:exported="false"
-            />
+            android:theme="@style/FullStatusTheme" />
         <activity
             android:name=".Help8Activity"
             android:exported="false"
-            />
+            android:theme="@style/FullStatusTheme" />
         <activity
             android:name=".Help9Activity"
             android:exported="false"
-            />
+            android:theme="@style/FullStatusTheme" />
         <activity
             android:name=".Help10Activity"
             android:exported="false"
-             />
+            android:theme="@style/FullStatusTheme" />
     </application>
 
 </manifest>
