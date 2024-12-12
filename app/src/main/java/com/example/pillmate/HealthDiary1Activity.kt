@@ -1,5 +1,6 @@
 package com.example.pillmate
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -33,6 +34,15 @@ class HealthDiary1Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHalthdiary1Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // SharedPreferences에서 사용자 이름 가져오기
+        val sharedPreferences = getSharedPreferences("userName", Context.MODE_PRIVATE)
+        val userName = sharedPreferences.getString("userName", "이름을 불러오는데 실패했습니다")
+
+        // TextView 업데이트
+        val fullText = "$userName 님이 평소에 느끼는 증상이에요"
+        binding.naming1.text = fullText
+
 
         // Intent로 date 값 받기
         date = intent.getStringExtra("date")

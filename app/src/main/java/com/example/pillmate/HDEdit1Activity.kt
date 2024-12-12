@@ -1,5 +1,6 @@
 package com.example.pillmate
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -49,6 +50,14 @@ class HDEdit1Activity : AppCompatActivity() {
         receivedSymptoms = intent.getStringExtra("symptoms")?.split(",") ?: emptyList()
         Log.d(logTag, "Intent 데이터 받음: date=$date, id=$id, score=$score, comment=$comment, record=$record, symptoms=$receivedSymptoms")
         //Log.d(logTag, "Intent 데이터 받음: date=$date, score=$score, comment=$comment, record=$record, symptoms=$receivedSymptoms")
+        // SharedPreferences에서 사용자 이름 가져오기
+        val sharedPreferences = getSharedPreferences("userName", Context.MODE_PRIVATE)
+        val userName = sharedPreferences.getString("userName", "이름을 불러오는데 실패했습니다")
+
+        // TextView 업데이트
+        val fullText = "$userName 님이 평소에 느끼는 증상이에요"
+        binding.naming1.text = fullText
+
 
         // d_btn_f 버튼 초기화 및 비활성화 설정
         binding.dBtnF.isEnabled = false
