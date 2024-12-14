@@ -18,6 +18,7 @@ class SplashActivity : AppCompatActivity() {
 
         // SharedPreferences에서 온보딩 실행 횟수 확인
         val preferences = getSharedPreferences("AppPreferences", MODE_PRIVATE)
+        preferences.edit().putInt("onboardingCount", 0).apply()
         val onboardingCount = preferences.getInt("onboardingCount", 0)
 
         //val isFirstLaunch = preferences.getBoolean("isFirstLaunch", true)

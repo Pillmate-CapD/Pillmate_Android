@@ -70,7 +70,8 @@ class RemainMediAdapter(
     }
 
     fun updateItems(newItems: List<RemainMediItem>) {
-        items = newItems
+        //items = newItems
+        items = newItems.filter{it.day>0}
         notifyDataSetChanged()
     }
 }

@@ -114,17 +114,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- 갤러리 버튼 -->
-    <View
-        android:id="@+id/btn_gallery"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/ic_gallery"
-        app:layout_constraintBottom_toBottomOf="parent"
+<!--    &lt;!&ndash; 갤러리 버튼 &ndash;&gt;-->
+<!--    <View-->
+<!--        android:id="@+id/btn_gallery"-->
+<!--        android:layout_width="35dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:layout_marginBottom="32dp"-->
+<!--        android:background="@drawable/ic_gallery"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
 
-        app:layout_constraintStart_toStartOf="@id/overlay_guide"
-        app:layout_constraintTop_toTopOf="@+id/btn_capture" />
+<!--        app:layout_constraintStart_toStartOf="@id/overlay_guide"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/btn_capture" />-->
 
     <!-- 카메라 버튼 -->
     <View
@@ -147,6 +147,7 @@
         android:background="@drawable/ic_flash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/overlay_guide"
+        app:layout_constraintStart_toEndOf="@+id/btn_capture"
         app:layout_constraintTop_toTopOf="@+id/btn_capture" />
 
 

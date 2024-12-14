@@ -52,6 +52,7 @@ class EatMediScanActivity : AppCompatActivity() {
 
     private val textureListener = object : TextureView.SurfaceTextureListener {
         override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
+            adjustTextureViewAspectRatio(binding.cameraPreview, 9, 14) // 9:16 비율
             openCamera()
         }
 
@@ -89,13 +90,35 @@ class EatMediScanActivity : AppCompatActivity() {
         }
     }
 
+    private fun getOptimalPreviewSize(sizes: Array<android.util.Size>, targetRatio: Double): android.util.Size? {
+        var optimalSize: android.util.Size? = null
+        var minDiff = Double.MAX_VALUE
+
+        for (size in sizes) {
+            val ratio = size.width.toDouble() / size.height
+            if (Math.abs(ratio - targetRatio) < minDiff) {
+                optimalSize = size
+                minDiff = Math.abs(ratio - targetRatio)
+            }
+        }
+
+        return optimalSize
+    }
+
     private fun openCamera() {
         val manager = getSystemService(CAMERA_SERVICE) as CameraManager
         try {
-            val cameraId = getDefaultCameraId(manager) ?: manager.cameraIdList[0] // 기본 카메라 선택
+            val cameraId = getDefaultCameraId(manager) ?: manager.cameraIdList[0]
             val characteristics = manager.getCameraCharacteristics(cameraId)
             val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
-            val imageDimension = map?.getOutputSizes(SurfaceTexture::class.java)?.get(0)
+            val sizes = map?.getOutputSizes(SurfaceTexture::class.java)
+
+            if (sizes != null) {
+                val optimalSize = getOptimalPreviewSize(sizes, 9.0 / 16.0)
+                optimalSize?.let {
+                    binding.cameraPreview.surfaceTexture?.setDefaultBufferSize(it.width, it.height)
+                }
+            }
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),
@@ -108,6 +131,26 @@ class EatMediScanActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
+//    private fun openCamera() {
+//        val manager = getSystemService(CAMERA_SERVICE) as CameraManager
+//        try {
+//            val cameraId = getDefaultCameraId(manager) ?: manager.cameraIdList[0] // 기본 카메라 선택
+//            val characteristics = manager.getCameraCharacteristics(cameraId)
+//            val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
+//            val imageDimension = map?.getOutputSizes(SurfaceTexture::class.java)?.get(0)
+//
+//            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),
+//                    EatMediScanActivity.REQUEST_CAMERA_PERMISSION
+//                )
+//                return
+//            }
+//            manager.openCamera(cameraId, stateCallback, null)
+//        } catch (e: CameraAccessException) {
+//            e.printStackTrace()
+//        }
+//    }
 
     private fun getDefaultCameraId(manager: CameraManager): String? {
         try {
@@ -141,6 +184,7 @@ class EatMediScanActivity : AppCompatActivity() {
         override fun onOpened(camera: CameraDevice) {
             cameraDevice = camera
             createCameraPreview()
+
         }
 
         override fun onDisconnected(camera: CameraDevice) {
@@ -151,6 +195,48 @@ class EatMediScanActivity : AppCompatActivity() {
             cameraDevice.close()
             this@EatMediScanActivity.finish()
         }
+    }
+
+//    private fun createCameraPreview() {
+//        try {
+//            val texture = binding.cameraPreview.surfaceTexture!!
+//            texture.setDefaultBufferSize(binding.cameraPreview.width, binding.cameraPreview.height)
+//            val surface = Surface(texture)
+//            captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
+//            captureRequestBuilder.addTarget(surface)
+//
+//            cameraDevice.createCaptureSession(Collections.singletonList(surface), object : CameraCaptureSession.StateCallback() {
+//                override fun onConfigured(session: CameraCaptureSession) {
+//                    if (cameraDevice == null) return
+//                    cameraCaptureSessions = session
+//                    updatePreview()
+//                }
+//
+//                override fun onConfigureFailed(session: CameraCaptureSession) {
+//                    Toast.makeText(this@EatMediScanActivity, "Configuration change", Toast.LENGTH_SHORT).show()
+//                }
+//            }, null)
+//        } catch (e: CameraAccessException) {
+//            e.printStackTrace()
+//        }
+//    }
+
+    private fun adjustTextureViewAspectRatio(textureView: TextureView, previewWidth: Int, previewHeight: Int) {
+        val viewWidth = textureView.width
+        val viewHeight = textureView.height
+        val aspectRatio = previewWidth.toFloat() / previewHeight
+
+        if (viewWidth.toFloat() / viewHeight > aspectRatio) {
+            // 화면이 더 넓음 -> 높이를 조정
+            textureView.layoutParams.height = (viewWidth / aspectRatio).toInt()
+            textureView.layoutParams.width = viewWidth
+        } else {
+            // 화면이 더 좁음 -> 폭을 조정
+            textureView.layoutParams.width = (viewHeight * aspectRatio).toInt()
+            textureView.layoutParams.height = viewHeight
+        }
+
+        textureView.requestLayout()
     }
 
     private fun createCameraPreview() {

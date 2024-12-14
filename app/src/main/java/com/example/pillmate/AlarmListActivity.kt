@@ -45,7 +45,7 @@ class AlarmListActivity : AppCompatActivity() {
             Log.e("AlarmListActivity", "userId를 찾을 수 없습니다.")
         }
 
-        binding.btnBefore.setOnClickListener {
+        binding.btnBeforeLayout.setOnClickListener {
             setResult(Activity.RESULT_OK)
             finish()
         }

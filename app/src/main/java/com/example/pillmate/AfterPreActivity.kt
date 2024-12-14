@@ -62,6 +62,10 @@ class AfterPreActivity : AppCompatActivity() {
         binding = ActivityAfterPreBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnX.setOnClickListener {
+            this@AfterPreActivity.finish()
+        }
+
         // Intent로부터 이미지 파일 경로를 받음
         val photoPath = intent.getStringExtra("photoPath")
         if (photoPath != null) {
